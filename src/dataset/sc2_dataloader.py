@@ -9,6 +9,8 @@ class SC2EGSetDataset(Dataset):
         self.dataset_dir = dataset_dir
         self.transform = transform
 
+        # TODO: Try to unpack all of the zip files that constitute the dataset.
+
     def __len__(self):
         # TODO: Implement how to calculate the len of the dataset.
         # In the case of SC2EGSet this will be the number of files.
