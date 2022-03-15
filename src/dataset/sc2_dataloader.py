@@ -1,7 +1,8 @@
-from typing import Any
+from typing import Any, List
 from torch.utils.data._typing import T_co
 from torch.utils.data import Dataset, DataLoader
 import os
+import requests
 
 
 class SC2EGSetDataset(Dataset):
@@ -22,14 +23,14 @@ class SC2EGSetDataset(Dataset):
         self,
         dataset_unpack_dir: str = "./data/unpack",
         dataset_download_dir: str = "./data/download",
-        url: str = "",  # This should probably be hardcoded! After all I want this to be a specific dataset.
+        list_of_urls: List = [],  # This should probably be hardcoded! After all I want this to be a specific dataset.
         transform=None,
     ):
 
         self.dataset_download_dir = dataset_download_dir
         self.dataset_unpack_dir = dataset_unpack_dir
         self.transform = transform
-        self.url = url
+        self.list_of_urls = list_of_urls
 
         self.downloaded = False
         # If there are files in the dataset_unpack_dir it means that it was downloaded and extracted:
@@ -38,7 +39,7 @@ class SC2EGSetDataset(Dataset):
             self.downloaded = True
 
         # We have received an URL for the dataset and it was not downloaded:
-        if url != "":
+        if list_of_urls:
             self.ensure_downloaded()
 
         # TODO: Try to unpack all of the zip files that constitute the dataset.
@@ -66,8 +67,12 @@ class SC2EGSetDataset(Dataset):
             return
 
         # TODO: download and unpack:
-
-        # Load to the list of files
+        for url in self.list_of_urls:
+            response = requests.get(self.url)
+            # Get the filename from URL!
+            with open(output_filepath, "wb") as output_map_file:
+                output_map_file.write(response.content)
+            # Load to the list of files
 
         self.downloaded = True
         return
