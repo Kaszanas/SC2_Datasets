@@ -5,11 +5,24 @@ import os
 
 
 class SC2EGSetDataset(Dataset):
+    """
+    Inherits from PyTorch Dataset and ensures that the dataset for SC2EGSet is downloaded.
+
+    :param dataset_unpack_dir: Specifies the path of a directory where the dataset files will be downloaded.
+    :type dataset_unpack_dir: str
+    :param dataset_download_dir: Specifies the path of a directory where the dataset files will be unpacked.
+    :type dataset_download_dir: str
+    :param url: Specifies the URL of the dataset which will be used to download the files.
+    :type url: str
+    :param transform: PyTorch transform.
+    :type transform: ??????????
+    """
+
     def __init__(
         self,
         dataset_unpack_dir: str = "./data/unpack",
         dataset_download_dir: str = "./data/download",
-        url: str = "",
+        url: str = "",  # This should probably be hardcoded! After all I want this to be a specific dataset.
         transform=None,
     ):
 
@@ -25,10 +38,8 @@ class SC2EGSetDataset(Dataset):
             self.downloaded = True
 
         # We have received an URL for the dataset and it was not downloaded:
-        if url != "" and not self.downloaded:
-            # TODO: Download the dataset to the dataset_download_dir
-
-            self.downloaded = True
+        if url != "":
+            self.ensure_downloaded()
 
         # TODO: Try to unpack all of the zip files that constitute the dataset.
         # If the directory is correctly specified:
@@ -41,7 +52,16 @@ class SC2EGSetDataset(Dataset):
 
                 self.downloaded = True
 
+    def __unpack_files(self):
+        """
+        Implements unpacking logic for the dataset.
+        """
+        pass
+
     def ensure_downloaded(self):
+        """
+        Ensures that the dataset was downloaded before accessing the __len__ or __getitem__ methods.
+        """
         if self.downloaded:
             return
 
@@ -53,6 +73,7 @@ class SC2EGSetDataset(Dataset):
         return
 
     def __len__(self):
+        """Returns the number of items that are within the dataset"""
         # TODO: Implement how to calculate the len of the dataset.
         # In the case of SC2EGSet this will be the number of files.
         self.ensure_downloaded()
@@ -62,6 +83,13 @@ class SC2EGSetDataset(Dataset):
         pass
 
     def __getitem__(self, index: Any) -> T_co:
+        """_summary_
+
+        :param index: Specifies the index of an item that should be retrieved.
+        :type index: Any
+        :return: Returns an item from the dataset.
+        :rtype: T_co
+        """
         # TODO: Implement how to get a single item from the dataset!
         # Most likely this will have to load the JSON file.
         self.ensure_downloaded()
