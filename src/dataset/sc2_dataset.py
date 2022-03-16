@@ -1,10 +1,13 @@
 from typing import Any, List
 from torch.utils.data._typing import T_co
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import os
 import requests
 import uuid
 import zipfile
+
+from dataset.replay_data import SC2ReplayData
+from dataset.replaypack_data import SC2ReplaypackData
 
 
 class SC2EGSetDataset(Dataset):
@@ -92,7 +95,7 @@ class SC2EGSetDataset(Dataset):
 
         # Download all of the files from the list of provided urls:
         for url in self.list_of_urls:
-            response = requests.get(self.url)
+            response = requests.get(url=url)
             # Get the filename from URL or it needs to be hardcoded!
             zip_filename = uuid.uuid4().hex
             download_filepath = os.path.join(
