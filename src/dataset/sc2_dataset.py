@@ -6,17 +6,6 @@ import requests
 import uuid
 import zipfile
 
-# TODO: This should hold the extraction logs.
-# And other information that comes out of the processing pipeline:
-class SC2ReplayData:
-    """
-    Holds IterableDatasets for the data that
-    is within a single StarCraft .json representation of a replay file.
-    """
-
-    def __init__(self, economy_stats, created_structures) -> None:
-        pass
-
 
 class SC2EGSetDataset(Dataset):
     """
@@ -46,6 +35,7 @@ class SC2EGSetDataset(Dataset):
         self.list_of_urls = list_of_urls
         # Holds all of the filepaths to .zip packages that contain the dataset:
         self.downloaded_filepaths = []
+        self.len = None
 
         self.downloaded = False
         # If there are files in the dataset_unpack_dir
@@ -118,7 +108,7 @@ class SC2EGSetDataset(Dataset):
         self.downloaded = True
         return
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Returns the number of items that are within the dataset
         """
@@ -126,7 +116,11 @@ class SC2EGSetDataset(Dataset):
         # In the case of SC2EGSet this will be the number of files.
         self.ensure_downloaded()
 
-        # Get len of list of files
+        # Get len of list of files from SC2ReplaypackData class
+        if self.len != None:
+            return self.len
+
+        # Otherwise calculate it and return
 
         pass
 
@@ -147,5 +141,7 @@ class SC2EGSetDataset(Dataset):
 
         # This should return contents of a .json file?
         # Or maybe different IterableDatasets that coincide with the Lists that .json holds?
+
+        # TODO: Get a specific SC2ReplayData from SC2ReplaypackData
 
         pass
