@@ -1,3 +1,4 @@
+from fileinput import filename
 from typing import Any, List
 from torch.utils.data._typing import T_co
 from torch.utils.data import Dataset
@@ -68,18 +69,28 @@ class SC2EGSetDataset(Dataset):
         Implements unpacking logic for the dataset.
         """
         # Unpacking the zip files that were downloaded:
-        for downloaded_zip_path, downloaded_zip_name in self.downloaded_filepaths:
-            with zipfile.ZipFile(downloaded_zip_path, "r") as zip_file:
-                path_to_extract = os.path.join(
-                    self.dataset_unpack_dir, downloaded_zip_name
-                )
-                # Checking the existence of the extraction output directory:
-                if not os.path.exists(path_to_extract):
-                    os.makedirs(path_to_extract)
-                zip_file.extractall(path_to_extract)
+        for root, _, filenames in os.walk(self.dataset_download_dir):
+            for filename in filenames:
+                full_zip_filepath = os.path.join(root, filename)
 
-                # TODO: Lazily load SC2ReplayData so that it holds the paths
-                # To the .json files holding different info.
+                # for downloaded_zip_path, downloaded_zip_name in self.downloaded_filepaths:
+                with zipfile.ZipFile(full_zip_filepath, "r") as zip_file:
+                    path_to_extract = os.path.join(
+                        self.dataset_unpack_dir, os.path.splitext(filename)[0]
+                    )
+                    # Checking the existence of the extraction output directory:
+                    if not os.path.exists(path_to_extract):
+                        os.makedirs(path_to_extract)
+                    zip_file.extractall(path_to_extract)
+
+                    # TODO: Further down extract the dataset
+
+        pass
+
+    def load_files(self):
+
+        # TODO: Lazily load SC2ReplayData so that it holds the paths
+        # To the .json files holding different info.
 
         # Load to the list of files
         # Add the files to the list of files.
