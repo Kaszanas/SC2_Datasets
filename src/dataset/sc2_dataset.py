@@ -1,4 +1,3 @@
-from fileinput import filename
 from typing import Any, List, Tuple
 from torch.utils.data._typing import T_co
 from torch.utils.data import Dataset
@@ -101,29 +100,35 @@ class SC2EGSetDataset(Dataset):
             self.replaypacks.append(replaypack)
             self.len += len(replaypack)
 
-        # If there are files in the dataset_unpack_dir
-        # it means that it was downloaded and extracted:
-        dataset_unpacked_files = os.listdir(self.dataset_unpack_dir)
-        if dataset_unpacked_files:
-            # TODO: calculate length
-            return
+        # # If there are files in the dataset_unpack_dir
+        # # it means that it was downloaded and extracted:
+        # dataset_unpacked_files = os.listdir(self.dataset_unpack_dir)
+        # if dataset_unpacked_files:
+        #     # TODO: calculate length
+        #     return
 
-        dataset_downloaded_files = os.listdir(self.dataset_download_dir)
-        if dataset_downloaded_files:
-            downloaded_filepaths = find_downloaded_datasets(self.dataset_download_dir)
+        # dataset_downloaded_files = os.listdir(self.dataset_download_dir)
+        # if dataset_downloaded_files:
+        #     downloaded_filepaths = find_downloaded_datasets(self.dataset_download_dir)
 
-            unpack_files(downloaded_filepaths, self.dataset_download_dir)
+        #     unpack_files(
+        #         dataset_archives=downloaded_filepaths,
+        #         destination_dir=self.dataset_download_dir,
+        #     )
 
-            # TODO: calculate length
-            return
+        #     # TODO: calculate length
+        #     return
 
-        # If we are here, we need to download, unpack, calculate lenght
-        downloaded_filepaths = download_dataset(
-            self.list_of_urls, self.dataset_download_dir
-        )
+        # # If we are here, we need to download, unpack, calculate lenght
+        # downloaded_filepaths = download_dataset(
+        #     urls=self.list_of_urls, destination_dir=self.dataset_download_dir
+        # )
 
-        # Unpack the downloaded files:
-        unpack_files(downloaded_filepaths, self.dataset_unpack_dir)
+        # # Unpack the downloaded files:
+        # unpack_files(
+        #     dataset_archives=downloaded_filepaths,
+        #     destination_dir=self.dataset_unpack_dir,
+        # )
 
     def __len__(self) -> int:
         """
