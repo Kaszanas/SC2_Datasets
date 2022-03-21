@@ -79,22 +79,28 @@ class SC2ReplaypackData(Dataset):
     is within a single StarCraft .json representation of a replay file.
     """
 
-    def __init__(self, replaypack_directory: str, url="", download=False):
+    def __init__(
+        self,
+        replaypack_directory: str,
+        replaypack_name: str,
+        url: str = "",
+        download: bool = False,
+    ):
         self.replaypack_directory = replaypack_directory
-
-        replaypack_name = uuid.uuid4().hex
+        self.replaypack_name = replaypack_name
 
         if download:
-            # Get the name from URL or it needs to be hardcoded!
+            # TODO: Files cannot be downloaded in the same place!
+            # This needs to be split as in sc2_dataset.py into download dir and the unpack dir.
             download_path = download_replaypack(
                 destination_dir=replaypack_directory + "/.download/",
-                replaypack_name=replaypack_name,
+                replaypack_name=self.replaypack_name,
                 replaypack_url=url,
             )
 
             replaypack_path = unpack_zipfile(
                 destination_dir=replaypack_directory,
-                subdir=replaypack_name,
+                subdir=self.replaypack_name,
                 zip_path=download_path,
             )
 
@@ -106,7 +112,7 @@ class SC2ReplaypackData(Dataset):
                 if file.endswith("_data.zip"):
                     data_path = unpack_zipfile(
                         destination_dir=replaypack_directory,
-                        subdir="data",
+                        subdir=self.replaypack_name + "_data",
                         zip_path=file,
                     )
 
