@@ -11,3 +11,15 @@ class SC2ReplayData:
             self.init_data = json_data["initData"]
 
         # TODO: Read JSON file and load info to class
+
+    @property
+    def header(self):
+        return self.header
+
+    @property
+    def init_data(self):
+        return self.init_data
+
+    @property
+    def initData(self):
+        return self.init_data
