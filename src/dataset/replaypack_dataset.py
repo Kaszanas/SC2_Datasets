@@ -6,7 +6,7 @@ from dataset.utils.download_utils import download_and_unpack_replaypack
 from dataset.utils.dataset_utils import load_replaypack_information
 
 
-class SC2ReplaypackData(Dataset):
+class SC2ReplaypackDataset(Dataset):
 
     """
     Represents a Dataset for a single pre-processed replaypack.
