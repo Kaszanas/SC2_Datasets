@@ -3,6 +3,7 @@ from typing import Dict, Tuple
 import requests
 
 from dataset.utils.zip_utils import unpack_zipfile
+from dataset.utils.dataset_utils import load_replaypack_information
 
 
 def download_replaypack(
@@ -79,21 +80,8 @@ def download_and_unpack_replaypack(
         zip_path=download_path,
     )
 
-    # TODO: find data files and unpack
-    replaypack_files = os.listdir(replaypack_path)
-    data_path = ""
-    for file in replaypack_files:
-        if file.endswith("_data.zip"):
-            data_path = unpack_zipfile(
-                destination_dir=replaypack_path,
-                subdir=replaypack_name + "_data",
-                zip_path=file,
-            )
-        if file.endswith("_summary.json"):
-            summary_content = ""
-        if file.endswith("_mapping.json"):
-            mapping_content = ""
-        if file.endswith(".log") and not file.endswith("main_log.log"):
-            processed_info = ""
+    dataset_information = load_replaypack_information(
+        replaypack_name=replaypack_name, replaypack_path=replaypack_path
+    )
 
-    return (data_path, summary_content, mapping_content, processed_info)
+    return dataset_information
