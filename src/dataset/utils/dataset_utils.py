@@ -20,11 +20,14 @@ def load_replaypack_information(
     """
 
     replaypack_files = os.listdir(replaypack_path)
+    # Initializing variables that should be returned:
     data_path = ""
     summary_content = {}
     mapping_content = {}
     processed_info = {}
 
+    # Extracting the nested .zip files,
+    # and loading replaypack information files:
     for file in replaypack_files:
         if file.endswith("_data.zip"):
             data_path = unpack_zipfile(
