@@ -18,7 +18,8 @@ def unpack_zipfile(destination_dir: str, subdir: str, zip_path: str) -> str:
     """
     with zipfile.ZipFile(zip_path, "r") as zip_file:
         path_to_extract = os.path.join(destination_dir, subdir)
-        # Checking the existence of the extraction output directory:
+        # Checking the existence of the extraction output directory
+        # If it doesn't exist it will be created:
         if not os.path.exists(path_to_extract):
             os.makedirs(path_to_extract)
         zip_file.extractall(path_to_extract)

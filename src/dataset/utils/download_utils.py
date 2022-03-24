@@ -68,18 +68,21 @@ def download_and_unpack_replaypack(
     :type url: str
     """
 
+    # Downloading the replaypack:
     download_path = download_replaypack(
         destination_dir=replaypack_download_dir,
         replaypack_name=replaypack_name,
         replaypack_url=url,
     )
 
+    # Unpacking the replaypack:
     replaypack_path = unpack_zipfile(
         destination_dir=replaypack_unpack_dir,
         subdir=replaypack_name,
         zip_path=download_path,
     )
 
+    # Loading the replaypack information:
     dataset_information = load_replaypack_information(
         replaypack_name=replaypack_name, replaypack_path=replaypack_path
     )
