@@ -1,11 +1,10 @@
-from re import L
 import unittest
 
 
-class SC2ReplayDataTest(unittest.TestCase):
+class SC2EGSetDatasetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         return super().setUpClass()
 
-    def test_loading_json(self):
+    def test_loading_replaypacks(self):
         pass
