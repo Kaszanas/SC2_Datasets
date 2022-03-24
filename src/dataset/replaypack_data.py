@@ -8,19 +8,32 @@ from dataset.utils.download_utils import download_and_unpack_replaypack
 # TODO: This should hold the extraction logs.
 # And other information that comes out of the processing pipeline:
 class SC2ReplaypackData(Dataset):
+
     """
-    Holds IterableDatasets for the data that
-    is within a single StarCraft .json representation of a replay file.
+    Represents a Dataset for a single pre-processed replaypack.
+
+
+    :param replaypack_name: Specifies the name of a replaypack. This can be a name of the tournament or any other arbitrary name.
+    :type replaypack_name: str
+    :param replaypack_download_dir: Specifies the directory where the initial archive will be downloaded.
+    :type replaypack_download_dir: str
+    :param replaypack_unpack_dir: Specifies the directory where the archive will be extracted.
+    :type replaypack_unpack_dir: str
+    :param url: Specifies the url which will be used to download the .zip archive, defaults to ""
+    :type url: str, optional
+    :param download: Specifies if the dataset should be downloaded or if it is pre-downloaded and extracted, defaults to False
+    :type download: bool, optional
     """
 
     def __init__(
         self,
         replaypack_name: str,
-        replaypack_download_dir: str,
         replaypack_unpack_dir: str,
+        replaypack_download_dir: str = "",
         url: str = "",
         download: bool = False,
     ):
+
         self.replaypack_download_dir = replaypack_download_dir
         self.replaypack_unpack_dir = replaypack_unpack_dir
         self.replaypack_name = replaypack_name
