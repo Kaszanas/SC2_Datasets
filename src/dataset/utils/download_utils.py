@@ -81,10 +81,3 @@ def download_and_unpack_replaypack(
         subdir=replaypack_name,
         zip_path=download_path,
     )
-
-    # Loading the replaypack information:
-    dataset_information = load_replaypack_information(
-        replaypack_name=replaypack_name, replaypack_path=replaypack_path
-    )
-
-    return dataset_information

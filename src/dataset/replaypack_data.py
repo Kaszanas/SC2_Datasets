@@ -3,10 +3,9 @@ import os
 from torch.utils.data import Dataset
 from dataset.replay_data import SC2ReplayData
 from dataset.utils.download_utils import download_and_unpack_replaypack
+from dataset.utils.dataset_utils import load_replaypack_information
 
 
-# TODO: This should hold the extraction logs.
-# And other information that comes out of the processing pipeline:
 class SC2ReplaypackData(Dataset):
 
     """
@@ -39,18 +38,27 @@ class SC2ReplaypackData(Dataset):
         self.replaypack_name = replaypack_name
         self.url = url
 
+        # Downloading the dataset:
         if download:
-            (
-                data_path,
-                summary_content,
-                mapping_content,
-                processed_info,
-            ) = download_and_unpack_replaypack(
+            download_and_unpack_replaypack(
                 replaypack_download_dir=self.replaypack_download_dir,
                 replaypack_unpack_dir=self.replaypack_unpack_dir,
                 replaypack_name=self.replaypack_name,
                 url=self.url,
             )
+
+        # Loading the dataset information:
+        (
+            data_path,
+            summary_content,
+            mapping_content,
+            processed_info,
+        ) = load_replaypack_information(
+            replaypack_name=self.replaypack_name,
+            replaypack_path=os.path.join(
+                self.replaypack_unpack_dir, self.replaypack_name
+            ),
+        )
 
         self.replaypack_summary = summary_content
         self.replaypack_dir_mapping = mapping_content
