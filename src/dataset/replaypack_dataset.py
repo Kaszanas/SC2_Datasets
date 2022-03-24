@@ -72,4 +72,5 @@ class SC2ReplaypackDataset(Dataset):
         return self.len
 
     def __getitem__(self, index: int) -> SC2ReplayData:
+        # Returning a replay serialized into Python class to assure the ease of use:
         return SC2ReplayData(replay_filepath=self.list_of_files[index])
