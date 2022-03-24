@@ -49,17 +49,18 @@ def download_replaypack(
 
 
 # Unpacks zip file at zip_path to a destination directory, into a subdirectory.
-def unpack_zipfile(destination_dir: str, subdir: str, zip_path: str):
-    """_summary_
+def unpack_zipfile(destination_dir: str, subdir: str, zip_path: str) -> str:
+    """
+    Helper function that unpacks the content of .zip archive.
 
-    :param destination_dir: _description_
+    :param destination_dir: Specifies the path where the .zip file will be extracted.
     :type destination_dir: str
-    :param subdir: _description_
+    :param subdir: Specifies the subdirectory where the content will be extracted.
     :type subdir: str
-    :param zip_path: _description_
+    :param zip_path: Specifies the path to the zip file that will be extracted.
     :type zip_path: str
-    :return: _description_
-    :rtype: _type_
+    :return: Returns a path to the extracted content.
+    :rtype: str
     """
     with zipfile.ZipFile(zip_path, "r") as zip_file:
         path_to_extract = os.path.join(destination_dir, subdir)
@@ -69,6 +70,53 @@ def unpack_zipfile(destination_dir: str, subdir: str, zip_path: str):
         zip_file.extractall(path_to_extract)
 
         return path_to_extract
+
+
+def download_and_unpack_replaypack(
+    replaypack_download_dir: str,
+    replaypack_unpack_dir: str,
+    replaypack_name: str,
+    url: str,
+):
+    """
+    Helper function that downloads a replaypack from a specified url.
+    The archive is saved to replaypack_download_dir using a replaypack_name.
+    This function extracts the replaypack to the replaypack_unpack_dir
+
+    :param replaypack_download_dir: Specifies a directory where the .zip archive will be downloaded.
+    :type replaypack_download_dir: str
+    :param replaypack_unpack_dir: Specifies a directory where the .zip file will be extracted under a replaypack_name directory.
+    :type replaypack_unpack_dir: str
+    :param replaypack_name: Specifies a replaypack name which will be used to create paths.
+    :type replaypack_name: str
+    :param url: Specifies the url that will be used to download the replaypack.
+    :type url: str
+    """
+
+    download_path = download_replaypack(
+        destination_dir=replaypack_download_dir,
+        replaypack_name=replaypack_name,
+        replaypack_url=url,
+    )
+
+    replaypack_path = unpack_zipfile(
+        destination_dir=replaypack_unpack_dir,
+        subdir=replaypack_name,
+        zip_path=download_path,
+    )
+
+    # TODO: find data files and unpack
+    replaypack_files = os.listdir(replaypack_path)
+    data_path = ""
+    for file in replaypack_files:
+        if file.endswith("_data.zip"):
+            data_path = unpack_zipfile(
+                destination_dir=replaypack_path,
+                subdir=replaypack_name + "_data",
+                zip_path=file,
+            )
+
+    return data_path
 
 
 # TODO: This should hold the extraction logs.
@@ -81,40 +129,24 @@ class SC2ReplaypackData(Dataset):
 
     def __init__(
         self,
-        replaypack_directory: str,
         replaypack_name: str,
+        replaypack_download_dir: str,
+        replaypack_unpack_dir: str,
         url: str = "",
         download: bool = False,
     ):
-        self.replaypack_directory = replaypack_directory
+        self.replaypack_download_dir = replaypack_download_dir
+        self.replaypack_unpack_dir = replaypack_unpack_dir
         self.replaypack_name = replaypack_name
+        self.url = url
 
         if download:
-            # TODO: Files cannot be downloaded in the same place!
-            # This needs to be split as in sc2_dataset.py into download dir and the unpack dir.
-            download_path = download_replaypack(
-                destination_dir=replaypack_directory + "/.download/",
+            data_path = download_and_unpack_replaypack(
+                replaypack_download_dir=self.replaypack_download_dir,
+                replaypack_unpack_dir=self.replaypack_unpack_dir,
                 replaypack_name=self.replaypack_name,
-                replaypack_url=url,
+                url=self.url,
             )
-
-            replaypack_path = unpack_zipfile(
-                destination_dir=replaypack_directory,
-                subdir=self.replaypack_name,
-                zip_path=download_path,
-            )
-
-            # TODO: find data files and unpack
-            replaypack_files = os.listdir(replaypack_path)
-            data_path = None
-
-            for file in replaypack_files:
-                if file.endswith("_data.zip"):
-                    data_path = unpack_zipfile(
-                        destination_dir=replaypack_directory,
-                        subdir=self.replaypack_name + "_data",
-                        zip_path=file,
-                    )
 
         # Load all of the files
         self.list_of_files = os.listdir(data_path)
