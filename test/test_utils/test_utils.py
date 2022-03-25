@@ -13,7 +13,7 @@ def get_workspace_dir() -> str:
         "Entered get_workspace_dir(), attempting to set workspace_dir = os.environ.get('TEST_WORKSPACE')"
     )
 
-    workspace_dir = os.environ.get("DATASET_TEST_WORKSPACE")
+    workspace_dir = os.environ.get("TEST_WORKSPACE")
     logging.info(
         f"Successfully set workspace_dir = {workspace_dir}, Attempting to return workspace_dir."
     )
@@ -34,9 +34,9 @@ def get_assets_dir() -> str:
     logging.info(f"Successfully set workspace_dir = {workspace_dir}")
 
     logging.info(
-        "Attempting to set input_dir = os.path.join(workspace_dir, 'test/test_files/assets')"
+        "Attempting to set input_dir = os.path.join(workspace_dir, 'test/test_files/single_replay')"
     )
-    input_dir = os.path.join(workspace_dir, "test/test_files/assets")
+    input_dir = os.path.join(workspace_dir, "test/test_files/single_replay")
     logging.info(f"Successfully set input_dir = {input_dir}, returning input_dir")
 
     return input_dir
