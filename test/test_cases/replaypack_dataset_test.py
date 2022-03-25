@@ -1,5 +1,7 @@
 import unittest
 
+from src.dataset.sc2_replaypack_dataset import SC2ReplaypackDataset
+
 
 class SC2ReplaypackDatasetTest(unittest.TestCase):
     @classmethod
@@ -7,4 +9,7 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         return super().setUpClass()
 
     def test_loading_replaypack(self):
-        pass
+
+        sc2_replaypack_dataset = SC2ReplaypackDataset()
+
+        self.assertIsInstance(sc2_replaypack_dataset, SC2ReplaypackDataset)

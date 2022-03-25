@@ -1,9 +1,9 @@
 import os
 
 from torch.utils.data import Dataset
-from dataset.replay_data import SC2ReplayData
-from dataset.utils.download_utils import download_and_unpack_replaypack
-from dataset.utils.dataset_utils import load_replaypack_information
+from src.dataset.sc2_replay_data import SC2ReplayData
+from src.dataset.utils.download_utils import download_and_unpack_replaypack
+from src.dataset.utils.dataset_utils import load_replaypack_information
 
 
 class SC2ReplaypackDataset(Dataset):
