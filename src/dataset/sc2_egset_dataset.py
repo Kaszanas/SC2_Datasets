@@ -6,34 +6,8 @@ import requests
 import uuid
 import zipfile
 
-from dataset.replay_data import SC2ReplayData
-from dataset.replaypack_data import SC2ReplaypackData
-
-
-def download_dataset(urls, destination_dir) -> List[Tuple[str, str]]:
-    result = []
-
-    for url in urls:
-        response = requests.get(url=url)
-        # Get the filename from URL or it needs to be hardcoded!
-        zip_filename = uuid.uuid4().hex
-        download_filepath = os.path.join(destination_dir, zip_filename + ".zip")
-        with open(download_filepath, "wb") as output_map_file:
-            output_map_file.write(response.content)
-            result.append((download_filepath, zip_filename))
-
-    if len(result) != len(urls):
-        raise Exception("dupa")
-
-    return result
-
-
-def find_downloaded_datasets(directory) -> List[Tuple[str, str]]:
-    result = []
-    files = os.listdir(directory)
-    for file in files:
-        result.append(file, os.path.splitext(file)[0])
-    return result
+from src.dataset.sc2_replay_data import SC2ReplayData
+from src.dataset.sc2_replay_data import SC2ReplaypackData
 
 
 def unpack_files(dataset_archives: List[str, str], destination_dir):

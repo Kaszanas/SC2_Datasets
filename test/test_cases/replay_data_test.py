@@ -1,7 +1,7 @@
 from re import L
 import unittest
 
-from src.dataset.replay_data import SC2ReplayData
+from src.dataset.sc2_replay_data import SC2ReplayData
 
 
 class SC2ReplayDataTest(unittest.TestCase):
