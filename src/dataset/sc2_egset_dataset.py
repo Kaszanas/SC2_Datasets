@@ -10,25 +10,6 @@ from src.dataset.sc2_replay_data import SC2ReplayData
 from src.dataset.sc2_replay_data import SC2ReplaypackData
 
 
-def unpack_files(dataset_archives: List[str, str], destination_dir):
-    """
-    Implements unpacking logic for the dataset.
-    """
-    # Unpacking the zip files that were downloaded:
-    for dataset_path, zip_filename in dataset_archives:
-
-        # for downloaded_zip_path, downloaded_zip_name in self.downloaded_filepaths:
-        with zipfile.ZipFile(dataset_path, "r") as zip_file:
-            path_to_extract = os.path.join(destination_dir, zip_filename)
-            # Checking the existence of the extraction output directory:
-            if not os.path.exists(path_to_extract):
-                os.makedirs(path_to_extract)
-            zip_file.extractall(path_to_extract)
-
-            # TODO: Further down extract the dataset
-    pass
-
-
 class SC2EGSetDataset(Dataset):
     """
     Inherits from PyTorch Dataset and ensures that the dataset for SC2EGSet is downloaded.
