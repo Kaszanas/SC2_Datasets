@@ -2,8 +2,8 @@ import os
 from typing import Dict, Tuple
 import requests
 
-from dataset.utils.zip_utils import unpack_zipfile
-from dataset.utils.dataset_utils import load_replaypack_information
+from src.dataset.utils.zip_utils import unpack_zipfile
+from src.dataset.utils.dataset_utils import load_replaypack_information
 
 
 def download_replaypack(
