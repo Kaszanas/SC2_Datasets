@@ -1,4 +1,3 @@
-from re import L
 import unittest
 
 from src.dataset.sc2_replay_data import SC2ReplayData
@@ -12,6 +11,9 @@ class SC2ReplayDataTest(unittest.TestCase):
 
     def test_loading_json(self):
 
-        sc2_replay_data = SC2ReplayData(replay_filepath=self.test_replay)
+        sc2_replay_data = SC2ReplayData.from_file(replay_filepath=self.test_replay)
 
         self.assertIsInstance(sc2_replay_data, SC2ReplayData)
+
+    def test_empty_json(self):
+        pass

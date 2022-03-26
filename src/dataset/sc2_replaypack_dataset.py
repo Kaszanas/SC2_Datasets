@@ -47,7 +47,7 @@ class SC2ReplaypackDataset(Dataset):
         if download:
             # Cannot download the replaypacks if the url is empty
             # or if the download directory does not exist:
-            if url == "":
+            if not url:
                 raise Exception("Detected empty URL! Cannot download a replaypack!")
             if not os.path.isdir(self.replaypack_download_dir):
                 raise Exception("Replaypack download directory does not exist!")
@@ -59,23 +59,18 @@ class SC2ReplaypackDataset(Dataset):
                 url=self.url,
             )
 
-        # Loading the dataset information:
+        # Loading the dataset information, additional replaypack information is kept:
         (
             data_path,
-            summary_content,
-            mapping_content,
-            processed_info,
+            self.replaypack_summary,
+            self.replaypack_dir_mapping,
+            self.replaypack_processed_info,
         ) = load_replaypack_information(
             replaypack_name=self.replaypack_name,
             replaypack_path=os.path.join(
                 self.replaypack_unpack_dir, self.replaypack_name
             ),
         )
-
-        # Additional replaypack information is kept:
-        self.replaypack_summary = summary_content
-        self.replaypack_dir_mapping = mapping_content
-        self.replaypack_processed_info = processed_info
 
         # Load all of the files:
         self.list_of_files = os.listdir(data_path)
