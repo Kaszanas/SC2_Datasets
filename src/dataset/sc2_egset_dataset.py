@@ -1,10 +1,6 @@
-from typing import Any, List, Tuple
+from typing import Any, List
 from torch.utils.data._typing import T_co
 from torch.utils.data import Dataset
-import os
-import requests
-import uuid
-import zipfile
 
 from src.dataset.sc2_replay_data import SC2ReplayData
 from src.dataset.sc2_replay_data import SC2ReplaypackData
@@ -55,36 +51,6 @@ class SC2EGSetDataset(Dataset):
             self.replaypacks.append(replaypack)
             self.len += len(replaypack)
 
-        # # If there are files in the dataset_unpack_dir
-        # # it means that it was downloaded and extracted:
-        # dataset_unpacked_files = os.listdir(self.dataset_unpack_dir)
-        # if dataset_unpacked_files:
-        #     # TODO: calculate length
-        #     return
-
-        # dataset_downloaded_files = os.listdir(self.dataset_download_dir)
-        # if dataset_downloaded_files:
-        #     downloaded_filepaths = find_downloaded_datasets(self.dataset_download_dir)
-
-        #     unpack_files(
-        #         dataset_archives=downloaded_filepaths,
-        #         destination_dir=self.dataset_download_dir,
-        #     )
-
-        #     # TODO: calculate length
-        #     return
-
-        # # If we are here, we need to download, unpack, calculate lenght
-        # downloaded_filepaths = download_dataset(
-        #     urls=self.list_of_urls, destination_dir=self.dataset_download_dir
-        # )
-
-        # # Unpack the downloaded files:
-        # unpack_files(
-        #     dataset_archives=downloaded_filepaths,
-        #     destination_dir=self.dataset_unpack_dir,
-        # )
-
     def __len__(self) -> int:
         """
         Returns the number of items that are within the dataset
@@ -93,12 +59,7 @@ class SC2EGSetDataset(Dataset):
         # In the case of SC2EGSet this will be the number of files.
 
         # Get len of list of files from SC2ReplaypackData class
-        if self.len != None:
-            return self.len
-
-        # Otherwise calculate it and return
-
-        pass
+        return self.len
 
     def __getitem__(self, index: Any) -> T_co:
         """
@@ -119,7 +80,22 @@ class SC2EGSetDataset(Dataset):
 
         # TODO: Get a specific SC2ReplayData from SC2ReplaypackData
 
-        pass
+        # If the index is negative, treat it as if expressed from the back of the sequence.
+        # For example, if index is -1 and lenght is 10, it means we are looking for the last element, which is at index 10 + (-1) = 9
+        if index < 0:
+            index = self.len + index
+
+        if index < 0:
+            raise IndexError(f"Computed index {index} is still less than zero!")
+
+        if index > self.len:
+            raise IndexError(f"Computed index {index} is greater than {self.len}!")
+
+        for replaypack in self.replaypacks:
+            if index < len(replaypack):
+                return replaypack[index]
+            else:
+                index -= len(replaypack)
 
     def load_files(self):
 
