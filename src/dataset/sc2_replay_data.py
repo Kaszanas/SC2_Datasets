@@ -14,6 +14,9 @@ class SC2ReplayData:
             self._header = json_data["header"]
             self._init_data = json_data["initData"]
 
+            # TODO: Check what are the unique game events that can occur
+            # And create serialization classes for them so that the json can be parsed.
+
     @property
     def header(self):
         return self._header
