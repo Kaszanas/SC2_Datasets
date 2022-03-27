@@ -16,20 +16,17 @@ class SC2ReplayData:
 
     def __init__(self, loaded_replay_object: Any) -> None:
 
-        unique_names = set()
-        for event in loaded_replay_object["gameEvents"]:
-            unique_names.add(event["evtTypeName"])
+        # unique_names = set()
+        # for event in loaded_replay_object["gameEvents"]:
+        #     unique_names.add(event["evtTypeName"])
 
-        print(unique_names)
+        # print(unique_names)
 
         self._header = loaded_replay_object["header"]
         self._init_data = loaded_replay_object["initData"]
         self._game_events = [
             GameEvent.from_dict(event) for event in loaded_replay_object["gameEvents"]
         ]
-
-        # TODO: Check what are the unique game events that can occur
-        # And create serialization classes for them so that the json can be parsed.
 
     @property
     def header(self):
@@ -39,9 +36,9 @@ class SC2ReplayData:
     # def header(self, header):
     #     self._header = header
 
-    @property
-    def init_data(self):
-        return self._init_data
+    # @property
+    # def init_data(self):
+    #     return self._init_data
 
     # @init_data.setter
     # def init_data(self, init_data):
