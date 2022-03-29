@@ -1,6 +1,6 @@
 import abc
 from types import NotImplementedType
-from typing import Dict
+from typing import Dict, Literal
 
 # TODO: from_dict documentation
 
