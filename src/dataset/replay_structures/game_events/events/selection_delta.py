@@ -2,6 +2,8 @@ from typing import Dict
 from src.dataset.replay_structures.game_events.events.nested.delta import Delta
 from src.dataset.replay_structures.game_events.game_event import GameEvent
 
+# TODO: Document the docstrings
+
 
 class SelectionDelta(GameEvent):
 

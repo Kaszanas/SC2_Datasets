@@ -8,6 +8,7 @@ from src.dataset.replay_structures.game_events.game_event import GameEvent
 # TODO: There are some null values in the data
 # it needs to be verified if such null values are a problem for later calculations with the dataset?
 # Should this be encoded somehow?
+# TODO: Document the docstrings
 
 
 class CameraUpdate(GameEvent):
