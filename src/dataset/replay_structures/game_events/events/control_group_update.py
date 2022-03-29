@@ -1,7 +1,10 @@
 from types import NoneType
+from typing import Dict
+
+from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 
-class ControlGroupUpdate:
+class ControlGroupUpdate(GameEvent):
     """_summary_
 
     :param controlGroupIndex: _description_
@@ -12,11 +15,26 @@ class ControlGroupUpdate:
     :type id: int
     :param loop: _description_
     :type loop: int
-    :param mask: _description_
-    :type mask: NoneType
     :param userid: _description_
     :type userid: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "ControlGroupUpdate":
+        """_summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: ControlGroupUpdate
+        """
+        return ControlGroupUpdate(
+            controlGroupIndex=d["controlGroupIndex"],
+            controlGroupUpdate=d["controlGroupUpdate"],
+            id=d["id"],
+            loop=d["loop"],
+            userid=d["userid"]["userId"],
+        )
 
     def __init__(
         self,
@@ -24,7 +42,6 @@ class ControlGroupUpdate:
         controlGroupUpdate: int,
         id: int,
         loop: int,
-        mask: NoneType,
         userid: int,
     ) -> None:
 
@@ -32,5 +49,4 @@ class ControlGroupUpdate:
         self.controlGroupUpdate = controlGroupUpdate
         self.id = id
         self.loop = loop
-        self.mask = mask
         self.userid = userid

@@ -1,8 +1,10 @@
 from types import NoneType
-from typing import List
+from typing import Dict, List
+
+from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 
-class AddSubgroups:
+class AddSubgroups(GameEvent):
 
     """_summary_
 
@@ -15,6 +17,15 @@ class AddSubgroups:
     :param unitLink: _description_
     :type unitLink: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "AddSubgroups":
+        return AddSubgroups(
+            count=d["count"],
+            intraSubgroupPriority=d["intraSubgroupPriority"],
+            subgroupPriority=d["subgroupPriority"],
+            unitLink=d["unitLink"],
+        )
 
     def __init__(
         self,
@@ -30,7 +41,7 @@ class AddSubgroups:
         self.unitLink = unitLink
 
 
-class Delta:
+class Delta(GameEvent):
 
     """_summary_
 
@@ -43,6 +54,15 @@ class Delta:
     :param subgroupIndex: _description_
     :type subgroupIndex: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "Delta":
+        return Delta(
+            addSubgroups=AddSubgroups.from_dict(d=d["addSubgroups"]),
+            addUnitTags=d["addUnitTags"],
+            removeMask=d["removeMask"],
+            subgroupIndex=d["subgroupIndex"],
+        )
 
     def __init__(
         self,

@@ -1,10 +1,14 @@
 from types import NoneType
+from typing import Dict
+
+from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 # TODO: Can the sequence be an int here?
 # Should this be encoded somehow if there is a NoneType detected?
 
 
-class Cmd:
+class Cmd(GameEvent):
+
     """_summary_
 
     :param id: _description_
@@ -20,6 +24,24 @@ class Cmd:
     :param userid: _description_
     :type userid: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "Cmd":
+        """_summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: Cmd
+        """
+        return Cmd(
+            id=d["id"],
+            loop=d["loop"],
+            otherUnit=d["otherUnit"],
+            sequence=d["sequence"],
+            unitGroup=d["unitGroup"],
+            userid=d["userid"]["userId"],
+        )
 
     def __init__(
         self,

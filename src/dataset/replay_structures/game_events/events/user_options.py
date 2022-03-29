@@ -1,4 +1,8 @@
-class UserOptions:
+from typing import Dict
+from src.dataset.replay_structures.game_events.game_event import GameEvent
+
+
+class UserOptions(GameEvent):
     """_summary_
 
     :param baseBuildNum: _description_
@@ -36,6 +40,36 @@ class UserOptions:
     :param versionFlags: _description_
     :type versionFlags: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "UserOptions":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: UserOptions
+        """
+        return UserOptions(
+            baseBuildNum=d["baseBuildNum"],
+            buildNum=d["buildNum"],
+            cameraFollow=d["cameraFollow"],
+            debugPauseEnabled=d["debugPauseEnabled"],
+            developmentCheatsEnabled=d["developmentCheatsEnabled"],
+            gameFullyDownloaded=d["gameFullyDownloaded"],
+            hotkeyProfile=d["hotkeyProfile"],
+            id=d["id"],
+            isMapToMapTransition=d["isMapToMapTransition"],
+            loop=d["loop"],
+            multiplayerCheatsEnabled=d["multiplayerCheatsEnabled"],
+            platformMac=d["platformMac"],
+            syncChecksummingEnabled=d["syncChecksummingEnabled"],
+            testCheatsEnabled=d["testCheatsEnabled"],
+            useGalaxyAsserts=d["useGalaxyAsserts"],
+            userid=d["userid"]["userId"],
+            versionFlags=d["versionFlags"],
+        )
 
     def __init__(
         self,

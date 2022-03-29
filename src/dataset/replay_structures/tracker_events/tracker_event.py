@@ -15,7 +15,7 @@ class TrackerEvent(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def from_dict(dict: Dict) -> "TrackerEvent":
+    def from_dict(d: Dict) -> "TrackerEvent":
         """_summary_
 
         :param dict: _description_
