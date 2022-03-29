@@ -2,6 +2,8 @@ from typing import Dict
 from src.dataset.replay_structures.game_events.events.nested.target_3d import Target3D
 from src.dataset.replay_structures.game_events.game_event import GameEvent
 
+# TODO: Document the docstrings
+
 
 class CmdUpdateTargetPoint(GameEvent):
     """_summary_

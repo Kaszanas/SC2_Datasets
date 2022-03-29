@@ -6,6 +6,8 @@ from src.dataset.replay_structures.game_events.game_event import GameEvent
 # TODO: Can the sequence be an int here?
 # Should this be encoded somehow if there is a NoneType detected?
 
+# TODO: Document the docstrings
+
 
 class Cmd(GameEvent):
 
