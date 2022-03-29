@@ -1,4 +1,10 @@
-class PlayerSetup:
+from typing import Dict
+from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+
+# TODO: Document the docstrings
+
+
+class PlayerSetup(TrackerEvent):
 
     """
     _summary_
@@ -16,6 +22,24 @@ class PlayerSetup:
     :param userId: _description_
     :type userId: int
     """
+
+    def from_dict(d: Dict) -> "PlayerSetup":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: PlayerSetup
+        """
+        return PlayerSetup(
+            id=d["id"],
+            loop=d["loop"],
+            playerId=d["playerId"],
+            slotId=d["slotId"],
+            type=d["type"],
+            userId=d["userId"],
+        )
 
     def __init__(
         self,

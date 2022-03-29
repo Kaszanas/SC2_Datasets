@@ -1,8 +1,11 @@
 from typing import Dict
-from src.dataset.replay_structures.tracker_events.player_stats.stats import Stats
+from src.dataset.replay_structures.tracker_events.events.player_stats.stats import Stats
+from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+
+# TODO: Document the docstrings
 
 
-class PlayerStats:
+class PlayerStats(TrackerEvent):
     """
     PlayerStats holds information about player economy
 
@@ -16,7 +19,31 @@ class PlayerStats:
     :type stats: Stats
     """
 
-    def __init__(self, id: int, loop: int, playerId: int, stats: Stats) -> None:
+    @staticmethod
+    def from_dict(d: Dict) -> "PlayerStats":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: PlayerStats
+        """
+        return PlayerStats(
+            id=d["id"],
+            loop=d["loop"],
+            playerId=d["playerId"],
+            stats=Stats.from_dict(d=d["stats"]),
+        )
+
+    def __init__(
+        self,
+        id: int,
+        loop: int,
+        playerId: int,
+        stats: Stats,
+    ) -> None:
+
         self.id = id
         self.loop = loop
         self.playerId = playerId
