@@ -1,4 +1,10 @@
-class UnitInit:
+from typing import Dict
+from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+
+# TODO: Document the docstrings
+
+
+class UnitInit(TrackerEvent):
 
     """
     _summary_
@@ -22,6 +28,27 @@ class UnitInit:
     :param y: _description_
     :type y: int
     """
+
+    def from_dict(d: Dict) -> "UnitInit":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: UnitInit
+        """
+        return UnitInit(
+            controlPlayerId=d["controlPlayerId"],
+            id=d["id"],
+            loop=d["loop"],
+            unitTagIndex=d["unitTagIndex"],
+            unitTagRecycle=d["unitTagRecycle"],
+            unitTypeName=d["unitTypeName"],
+            upkeepPlayerId=d["upkeepPlayerId"],
+            x=d["x"],
+            y=d["y"],
+        )
 
     def __init__(
         self,

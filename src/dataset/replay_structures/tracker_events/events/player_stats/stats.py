@@ -1,4 +1,10 @@
-class Stats:
+from typing import Dict
+from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+
+# TODO: Document the docstrings
+
+
+class Stats(TrackerEvent):
 
     """
     Stats holds specific fields on the economy of a player and is used in PlayerStats event.
@@ -82,6 +88,58 @@ class Stats:
     :param workersActiveCount: Specifies the number of workers that the player has.
     :type workersActiveCount: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "Stats":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: Stats
+        """
+        return Stats(
+            foodMade=d["foodMade"],
+            foodUsed=d["foodUsed"],
+            mineralsCollectionRate=d["mineralsCollectionRate"],
+            mineralsCurrent=d["mineralsCurrent"],
+            mineralsFriendlyFireArmy=d["mineralsFriendlyFireArmy"],
+            mineralsFriendlyFireEconomy=d["mineralsFriendlyFireEconomy"],
+            mineralsFriendlyFireTechnology=d["mineralsFriendlyFireTechnology"],
+            mineralsKilledArmy=d["mineralsKilledArmy"],
+            mineralsKilledEconomy=d["mineralsKilledEconomy"],
+            mineralsKilledTechnology=d["mineralsKilledTechnology"],
+            mineralsLostArmy=d["mineralsLostArmy"],
+            mineralsLostEconomy=d["mineralsLostEconomy"],
+            mineralsLostTechnology=d["mineralsLostTechnology"],
+            mineralsUsedActiveForces=d["mineralsUsedActiveForces"],
+            mineralsUsedCurrentArmy=d["mineralsUsedCurrentArmy"],
+            mineralsUsedCurrentEconomy=d["mineralsUsedCurrentEconomy"],
+            mineralsUsedCurrentTechnology=d["mineralsUsedCurrentTechnology"],
+            mineralsUsedInProgressArmy=d["mineralsUsedInProgressArmy"],
+            mineralsUsedInProgressEconomy=d["mineralsUsedInProgressEconomy"],
+            mineralsUsedInProgressTechnology=d["mineralsUsedInProgressTechnology"],
+            vespeneCollectionRate=d["vespeneCollectionRate"],
+            vespeneCurrent=d["vespeneCurrent"],
+            vespeneFriendlyFireArmy=d["vespeneFriendlyFireArmy"],
+            vespeneFriendlyFireEconomy=d["vespeneFriendlyFireEconomy"],
+            vespeneFriendlyFireTechnology=d["vespeneFriendlyFireTechnology"],
+            vespeneKilledArmy=d["vespeneKilledArmy"],
+            vespeneKilledEconomy=d["vespeneKilledEconomy"],
+            vespeneKilledTechnology=d["vespeneKilledTechnology"],
+            vespeneLostArmy=d["vespeneLostArmy"],
+            vespeneLostEconomy=d["vespeneLostEconomy"],
+            vespeneLostTechnology=d["vespeneLostTechnology"],
+            vespeneUsedActiveForces=d["vespeneUsedActiveForces"],
+            vespeneUsedCurrentArmy=d["vespeneUsedCurrentArmy"],
+            vespeneUsedCurrentEconomy=d["vespeneUsedCurrentEconomy"],
+            vespeneUsedCurrentTechnology=d["vespeneUsedCurrentTechnology"],
+            vespeneUsedInProgressArmy=d["vespeneUsedInProgressArmy"],
+            vespeneUsedInProgressEconomy=d["vespeneUsedInProgressEconomy"],
+            vespeneUsedInProgressTechnology=d["vespeneUsedInProgressTechnology"],
+            workersActiveCount=d["workersActiveCount"],
+        )
 
     def __init__(
         self,

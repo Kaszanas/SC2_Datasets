@@ -1,4 +1,10 @@
-class UnitTypeChange:
+from typing import Dict
+from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+
+# TODO: Document the docstrings
+
+
+class UnitTypeChange(TrackerEvent):
 
     """
     _summary_
@@ -14,6 +20,23 @@ class UnitTypeChange:
     :param unitTypeName: _description_
     :type unitTypeName: str
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "UnitTypeChange":
+        """_summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: UnitTypeChange
+        """
+        return UnitTypeChange(
+            id=d["id"],
+            loop=d["loop"],
+            unitTagIndex=d["unitTagIndex"],
+            unitTagRecycle=d["unitTagRecycle"],
+            unitTypeName=d["unitTypeName"],
+        )
 
     def __init__(
         self,
