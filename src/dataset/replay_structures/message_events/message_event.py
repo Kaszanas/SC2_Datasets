@@ -15,7 +15,7 @@ class MessageEvent(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def from_dict(dict: Dict) -> "MessageEvent":
+    def from_dict(d: Dict) -> "MessageEvent":
         """_summary_
 
         :param dict: _description_

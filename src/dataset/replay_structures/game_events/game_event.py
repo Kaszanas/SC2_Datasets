@@ -15,8 +15,9 @@ class GameEvent(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def from_dict(dict: Dict) -> "GameEvent":
-        """_summary_
+    def from_dict(d: Dict) -> "GameEvent":
+        """
+        _summary_
 
         :param dict: _description_
         :type dict: Dict
