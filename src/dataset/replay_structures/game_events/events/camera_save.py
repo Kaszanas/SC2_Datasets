@@ -1,7 +1,9 @@
+from typing import Dict
 from src.dataset.replay_structures.game_events.events.nested.target_2d import Target2D
+from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 
-class CameraSave:
+class CameraSave(GameEvent):
 
     """_summary_
 
@@ -16,6 +18,24 @@ class CameraSave:
     :param which: _description_
     :type which: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "CameraSave":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: CameraSave
+        """
+        return CameraSave(
+            id=d["id"],
+            loop=d["loop"],
+            target=Target2D(x=d["target"]["x"], y=d["target"]["y"]),
+            userid=d["userid"]["userId"],
+            which=d["which"],
+        )
 
     def __init__(
         self,

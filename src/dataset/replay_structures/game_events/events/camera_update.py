@@ -1,6 +1,8 @@
 from types import NoneType
+from typing import Dict
 
 from src.dataset.replay_structures.game_events.events.nested.target_2d import Target2D
+from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 
 # TODO: There are some null values in the data
@@ -8,7 +10,7 @@ from src.dataset.replay_structures.game_events.events.nested.target_2d import Ta
 # Should this be encoded somehow?
 
 
-class CameraUpdate:
+class CameraUpdate(GameEvent):
 
     """_summary_
 
@@ -31,6 +33,28 @@ class CameraUpdate:
     :param yaw: _description_
     :type yaw: NoneType | float | int
     """
+
+    @staticmethod
+    def from_dict(d: Dict):
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: _type_
+        """
+        return CameraUpdate(
+            distance=d["distance"],
+            follow=d["follow"],
+            id=d["id"],
+            loop=d["loop"],
+            pitch=d["pitch"],
+            reason=d["reason"],
+            target=Target2D(x=d["target"]["x"], y=d["target"]["y"]),
+            userid=d["userid"]["userId"],
+            yaw=d["yaw"],
+        )
 
     def __init__(
         self,

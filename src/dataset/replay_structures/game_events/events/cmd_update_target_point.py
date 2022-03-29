@@ -1,7 +1,9 @@
+from typing import Dict
 from src.dataset.replay_structures.game_events.events.nested.target_3d import Target3D
+from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 
-class CmdUpdateTargetPoint:
+class CmdUpdateTargetPoint(GameEvent):
     """_summary_
 
     :param id: _description_
@@ -13,6 +15,22 @@ class CmdUpdateTargetPoint:
     :param userid: _description_
     :type userid: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "CmdUpdateTargetPoint":
+        """_summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: CmdUpdateTargetPoint
+        """
+        return CmdUpdateTargetPoint(
+            id=d["id"],
+            loop=d["loop"],
+            target=Target3D(x=d["target"]["x"], y=d["target"]["y"], z=d["target"]["z"]),
+            userid=d["userid"]["userId"],
+        )
 
     def __init__(
         self,

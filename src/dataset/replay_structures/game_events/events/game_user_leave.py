@@ -1,5 +1,10 @@
-class GameUserLeave:
-    """_summary_
+from typing import Dict
+from src.dataset.replay_structures.game_events.game_event import GameEvent
+
+
+class GameUserLeave(GameEvent):
+    """
+    _summary_
 
     :param id: _description_
     :type id: int
@@ -10,6 +15,22 @@ class GameUserLeave:
     :param userid: _description_
     :type userid: int
     """
+
+    @staticmethod
+    def from_dict(d: Dict) -> "GameUserLeave":
+        """_summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: GameUserLeave
+        """
+        return GameUserLeave(
+            id=d["id"],
+            leaveReason=d["leaveReason"],
+            loop=d["loop"],
+            userid=d["userid"]["userId"],
+        )
 
     def __init__(
         self,
