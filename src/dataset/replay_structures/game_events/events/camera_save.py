@@ -7,7 +7,8 @@ from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 class CameraSave(GameEvent):
 
-    """_summary_
+    """
+    _summary_
 
     :param id: _description_
     :type id: int
