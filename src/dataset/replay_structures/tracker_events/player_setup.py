@@ -18,7 +18,13 @@ class PlayerSetup:
     """
 
     def __init__(
-        self, id: int, loop: int, playerId: int, slotId: int, type: int, userId: int
+        self,
+        id: int,
+        loop: int,
+        playerId: int,
+        slotId: int,
+        type: int,
+        userId: int,
     ) -> None:
 
         self.id = id
