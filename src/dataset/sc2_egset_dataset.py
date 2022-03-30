@@ -1,9 +1,10 @@
-from typing import Any, List
+from typing import Any, List, Tuple
 from torch.utils.data._typing import T_co
 from torch.utils.data import Dataset
+from src.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
 
-from src.dataset.sc2_replay_data import SC2ReplayData
 from src.dataset.sc2_replay_data import SC2ReplaypackData
+from src.dataset.sc2_replaypack_dataset import SC2ReplaypackDataset
 
 
 class SC2EGSetDataset(Dataset):
@@ -25,8 +26,8 @@ class SC2EGSetDataset(Dataset):
         dataset_unpack_dir: str = "./data/unpack",
         dataset_download_dir: str = "./data/download",
         urls: List[
-            str
-        ] = [],  # This should probably be hardcoded! After all I want this to be a specific dataset.
+            Tuple[str, str]
+        ] = AVAILABLE_REPLAYPACKS,  # This should probably be hardcoded! After all I want this to be a specific dataset.
         transform=None,
     ):
         self.dataset_download_dir = dataset_download_dir

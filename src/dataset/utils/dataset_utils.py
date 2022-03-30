@@ -33,7 +33,7 @@ def load_replaypack_information(
             data_path = unpack_zipfile(
                 destination_dir=replaypack_path,
                 subdir=replaypack_name + "_data",
-                zip_path=file,
+                zip_path=os.path.join(replaypack_path, file),
             )
         # TODO: ADD THE LOADING LOGIC
         if file.endswith("_summary.json"):

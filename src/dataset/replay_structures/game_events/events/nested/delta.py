@@ -20,12 +20,15 @@ class AddSubgroups(GameEvent):
 
     @staticmethod
     def from_dict(d: Dict) -> "AddSubgroups":
-        return AddSubgroups(
-            count=d["count"],
-            intraSubgroupPriority=d["intraSubgroupPriority"],
-            subgroupPriority=d["subgroupPriority"],
-            unitLink=d["unitLink"],
-        )
+        return [
+            AddSubgroups(
+                count=subgroup["count"],
+                intraSubgroupPriority=subgroup["intraSubgroupPriority"],
+                subgroupPriority=subgroup["subgroupPriority"],
+                unitLink=subgroup["unitLink"],
+            )
+            for subgroup in d
+        ]
 
     def __init__(
         self,
@@ -66,7 +69,7 @@ class Delta(GameEvent):
 
     def __init__(
         self,
-        addSubgroups: AddSubgroups,
+        addSubgroups: List[AddSubgroups],
         addUnitTags: List[int],
         removeMask: NoneType,
         subgroupIndex: int,
