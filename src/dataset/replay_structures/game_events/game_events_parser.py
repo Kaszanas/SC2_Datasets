@@ -38,7 +38,7 @@ from src.dataset.replay_structures.game_events.events.camera_save import CameraS
 # TODO: from_dict documentation
 
 
-class GameEventParser:
+class GameEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> GameEvent:
         """

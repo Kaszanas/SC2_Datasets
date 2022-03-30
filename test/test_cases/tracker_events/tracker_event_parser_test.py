@@ -20,5 +20,5 @@ class TrackerEventsParserTest(unittest.TestCase):
             # Iterating over all of the tracker events and verifying
             # If the parsing works correctly:
             for tracker_event in loaded_file["trackerEvents"]:
-                some_tracker_event = TrackerEventsParser.from_dict(d=tracker_event)
-                self.assertIsInstance(some_tracker_event, TrackerEvent)
+                some_parsed_event = TrackerEventsParser.from_dict(d=tracker_event)
+                self.assertIsInstance(some_parsed_event, TrackerEvent)
