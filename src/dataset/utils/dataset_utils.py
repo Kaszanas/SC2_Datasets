@@ -29,18 +29,21 @@ def load_replaypack_information(
     # Extracting the nested .zip files,
     # and loading replaypack information files:
     for file in replaypack_files:
-        if file.endswith("_data.zip"):
-            data_path = unpack_zipfile(
-                destination_dir=replaypack_path,
-                subdir=replaypack_name + "_data",
-                zip_path=os.path.join(replaypack_path, file),
-            )
-        # TODO: ADD THE LOADING LOGIC
-        if file.endswith("_summary.json"):
-            summary_content = ""
-        if file.endswith("_mapping.json"):
-            mapping_content = ""
-        if file.endswith(".log") and not file.endswith("main_log.log"):
-            processed_info = ""
+
+        match file:
+            case file.endswith("_data.zip"):
+                data_path = unpack_zipfile(
+                    destination_dir=replaypack_path,
+                    subdir=replaypack_name + "_data",
+                    zip_path=os.path.join(replaypack_path, file),
+                )
+            # TODO: ADD THE LOADING LOGIC
+            case file.endswith("_summary.json"):
+                summary_content = ""
+            case file.endswith("_mapping.json"):
+                mapping_content = ""
+            case file.endswith(".log"):
+                if not file.endswith("main_log.log"):
+                    processed_info = ""
 
     return (data_path, summary_content, mapping_content, processed_info)

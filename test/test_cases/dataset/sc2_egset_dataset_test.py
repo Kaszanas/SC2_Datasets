@@ -10,6 +10,6 @@ class SC2EGSetDatasetTest(unittest.TestCase):
 
     def test_loading_replaypacks(self):
 
-        sc2egset_dataset = SC2EGSetDataset
+        sc2egset_dataset = SC2EGSetDataset()
 
         pass
