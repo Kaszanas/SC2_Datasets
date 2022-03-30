@@ -1,7 +1,7 @@
 import json
 from typing import Any
 
-from src.dataset.replay_structures.game_events.game_event_parser import GameEvent
+from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 
 class GameOptions:
