@@ -1,10 +1,20 @@
 from typing import Dict
+from src.dataset.replay_structures.message_events.events.chat import Chat
 from src.dataset.replay_structures.message_events.message_event import MessageEvent
 
 
 class MessageEventParser:
     @staticmethod
     def from_dict(d: Dict) -> MessageEvent:
-        type_name = dict["evtTypeName"]
-        if type_name == CameraSave.__name__:
-            pass
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: MessageEvent
+        """
+        type_name = d["evtTypeName"]
+        match type_name:
+            case Chat.__name__:
+                return Chat.from_dict(d=d)
