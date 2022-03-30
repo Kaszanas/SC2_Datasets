@@ -35,28 +35,40 @@ from src.dataset.replay_structures.game_events.game_event import GameEvent
 
 from src.dataset.replay_structures.game_events.events.camera_save import CameraSave
 
+# TODO: from_dict documentation
+
 
 class GameEventParser:
     @staticmethod
     def from_dict(d: Dict) -> GameEvent:
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict
+        :return: _description_
+        :rtype: GameEvent
+        """
         type_name = d["evtTypeName"]
-        if type_name == CameraSave.__name__:
-            return CameraSave.from_dict(d=d)
-        if type_name == CameraUpdate.__name__:
-            return CameraUpdate.from_dict(d=d)
-        if type_name == CmdUpdateTargetPoint.__name__:
-            pass
-        if type_name == CmdUpdateTargetUnit.__name__:
-            pass
-        if type_name == Cmd.__name__:
-            pass
-        if type_name == CommandManagerState.__name__:
-            pass
-        if type_name == ControlGroupUpdate.__name__:
-            pass
-        if type_name == GameUserLeave.__name__:
-            pass
-        if type_name == SelectionDelta.__name__:
-            pass
-        if type_name == UserOptions.__name__:
-            pass
+
+        match type_name:
+            case CameraSave.__name__:
+                return CameraSave.from_dict(d=d)
+            case CameraUpdate.__name__:
+                return CameraUpdate.from_dict(d=d)
+            case CmdUpdateTargetPoint.__name__:
+                return CmdUpdateTargetPoint.from_dict(d=d)
+            case CmdUpdateTargetUnit.__name__:
+                return CmdUpdateTargetUnit.from_dict(d=d)
+            case Cmd.__name__:
+                return Cmd.from_dict(d=d)
+            case CommandManagerState.__name__:
+                return CommandManagerState.from_dict(d=d)
+            case ControlGroupUpdate.__name__:
+                return ControlGroupUpdate.from_dict(d=d)
+            case GameUserLeave.__name__:
+                return GameUserLeave.from_dict(d=d)
+            case SelectionDelta.__name__:
+                return SelectionDelta.from_dict(d=d)
+            case UserOptions.__name__:
+                return UserOptions.from_dict(d=d)
