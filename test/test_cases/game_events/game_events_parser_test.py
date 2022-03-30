@@ -18,7 +18,7 @@ class GameEventsParserTest(unittest.TestCase):
         with open(self.test_replay) as f:
             loaded_file = json.load(f)
 
-            # Iterating over all of the tracker events and verifying
+            # Iterating over all of the game events and verifying
             # If the parsing works correctly:
             for game_event in loaded_file["gameEvents"]:
                 some_parsed_event = GameEventsParser.from_dict(d=game_event)
