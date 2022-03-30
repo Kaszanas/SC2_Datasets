@@ -22,7 +22,7 @@ from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEv
 # TODO: from_dict documentation
 
 
-class TrackerEventParser:
+class TrackerEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> TrackerEvent:
         """
