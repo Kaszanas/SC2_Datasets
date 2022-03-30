@@ -14,7 +14,6 @@ class GameEventsParserTest(unittest.TestCase):
         cls.test_replay = test_utils.get_specific_asset(filename="test_replay.json")
 
     def test_game_events_parser(self):
-
         with open(self.test_replay) as f:
             loaded_file = json.load(f)
 
