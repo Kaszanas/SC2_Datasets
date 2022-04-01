@@ -1,20 +1,20 @@
 import json
 from typing import Any, Dict
-from src.dataset.replay_data.replay_structures.details.details import Details
+from src.dataset.replay_data.replay_parser.details.details import Details
 
-from src.dataset.replay_data.replay_structures.game_events.game_events_parser import (
+from src.dataset.replay_data.replay_parser.game_events.game_events_parser import (
     GameEventsParser,
 )
-from src.dataset.replay_data.replay_structures.header.header import Header
-from src.dataset.replay_data.replay_structures.init_data.init_data import InitData
-from src.dataset.replay_data.replay_structures.message_events.message_events_parser import (
+from src.dataset.replay_data.replay_parser.header.header import Header
+from src.dataset.replay_data.replay_parser.init_data.init_data import InitData
+from src.dataset.replay_data.replay_parser.message_events.message_events_parser import (
     MessageEventsParser,
 )
-from src.dataset.replay_data.replay_structures.metadata.metadata import Metadata
-from src.dataset.replay_data.replay_structures.toon_player_desc_map.toon_player_desc import (
+from src.dataset.replay_data.replay_parser.metadata.metadata import Metadata
+from src.dataset.replay_data.replay_parser.toon_player_desc_map.toon_player_desc import (
     ToonPlayerDesc,
 )
-from src.dataset.replay_data.replay_structures.tracker_events.tracker_events_parser import (
+from src.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
 
