@@ -11,7 +11,7 @@ from src.dataset.replay_structures.message_events.message_events_parser import (
     MessageEventsParser,
 )
 from src.dataset.replay_structures.metadata.metadata import Metadata
-from src.dataset.replay_structures.toon_player_desc_map.toon_player_desc_map import (
+from src.dataset.replay_structures.toon_player_desc_map.toon_player_desc import (
     ToonPlayerDesc,
 )
 from src.dataset.replay_structures.tracker_events.tracker_events_parser import (
