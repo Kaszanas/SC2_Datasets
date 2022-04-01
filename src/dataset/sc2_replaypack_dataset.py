@@ -81,8 +81,16 @@ class SC2ReplaypackDataset(Dataset):
         return self.len
 
     def __getitem__(self, index: int) -> SC2ReplayData:
+        """
+        Exposes logic of getting a single parsed item from the replaypack.
+
+        :param index: Specifies the index of a file that will be parsed and loaded into memory,
+        :type index: int
+        :return: Returns a parsed SC2ReplayData.
+        :rtype: SC2ReplayData
+        """
         # Returning a replay serialized into Python class to assure the ease of use:
-        return SC2ReplayData(replay_filepath=self.list_of_files[index])
+        return SC2ReplayData.from_file(replay_filepath=self.list_of_files[index])
 
     @property
     def replaypack_summary(self) -> Dict[str, Any]:

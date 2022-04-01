@@ -2,6 +2,7 @@ from typing import Any, List, Tuple
 from torch.utils.data._typing import T_co
 from torch.utils.data import Dataset
 from src.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
+from src.dataset.sc2_replay_data import SC2ReplayData
 
 from src.dataset.sc2_replaypack_dataset import SC2ReplaypackDataset
 
@@ -68,14 +69,14 @@ class SC2EGSetDataset(Dataset):
         # TODO: Verify that this works
         return self.len
 
-    def __getitem__(self, index: Any) -> T_co:
+    def __getitem__(self, index: Any) -> SC2ReplayData:
         """
-        Implements the dataset[index] acquisition of data.
+        Exposes logic of getting a single parsed item by using dataset[index].
 
         :param index: Specifies the index of an item that should be retrieved.
         :type index: Any
-        :return: Returns an item from the dataset.
-        :rtype: T_co
+        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset.
+        :rtype: SC2ReplayData
         """
 
         # If the index is negative, treat it as if expressed from the back of the sequence.

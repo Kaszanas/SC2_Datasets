@@ -19,6 +19,12 @@ class SC2EGSetDatasetTest(unittest.TestCase):
 
         self.assertIsInstance(sc2egset_dataset, SC2EGSetDataset)
 
+    def test_parsing_all_files(self):
+
+        # TODO: Iterate over the whole dataset and test replay json parsing
+
+        pass
+
     def test_get_item(self):
         pass
 
