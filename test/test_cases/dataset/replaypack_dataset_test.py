@@ -20,10 +20,13 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         self.assertIsInstance(sc2_replaypack_dataset, SC2ReplaypackDataset)
         self.assertIsInstance(sc2_replaypack_dataset.replaypack_processed_info, Dict)
 
-    def test_download_load_replaypack(self):
+    def test_parsing_replaypack_replays(self):
+
+        # TODO: Iterate over the Replaypack dataset and try parsing all of the replays
+
         pass
 
-    def test_get_item(self):
+    def test_download_load_replaypack(self):
         pass
 
     def test_get_len(self):
