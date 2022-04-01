@@ -1,5 +1,5 @@
 import json
-from typing import Any
+from typing import Any, Dict
 from src.dataset.replay_structures.details.details import Details
 
 from src.dataset.replay_structures.game_events.game_events_parser import (
@@ -11,6 +11,9 @@ from src.dataset.replay_structures.message_events.message_events_parser import (
     MessageEventsParser,
 )
 from src.dataset.replay_structures.metadata.metadata import Metadata
+from src.dataset.replay_structures.toon_player_desc_map.toon_player_desc_map import (
+    ToonPlayerDesc,
+)
 from src.dataset.replay_structures.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
@@ -35,20 +38,27 @@ class SC2ReplayData:
         # print(unique_names)
 
         self._header = Header.from_dict(d=loaded_replay_object["header"])
-        self._init_data = InitData.from_dict(d=loaded_replay_object["initData"])
+        self._initData = InitData.from_dict(d=loaded_replay_object["initData"])
         self._details = Details.from_dict(d=loaded_replay_object["details"])
         self._metadata = Metadata.from_dict(d=loaded_replay_object["metadata"])
-        self._message_events = [
+        self._messageEvents = [
             MessageEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["messageEvents"]
         ]
-        self._game_events = [
+        self._gameEvents = [
             GameEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["gameEvents"]
         ]
-        self._tracker_events = [
+        self._trackerEvents = [
             TrackerEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["trackerEvents"]
+        ]
+        toon_player_desc_dict: Dict[str, Dict[str, Any]] = loaded_replay_object[
+            "ToonPlayerDescMap"
+        ]
+        self._toonPlayerDescMap = [
+            ToonPlayerDesc.from_dict(toon=toon, d=player_dict)
+            for toon, player_dict in toon_player_desc_dict.items()
         ]
 
     @property

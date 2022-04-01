@@ -1,9 +1,11 @@
+from typing import Any, Dict
 from src.dataset.replay_structures.toon_player_desc_map.color import Color
 
 
 class ToonPlayerInfo:
 
-    """_summary_
+    """
+    _summary_
 
     :param nickname: _description_
     :type nickname: _type_
@@ -46,6 +48,39 @@ class ToonPlayerInfo:
     :param color: _description_
     :type color: Color
     """
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> "ToonPlayerInfo":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict[str, Any]
+        :return: _description_
+        :rtype: ToonPlayerInfo
+        """
+        return ToonPlayerInfo(
+            nickname=d["nickname"],
+            playerID=d["playerID"],
+            userID=d["userID"],
+            SQ=d["SQ"],
+            supplyCappedPercent=d["supplyCappedPercent"],
+            startDir=d["startDir"],
+            startLocX=d["startLocX"],
+            startLocY=d["startLocY"],
+            race=d["race"],
+            selectedRace=d["selectedRace"],
+            APM=d["APM"],
+            MMR=d["MMR"],
+            result=d["result"],
+            region=d["region"],
+            realm=d["realm"],
+            highestLeague=d["highestLeague"],
+            isInClan=d["isInClan"],
+            clanTag=d["clanTag"],
+            handicap=d["handicap"],
+            color=Color.from_dict(d=d["color"]),
+        )
 
     def __init__(
         self,
