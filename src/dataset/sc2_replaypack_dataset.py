@@ -1,4 +1,5 @@
 import os
+from typing import Any, Dict, List
 
 from torch.utils.data import Dataset
 from src.dataset.sc2_replay_data import SC2ReplayData
@@ -62,9 +63,9 @@ class SC2ReplaypackDataset(Dataset):
         # Loading the dataset information, additional replaypack information is kept:
         (
             data_path,
-            self.replaypack_summary,
-            self.replaypack_dir_mapping,
-            self.replaypack_processed_info,
+            self._replaypack_summary,
+            self._replaypack_dir_mapping,
+            self._replaypack_processed_info,
         ) = load_replaypack_information(
             replaypack_name=self.replaypack_name,
             replaypack_path=os.path.join(
@@ -82,3 +83,15 @@ class SC2ReplaypackDataset(Dataset):
     def __getitem__(self, index: int) -> SC2ReplayData:
         # Returning a replay serialized into Python class to assure the ease of use:
         return SC2ReplayData(replay_filepath=self.list_of_files[index])
+
+    @property
+    def replaypack_summary(self) -> Dict[str, Any]:
+        return self._replaypack_summary
+
+    @property
+    def replaypack_dir_mapping(self) -> Dict[str, str]:
+        return self._replaypack_dir_mapping
+
+    @property
+    def replaypack_processed_info(self) -> Dict[str, List[str]]:
+        return self._replaypack_processed_info
