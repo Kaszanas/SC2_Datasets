@@ -5,6 +5,24 @@ from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
 
 
 class SC2EGSetDataModule(pl.LightningDataModule):
+
+    """
+    _summary_
+
+    :param dataset_download_dir: _description_, defaults to "./data/unpack"
+    :type dataset_download_dir: str, optional
+    :param dataset_unpack_dir: _description_, defaults to "./data/unpack"
+    :type dataset_unpack_dir: str, optional
+    :param train_transforms: _description_, defaults to None
+    :type train_transforms: _type_, optional
+    :param val_transforms: _description_, defaults to None
+    :type val_transforms: _type_, optional
+    :param test_transforms: _description_, defaults to None
+    :type test_transforms: _type_, optional
+    :param dims: _description_, defaults to None
+    :type dims: _type_, optional
+    """
+
     def __init__(
         self,
         dataset_download_dir: str = "./data/unpack",
@@ -14,6 +32,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         test_transforms=None,
         dims=None,
     ):
+
         super().__init__()
 
         self.dataset_download_dir = dataset_download_dir

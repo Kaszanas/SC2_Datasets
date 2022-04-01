@@ -5,6 +5,30 @@ from src.dataset.pytorch_datasets.sc2_replaypack_dataset import SC2ReplaypackDat
 
 
 class SC2ReplaypackDataModule(pl.LightningDataModule):
+
+    """
+    _summary_
+
+    :param replaypack_name: _description_
+    :type replaypack_name: str
+    :param replaypack_unpack_dir: _description_, defaults to "./data/unpack"
+    :type replaypack_unpack_dir: str, optional
+    :param replaypack_download_dir: _description_, defaults to "./data/unpack"
+    :type replaypack_download_dir: str, optional
+    :param url: _description_, defaults to ""
+    :type url: str, optional
+    :param download: _description_, defaults to True
+    :type download: bool, optional
+    :param train_transforms: _description_, defaults to None
+    :type train_transforms: _type_, optional
+    :param val_transforms: _description_, defaults to None
+    :type val_transforms: _type_, optional
+    :param test_transforms: _description_, defaults to None
+    :type test_transforms: _type_, optional
+    :param dims: _description_, defaults to None
+    :type dims: _type_, optional
+    """
+
     def __init__(
         self,
         replaypack_name: str,
@@ -17,6 +41,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         test_transforms=None,
         dims=None,
     ):
+
         super().__init__()
 
         self.replaypack_name = replaypack_name
