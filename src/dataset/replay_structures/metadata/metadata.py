@@ -1,5 +1,9 @@
+from typing import Any, Dict
+
+
 class Metadata:
-    """_summary_
+    """
+    _summary_
 
     :param baseBuild: _description_
     :type baseBuild: str
@@ -12,6 +16,24 @@ class Metadata:
     :param mapName: _description_
     :type mapName: str
     """
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> "Metadata":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict[str, Any]
+        :return: _description_
+        :rtype: Metadata
+        """
+        return Metadata(
+            baseBuild=d["baseBuild"],
+            dataBuild=d["dataBuild"],
+            durationSeconds=d["durationSeconds"],
+            gameVersion=d["gameVersion"],
+            mapName=d["mapName"],
+        )
 
     def __init__(
         self,

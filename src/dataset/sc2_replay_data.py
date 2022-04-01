@@ -10,6 +10,7 @@ from src.dataset.replay_structures.init_data.init_data import InitData
 from src.dataset.replay_structures.message_events.message_events_parser import (
     MessageEventsParser,
 )
+from src.dataset.replay_structures.metadata.metadata import Metadata
 from src.dataset.replay_structures.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
@@ -36,14 +37,14 @@ class SC2ReplayData:
         self._header = Header.from_dict(d=loaded_replay_object["header"])
         self._init_data = InitData.from_dict(d=loaded_replay_object["initData"])
         self._details = Details.from_dict(d=loaded_replay_object["details"])
-        self._metadata = ""
-        self._game_events = [
-            GameEventsParser.from_dict(d=event_dict)
-            for event_dict in loaded_replay_object["gameEvents"]
-        ]
+        self._metadata = Metadata.from_dict(d=loaded_replay_object["metadata"])
         self._message_events = [
             MessageEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["messageEvents"]
+        ]
+        self._game_events = [
+            GameEventsParser.from_dict(d=event_dict)
+            for event_dict in loaded_replay_object["gameEvents"]
         ]
         self._tracker_events = [
             TrackerEventsParser.from_dict(d=event_dict)
