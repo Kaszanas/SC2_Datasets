@@ -19,10 +19,6 @@ from src.dataset.replay_structures.tracker_events.tracker_events_parser import (
 )
 
 
-class GameOptions:
-    pass
-
-
 class SC2ReplayData:
     @staticmethod
     def from_file(replay_filepath: str) -> "SC2ReplayData":
@@ -61,22 +57,38 @@ class SC2ReplayData:
             for toon, player_dict in toon_player_desc_dict.items()
         ]
 
-    @property
-    def header(self):
-        return self._header
-
-    # @header.setter
-    # def header(self, header):
-    #     self._header = header
-
-    # @property
-    # def init_data(self):
-    #     return self._init_data
-
-    # @init_data.setter
-    # def init_data(self, init_data):
-    #     self._init_data = init_data
+        self._gameEventsErr: bool = loaded_replay_object["gameEventsErr"]
+        self._messageEventsErr: bool = loaded_replay_object["messageEventsErr"]
+        self._trackerEventsErr: bool = loaded_replay_object["trackerEvtsErr"]
 
     @property
     def initData(self):
         return self._init_data
+
+    @property
+    def header(self):
+        return self._header
+
+    @property
+    def details(self):
+        return self._details
+
+    @property
+    def metadata(self):
+        return self._metadata
+
+    @property
+    def messageEvents(self):
+        return self._messageEvents
+
+    @property
+    def gameEvents(self):
+        return self._gameEvents
+
+    @property
+    def trackerEvents(self):
+        return self._trackerEvents
+
+    @property
+    def toonPlayerDescMap(self):
+        return self._toonPlayerDescMap
