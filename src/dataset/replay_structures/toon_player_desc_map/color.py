@@ -1,5 +1,9 @@
+from typing import Dict
+
+
 class Color:
-    """_summary_
+    """
+    _summary_
 
     :param a: _description_
     :type a: int
@@ -11,7 +15,30 @@ class Color:
     :type r: int
     """
 
-    def __init__(self, a: int, b: int, g: int, r: int) -> None:
+    @staticmethod
+    def from_dict(d: Dict[str, int]) -> "Color":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict[str, int]
+        :return: _description_
+        :rtype: Color
+        """
+        return Color(
+            a=d["a"],
+            b=d["b"],
+            g=d["g"],
+            r=d["r"],
+        )
+
+    def __init__(
+        self,
+        a: int,
+        b: int,
+        g: int,
+        r: int,
+    ) -> None:
 
         self.a = a
         self.b = b
