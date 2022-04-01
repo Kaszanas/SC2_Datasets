@@ -1,39 +1,41 @@
-class Details:
-    """_summary_
+from typing import Any, Dict
 
-    :param game_speed: _description_
-    :type game_speed: str
-    :param is_blizzard_map: _description_
-    :type is_blizzard_map: bool
-    :param time_utc: _description_
-    :type time_utc: str
+
+class Details:
+    """
+    _summary_
+
+    :param gameSpeed: _description_
+    :type gameSpeed: str
+    :param isBlizzardMap: _description_
+    :type isBlizzardMap: bool
+    :param timeUTC: _description_
+    :type timeUTC: str
     """
 
-    def __init__(self, game_speed: str, is_blizzard_map: bool, time_utc: str) -> None:
-        self.game_speed = game_speed
-        self.is_blizzard_map = is_blizzard_map
-        self.time_utc = time_utc
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> "Details":
+        """
+        _summary_
 
-    @property
-    def game_speed(self):
-        return self.game_speed
+        :param d: _description_
+        :type d: Dict[str, Any]
+        :return: _description_
+        :rtype: Details
+        """
+        return Details(
+            gameSpeed=d["gameSpeed"],
+            isBlizzardMap=d["isBlizzardMap"],
+            timeUTC=d["timeUTC"],
+        )
 
-    @property
-    def gameSpeed(self):
-        return self.game_speed
+    def __init__(
+        self,
+        gameSpeed: str,
+        isBlizzardMap: bool,
+        timeUTC: str,
+    ) -> None:
 
-    @property
-    def is_blizzard_map(self):
-        return self.is_blizzard_map
-
-    @property
-    def isBlizzardMap(self):
-        return self.is_blizzard_map
-
-    @property
-    def time_utc(self):
-        return self.time_utc
-
-    @property
-    def timeUTC(self):
-        return self.time_utc
+        self.gameSpeed = gameSpeed
+        self.isBlizzardMap = isBlizzardMap
+        self.timeUTC = timeUTC
