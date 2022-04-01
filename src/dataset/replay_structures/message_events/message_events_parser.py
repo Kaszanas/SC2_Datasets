@@ -3,7 +3,7 @@ from src.dataset.replay_structures.message_events.events.chat import Chat
 from src.dataset.replay_structures.message_events.message_event import MessageEvent
 
 
-class MessageEventParser:
+class MessageEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> MessageEvent:
         """

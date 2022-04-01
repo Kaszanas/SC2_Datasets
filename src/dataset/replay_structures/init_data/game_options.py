@@ -1,3 +1,6 @@
+from typing import Any, Dict
+
+
 class GameOptions:
 
     """_summary_
@@ -33,6 +36,34 @@ class GameOptions:
     :param userDifficulty: _description_
     :type userDifficulty: bool
     """
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> "GameOptions":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict[str, Any]
+        :return: _description_
+        :rtype: GameOptions
+        """
+        return GameOptions(
+            advancedSharedControl=d["advancedSharedControl"],
+            amm=d["amm"],
+            battleNet=d["battleNet"],
+            clientDebugFlags=d["clientDebugFlags"],
+            competitive=d["competitive"],
+            cooperative=d["cooperative"],
+            fog=d["fog"],
+            heroDuplicatesAllowed=d["heroDuplicatesAllowed"],
+            lockTeams=d["lockTeams"],
+            noVictoryOrDefeat=d["noVictoryOrDefeat"],
+            observers=d["observers"],
+            practice=d["practice"],
+            randomRaces=d["randomRaces"],
+            teamsTogether=d["teamsTogether"],
+            userDifficulty=d["userDifficulty"],
+        )
 
     def __init__(
         self,

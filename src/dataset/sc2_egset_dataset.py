@@ -1,5 +1,4 @@
 from typing import Any, List, Tuple
-from torch.utils.data._typing import T_co
 from torch.utils.data import Dataset
 from src.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
 from src.dataset.sc2_replay_data import SC2ReplayData
@@ -34,7 +33,7 @@ class SC2EGSetDataset(Dataset):
         self.dataset_download_dir = dataset_download_dir
         self.dataset_unpack_dir = dataset_unpack_dir
         # TODO: What to do with the transform?
-        # I don't think that it will be used
+        # I don't think that it will be used:
         self.transform = transform
         self.names_urls = names_urls
         self.download = download
@@ -48,7 +47,7 @@ class SC2EGSetDataset(Dataset):
         Ensures that the dataset was downloaded before accessing the __len__ or __getitem__ methods.
         """
 
-        self.replaypacks = []
+        self.replaypacks: List[SC2ReplaypackDataset] = []
         self.len = 0
 
         for replaypack_name, url in self.names_urls:
@@ -66,7 +65,6 @@ class SC2EGSetDataset(Dataset):
         """
         Returns the number of items that are within the dataset
         """
-        # TODO: Verify that this works
         return self.len
 
     def __getitem__(self, index: Any) -> SC2ReplayData:
