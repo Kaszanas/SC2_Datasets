@@ -1,5 +1,6 @@
 import json
 from typing import Any
+from src.dataset.replay_structures.details.details import Details
 
 from src.dataset.replay_structures.game_events.game_events_parser import (
     GameEventsParser,
@@ -34,6 +35,8 @@ class SC2ReplayData:
 
         self._header = Header.from_dict(d=loaded_replay_object["header"])
         self._init_data = InitData.from_dict(d=loaded_replay_object["initData"])
+        self._details = Details.from_dict(d=loaded_replay_object["details"])
+        self._metadata = ""
         self._game_events = [
             GameEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["gameEvents"]
