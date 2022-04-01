@@ -7,8 +7,8 @@ from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
 class SC2EGSetDataModule(pl.LightningDataModule):
     def __init__(
         self,
-        dataset_download_dir: str = "",
-        dataset_unpack_dir: str = "",
+        dataset_download_dir: str = "./data/unpack",
+        dataset_unpack_dir: str = "./data/unpack",
         train_transforms=None,
         val_transforms=None,
         test_transforms=None,
