@@ -26,7 +26,7 @@ class ToonPlayerDesc:
         """
         return ToonPlayerDesc(
             toon=toon,
-            toon_player_info=ToonPlayerInfo.from_dict(d=d["toon_player_info"]),
+            toon_player_info=ToonPlayerInfo.from_dict(d=d),
         )
 
     def __init__(

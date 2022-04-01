@@ -1,5 +1,5 @@
 from typing import Any, Dict
-from dataset.replay_structures.init_data.game_options import GameOptions
+from src.dataset.replay_structures.init_data.game_options import GameOptions
 
 
 class GameDescription:

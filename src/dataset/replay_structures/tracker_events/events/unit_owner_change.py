@@ -1,3 +1,4 @@
+from typing import Dict
 from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
 
 # TODO: Document the docstrings
@@ -21,7 +22,7 @@ class UnitOwnerChange(TrackerEvent):
     :type upkeepPlayerId: int
     """
 
-    def from_dict(d: Dict) -> "UnitOwnerChange":
+    def from_dict(d: Dict[str, int]) -> "UnitOwnerChange":
         """
         _summary_
 
