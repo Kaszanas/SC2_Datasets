@@ -10,6 +10,17 @@ class SC2EGSetDatasetTest(unittest.TestCase):
 
     def test_loading_replaypacks(self):
 
-        sc2egset_dataset = SC2EGSetDataset()
+        sc2egset_dataset = SC2EGSetDataset(
+            names_urls=[
+                ("2020_IEM_Katowice", ""),
+            ],
+            download=False,
+        )
 
+        self.assertIsInstance(sc2egset_dataset, SC2EGSetDataset)
+
+    def test_get_item(self):
+        pass
+
+    def test_get_len(self):
         pass

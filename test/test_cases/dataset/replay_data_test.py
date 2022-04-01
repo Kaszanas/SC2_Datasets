@@ -15,6 +15,12 @@ class SC2ReplayDataTest(unittest.TestCase):
 
         self.assertIsInstance(sc2_replay_data, SC2ReplayData)
 
+    def test_batch_loading_json(self):
+
+        # TODO: Test all of the files that consist of the SC2EGSet Dataset.
+
+        pass
+
     def test_empty_json(self):
 
         # Empty json should raise a KeyError:
