@@ -1,6 +1,7 @@
 import os
 from typing import Dict
 import unittest
+from src.dataset.sc2_replay_data import SC2ReplayData
 
 from src.dataset.sc2_replaypack_dataset import SC2ReplaypackDataset
 
@@ -22,9 +23,17 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
     def test_parsing_replaypack_replays(self):
 
-        # TODO: Iterate over the Replaypack dataset and try parsing all of the replays
+        sc2_replaypack_dataset = SC2ReplaypackDataset(
+            replaypack_name="2020_IEM_Katowice",
+            replaypack_unpack_dir=os.path.abspath("./test/test_files/unpack"),
+        )
 
-        pass
+        # Iterating over a single replaypacka and verifying
+        # That it is possible to parse the replays into SC2ReplayData:
+        for index in len(sc2_replaypack_dataset):
+            replay_data = sc2_replaypack_dataset[index]
+
+            self.assertIsInstance(replay_data, SC2ReplayData)
 
     def test_download_load_replaypack(self):
         pass
