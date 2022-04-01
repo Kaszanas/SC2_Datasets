@@ -1,9 +1,9 @@
 import os
 from typing import Dict
 import unittest
-from src.dataset.sc2_replay_data import SC2ReplayData
+from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
-from src.dataset.sc2_replaypack_dataset import SC2ReplaypackDataset
+from src.dataset.pytorch_datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
 
 
 class SC2ReplaypackDatasetTest(unittest.TestCase):
