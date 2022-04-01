@@ -1,3 +1,6 @@
+from typing import Any, Dict
+
+
 class Header:
     """
     Header represents the replay header.
@@ -11,6 +14,15 @@ class Header:
     :param version: Specifies the game version that was used to play the game.
     :type version: str
     """
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> "Header":
+        return Header(
+            elapsedGameLoops=d["elapsedGameLoops"],
+            durationNanoseconds=d["durationNanoseconds"],
+            durationSeconds=d["durationSeconds"],
+            version=d["version"],
+        )
 
     def __init__(
         self,
