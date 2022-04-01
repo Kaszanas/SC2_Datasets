@@ -1,6 +1,6 @@
 import unittest
 
-from src.dataset.sc2_egset_dataset import SC2EGSetDataset
+from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
 
 
 class SC2EGSetDatasetTest(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 
-from src.dataset.sc2_replay_data import SC2ReplayData
+from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 import test.test_utils.test_utils as test_utils
 
 

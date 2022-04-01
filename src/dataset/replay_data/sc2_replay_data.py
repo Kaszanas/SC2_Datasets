@@ -1,20 +1,20 @@
 import json
 from typing import Any, Dict
-from src.dataset.replay_structures.details.details import Details
+from src.dataset.replay_data.replay_structures.details.details import Details
 
-from src.dataset.replay_structures.game_events.game_events_parser import (
+from src.dataset.replay_data.replay_structures.game_events.game_events_parser import (
     GameEventsParser,
 )
-from src.dataset.replay_structures.header.header import Header
-from src.dataset.replay_structures.init_data.init_data import InitData
-from src.dataset.replay_structures.message_events.message_events_parser import (
+from src.dataset.replay_data.replay_structures.header.header import Header
+from src.dataset.replay_data.replay_structures.init_data.init_data import InitData
+from src.dataset.replay_data.replay_structures.message_events.message_events_parser import (
     MessageEventsParser,
 )
-from src.dataset.replay_structures.metadata.metadata import Metadata
-from src.dataset.replay_structures.toon_player_desc_map.toon_player_desc import (
+from src.dataset.replay_data.replay_structures.metadata.metadata import Metadata
+from src.dataset.replay_data.replay_structures.toon_player_desc_map.toon_player_desc import (
     ToonPlayerDesc,
 )
-from src.dataset.replay_structures.tracker_events.tracker_events_parser import (
+from src.dataset.replay_data.replay_structures.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
 
@@ -37,18 +37,22 @@ class SC2ReplayData:
         self._initData = InitData.from_dict(d=loaded_replay_object["initData"])
         self._details = Details.from_dict(d=loaded_replay_object["details"])
         self._metadata = Metadata.from_dict(d=loaded_replay_object["metadata"])
+        # TODO: We might want this to be a IterableDataset using PyTorch class:
         self._messageEvents = [
             MessageEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["messageEvents"]
         ]
+        # TODO: We might want this to be a IterableDataset using PyTorch class:
         self._gameEvents = [
             GameEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["gameEvents"]
         ]
+        # TODO: We might want this to be a IterableDataset using PyTorch class:
         self._trackerEvents = [
             TrackerEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["trackerEvents"]
         ]
+        # TODO: We might want this to be a IterableDataset using PyTorch class:
         toon_player_desc_dict: Dict[str, Dict[str, Any]] = loaded_replay_object[
             "ToonPlayerDescMap"
         ]
