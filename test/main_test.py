@@ -14,7 +14,7 @@ def suite():
     start_dir = os.path.join(workspace_dir, "test/test_cases")
     suite = unittest.TestLoader().discover(
         start_dir=start_dir,
-        pattern="replaypack_dataset_test.py",  # *_test.py
+        pattern="replay_data_test.py",  # *_test.py
     )
     return suite
 

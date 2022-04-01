@@ -3,7 +3,8 @@ from typing import Any, Dict
 
 class GameOptions:
 
-    """_summary_
+    """
+    _summary_
 
     :param advancedSharedControl: _description_
     :type advancedSharedControl: bool
