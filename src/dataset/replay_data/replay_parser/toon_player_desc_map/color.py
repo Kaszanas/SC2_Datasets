@@ -1,7 +1,11 @@
 from typing import Dict
 
+import torch
 
-class Color:
+from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
+
+
+class Color(SC2ReplayField):
     """
     _summary_
 
@@ -44,3 +48,6 @@ class Color:
         self.b = b
         self.g = g
         self.r = r
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

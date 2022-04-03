@@ -1,5 +1,7 @@
 from typing import Dict
-from src.dataset.replay_structures.game_events.game_event import GameEvent
+
+import torch
+from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 # TODO: Document the docstrings
 
@@ -50,3 +52,6 @@ class CommandManagerState(GameEvent):
         self.sequence = sequence
         self.state = state
         self.userid = userid
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

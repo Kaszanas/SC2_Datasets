@@ -1,5 +1,9 @@
 from typing import Dict
-from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+
+import torch
+from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
+    TrackerEvent,
+)
 
 # TODO: Document the docstrings
 
@@ -72,3 +76,6 @@ class UnitInit(TrackerEvent):
         self.upkeepPlayerId = upkeepPlayerId
         self.x = x
         self.y = y
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

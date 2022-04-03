@@ -1,5 +1,7 @@
 from typing import Dict
-from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
+    TrackerEvent,
+)
 
 # TODO: Document the docstrings
 

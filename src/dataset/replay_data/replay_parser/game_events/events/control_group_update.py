@@ -1,7 +1,8 @@
-from types import NoneType
 from typing import Dict
 
-from src.dataset.replay_structures.game_events.game_event import GameEvent
+import torch
+
+from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 # TODO: Document the docstrings
 
@@ -52,3 +53,6 @@ class ControlGroupUpdate(GameEvent):
         self.id = id
         self.loop = loop
         self.userid = userid
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

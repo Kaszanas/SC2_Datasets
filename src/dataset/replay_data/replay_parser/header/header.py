@@ -1,7 +1,9 @@
 from typing import Any, Dict
 
+from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
 
-class Header:
+
+class Header(SC2ReplayField):
     """
     Header represents the replay header.
 
@@ -35,3 +37,6 @@ class Header:
         self.durationNanoseconds = durationNanoseconds
         self.durationSeconds = durationSeconds
         self.version = version
+
+    def to_tensor(self):
+        pass

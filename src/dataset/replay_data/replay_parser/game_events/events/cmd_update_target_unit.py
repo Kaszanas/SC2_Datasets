@@ -1,8 +1,10 @@
 from typing import Dict
-from src.dataset.replay_structures.game_events.events.nested.target_unit import (
+
+import torch
+from src.dataset.replay_data.replay_parser.game_events.events.nested.target_unit import (
     TargetUnit,
 )
-from src.dataset.replay_structures.game_events.game_event import GameEvent
+from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 # TODO: Document the docstrings
 
@@ -51,3 +53,6 @@ class CmdUpdateTargetUnit(GameEvent):
         self.loop = loop
         self.target = target
         self.userid = userid
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

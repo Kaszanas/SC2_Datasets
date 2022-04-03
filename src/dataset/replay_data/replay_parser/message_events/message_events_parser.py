@@ -1,6 +1,8 @@
 from typing import Dict
-from src.dataset.replay_structures.message_events.events.chat import Chat
-from src.dataset.replay_structures.message_events.message_event import MessageEvent
+from src.dataset.replay_data.replay_parser.message_events.events.chat import Chat
+from src.dataset.replay_data.replay_parser.message_events.message_event import (
+    MessageEvent,
+)
 
 
 class MessageEventsParser:

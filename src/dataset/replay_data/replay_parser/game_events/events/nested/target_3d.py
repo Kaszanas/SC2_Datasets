@@ -1,6 +1,10 @@
+import torch
+
+
 class Target3D:
 
-    """_summary_
+    """
+    _summary_
 
     :param x: _description_
     :type x: float
@@ -15,3 +19,6 @@ class Target3D:
         self.x = x
         self.y = y
         self.z = z
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

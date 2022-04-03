@@ -1,7 +1,11 @@
 from typing import Any, Dict
 
+import torch
 
-class Metadata:
+from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
+
+
+class Metadata(SC2ReplayField):
     """
     _summary_
 
@@ -49,3 +53,6 @@ class Metadata:
         self.durationSeconds = durationSeconds
         self.gameVersion = gameVersion
         self.mapName = mapName
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

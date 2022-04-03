@@ -1,9 +1,13 @@
-from src.dataset.replay_structures.game_events.events.nested.target_3d import Target3D
+import torch
+from src.dataset.replay_data.replay_parser.game_events.events.nested.target_3d import (
+    Target3D,
+)
 
 
 class TargetUnit:
 
-    """_summary_
+    """
+    _summary_
 
     :param snapshotControlPlayerId: _description_
     :type snapshotControlPlayerId: int
@@ -39,3 +43,6 @@ class TargetUnit:
         self.tag = tag
         self.targetUnitFlags = targetUnitFlags
         self.timer = timer
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

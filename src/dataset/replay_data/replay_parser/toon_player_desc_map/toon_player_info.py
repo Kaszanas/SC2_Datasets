@@ -1,8 +1,11 @@
 from typing import Any, Dict
-from src.dataset.replay_structures.toon_player_desc_map.color import Color
+
+import torch
+from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
+from src.dataset.replay_data.replay_parser.toon_player_desc_map.color import Color
 
 
-class ToonPlayerInfo:
+class ToonPlayerInfo(SC2ReplayField):
 
     """
     _summary_
@@ -126,3 +129,6 @@ class ToonPlayerInfo:
         self.clanTag = clanTag
         self.handicap = handicap
         self.color = color
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

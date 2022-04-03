@@ -1,12 +1,15 @@
 from types import NoneType
 from typing import Dict, List
 
-from src.dataset.replay_structures.game_events.game_event import GameEvent
+import torch
+
+from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
 class AddSubgroups(GameEvent):
 
-    """_summary_
+    """
+    _summary_
 
     :param count: _description_
     :type count: int
@@ -43,10 +46,14 @@ class AddSubgroups(GameEvent):
         self.subgroupPriority = subgroupPriority
         self.unitLink = unitLink
 
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()
+
 
 class Delta(GameEvent):
 
-    """_summary_
+    """
+    _summary_
 
     :param addSubgroups: _description_
     :type addSubgroups: AddSubgroups
@@ -79,3 +86,6 @@ class Delta(GameEvent):
         self.addUnitTags = addUnitTags
         self.removeMask = removeMask
         self.subgroupIndex = subgroupIndex
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

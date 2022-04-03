@@ -67,7 +67,7 @@ class SC2EGSetDataset(Dataset):
         """
         return self.len
 
-    def __getitem__(self, index: Any) -> SC2ReplayData | "T":
+    def __getitem__(self, index: Any) -> Tuple[Any, Any]:
         """
         Exposes logic of getting a single parsed item by using dataset[index].
 

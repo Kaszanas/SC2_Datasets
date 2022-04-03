@@ -1,5 +1,9 @@
 from typing import Dict
-from src.dataset.replay_structures.message_events.message_event import MessageEvent
+
+import torch
+from src.dataset.replay_data.replay_parser.message_events.message_event import (
+    MessageEvent,
+)
 
 # TODO: Docstrings
 
@@ -53,3 +57,6 @@ class Chat(MessageEvent):
         self.recipient = recipient
         self.string = string
         self.userid = userid
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

@@ -1,8 +1,11 @@
 from typing import Any, Dict
-from src.dataset.replay_structures.init_data.game_description import GameDescription
+from src.dataset.replay_data.replay_parser.init_data.game_description import (
+    GameDescription,
+)
+from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
 
 
-class InitData:
+class InitData(SC2ReplayField):
 
     """
     _summary_
@@ -28,3 +31,6 @@ class InitData:
     def __init__(self, gameDescription: GameDescription) -> None:
 
         self.gameDescription = gameDescription
+
+    def to_tensor(self):
+        pass

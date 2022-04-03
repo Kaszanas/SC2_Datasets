@@ -1,31 +1,32 @@
 import abc
 from types import NotImplementedType
-from typing import Dict, Literal
+from typing import Dict
 
+from pyparsing import Literal
 import torch
 
-# TODO: from_dict documentation
 
-
-class GameEvent(metaclass=abc.ABCMeta):
+class SC2ReplayField(metaclass=abc.ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass: type) -> Literal[True] | NotImplementedType:
         return (
             hasattr(subclass, "from_dict")
             and callable(subclass.from_dict)
+            and hasattr(subclass, "to_tensor")
+            and hasattr(subclass.to_tensor)
             or NotImplemented
         )
 
     @abc.abstractmethod
-    def from_dict(d: Dict) -> "GameEvent":
+    def from_dict(d: Dict) -> "SC2ReplayField":
         """
         _summary_
 
-        :param dict: _description_
-        :type dict: Dict
+        :param d: _description_
+        :type d: Dict
         :raises NotImplementedError: _description_
         :return: _description_
-        :rtype: MessageEvent
+        :rtype: ReplayField
         """
         raise NotImplementedError
 

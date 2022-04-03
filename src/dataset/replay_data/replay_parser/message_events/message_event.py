@@ -2,6 +2,8 @@ import abc
 from types import NotImplementedType
 from typing import Dict, Literal
 
+import torch
+
 # TODO: from_dict documentation
 
 
@@ -24,5 +26,16 @@ class MessageEvent(metaclass=abc.ABCMeta):
         :raises NotImplementedError: _description_
         :return: _description_
         :rtype: MessageEvent
+        """
+        raise NotImplementedError
+
+    @abc.abstractclassmethod
+    def to_tensor(self) -> torch.Tensor:
+        """
+        _summary_
+
+        :raises NotImplementedError: _description_
+        :return: _description_
+        :rtype: torch.Tensor
         """
         raise NotImplementedError
