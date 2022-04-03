@@ -10,11 +10,12 @@ import torch
 class MessageEvent(metaclass=abc.ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass: type) -> Literal[True] | NotImplementedType:
-        return (
-            hasattr(subclass, "from_dict")
-            and callable(subclass.from_dict)
-            or NotImplemented
-        )
+        return True
+        #  (
+        #     hasattr(subclass, "from_dict")
+        #     and callable(subclass.from_dict)
+        #     or NotImplemented
+        # )
 
     @abc.abstractmethod
     def from_dict(d: Dict) -> "MessageEvent":
@@ -29,13 +30,13 @@ class MessageEvent(metaclass=abc.ABCMeta):
         """
         raise NotImplementedError
 
-    @abc.abstractclassmethod
-    def to_tensor(self) -> torch.Tensor:
-        """
-        _summary_
+    # @abc.abstractclassmethod
+    # def to_tensor(self) -> torch.Tensor:
+    #     """
+    #     _summary_
 
-        :raises NotImplementedError: _description_
-        :return: _description_
-        :rtype: torch.Tensor
-        """
-        raise NotImplementedError
+    #     :raises NotImplementedError: _description_
+    #     :return: _description_
+    #     :rtype: torch.Tensor
+    #     """
+    #     raise NotImplementedError

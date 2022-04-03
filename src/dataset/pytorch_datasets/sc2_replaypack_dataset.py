@@ -32,8 +32,9 @@ class SC2ReplaypackDataset(Dataset):
         replaypack_download_dir: str = "",
         url: str = "",
         download: bool = False,
+        transform=None,
     ):
-
+        self.transform = transform
         self.replaypack_download_dir = replaypack_download_dir
         self.replaypack_unpack_dir = replaypack_unpack_dir
         # Replaypack unpack directory must exist
@@ -74,7 +75,9 @@ class SC2ReplaypackDataset(Dataset):
         )
 
         # Load all of the files:
-        self.list_of_files = os.listdir(data_path)
+        self.list_of_files = [
+            os.path.join(data_path, file) for file in os.listdir(data_path)
+        ]
         self.len = len(self.list_of_files)
 
     def __len__(self) -> int:
@@ -90,7 +93,11 @@ class SC2ReplaypackDataset(Dataset):
         :rtype: SC2ReplayData
         """
         # Returning a replay serialized into Python class to assure the ease of use:
-        return SC2ReplayData.from_file(replay_filepath=self.list_of_files[index])
+
+        replay_data = SC2ReplayData.from_file(replay_filepath=self.list_of_files[index])
+        if self.transform:
+            return self.transform(replay_data)
+        return replay_data
 
     @property
     def replaypack_summary(self) -> Dict[str, Any]:

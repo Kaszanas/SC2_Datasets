@@ -39,9 +39,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         replaypack_download_dir: str = "./data/unpack",
         url: str = "",
         download: bool = True,
-        train_transforms=None,
-        val_transforms=None,
-        test_transforms=None,
+        transform=None,
         dims=None,
     ):
 
@@ -52,9 +50,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         self.replaypack_download_dir = replaypack_download_dir
         self.url = url
         self.download = download
-        self.train_transforms = train_transforms
-        self.val_transforms = val_transforms
-        self.test_transforms = test_transforms
+        self.transform = transform
         self.dims = dims
 
     def prepare_data(self) -> None:
@@ -66,6 +62,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
             replaypack_download_dir=self.replaypack_download_dir,
             url=self.url,
             download=self.download,
+            transform=self.transform,
         )
 
     def setup(self, stage: Optional[str] = None) -> None:

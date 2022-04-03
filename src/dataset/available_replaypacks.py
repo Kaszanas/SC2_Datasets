@@ -1,5 +1,3 @@
-from src.dataset.sc2_replaypack_dataset import SC2ReplaypackDataset
-
 
 AVAILABLE_REPLAYPACKS = [
     ("2016_IEM_10_Taipei", "url"),

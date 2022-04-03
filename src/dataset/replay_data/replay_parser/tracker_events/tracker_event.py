@@ -10,13 +10,14 @@ import torch
 class TrackerEvent(metaclass=abc.ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass: type) -> Literal[True] | NotImplementedType:
-        return (
-            hasattr(subclass, "from_dict")
-            and callable(subclass.from_dict)
-            and hasattr(subclass, "to_tensor")
-            and callable(subclass.to_tensor)
-            or NotImplemented
-        )
+        return True
+        #  (
+        #     hasattr(subclass, "from_dict")
+        #     and callable(subclass.from_dict)
+        #     # and hasattr(subclass, "to_tensor")
+        #     # and callable(subclass.to_tensor)
+        #     or NotImplemented
+        # )
 
     @abc.abstractmethod
     def from_dict(d: Dict) -> "TrackerEvent":
@@ -31,13 +32,13 @@ class TrackerEvent(metaclass=abc.ABCMeta):
         """
         raise NotImplementedError
 
-    @abc.abstractmethod
-    def to_tensor(self) -> torch.Tensor:
-        """
-        _summary_
+    # @abc.abstractmethod
+    # def to_tensor(self) -> torch.Tensor:
+    #     """
+    #     _summary_
 
-        :raises NotImplementedError: _description_
-        :return: _description_
-        :rtype: torch.Tensor
-        """
-        raise NotImplementedError
+    #     :raises NotImplementedError: _description_
+    #     :return: _description_
+    #     :rtype: torch.Tensor
+    #     """
+    #     raise NotImplementedError

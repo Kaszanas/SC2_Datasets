@@ -1,5 +1,7 @@
 from typing import Any, Dict
 
+import torch
+
 from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
 
 
@@ -39,4 +41,4 @@ class Header(SC2ReplayField):
         self.version = version
 
     def to_tensor(self):
-        pass
+        return ""
