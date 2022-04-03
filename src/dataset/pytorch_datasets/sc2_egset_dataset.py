@@ -16,8 +16,8 @@ class SC2EGSetDataset(Dataset):
     :type dataset_download_dir: str
     :param urls: Specifies the URL of the dataset which will be used to download the files.
     :type urls: List[str]
-    :param transform: PyTorch transform.
-    :type transform: ??????????
+    :param transform: PyTorch transform. function that takes SC2ReplayData and return something
+    :type transform: Func[SC2ReplayData, T]
     """
 
     def __init__(
@@ -67,7 +67,7 @@ class SC2EGSetDataset(Dataset):
         """
         return self.len
 
-    def __getitem__(self, index: Any) -> SC2ReplayData:
+    def __getitem__(self, index: Any) -> SC2ReplayData | "T":
         """
         Exposes logic of getting a single parsed item by using dataset[index].
 
@@ -90,6 +90,8 @@ class SC2EGSetDataset(Dataset):
 
         for replaypack in self.replaypacks:
             if index < len(replaypack):
+                if self.transform:
+                    return self.transform(replaypack[index])
                 return replaypack[index]
             else:
                 index -= len(replaypack)
