@@ -1,7 +1,9 @@
 from types import NoneType
 from typing import Dict
 
-from src.dataset.replay_structures.game_events.game_event import GameEvent
+import torch
+
+from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 # TODO: Can the sequence be an int here?
 # Should this be encoded somehow if there is a NoneType detected?
@@ -61,3 +63,6 @@ class Cmd(GameEvent):
         self.sequence = sequence
         self.unitGroup = unitGroup
         self.userid = userid
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

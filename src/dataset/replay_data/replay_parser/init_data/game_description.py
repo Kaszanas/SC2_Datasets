@@ -1,8 +1,9 @@
 from typing import Any, Dict
-from src.dataset.replay_structures.init_data.game_options import GameOptions
+from src.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
+from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
 
 
-class GameDescription:
+class GameDescription(SC2ReplayField):
 
     """
     _summary_
@@ -66,3 +67,6 @@ class GameDescription:
         self.mapSizeX = mapSizeX
         self.mapSizeY = mapSizeY
         self.maxPlayers = maxPlayers
+
+    def to_tensor(self):
+        pass

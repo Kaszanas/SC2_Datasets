@@ -65,6 +65,9 @@ class SC2ReplayData:
         self._messageEventsErr: bool = loaded_replay_object["messageEventsErr"]
         self._trackerEventsErr: bool = loaded_replay_object["trackerEvtsErr"]
 
+    def to_tensor(self):
+        pass
+
     @property
     def initData(self):
         return self._init_data

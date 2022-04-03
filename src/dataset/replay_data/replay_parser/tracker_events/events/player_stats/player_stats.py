@@ -1,6 +1,12 @@
 from typing import Dict
-from src.dataset.replay_structures.tracker_events.events.player_stats.stats import Stats
-from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+
+import torch
+from src.dataset.replay_data.replay_parser.tracker_events.events.player_stats.stats import (
+    Stats,
+)
+from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
+    TrackerEvent,
+)
 
 # TODO: Document the docstrings
 
@@ -48,3 +54,6 @@ class PlayerStats(TrackerEvent):
         self.loop = loop
         self.playerId = playerId
         self.stats = stats
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

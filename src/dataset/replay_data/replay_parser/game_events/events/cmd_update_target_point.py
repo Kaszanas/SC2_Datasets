@@ -1,12 +1,17 @@
 from typing import Dict
-from src.dataset.replay_structures.game_events.events.nested.target_3d import Target3D
-from src.dataset.replay_structures.game_events.game_event import GameEvent
+
+import torch
+from src.dataset.replay_data.replay_parser.game_events.events.nested.target_3d import (
+    Target3D,
+)
+from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 # TODO: Document the docstrings
 
 
 class CmdUpdateTargetPoint(GameEvent):
-    """_summary_
+    """
+    _summary_
 
     :param id: _description_
     :type id: int
@@ -20,7 +25,8 @@ class CmdUpdateTargetPoint(GameEvent):
 
     @staticmethod
     def from_dict(d: Dict) -> "CmdUpdateTargetPoint":
-        """_summary_
+        """
+        _summary_
 
         :param d: _description_
         :type d: Dict
@@ -45,3 +51,6 @@ class CmdUpdateTargetPoint(GameEvent):
         self.loop = loop
         self.target = target
         self.userid = userid
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

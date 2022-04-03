@@ -1,10 +1,13 @@
 from typing import Any, Dict
-from src.dataset.replay_structures.toon_player_desc_map.toon_player_info import (
+
+import torch
+from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
+from src.dataset.replay_data.replay_parser.toon_player_desc_map.toon_player_info import (
     ToonPlayerInfo,
 )
 
 
-class ToonPlayerDesc:
+class ToonPlayerDesc(SC2ReplayField):
     """
     _summary_
 
@@ -37,3 +40,6 @@ class ToonPlayerDesc:
 
         self.toon = toon
         self.toon_player_info = toon_player_info
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

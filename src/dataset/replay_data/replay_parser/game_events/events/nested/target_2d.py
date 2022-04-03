@@ -1,5 +1,9 @@
+import torch
+
+
 class Target2D:
-    """_summary_
+    """
+    _summary_
 
     :param x: _description_
     :type x: float
@@ -11,3 +15,6 @@ class Target2D:
 
         self.x = x
         self.y = y
+
+    def to_tensor(self) -> torch.Tensor:
+        return super().to_tensor()

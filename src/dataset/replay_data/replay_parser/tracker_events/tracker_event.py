@@ -2,6 +2,8 @@ import abc
 from types import NotImplementedType
 from typing import Dict, Literal
 
+import torch
+
 # TODO: from_dict documentation
 
 
@@ -11,6 +13,8 @@ class TrackerEvent(metaclass=abc.ABCMeta):
         return (
             hasattr(subclass, "from_dict")
             and callable(subclass.from_dict)
+            and hasattr(subclass, "to_tensor")
+            and callable(subclass.to_tensor)
             or NotImplemented
         )
 
@@ -24,5 +28,16 @@ class TrackerEvent(metaclass=abc.ABCMeta):
         :raises NotImplementedError: _description_
         :return: _description_
         :rtype: MessageEvent
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def to_tensor(self) -> torch.Tensor:
+        """
+        _summary_
+
+        :raises NotImplementedError: _description_
+        :return: _description_
+        :rtype: torch.Tensor
         """
         raise NotImplementedError

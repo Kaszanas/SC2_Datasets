@@ -1,23 +1,35 @@
 from typing import Dict
-from src.dataset.replay_structures.tracker_events.events.player_setup import PlayerSetup
-from src.dataset.replay_structures.tracker_events.events.player_stats.player_stats import (
+from src.dataset.replay_data.replay_parser.tracker_events.events.player_setup import (
+    PlayerSetup,
+)
+from src.dataset.replay_data.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
 )
-from src.dataset.replay_structures.tracker_events.events.unit_born import UnitBorn
-from src.dataset.replay_structures.tracker_events.events.unit_died import UnitDied
-from src.dataset.replay_structures.tracker_events.events.unit_done import UnitDone
-from src.dataset.replay_structures.tracker_events.events.unit_init import UnitInit
-from src.dataset.replay_structures.tracker_events.events.unit_owner_change import (
+from src.dataset.replay_data.replay_parser.tracker_events.events.unit_born import (
+    UnitBorn,
+)
+from src.dataset.replay_data.replay_parser.tracker_events.events.unit_died import (
+    UnitDied,
+)
+from src.dataset.replay_data.replay_parser.tracker_events.events.unit_done import (
+    UnitDone,
+)
+from src.dataset.replay_data.replay_parser.tracker_events.events.unit_init import (
+    UnitInit,
+)
+from src.dataset.replay_data.replay_parser.tracker_events.events.unit_owner_change import (
     UnitOwnerChange,
 )
-from src.dataset.replay_structures.tracker_events.events.unit_positions import (
+from src.dataset.replay_data.replay_parser.tracker_events.events.unit_positions import (
     UnitPositions,
 )
-from src.dataset.replay_structures.tracker_events.events.unit_type_change import (
+from src.dataset.replay_data.replay_parser.tracker_events.events.unit_type_change import (
     UnitTypeChange,
 )
-from src.dataset.replay_structures.tracker_events.events.upgrade import Upgrade
-from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+from src.dataset.replay_data.replay_parser.tracker_events.events.upgrade import Upgrade
+from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
+    TrackerEvent,
+)
 
 # TODO: from_dict documentation
 
