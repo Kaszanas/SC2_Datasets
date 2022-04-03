@@ -1,6 +1,9 @@
 from typing import Optional
 import pytorch_lightning as pl
 
+from torch.utils.data import random_split
+from torch.utils.data.dataloader import DataLoader
+
 from src.dataset.pytorch_datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
 
 
@@ -57,7 +60,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     def prepare_data(self) -> None:
         # download, split, etc...
         # only called on 1 GPU/TPU in distributed
-        SC2ReplaypackDataset(
+        self.dataset = SC2ReplaypackDataset(
             replaypack_name=self.replaypack_name,
             replaypack_unpack_dir=self.replaypack_unpack_dir,
             replaypack_download_dir=self.replaypack_download_dir,
@@ -68,16 +71,29 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     def setup(self, stage: Optional[str] = None) -> None:
         # make assignments here (val/train/test split)
         # called on every process in DDP
-        return super().setup(stage)
+
+        total_length = len(self.dataset)
+        # Add these to be a parameter in the initialization:
+        # 16.(6)% of total entries will be used for testing:
+        test_length = int(total_length / 6)
+        # 10% of total entries will be used for validation
+        val_length = int(total_length / 10)
+        # everything else will be used for training
+        train_length = total_length - test_length - val_length
+
+        self.train_dataset, self.test_dataset, self.val_dataset = random_split(
+            self.dataset,
+            [train_length, test_length, val_length],
+        )
 
     def train_dataloader(self):
-        return super().train_dataloader()
+        return DataLoader(self.train_dataset)
 
     def val_dataloader(self):
-        return super().val_dataloader()
+        return DataLoader(self.val_dataset)
 
     def test_dataloader(self):
-        return super().test_dataloader()
+        return DataLoader(self.test_dataset)
 
     def teardown(self, stage: Optional[str] = None) -> None:
         # clean up after fit or test
