@@ -47,7 +47,7 @@ class AddSubgroups(GameEvent):
         self.unitLink = unitLink
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass
 
 
 class Delta(GameEvent):
@@ -88,4 +88,4 @@ class Delta(GameEvent):
         self.subgroupIndex = subgroupIndex
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

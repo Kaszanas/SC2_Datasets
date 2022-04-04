@@ -85,4 +85,4 @@ class CameraUpdate(GameEvent):
         self.yaw = yaw
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

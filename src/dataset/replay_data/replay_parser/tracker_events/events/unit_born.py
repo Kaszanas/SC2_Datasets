@@ -98,4 +98,4 @@ class UnitBorn(TrackerEvent):
         self.y = y
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

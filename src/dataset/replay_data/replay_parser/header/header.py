@@ -2,10 +2,8 @@ from typing import Any, Dict
 
 import torch
 
-from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
 
-
-class Header(SC2ReplayField):
+class Header:
     """
     Header represents the replay header.
 
@@ -21,6 +19,14 @@ class Header(SC2ReplayField):
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Header":
+        """
+        _summary_
+
+        :param d: _description_
+        :type d: Dict[str, Any]
+        :return: _description_
+        :rtype: Header
+        """
         return Header(
             elapsedGameLoops=d["elapsedGameLoops"],
             durationNanoseconds=d["durationNanoseconds"],
@@ -39,6 +45,3 @@ class Header(SC2ReplayField):
         self.durationNanoseconds = durationNanoseconds
         self.durationSeconds = durationSeconds
         self.version = version
-
-    def to_tensor(self):
-        return ""

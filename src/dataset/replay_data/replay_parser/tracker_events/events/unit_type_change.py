@@ -58,4 +58,4 @@ class UnitTypeChange(TrackerEvent):
         self.unitTypeName = unitTypeName
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

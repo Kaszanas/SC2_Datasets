@@ -53,4 +53,4 @@ class CmdUpdateTargetPoint(GameEvent):
         self.userid = userid
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass
