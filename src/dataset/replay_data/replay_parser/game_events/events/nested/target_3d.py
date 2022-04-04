@@ -21,4 +21,4 @@ class Target3D:
         self.z = z
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

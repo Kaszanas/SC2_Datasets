@@ -45,4 +45,4 @@ class TargetUnit:
         self.timer = timer
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

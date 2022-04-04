@@ -2,10 +2,8 @@ from typing import Dict
 
 import torch
 
-from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
 
-
-class Color(SC2ReplayField):
+class Color:
     """
     _summary_
 
@@ -50,4 +48,4 @@ class Color(SC2ReplayField):
         self.r = r
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

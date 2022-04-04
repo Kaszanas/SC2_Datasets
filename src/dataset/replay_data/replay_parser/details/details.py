@@ -2,10 +2,8 @@ from typing import Any, Dict
 
 import torch
 
-from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
 
-
-class Details(SC2ReplayField):
+class Details:
     """
     _summary_
 
@@ -45,4 +43,4 @@ class Details(SC2ReplayField):
         self.timeUTC = timeUTC
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

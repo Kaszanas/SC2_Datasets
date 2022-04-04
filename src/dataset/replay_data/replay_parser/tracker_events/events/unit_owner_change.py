@@ -62,4 +62,4 @@ class UnitOwnerChange(TrackerEvent):
         self.upkeepPlayerId = upkeepPlayerId
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

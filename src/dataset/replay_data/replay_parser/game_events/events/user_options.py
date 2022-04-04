@@ -115,4 +115,4 @@ class UserOptions(GameEvent):
         self.versionFlags = versionFlags
 
     def to_tensor(self) -> torch.Tensor:
-        return super().to_tensor()
+        pass

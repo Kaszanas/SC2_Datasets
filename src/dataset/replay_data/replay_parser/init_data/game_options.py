@@ -1,9 +1,7 @@
 from typing import Any, Dict
 
-from src.dataset.replay_data.replay_parser.replay_field import SC2ReplayField
 
-
-class GameOptions(SC2ReplayField):
+class GameOptions:
 
     """
     _summary_
