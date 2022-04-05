@@ -55,5 +55,19 @@ class PlayerStats(TrackerEvent):
         self.playerId = playerId
         self.stats = stats
 
-    def to_tensor(self) -> torch.Tensor:
-        pass
+    def to_tensor(self, requires_grad: bool) -> torch.Tensor:
+        """
+        _summary_
+
+        :param requires_grad: _description_
+        :type requires_grad: bool
+        :return: _description_
+        :rtype: torch.Tensor
+        """
+        return torch.tensor(
+            data=[self.id, self.loop, self.playerId].extend(
+                list(self.stats.__dict__.values())
+            ),
+            dtype=torch.int32,
+            requires_grad=requires_grad,
+        )
