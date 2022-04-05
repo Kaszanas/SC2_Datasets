@@ -197,7 +197,6 @@ class Stats(TrackerEvent):
         # This calculation is required for raw data ingestion:
         self.foodMade = int(foodMade / 4096)
         self.foodUsed = int(foodUsed / 4096)
-
         self.mineralsCollectionRate = mineralsCollectionRate
         self.mineralsCurrent = mineralsCurrent
         self.mineralsFriendlyFireArmy = mineralsFriendlyFireArmy
@@ -236,5 +235,17 @@ class Stats(TrackerEvent):
         self.vespeneUsedInProgressTechnology = vespeneUsedInProgressTechnology
         self.workersActiveCount = workersActiveCount
 
-    def to_tensor(self) -> torch.Tensor:
-        pass
+    def to_tensor(self, required_grad: bool) -> torch.Tensor:
+        """
+        _summary_
+
+        :param required_grad: _description_
+        :type required_grad: bool
+        :return: _description_
+        :rtype: torch.Tensor
+        """
+        return torch.tensor(
+            data=list(self.__dict__.values()),
+            dtype=torch.int32,
+            requires_grad=required_grad,
+        )
