@@ -1,3 +1,4 @@
+import json
 import os
 from typing import Dict, Tuple
 from src.dataset.utils.zip_utils import unpack_zipfile
@@ -40,9 +41,11 @@ def load_replaypack_information(
                 )
         # TODO: ADD THE LOADING LOGIC
         if file.endswith("_summary.json"):
-            summary_content = ""
+            with open(file) as summary_file:
+                summary_content = json.load(summary_file)
         if file.endswith("_mapping.json"):
-            mapping_content = ""
+            with open(file) as mapping_file:
+                mapping_content = json.load(mapping_file)
         if file.endswith(".log") and not file.endswith("main_log.log"):
             processed_info = ""
 
