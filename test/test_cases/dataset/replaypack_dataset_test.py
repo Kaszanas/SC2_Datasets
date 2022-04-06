@@ -18,8 +18,17 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
             replaypack_unpack_dir=os.path.abspath("./test/test_files/unpack"),
         )
 
+        # Replaypack was initialized:
         self.assertIsInstance(sc2_replaypack_dataset, SC2ReplaypackDataset)
+        # Supplementary files were loaded properly:
         self.assertIsInstance(sc2_replaypack_dataset.replaypack_processed_info, Dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_dir_mapping, Dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_summary, Dict)
+
+        # Files were properly indexed:
+        self.assertNotEqual(len(sc2_replaypack_dataset), 0)
+        # It is possible to retrieve a single file by index:
+        self.assertIsInstance(sc2_replaypack_dataset[0], SC2ReplayData)
 
     def test_parsing_replaypack_replays(self):
 
@@ -34,9 +43,3 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
             replay_data = sc2_replaypack_dataset[index]
 
             self.assertIsInstance(replay_data, SC2ReplayData)
-
-    def test_download_load_replaypack(self):
-        pass
-
-    def test_get_len(self):
-        pass
