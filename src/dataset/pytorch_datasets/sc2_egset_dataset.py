@@ -40,6 +40,7 @@ class SC2EGSetDataset(Dataset):
 
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
+        self.len = 0
         self.ensure_downloaded()
 
     def ensure_downloaded(self):
@@ -48,7 +49,6 @@ class SC2EGSetDataset(Dataset):
         """
 
         self.replaypacks: List[SC2ReplaypackDataset] = []
-        self.len = 0
 
         for replaypack_name, url in self.names_urls:
             replaypack = SC2ReplaypackDataset(
@@ -67,14 +67,16 @@ class SC2EGSetDataset(Dataset):
         """
         return self.len
 
-    def __getitem__(self, index: Any) -> Tuple[Any, Any]:
+    def __getitem__(self, index: Any) -> Tuple[Any, Any] | SC2ReplayData:
         """
         Exposes logic of getting a single parsed item by using dataset[index].
 
         :param index: Specifies the index of an item that should be retrieved.
         :type index: Any
+        :raises IndexError: _description_
+        :raises IndexError: _description_
         :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset.
-        :rtype: SC2ReplayData
+        :rtype: Tuple[Any, Any] | SC2ReplayData
         """
 
         # If the index is negative, treat it as if expressed from the back of the sequence.
