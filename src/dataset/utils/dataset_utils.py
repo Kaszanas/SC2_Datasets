@@ -30,11 +30,14 @@ def load_replaypack_information(
     # and loading replaypack information files:
     for file in replaypack_files:
         if file.endswith("_data.zip"):
-            data_path = unpack_zipfile(
-                destination_dir=replaypack_path,
-                subdir=replaypack_name + "_data",
-                zip_path=os.path.join(replaypack_path, file),
-            )
+            data_path = os.path.join(replaypack_path, replaypack_name + "_data")
+            # Unpack the .zip archive only if it is not unpacked already:
+            if not os.path.isdir(data_path):
+                data_path = unpack_zipfile(
+                    destination_dir=replaypack_path,
+                    subdir=replaypack_name + "_data",
+                    zip_path=os.path.join(replaypack_path, file),
+                )
         # TODO: ADD THE LOADING LOGIC
         if file.endswith("_summary.json"):
             summary_content = ""
