@@ -1,3 +1,4 @@
+import os
 import unittest
 
 from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
@@ -12,8 +13,8 @@ class SC2EGSetDatasetTest(unittest.TestCase):
     def test_loading_replaypacks(self):
 
         sc2egset_dataset = SC2EGSetDataset(
-            dataset_unpack_dir="./test_files/unpack",
-            dataset_download_dir="./test_files/download",
+            dataset_unpack_dir=os.path.abspath("./test/test_files/unpack"),
+            dataset_download_dir=os.path.abspath("./test/test_files/download"),
             names_urls=[
                 ("2020_IEM_Katowice", ""),
             ],
