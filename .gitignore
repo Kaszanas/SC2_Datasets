@@ -7,3 +7,5 @@ __pycache__/
 unpack/
 
 download/
+
+lightning_logs/
