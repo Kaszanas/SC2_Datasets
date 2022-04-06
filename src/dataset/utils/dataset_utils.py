@@ -47,6 +47,7 @@ def load_replaypack_information(
             with open(file) as mapping_file:
                 mapping_content = json.load(mapping_file)
         if file.endswith(".log") and not file.endswith("main_log.log"):
-            processed_info = ""
+            with open(file) as processed_info_file:
+                processed_info = json.load(processed_info_file)
 
     return (data_path, summary_content, mapping_content, processed_info)
