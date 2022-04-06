@@ -1,6 +1,7 @@
 import unittest
 
 from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
+from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 class SC2EGSetDatasetTest(unittest.TestCase):
@@ -11,22 +12,28 @@ class SC2EGSetDatasetTest(unittest.TestCase):
     def test_loading_replaypacks(self):
 
         sc2egset_dataset = SC2EGSetDataset(
+            dataset_unpack_dir="./test_files/unpack",
+            dataset_download_dir="./test_files/download",
             names_urls=[
                 ("2020_IEM_Katowice", ""),
             ],
             download=False,
         )
 
+        # Dataset was initialized:
         self.assertIsInstance(sc2egset_dataset, SC2EGSetDataset)
+        # Files were properly indexed:
+        self.assertNotEqual(len(sc2egset_dataset), 0)
+        # It is possible to retrieve a single file by index:
+        self.assertIsInstance(sc2egset_dataset[0], SC2ReplayData)
 
     def test_parsing_all_files(self):
 
-        # TODO: Iterate over the whole dataset and test replay json parsing
-
-        pass
-
-    def test_get_item(self):
-        pass
-
-    def test_get_len(self):
-        pass
+        sc2egset_dataset = SC2EGSetDataset(
+            dataset_unpack_dir="./test_files/unpack",
+            dataset_download_dir="./test_files/download",
+            download=False,
+        )
+        # Iterate over the whole dataset and test replay json parsing
+        for index in range(len(sc2egset_dataset)):
+            sc2_replaydata = sc2egset_dataset[index]

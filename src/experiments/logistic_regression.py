@@ -65,6 +65,7 @@ datamodule.setup()
 
 print(datamodule.train_dataloader().dataset[0])
 
+# REVIEW: I am blocked here. The LR doesn't train:
 logistic_regression = LogisticRegression(input_dim=2, num_classes=2)
 
 trainer = pl.Trainer(
