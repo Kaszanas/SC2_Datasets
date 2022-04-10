@@ -14,6 +14,8 @@ from src.dataset.lightning_datamodules.sc2_replaypack_datamodule import (
     SC2ReplaypackDataModule,
 )
 
+from src.dataset.transforms.economy_vs_outcome import economy_average_vs_outcome
+
 # TODO: Import the dataset:
 
 
@@ -25,37 +27,9 @@ from src.dataset.lightning_datamodules.sc2_replaypack_datamodule import (
 
 # TODO: Save the metrics:
 
-# transform_1 = lambda sc2replay: (
-#     torch.tensor(
-#         [
-#             sc2replay.toonPlayerDescMap[0].toon_player_info.APM,
-#             sc2replay.toonPlayerDescMap[1].toon_player_info.APM,
-#         ]
-#     ),
-#     sc2replay.toonPlayerDescMap[0].toon_player_info.result,
-# )
-
-
-def get_mmr_result(sc2_replay: SC2ReplayData) -> Tuple[torch.Tensor, torch.Tensor]:
-    feature_tensor = torch.tensor(
-        [
-            sc2_replay.toonPlayerDescMap[0].toon_player_info.APM,
-            sc2_replay.toonPlayerDescMap[1].toon_player_info.APM,
-        ],
-        dtype=torch.float,
-    )
-
-    result_dict = {"Loss": 0, "Win": 1}
-    label_tensor = torch.tensor(
-        result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result],
-        dtype=torch.int8,
-    )
-
-    return feature_tensor, label_tensor
-
 
 datamodule = SC2ReplaypackDataModule(
-    transform=get_mmr_result,
+    transform=economy_average_vs_outcome,
     replaypack_name="2020_IEM_Katowice",
     replaypack_unpack_dir="D:/Projects/SC2EGSet_Experiments/test/test_files/unpack",
     download=False,
@@ -66,7 +40,7 @@ datamodule.setup()
 print(datamodule.train_dataloader().dataset[0])
 
 # REVIEW: I am blocked here. The LR doesn't train:
-logistic_regression = LogisticRegression(input_dim=2, num_classes=2)
+logistic_regression = LogisticRegression(input_dim=39, num_classes=2)
 
 trainer = pl.Trainer(
     accelerator="gpu", devices=1, auto_select_gpus=True, max_epochs=10000

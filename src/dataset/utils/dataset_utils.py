@@ -41,13 +41,13 @@ def load_replaypack_information(
                     zip_path=os.path.join(replaypack_path, file),
                 )
         if file.endswith("_summary.json"):
-            with open(file) as summary_file:
+            with open(os.path.join(replaypack_path, file)) as summary_file:
                 summary_content = json.load(summary_file)
         if file.endswith("_mapping.json"):
-            with open(file) as mapping_file:
+            with open(os.path.join(replaypack_path, file)) as mapping_file:
                 mapping_content = json.load(mapping_file)
         if file.endswith(".log") and not file.endswith("main_log.log"):
-            with open(file) as processed_info_file:
+            with open(os.path.join(replaypack_path, file)) as processed_info_file:
                 processed_info = json.load(processed_info_file)
 
     return (data_path, summary_content, mapping_content, processed_info)
