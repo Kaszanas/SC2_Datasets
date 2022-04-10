@@ -23,16 +23,17 @@ def economy_average_vs_outcome(
     player_stats_events = []
     # Filter PlayerStats:
     for event in sc2_replay.trackerEvents:
-        match event:
-            case PlayerStats:
-                player_stats_events.append(event)
+        if type(event).__name__ == "PlayerStats":
+            player_stats_events.append(event)
 
     # Summing all of the features that are within Stats that is held in PlayerStats:
-    sum_of_features = [player_stats_events[0].stats.__dict__.values()]
+    sum_of_features = list(player_stats_events[0].stats.__dict__.values())
     for index, player_stats in enumerate(player_stats_events):
         if index == 0:
             continue
-        sum_of_features = np.add(sum_of_features, player_stats.stats.__dict__.values())
+        sum_of_features = np.add(
+            sum_of_features, list(player_stats.stats.__dict__.values())
+        )
 
     # Getting the average of the features:
     average_of_features = [item / len(player_stats_events) for item in sum_of_features]
