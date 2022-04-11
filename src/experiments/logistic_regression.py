@@ -45,7 +45,5 @@ logistic_regression = LogisticRegression(input_dim=39, num_classes=2)
 trainer = pl.Trainer(
     accelerator="gpu", devices=1, auto_select_gpus=True, max_epochs=10000
 )
+# REVIEW: Something is wrong here!
 trainer.fit(model=logistic_regression, datamodule=datamodule)
-
-
-# transform_1 = lambda sc2: []

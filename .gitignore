@@ -9,3 +9,7 @@ unpack/
 download/
 
 lightning_logs/
+
+data/
+
+.vscode/

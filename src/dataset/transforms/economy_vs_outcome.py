@@ -20,6 +20,9 @@ def economy_average_vs_outcome(
     :return: Returns a tensor containing features and a target.
     :rtype: Tuple[torch.Tensor, torch.Tensor]
     """
+
+    # TODO: Differentiate between two players
+    # Currently all of the events are summed up
     player_stats_events = []
     # Filter PlayerStats:
     for event in sc2_replay.trackerEvents:
@@ -39,13 +42,16 @@ def economy_average_vs_outcome(
     average_of_features = [item / len(player_stats_events) for item in sum_of_features]
 
     # Creating feature tensor:
-    feature_tensor = torch.tensor(average_of_features)
+    feature_tensor = torch.tensor(average_of_features, dtype=torch.float32)
 
     # REVIEW: Check if this is the correct way to initialize this type of tensor:
     result_dict = {"Loss": 0, "Win": 1}
-    target_tensor = torch.tensor(
-        result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result],
-        dtype=torch.int8,
-    )
+    target = result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result]
+    # target_tensor = torch.tensor(
+    #     result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result],
+    #     dtype=torch.int8,
+    # )
 
-    return feature_tensor, target_tensor
+    # print(feature_tensor)
+    # print(target)
+    return feature_tensor, target
