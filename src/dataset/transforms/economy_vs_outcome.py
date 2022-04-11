@@ -1,12 +1,73 @@
-from typing import Tuple
+from typing import Dict, List, Tuple
 import numpy as np
 import torch
+from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
+    TrackerEvent,
+)
 
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 from src.dataset.replay_data.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
 )
+
+# REVIEW: Verify this function:
+def filter_player_stats(
+    player_tracker_events: List[TrackerEvent],
+) -> Dict[str, List[PlayerStats]]:
+    """
+    _summary_
+
+    :param player_tracker_events: _description_
+    :type player_tracker_events: List[TrackerEvent]
+    :return: _description_
+    :rtype: Dict[str, List[PlayerStats]]
+    """
+    player_stats_events = {"1": [], "2": []}
+    # Filter PlayerStats:
+    for event in player_tracker_events:
+        if type(event).__name__ == "PlayerStats":
+            if event.playerId == 1:
+                player_stats_events["1"].append(event)
+            if event.playerId == 2:
+                player_stats_events["2"].append(event)
+
+    return player_stats_events
+
+
+# REVIEW: Verify this function:
+def average_player_stats(
+    player_tracker_events: List[TrackerEvent],
+) -> Dict[str, List[float]]:
+    """
+    _summary_
+
+    :param player_tracker_events: _description_
+    :type player_tracker_events: List[TrackerEvent]
+    :return: _description_
+    :rtype: Dict[str, List[float]]
+    """
+
+    player_stats_dict = filter_player_stats(player_tracker_events=player_tracker_events)
+
+    average_player_features = {}
+    for key, list_of_events in player_stats_dict.items():
+        # Summing all of the features that are within Stats that is held in PlayerStats:
+        sum_of_features = list(list_of_events[0].stats.__dict__.values())
+        for index, player_stats in enumerate(list_of_events):
+            if index == 0:
+                continue
+            sum_of_features = np.add(
+                sum_of_features, list(player_stats.stats.__dict__.values())
+            )
+
+        # Getting the average of the features:
+        average_player_features[key] = [
+            item / len(list_of_events) for item in sum_of_features
+        ]
+
+    return average_player_features
+
 
 # REVIEW: Check this function and its application:
 def economy_average_vs_outcome(
@@ -21,37 +82,18 @@ def economy_average_vs_outcome(
     :rtype: Tuple[torch.Tensor, torch.Tensor]
     """
 
-    # TODO: Differentiate between two players
-    # Currently all of the events are summed up
-    player_stats_events = []
-    # Filter PlayerStats:
-    for event in sc2_replay.trackerEvents:
-        if type(event).__name__ == "PlayerStats":
-            player_stats_events.append(event)
-
-    # Summing all of the features that are within Stats that is held in PlayerStats:
-    sum_of_features = list(player_stats_events[0].stats.__dict__.values())
-    for index, player_stats in enumerate(player_stats_events):
-        if index == 0:
-            continue
-        sum_of_features = np.add(
-            sum_of_features, list(player_stats.stats.__dict__.values())
-        )
-
-    # Getting the average of the features:
-    average_of_features = [item / len(player_stats_events) for item in sum_of_features]
+    average_player_features = average_player_stats(
+        player_tracker_events=sc2_replay.trackerEvents
+    )
+    feature_list = [
+        player_features for player_features in average_player_features.values()
+    ]
 
     # Creating feature tensor:
-    feature_tensor = torch.tensor(average_of_features, dtype=torch.float32)
+    feature_tensor = torch.tensor(feature_list, dtype=torch.float32)
 
     # REVIEW: Check if this is the correct way to initialize this type of tensor:
     result_dict = {"Loss": 0, "Win": 1}
     target = result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result]
-    # target_tensor = torch.tensor(
-    #     result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result],
-    #     dtype=torch.int8,
-    # )
 
-    # print(feature_tensor)
-    # print(target)
     return feature_tensor, target
