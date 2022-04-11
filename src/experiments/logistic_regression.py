@@ -40,7 +40,7 @@ datamodule.setup()
 print(datamodule.train_dataloader().dataset[0])
 
 # REVIEW: I am blocked here. The LR doesn't train:
-logistic_regression = LogisticRegression(input_dim=39, num_classes=2)
+logistic_regression = LogisticRegression(input_dim=2 * 39, num_classes=2)
 
 trainer = pl.Trainer(
     accelerator="gpu", devices=1, auto_select_gpus=True, max_epochs=10000
