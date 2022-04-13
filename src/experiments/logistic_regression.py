@@ -1,16 +1,11 @@
 import os
 import sys
-from typing import Tuple
 from pl_bolts.models.regression import LogisticRegression
 import pytorch_lightning as pl
-import torch
 from pytorch_lightning.loggers import TensorBoardLogger
-
-from pl_bolts.datamodules import ImagenetDataModule
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from src.dataset.lightning_datamodules.sc2_replaypack_datamodule import (
     SC2ReplaypackDataModule,
 )
