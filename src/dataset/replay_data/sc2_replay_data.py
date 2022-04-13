@@ -41,6 +41,7 @@ class SC2ReplayData:
         self._messageEvents = [
             MessageEventsParser.from_dict(d=event_dict)
             for event_dict in loaded_replay_object["messageEvents"]
+            if loaded_replay_object["messageEvents"] is not None
         ]
         # TODO: We might want this to be a IterableDataset using PyTorch class:
         self._gameEvents = [

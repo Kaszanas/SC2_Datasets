@@ -13,3 +13,5 @@ lightning_logs/
 data/
 
 .vscode/
+
+tb_logs/
