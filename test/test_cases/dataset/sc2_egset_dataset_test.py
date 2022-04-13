@@ -31,10 +31,16 @@ class SC2EGSetDatasetTest(unittest.TestCase):
     def test_parsing_all_files(self):
 
         sc2egset_dataset = SC2EGSetDataset(
-            dataset_unpack_dir="./test_files/unpack",
-            dataset_download_dir="./test_files/download",
+            dataset_unpack_dir=os.path.abspath("./test_files/unpack"),
+            dataset_download_dir=os.path.abspath("./test_files/download"),
+            names_urls=[
+                ("2020_IEM_Katowice", ""),
+            ],
             download=False,
         )
         # Iterate over the whole dataset and test replay json parsing
         for index in range(len(sc2egset_dataset)):
             sc2_replaydata = sc2egset_dataset[index]
+
+            # Replay was parsed:
+            self.assertIsInstance(sc2_replaydata, SC2ReplayData)
