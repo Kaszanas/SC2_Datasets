@@ -41,6 +41,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         download: bool = True,
         transform=None,
         dims=None,
+        batch_size: int = 256,
     ):
 
         super().__init__()
@@ -52,6 +53,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         self.download = download
         self.transform = transform
         self.dims = dims
+        self.batch_size = batch_size
 
     def prepare_data(self) -> None:
         # download, split, etc...
@@ -84,13 +86,13 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         )
 
     def train_dataloader(self):
-        return DataLoader(self.train_dataset)
+        return DataLoader(self.train_dataset, batch_size=self.batch_size)
 
     def val_dataloader(self):
-        return DataLoader(self.val_dataset)
+        return DataLoader(self.val_dataset, batch_size=self.batch_size)
 
     def test_dataloader(self):
-        return DataLoader(self.test_dataset)
+        return DataLoader(self.test_dataset, batch_size=self.batch_size)
 
     def teardown(self, stage: Optional[str] = None) -> None:
         # clean up after fit or test
