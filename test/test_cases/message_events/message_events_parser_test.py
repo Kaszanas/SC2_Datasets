@@ -1,8 +1,10 @@
 import json
 import unittest
-from src.dataset.replay_structures.message_events.message_event import MessageEvent
-from src.dataset.replay_structures.message_events.message_events_parser import (
-    MessageEventParser,
+from src.dataset.replay_data.replay_parser.message_events.message_event import (
+    MessageEvent,
+)
+from src.dataset.replay_data.replay_parser.message_events.message_events_parser import (
+    MessageEventsParser,
 )
 import test.test_utils.test_utils as test_utils
 
@@ -20,5 +22,5 @@ class MessageEventsParserTest(unittest.TestCase):
             # Iterating over all of the message events and verifying
             # If the parsing works correctly:
             for game_event in loaded_file["messageEvents"]:
-                some_parsed_event = MessageEventParser.from_dict(d=game_event)
+                some_parsed_event = MessageEventsParser.from_dict(d=game_event)
                 self.assertIsInstance(some_parsed_event, MessageEvent)

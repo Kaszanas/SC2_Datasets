@@ -15,3 +15,5 @@ data/
 .vscode/
 
 tb_logs/
+
+test_replay1.json

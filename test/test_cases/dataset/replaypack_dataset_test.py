@@ -39,7 +39,7 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
         # Iterating over a single replaypacka and verifying
         # That it is possible to parse the replays into SC2ReplayData:
-        for index in len(sc2_replaypack_dataset):
+        for index in range(len(sc2_replaypack_dataset)):
             replay_data = sc2_replaypack_dataset[index]
 
             self.assertIsInstance(replay_data, SC2ReplayData)
