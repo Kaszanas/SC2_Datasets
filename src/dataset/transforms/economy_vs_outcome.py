@@ -1,6 +1,9 @@
 from typing import Dict, List, Tuple
+
+import functools
 import numpy as np
 import torch
+
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
@@ -11,7 +14,7 @@ from src.dataset.replay_data.replay_parser.tracker_events.events.player_stats.pl
     PlayerStats,
 )
 
-# REVIEW: Verify this function:
+
 def filter_player_stats(
     player_tracker_events: List[TrackerEvent],
 ) -> Dict[str, List[PlayerStats]]:
@@ -35,7 +38,6 @@ def filter_player_stats(
     return player_stats_events
 
 
-# REVIEW: Verify this function:
 def average_player_stats(
     player_tracker_events: List[TrackerEvent],
 ) -> Dict[str, List[float]]:
@@ -61,6 +63,11 @@ def average_player_stats(
                 sum_of_features, list(player_stats.stats.__dict__.values())
             )
 
+        # TODO: Verify if this is not better than the above iterative approach to summing features:
+        # sum_of_features = functools.reduce(
+        #     np.add, [elem.stats.__dict__.values() for elem in list_of_events]
+        # )
+
         # Getting the average of the features:
         average_player_features[key] = [
             item / len(list_of_events) for item in sum_of_features
@@ -69,7 +76,6 @@ def average_player_stats(
     return average_player_features
 
 
-# REVIEW: Check this function and its application:
 def economy_average_vs_outcome(
     sc2_replay: SC2ReplayData,
 ) -> Tuple[torch.Tensor, torch.Tensor]:
@@ -92,7 +98,6 @@ def economy_average_vs_outcome(
     # Creating feature tensor:
     feature_tensor = torch.tensor(feature_list, dtype=torch.float32)
 
-    # REVIEW: Check if this is the correct way to initialize this type of tensor:
     result_dict = {"Loss": 0, "Win": 1}
     target = result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result]
 

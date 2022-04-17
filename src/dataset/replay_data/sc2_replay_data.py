@@ -32,9 +32,24 @@ class SC2ReplayData:
 
     @staticmethod
     def from_file(replay_filepath: str) -> "SC2ReplayData":
+        """
+        _summary_
+
+        :param replay_filepath: _description_
+        :type replay_filepath: str
+        :return: _description_
+        :rtype: SC2ReplayData
+        """
         logging.info(f"\nAttempting to parse: {replay_filepath}")
-        with open(replay_filepath) as replay_file:
-            return SC2ReplayData(json.load(replay_file))
+        with open(replay_filepath, encoding="utf-8") as replay_file:
+            try:
+                loaded_data = json.load(replay_file)
+            except UnicodeDecodeError as exc:
+                logging.error(
+                    f"UnicodeDecodeError was raised for file {replay_filepath}",
+                    exc_info=True,
+                )
+            return SC2ReplayData(loaded_replay_object=loaded_data)
 
     def __init__(self, loaded_replay_object: Any) -> None:
 

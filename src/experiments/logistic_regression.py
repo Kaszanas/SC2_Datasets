@@ -22,27 +22,27 @@ if __name__ == "__main__":
         replaypack_name="2020_IEM_Katowice",
         replaypack_unpack_dir="D:/Projects/SC2EGSet_Experiments/test/test_files/unpack",
         download=False,
-        batch_size=2,
-        num_workers=4,
+        batch_size=256,
+        num_workers=12,
     )
     # Preparing the data:
     datamodule.prepare_data()
     datamodule.setup()
 
-    print(datamodule.train_dataloader().dataset[0])
+    # print(datamodule.train_dataloader().dataset[0])
 
     # REVIEW: I am blocked here. The LR doesn't train:
     # Defining the model:
     logistic_regression = LogisticRegression(input_dim=2 * 39, num_classes=2)
 
     # Initializing logger and trainer:
-    logger = TensorBoardLogger("tb_logs", name="Logistic Regression")
+    # logger = TensorBoardLogger("tb_logs", name="Logistic Regression")
     trainer = pl.Trainer(
-        logger=logger,
+        logger=True,
         accelerator="gpu",
         devices=1,
         auto_select_gpus=True,
-        max_epochs=50,
+        max_epochs=10,
         log_every_n_steps=2,
     )
 
