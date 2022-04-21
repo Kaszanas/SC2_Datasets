@@ -1,6 +1,7 @@
 import os
 import sys
-from pl_bolts.models.regression import LogisticRegression
+
+# from pl_bolts.models.regression import LogisticRegression
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import TensorBoardLogger
 
@@ -10,7 +11,10 @@ from src.dataset.lightning_datamodules.sc2_replaypack_datamodule import (
     SC2ReplaypackDataModule,
 )
 
+from src.experiments.logistic_model import LogisticRegression
+
 from src.dataset.transforms.economy_vs_outcome import economy_average_vs_outcome
+
 
 # This is required because num_workers needs this guard
 # Because otherwise creating processes might be done recursively?
@@ -22,28 +26,26 @@ if __name__ == "__main__":
         replaypack_name="2020_IEM_Katowice",
         replaypack_unpack_dir="D:/Projects/SC2EGSet_Experiments/test/test_files/unpack",
         download=False,
-        batch_size=256,
-        num_workers=12,
+        batch_size=8,
+        num_workers=4,
     )
     # Preparing the data:
     datamodule.prepare_data()
     datamodule.setup()
-
-    # print(datamodule.train_dataloader().dataset[0])
 
     # REVIEW: I am blocked here. The LR doesn't train:
     # Defining the model:
     logistic_regression = LogisticRegression(input_dim=2 * 39, num_classes=2)
 
     # Initializing logger and trainer:
-    # logger = TensorBoardLogger("tb_logs", name="Logistic Regression")
+    logger = TensorBoardLogger("tb_logs", name="Logistic Regression")
     trainer = pl.Trainer(
-        logger=True,
+        logger=logger,
         accelerator="gpu",
         devices=1,
         auto_select_gpus=True,
         max_epochs=10,
-        log_every_n_steps=2,
+        log_every_n_steps=5,
     )
 
     # REVIEW: Something is wrong here!

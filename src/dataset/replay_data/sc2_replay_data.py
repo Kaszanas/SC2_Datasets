@@ -49,6 +49,11 @@ class SC2ReplayData:
                     f"UnicodeDecodeError was raised for file {replay_filepath}",
                     exc_info=True,
                 )
+            except json.decoder.JSONDecodeError as exc:
+                logging.error(
+                    f"JSONDecodeError was raised for file {replay_filepath}",
+                    exc_info=True,
+                )
             return SC2ReplayData(loaded_replay_object=loaded_data)
 
     def __init__(self, loaded_replay_object: Any) -> None:
