@@ -10,24 +10,20 @@ from src.dataset.pytorch_datasets.sc2_replaypack_dataset import SC2ReplaypackDat
 class SC2ReplaypackDataModule(pl.LightningDataModule):
 
     """
-    _summary_
+    Defines a LightningDataModule abstraction for a single StarCraft II replaypack.
 
-    :param replaypack_name: _description_
+    :param replaypack_name: Specifies a replaypack name which will be used as a directory name.
     :type replaypack_name: str
-    :param replaypack_unpack_dir: _description_, defaults to "./data/unpack"
-    :type replaypack_unpack_dir: str, optional
-    :param replaypack_download_dir: _description_, defaults to "./data/unpack"
-    :type replaypack_download_dir: str, optional
-    :param url: _description_, defaults to ""
+    :param unpack_dir: Specifies the path where the replaypack (dataset) will be unpacked into a custom directory structure, defaults to "./data/unpack"
+    :type unpack_dir: str, optional
+    :param download_dir: Specifies the path where the replaypack (dataset) will be downloaded, defaults to "./data/unpack"
+    :type download_dir: str, optional
+    :param url: Specifies the url which will be used to download the replaypack (dataset), defaults to ""
     :type url: str, optional
-    :param download: _description_, defaults to True
+    :param download: Specifies if the dataset should be downloaded. Otherwise the dataset is loaded from the unpack_dir and a custom directory structure is assumed, defaults to True
     :type download: bool, optional
-    :param train_transforms: _description_, defaults to None
-    :type train_transforms: _type_, optional
-    :param val_transforms: _description_, defaults to None
-    :type val_transforms: _type_, optional
-    :param test_transforms: _description_, defaults to None
-    :type test_transforms: _type_, optional
+    :param transform: Specifies the PyTorch transforms to be used on the replaypack (dataset), defaults to None
+    :type transform: _type_, optional
     :param dims: _description_, defaults to None
     :type dims: _type_, optional
     """
@@ -35,8 +31,8 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     def __init__(
         self,
         replaypack_name: str,
-        replaypack_unpack_dir: str = "./data/unpack",
-        replaypack_download_dir: str = "./data/unpack",
+        unpack_dir: str = "./data/unpack",
+        download_dir: str = "./data/unpack",
         url: str = "",
         download: bool = True,
         transform=None,
@@ -55,8 +51,8 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
 
         # Custom fields:
         self.replaypack_name = replaypack_name
-        self.replaypack_unpack_dir = replaypack_unpack_dir
-        self.replaypack_download_dir = replaypack_download_dir
+        self.unpack_dir = unpack_dir
+        self.download_dir = download_dir
         self.url = url
         self.download = download
 
@@ -65,8 +61,8 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         # only called on 1 GPU/TPU in distributed
         self.dataset = SC2ReplaypackDataset(
             replaypack_name=self.replaypack_name,
-            replaypack_unpack_dir=self.replaypack_unpack_dir,
-            replaypack_download_dir=self.replaypack_download_dir,
+            unpack_dir=self.unpack_dir,
+            download_dir=self.download_dir,
             url=self.url,
             download=self.download,
             transform=self.transform,

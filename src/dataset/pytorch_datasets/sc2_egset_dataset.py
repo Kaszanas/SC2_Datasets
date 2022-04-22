@@ -10,10 +10,10 @@ class SC2EGSetDataset(Dataset):
     """
     Inherits from PyTorch Dataset and ensures that the dataset for SC2EGSet is downloaded.
 
-    :param dataset_unpack_dir: Specifies the path of a directory where the dataset files will be unpacked.
-    :type dataset_unpack_dir: str
-    :param dataset_download_dir: Specifies the path of a directory where the dataset files will be downloaded.
-    :type dataset_download_dir: str
+    :param unpack_dir: Specifies the path of a directory where the dataset files will be unpacked.
+    :type unpack_dir: str
+    :param download_dir: Specifies the path of a directory where the dataset files will be downloaded.
+    :type download_dir: str
     :param urls: Specifies the URL of the dataset which will be used to download the files.
     :type urls: List[str]
     :param transform: PyTorch transform. function that takes SC2ReplayData and return something
@@ -22,19 +22,23 @@ class SC2EGSetDataset(Dataset):
 
     def __init__(
         self,
-        dataset_unpack_dir: str = "./data/unpack",
-        dataset_download_dir: str = "./data/download",
+        unpack_dir: str = "./data/unpack",
+        download_dir: str = "./data/download",
         names_urls: List[
             Tuple[str, str]
         ] = AVAILABLE_REPLAYPACKS,  # This should probably be hardcoded! After all I want this to be a specific dataset.
         download: bool = True,
         transform=None,
     ):
-        self.dataset_download_dir = dataset_download_dir
-        self.dataset_unpack_dir = dataset_unpack_dir
+
+        # PyTorch fields:
+        self.transform = transform
+
+        # Custom fields:
+        self.download_dir = download_dir
+        self.unpack_dir = unpack_dir
         # TODO: What to do with the transform?
         # I don't think that it will be used:
-        self.transform = transform
         self.names_urls = names_urls
         self.download = download
 
@@ -53,8 +57,8 @@ class SC2EGSetDataset(Dataset):
         for replaypack_name, url in self.names_urls:
             replaypack = SC2ReplaypackDataset(
                 replaypack_name=replaypack_name,
-                replaypack_download_dir=self.dataset_download_dir,
-                replaypack_unpack_dir=self.dataset_unpack_dir,
+                download_dir=self.download_dir,
+                unpack_dir=self.unpack_dir,
                 url=url,
                 download=self.download,
             )

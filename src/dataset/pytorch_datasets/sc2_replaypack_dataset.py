@@ -15,10 +15,10 @@ class SC2ReplaypackDataset(Dataset):
 
     :param replaypack_name: Specifies the name of a replaypack. This can be a name of the tournament or any other arbitrary name.
     :type replaypack_name: str
-    :param replaypack_download_dir: Specifies the directory where the initial archive will be downloaded.
-    :type replaypack_download_dir: str
-    :param replaypack_unpack_dir: Specifies the directory where the archive will be extracted.
-    :type replaypack_unpack_dir: str
+    :param download_dir: Specifies the directory where the initial archive will be downloaded.
+    :type download_dir: str
+    :param unpack_dir: Specifies the directory where the archive will be extracted.
+    :type unpack_dir: str
     :param url: Specifies the url which will be used to download the .zip archive, defaults to ""
     :type url: str, optional
     :param download: Specifies if the dataset should be downloaded or if it is pre-downloaded and extracted, defaults to False
@@ -28,18 +28,22 @@ class SC2ReplaypackDataset(Dataset):
     def __init__(
         self,
         replaypack_name: str,
-        replaypack_unpack_dir: str,
-        replaypack_download_dir: str = "",
+        unpack_dir: str,
+        download_dir: str = "",
         url: str = "",
         download: bool = False,
         transform=None,
     ):
+
+        # PyTorch fields:
         self.transform = transform
-        self.replaypack_download_dir = replaypack_download_dir
-        self.replaypack_unpack_dir = replaypack_unpack_dir
+
+        # Custom fields:
+        self.download_dir = download_dir
+        self.unpack_dir = unpack_dir
         # Replaypack unpack directory must exist
         # This is because otherwise we will not be able to load any data:
-        if not os.path.isdir(self.replaypack_unpack_dir):
+        if not os.path.isdir(self.unpack_dir):
             raise Exception("Replaypack unpack directory does not exist!")
 
         self.replaypack_name = replaypack_name
@@ -51,12 +55,12 @@ class SC2ReplaypackDataset(Dataset):
             # or if the download directory does not exist:
             if not url:
                 raise Exception("Detected empty URL! Cannot download a replaypack!")
-            if not os.path.isdir(self.replaypack_download_dir):
+            if not os.path.isdir(self.download_dir):
                 raise Exception("Replaypack download directory does not exist!")
 
             download_and_unpack_replaypack(
-                replaypack_download_dir=self.replaypack_download_dir,
-                replaypack_unpack_dir=self.replaypack_unpack_dir,
+                replaypack_download_dir=self.download_dir,
+                replaypack_unpack_dir=self.unpack_dir,
                 replaypack_name=self.replaypack_name,
                 url=self.url,
             )
@@ -69,9 +73,7 @@ class SC2ReplaypackDataset(Dataset):
             self._replaypack_processed_info,
         ) = load_replaypack_information(
             replaypack_name=self.replaypack_name,
-            replaypack_path=os.path.join(
-                self.replaypack_unpack_dir, self.replaypack_name
-            ),
+            replaypack_path=os.path.join(self.unpack_dir, self.replaypack_name),
         )
 
         # Load all of the files:

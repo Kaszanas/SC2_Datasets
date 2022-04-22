@@ -9,22 +9,26 @@ from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
 class SC2EGSetDataModule(pl.LightningDataModule):
 
     """
-    _summary_
+    Defines a LightningDataModule abstraction for the SC2EGSet: StarCraft II Esport Game-State Dataset.
 
-    :param dataset_download_dir: _description_, defaults to "./data/unpack"
-    :type dataset_download_dir: str, optional
-    :param dataset_unpack_dir: _description_, defaults to "./data/unpack"
-    :type dataset_unpack_dir: str, optional
+    :param download_dir:
+    :type download_dir: str, optional
+    :param unpack_dir: Specifies the path where the dataset will be unpacked into a custom directory structure, defaults to "./data/unpack"
+    :type unpack_dir: str, optional
     :param transform: _description_, defaults to None
     :type transform: _type_, optional
     :param dims: _description_, defaults to None
     :type dims: _type_, optional
+    :param batch_size: _description_, defaults to 256
+    :type batch_size: int, optional
+    :param num_workers: _description_, defaults to 0
+    :type num_workers: int, optional
     """
 
     def __init__(
         self,
-        dataset_download_dir: str = "./data/unpack",
-        dataset_unpack_dir: str = "./data/unpack",
+        download_dir: str = "./data/unpack",
+        unpack_dir: str = "./data/unpack",
         download: bool = True,
         transform=None,
         dims=None,
@@ -41,8 +45,8 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         self.num_workers = num_workers
 
         # Custom fields:
-        self.dataset_download_dir = dataset_download_dir
-        self.dataset_unpack_dir = dataset_unpack_dir
+        self.download_dir = download_dir
+        self.unpack_dir = unpack_dir
         self.download = download
 
     def prepare_data(self) -> None:
@@ -50,8 +54,8 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         # download, split, etc...
         # only called on 1 GPU/TPU in distributed
         self.dataset = SC2EGSetDataset(
-            dataset_download_dir=self.dataset_download_dir,
-            dataset_unpack_dir=self.dataset_unpack_dir,
+            download_dir=self.download_dir,
+            unpack_dir=self.unpack_dir,
             transform=self.transform,
         )
 
