@@ -47,15 +47,18 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
 
         super().__init__()
 
+        # PyTorch fields:
+        self.transform = transform
+        self.dims = dims
+        self.batch_size = batch_size
+        self.num_workers = num_workers
+
+        # Custom fields:
         self.replaypack_name = replaypack_name
         self.replaypack_unpack_dir = replaypack_unpack_dir
         self.replaypack_download_dir = replaypack_download_dir
         self.url = url
         self.download = download
-        self.transform = transform
-        self.dims = dims
-        self.batch_size = batch_size
-        self.num_workers = num_workers
 
     def prepare_data(self) -> None:
         # download, split, etc...
