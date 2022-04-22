@@ -27,7 +27,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
 
     def __init__(
         self,
-        download_dir: str = "./data/unpack",
+        download_dir: str = "./data/download",
         unpack_dir: str = "./data/unpack",
         download: bool = True,
         transform=None,

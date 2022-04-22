@@ -32,7 +32,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         self,
         replaypack_name: str,
         unpack_dir: str = "./data/unpack",
-        download_dir: str = "./data/unpack",
+        download_dir: str = "./data/download",
         url: str = "",
         download: bool = True,
         transform=None,

@@ -30,7 +30,7 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
             replaypack_name="2020_IEM_Katowice",
-            replaypack_unpack_dir=os.path.abspath("./test/test_files/unpack"),
+            unpack_dir=os.path.abspath("./test/test_files/unpack"),
         )
 
         # Iterating over a single replaypacka and verifying
