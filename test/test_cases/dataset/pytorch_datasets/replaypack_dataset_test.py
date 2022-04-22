@@ -7,10 +7,6 @@ from src.dataset.pytorch_datasets.sc2_replaypack_dataset import SC2ReplaypackDat
 
 
 class SC2ReplaypackDatasetTest(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        return super().setUpClass()
-
     def test_unpack_load_replaypack(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
