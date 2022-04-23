@@ -15,9 +15,6 @@ class SC2EGSetDatasetTest(unittest.TestCase):
         sc2egset_dataset = SC2EGSetDataset(
             unpack_dir=os.path.abspath("./test/test_files/unpack"),
             download_dir=os.path.abspath("./test/test_files/download"),
-            names_urls=[
-                ("2020_IEM_Katowice", ""),
-            ],
             download=False,
         )
 
@@ -31,11 +28,8 @@ class SC2EGSetDatasetTest(unittest.TestCase):
     def test_parsing_all_files(self):
 
         sc2egset_dataset = SC2EGSetDataset(
-            unpack_dir=os.path.abspath("./test_files/unpack"),
-            download_dir=os.path.abspath("./test_files/download"),
-            names_urls=[
-                ("2020_IEM_Katowice", ""),
-            ],
+            unpack_dir=os.path.abspath("./test/test_files/unpack"),
+            download_dir=os.path.abspath("./test/test_files/download"),
             download=False,
         )
         # Iterate over the whole dataset and test replay json parsing
