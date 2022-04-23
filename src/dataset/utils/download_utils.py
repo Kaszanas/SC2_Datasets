@@ -80,4 +80,5 @@ def download_and_unpack_replaypack(
         destination_dir=replaypack_unpack_dir,
         subdir=replaypack_name,
         zip_path=download_path,
+        n_workers=1,
     )

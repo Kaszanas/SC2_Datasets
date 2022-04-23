@@ -23,6 +23,8 @@ class SC2ReplaypackDataset(Dataset):
     :type url: str, optional
     :param download: Specifies if the dataset should be downloaded or if it is pre-downloaded and extracted, defaults to False
     :type download: bool, optional
+    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
+    :type unpack_n_workers: int, optional
     """
 
     def __init__(
@@ -32,6 +34,7 @@ class SC2ReplaypackDataset(Dataset):
         download_dir: str = "",
         url: str = "",
         download: bool = False,
+        unpack_n_workers: int = 16,
         transform=None,
     ):
 
@@ -39,6 +42,7 @@ class SC2ReplaypackDataset(Dataset):
         self.transform = transform
 
         # Custom fields:
+        self.unpack_n_workers = unpack_n_workers
         self.download_dir = download_dir
         self.unpack_dir = unpack_dir
         # Replaypack unpack directory must exist
@@ -74,6 +78,7 @@ class SC2ReplaypackDataset(Dataset):
         ) = load_replaypack_information(
             replaypack_name=self.replaypack_name,
             replaypack_path=os.path.join(self.unpack_dir, self.replaypack_name),
+            unpack_n_workers=self.unpack_n_workers,
         )
 
         # Load all of the files:

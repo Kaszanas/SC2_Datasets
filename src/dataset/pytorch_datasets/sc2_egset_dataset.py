@@ -1,3 +1,4 @@
+from struct import unpack
 from typing import Any, List, Tuple
 from torch.utils.data import Dataset
 from src.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
@@ -14,8 +15,10 @@ class SC2EGSetDataset(Dataset):
     :type unpack_dir: str
     :param download_dir: Specifies the path of a directory where the dataset files will be downloaded.
     :type download_dir: str
-    :param urls: Specifies the URL of the dataset which will be used to download the files.
-    :type urls: List[str]
+    :param names_urls: Specifies the URL of the dataset which will be used to download the files.
+    :type names_urls: List[Tuple[str, str]]
+    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
+    :type unpack_n_workers: int, optional
     :param transform: PyTorch transform. function that takes SC2ReplayData and return something
     :type transform: Func[SC2ReplayData, T]
     """
@@ -28,6 +31,7 @@ class SC2EGSetDataset(Dataset):
             Tuple[str, str]
         ] = AVAILABLE_REPLAYPACKS,  # This should probably be hardcoded! After all I want this to be a specific dataset.
         download: bool = True,
+        unpack_n_workers: int = 16,
         transform=None,
     ):
 
@@ -41,6 +45,7 @@ class SC2EGSetDataset(Dataset):
         # I don't think that it will be used:
         self.names_urls = names_urls
         self.download = download
+        self.unpack_n_workers = unpack_n_workers
 
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
@@ -61,6 +66,7 @@ class SC2EGSetDataset(Dataset):
                 unpack_dir=self.unpack_dir,
                 url=url,
                 download=self.download,
+                unpack_n_workers=self.unpack_n_workers,
             )
             self.replaypacks.append(replaypack)
             self.len += len(replaypack)

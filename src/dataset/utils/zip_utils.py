@@ -7,7 +7,7 @@ import logging
 
 from tqdm import tqdm
 
-
+# REVIEW: Check this:
 def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
     """
     Helper function for unpacking a chunk of files from a an archive
@@ -31,7 +31,10 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
                 )
 
 
-def unpack_zipfile(destination_dir: str, subdir: str, zip_path: str) -> str:
+# REVIEW: Check this:
+def unpack_zipfile(
+    destination_dir: str, subdir: str, zip_path: str, n_workers: int
+) -> str:
     """
     Helper function that unpacks the content of .zip archive.
 
@@ -41,6 +44,8 @@ def unpack_zipfile(destination_dir: str, subdir: str, zip_path: str) -> str:
     :type subdir: str
     :param zip_path: Specifies the path to the zip file that will be extracted.
     :type zip_path: str
+    :param n_workers: Specifies the number of workers that will be used for unpacking the archive.
+    :type n_workers: int
     :return: Returns a path to the extracted content.
     :rtype: str
     """
@@ -55,7 +60,6 @@ def unpack_zipfile(destination_dir: str, subdir: str, zip_path: str) -> str:
 
         file_list = zip_file.namelist()
 
-    n_workers = 16
     chunksize = round(len(file_list) / n_workers)
 
     with ProcessPoolExecutor(n_workers) as exe:

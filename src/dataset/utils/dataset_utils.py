@@ -5,7 +5,7 @@ from src.dataset.utils.zip_utils import unpack_zipfile
 
 
 def load_replaypack_information(
-    replaypack_name: str, replaypack_path: str
+    replaypack_name: str, replaypack_path: str, unpack_n_workers: int
 ) -> Tuple[str, Dict[str, str], Dict[str, str]]:
     """
     Helper function that loads replaypack information from a standard directory structure.
@@ -14,6 +14,8 @@ def load_replaypack_information(
     :type replaypack_name: str
     :param replaypack_path: Specifies the path to the extracted replaypack.
     :type replaypack_path: str
+    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive.
+    :type unpack_n_workers: int
     :return: Returns path to the directory that contains .json files with data extracted from replays,
             summary information that was generated when extracting the data from replays,
             mapping information that specifies what was the directory structure pre-extraction, and log file which contaions how many files were successfully extracted.
@@ -39,6 +41,7 @@ def load_replaypack_information(
                     destination_dir=replaypack_path,
                     subdir=replaypack_name + "_data",
                     zip_path=os.path.join(replaypack_path, file),
+                    n_workers=unpack_n_workers,
                 )
         if file.endswith("_summary.json"):
             with open(os.path.join(replaypack_path, file)) as summary_file:
