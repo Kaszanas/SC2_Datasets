@@ -58,6 +58,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         # download, split, etc...
         # only called on 1 GPU/TPU in distributed
         self.dataset = SC2EGSetDataset(
+            download=self.download,
             download_dir=self.download_dir,
             unpack_dir=self.unpack_dir,
             transform=self.transform,

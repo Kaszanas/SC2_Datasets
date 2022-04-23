@@ -27,9 +27,7 @@ class SC2EGSetDataset(Dataset):
         self,
         unpack_dir: str = "./data/unpack",
         download_dir: str = "./data/download",
-        names_urls: List[
-            Tuple[str, str]
-        ] = AVAILABLE_REPLAYPACKS,  # This should probably be hardcoded! After all I want this to be a specific dataset.
+        names_urls: List[Tuple[str, str]] = AVAILABLE_REPLAYPACKS,
         download: bool = True,
         unpack_n_workers: int = 16,
         transform=None,

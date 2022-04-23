@@ -4,10 +4,10 @@ import sys
 # from pl_bolts.models.regression import LogisticRegression
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import TensorBoardLogger
-from src.dataset.lightning_datamodules.sc2_egset_datamodule import SC2EGSetDataModule
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
+from src.dataset.lightning_datamodules.sc2_egset_datamodule import SC2EGSetDataModule
 from src.dataset.lightning_datamodules.sc2_replaypack_datamodule import (
     SC2ReplaypackDataModule,
 )
@@ -36,7 +36,7 @@ if __name__ == "__main__":
             "G:\\Projects\\SC2EGSet_Experiments\\test\\test_files\\unpack"
         ),
         download=False,
-        num_workers=16,
+        num_workers=4,
         unpack_n_workers=8,
         batch_size=256,
     )
@@ -45,7 +45,6 @@ if __name__ == "__main__":
     datamodule.prepare_data()
     datamodule.setup()
 
-    # REVIEW: I am blocked here. The LR doesn't train:
     # Defining the model:
     logistic_regression = LogisticRegression(input_dim=2 * 39, num_classes=2)
 
@@ -60,6 +59,5 @@ if __name__ == "__main__":
         log_every_n_steps=5,
     )
 
-    # REVIEW: Something is wrong here!
     # Training the model:
     trainer.fit(model=logistic_regression, datamodule=datamodule)
