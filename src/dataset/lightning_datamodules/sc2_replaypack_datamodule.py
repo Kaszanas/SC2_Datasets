@@ -26,6 +26,8 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     :type transform: _type_, optional
     :param dims: _description_, defaults to None
     :type dims: _type_, optional
+    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
+    :type unpack_n_workers: int, optional
     """
 
     def __init__(
@@ -39,6 +41,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         dims=None,
         batch_size: int = 256,
         num_workers: int = 0,
+        unpack_n_workers: int = 16,
     ):
 
         super().__init__()
@@ -55,6 +58,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         self.download_dir = download_dir
         self.url = url
         self.download = download
+        self.unpack_n_workers = unpack_n_workers
 
     def prepare_data(self) -> None:
         # download, split, etc...
@@ -66,6 +70,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
             url=self.url,
             download=self.download,
             transform=self.transform,
+            unpack_n_workers=self.unpack_n_workers,
         )
 
     def setup(self, stage: Optional[str] = None) -> None:

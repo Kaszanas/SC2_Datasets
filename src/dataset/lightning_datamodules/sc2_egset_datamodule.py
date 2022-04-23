@@ -23,6 +23,8 @@ class SC2EGSetDataModule(pl.LightningDataModule):
     :type batch_size: int, optional
     :param num_workers: _description_, defaults to 0
     :type num_workers: int, optional
+    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
+    :type unpack_n_workers: int, optional
     """
 
     def __init__(
@@ -34,6 +36,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         dims=None,
         batch_size: int = 256,
         num_workers: int = 0,
+        unpack_n_workers: int = 16,
     ):
 
         super().__init__()
@@ -48,6 +51,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         self.download_dir = download_dir
         self.unpack_dir = unpack_dir
         self.download = download
+        self.unpack_n_workers = unpack_n_workers
 
     def prepare_data(self) -> None:
 
@@ -57,6 +61,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
             download_dir=self.download_dir,
             unpack_dir=self.unpack_dir,
             transform=self.transform,
+            unpack_n_workers=self.unpack_n_workers,
         )
 
     def setup(self, stage: Optional[str] = None) -> None:

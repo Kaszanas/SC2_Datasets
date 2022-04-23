@@ -4,6 +4,7 @@ import sys
 # from pl_bolts.models.regression import LogisticRegression
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import TensorBoardLogger
+from src.dataset.lightning_datamodules.sc2_egset_datamodule import SC2EGSetDataModule
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
@@ -21,14 +22,25 @@ from src.dataset.transforms.economy_vs_outcome import economy_average_vs_outcome
 # TODO: Verify this Issue #11
 if __name__ == "__main__":
     # Initializing Lightning DataModule
-    datamodule = SC2ReplaypackDataModule(
-        transform=economy_average_vs_outcome,
-        replaypack_name="2020_IEM_Katowice",
-        replaypack_unpack_dir="D:/Projects/SC2EGSet_Experiments/test/test_files/unpack",
+    # datamodule = SC2ReplaypackDataModule(
+    #     transform=economy_average_vs_outcome,
+    #     replaypack_name="2020_IEM_Katowice",
+    #     unpack_dir="D:/Projects/SC2EGSet_Experiments/test/test_files/unpack",
+    #     download=False,
+    #     batch_size=8,
+    #     num_workers=4,
+    # )
+
+    datamodule = SC2EGSetDataModule(
+        unpack_dir=os.path.abspath(
+            "G:\\Projects\\SC2EGSet_Experiments\\test\\test_files\\unpack"
+        ),
         download=False,
-        batch_size=8,
-        num_workers=4,
+        num_workers=16,
+        unpack_n_workers=8,
+        batch_size=256,
     )
+
     # Preparing the data:
     datamodule.prepare_data()
     datamodule.setup()
