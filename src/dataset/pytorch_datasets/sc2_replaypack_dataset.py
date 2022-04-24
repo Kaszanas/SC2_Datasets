@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List, Set
 
 from torch.utils.data import Dataset
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
@@ -35,9 +35,9 @@ class SC2ReplaypackDataset(Dataset):
         url: str = "",
         download: bool = False,
         unpack_n_workers: int = 16,
-        transform=None,
+        transform: None | Callable = None,
+        validator: None | Callable = None,
     ):
-
         # PyTorch fields:
         self.transform = transform
 
@@ -81,9 +81,20 @@ class SC2ReplaypackDataset(Dataset):
             unpack_n_workers=self.unpack_n_workers,
         )
 
+        # TODO: ReplayFile class so that there is no tuples:
+
+        # Validate here:
+        all_files = [(data_path, file) for file in os.listdir(data_path)]
+
+        self.invalid_file_names = (
+            validator(all_files) if validator is not None else set()
+        )
+
         # Load all of the files:
         self.list_of_files = [
-            os.path.join(data_path, file) for file in os.listdir(data_path)
+            os.path.join(data_path, file)
+            for (data_path, file) in all_files
+            if file not in self.invalid_file_names
         ]
         self.len = len(self.list_of_files)
 

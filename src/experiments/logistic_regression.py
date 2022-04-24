@@ -39,6 +39,7 @@ if __name__ == "__main__":
         num_workers=4,
         unpack_n_workers=8,
         batch_size=256,
+        transform=economy_average_vs_outcome,
     )
 
     # Preparing the data:

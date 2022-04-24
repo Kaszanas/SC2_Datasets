@@ -42,18 +42,18 @@ class SC2ReplayData:
         """
         logging.info(f"\nAttempting to parse: {replay_filepath}")
         with open(replay_filepath, encoding="utf-8") as replay_file:
-            try:
-                loaded_data = json.load(replay_file)
-            except UnicodeDecodeError as exc:
-                logging.error(
-                    f"UnicodeDecodeError was raised for file {replay_filepath}",
-                    exc_info=True,
-                )
-            except json.decoder.JSONDecodeError as exc:
-                logging.error(
-                    f"JSONDecodeError was raised for file {replay_filepath}",
-                    exc_info=True,
-                )
+            # try:
+            loaded_data = json.load(replay_file)
+            # except UnicodeDecodeError as exc:
+            #     logging.error(
+            #         f"UnicodeDecodeError was raised for file {replay_filepath}",
+            #         exc_info=True,
+            #     )
+            # except json.decoder.JSONDecodeError as exc:
+            #     logging.error(
+            #         f"JSONDecodeError was raised for file {replay_filepath}",
+            #         exc_info=True,
+            #     )
             return SC2ReplayData(loaded_replay_object=loaded_data)
 
     def __init__(self, loaded_replay_object: Any) -> None:

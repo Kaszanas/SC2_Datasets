@@ -1,12 +1,17 @@
 import os
 from typing import Dict
 import unittest
-from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
+from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from src.dataset.pytorch_datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
+from src.dataset.utils.dataset_utils import (
+    validate_replays_integrity,
+    validate_integrity_singleprocess,
+)
 
 
 class SC2ReplaypackDatasetTest(unittest.TestCase):
+    @unittest.skip("reason for skipping")
     def test_unpack_load_replaypack(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
@@ -26,6 +31,7 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         # It is possible to retrieve a single file by index:
         self.assertIsInstance(sc2_replaypack_dataset[0], SC2ReplayData)
 
+    @unittest.skip("reason for skipping")
     def test_parsing_replaypack_replays(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
@@ -39,3 +45,53 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
             replay_data = sc2_replaypack_dataset[index]
 
             self.assertIsInstance(replay_data, SC2ReplayData)
+
+    def test_replaypack_integrity_validation(self):
+
+        files_rejected = 0
+
+        def validator(list_of_replays):
+            nonlocal files_rejected
+            result = validate_integrity_singleprocess(list_of_replays=list_of_replays)
+            files_rejected = len(result)
+
+            # save to disk
+
+            return result
+
+        sc2_replaypack_dataset = SC2ReplaypackDataset(
+            replaypack_name="2021_Dreamhack_SC2_Masters_Fall",
+            unpack_dir=os.path.abspath("./test/test_files/unpack"),
+            validator=validator,
+        )
+
+        self.assertIsInstance(sc2_replaypack_dataset, SC2ReplaypackDataset)
+        self.assertGreaterEqual(files_rejected, 1)
+
+    def test_replaypack_integrity_validation(self):
+
+        path_to_file = ""
+
+        def save_to_disk_validator(list_of_replays):
+            nonlocal path_to_file
+            result = validate_integrity_singleprocess(list_of_replays=list_of_replays)
+            # TODO: save `result` to disk
+            return result
+
+        def load_from_disk_validator(list_of_replays):
+            nonlocal path_to_file
+            # load set from disk and return
+            pass
+
+        sc2_replaypack_dataset_1 = SC2ReplaypackDataset(
+            replaypack_name="2021_Dreamhack_SC2_Masters_Fall",
+            unpack_dir=os.path.abspath("./test/test_files/unpack"),
+            validator=save_to_disk_validator,
+        )
+
+        # this call should be quick:
+        sc2_replaypack_dataset_2 = SC2ReplaypackDataset(
+            replaypack_name="2021_Dreamhack_SC2_Masters_Fall",
+            unpack_dir=os.path.abspath("./test/test_files/unpack"),
+            validator=load_from_disk_validator,
+        )
