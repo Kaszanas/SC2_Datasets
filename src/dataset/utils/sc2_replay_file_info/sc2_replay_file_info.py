@@ -20,10 +20,7 @@ class SC2ReplayFileInfo:
     ) -> None:
 
         if not os.path.isdir(directory):
-            raise Error
-
-        if not os.path.isfile(filename):
-            raise Error
+            raise Exception("The directory does not exist!")
 
         self.directory = directory
         self.filename = filename

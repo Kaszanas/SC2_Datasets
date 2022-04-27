@@ -20,7 +20,16 @@ class IntegrityValidatorTest(unittest.TestCase):
         cls.working_test_replay = Path(
             test_utils.get_specific_asset(filename="test_replay.json")
         )
-        cls.list_of_replays = [cls.not_working_test_replay, cls.working_test_replay]
+        cls.list_of_replays = [
+            SC2ReplayFileInfo(
+                directory=cls.not_working_test_replay.parent,
+                filename=cls.not_working_test_replay.name,
+            ),
+            SC2ReplayFileInfo(
+                directory=cls.working_test_replay.parent,
+                filename=cls.working_test_replay.name,
+            ),
+        ]
 
     def test_integrity_validator(self):
         bad_replays = validate_integrity_singleprocess(
