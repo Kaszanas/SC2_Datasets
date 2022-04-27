@@ -12,14 +12,14 @@ from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
 
 def validate_chunk(
     list_of_replays: List[SC2ReplayFileInfo],
-) -> Set[str]:
+) -> Set[SC2ReplayFileInfo]:
     """
     Attempts to parse a chunk of replays and validates the JSON structure using SC2ReplayData parser.
 
-    :param list_of_replays: Specifies the list of replays that will be validated, first tuple element is the path, second tuple element is file.
-    :type list_of_replays: List[Tuple[str, str]]
+    :param list_of_replays: Specifies the list of replays that will be validated.
+    :type list_of_replays: List[SC2ReplayFileInfo]
     :return: Returns a set of string of the incorrect files that need to be filtered out of the dataset.
-    :rtype: Set[str]
+    :rtype: Set[SC2ReplayFileInfo]
     """
     result = set()
     for file_info in list_of_replays:
@@ -36,15 +36,15 @@ def validate_chunk(
 def validate_replays_integrity(
     list_of_replays: List[SC2ReplayFileInfo],
     n_workers: int,
-) -> Set[str]:
+) -> Set[SC2ReplayFileInfo]:
     """
     Validates if the replay can be parsed by using SC2ReplayData by spawning multiple processes.
 
-    :param list_of_replays: Specifies a list of replays. Contains directory and filename.
-    :type list_of_replays: List[Tuple[str, str]]
-    :param n_workers: _description_
+    :param list_of_replays: Specifies a list of replays in a form of SC2ReplayFileInfo.
+    :type list_of_replays: List[SC2ReplayFileInfo]
+    :param n_workers: Specifies the number of workers (processes) that will be used for validating replays.
     :type n_workers: int
-    :return: _description_
+    :return: Returns a list of replays that did not pass the validation.
     :rtype: Set[str]
     """
 
@@ -67,5 +67,15 @@ def validate_replays_integrity(
     return result
 
 
-def validate_integrity_singleprocess(list_of_replays: List[SC2ReplayFileInfo]):
+def validate_integrity_singleprocess(
+    list_of_replays: List[SC2ReplayFileInfo],
+) -> Set[SC2ReplayFileInfo]:
+    """
+    Exposes logif for single process integrity validation of a replay.
+
+    :param list_of_replays: Specifies the SC2ReplayInfo information of the files that will be validated.
+    :type list_of_replays: List[SC2ReplayFileInfo]
+    :return: Returns a list of replays that did not pass the validation.
+    :rtype: Set[SC2ReplayFileInfo]
+    """
     return validate_chunk(list_of_replays)
