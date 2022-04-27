@@ -30,6 +30,8 @@ class IntegrityValidatorTest(unittest.TestCase):
         self.assertEqual(len(bad_replays), 1)
 
     def test_multiprocessing_integrity_validator(self):
-        bad_replays = validate_replays_integrity(list_of_replays=self.list_of_replays)
+        bad_replays = validate_replays_integrity(
+            list_of_replays=self.list_of_replays, n_workers=2
+        )
         self.assertIsInstance(next(iter(bad_replays)), SC2ReplayFileInfo)
         self.assertEqual(len(bad_replays), 1)
