@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Callable, Optional
 import pytorch_lightning as pl
 
 from torch.utils.data import random_split
@@ -25,6 +25,8 @@ class SC2EGSetDataModule(pl.LightningDataModule):
     :type num_workers: int, optional
     :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
     :type unpack_n_workers: int, optional
+    :param validator: _description_, defaults to None
+    :type validator: Callable | None, optional
     """
 
     def __init__(
@@ -37,6 +39,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
+        validator: Callable | None = None,
     ):
 
         super().__init__()
@@ -52,6 +55,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         self.unpack_dir = unpack_dir
         self.download = download
         self.unpack_n_workers = unpack_n_workers
+        self.validator = validator
 
     def prepare_data(self) -> None:
 
