@@ -1,5 +1,5 @@
 from concurrent.futures import ProcessPoolExecutor
-from typing import List, Set, Tuple
+from typing import List, Set
 
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
