@@ -5,6 +5,9 @@ from torch.utils.data import Dataset
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from src.dataset.utils.download_utils import download_and_unpack_replaypack
 from src.dataset.utils.dataset_utils import load_replaypack_information
+from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
+    SC2ReplayFileInfo,
+)
 
 
 class SC2ReplaypackDataset(Dataset):
@@ -84,7 +87,10 @@ class SC2ReplaypackDataset(Dataset):
         # TODO: ReplayFile class so that there is no tuples:
 
         # Validate here:
-        all_files = [(data_path, file) for file in os.listdir(data_path)]
+        all_files = [
+            SC2ReplayFileInfo(directory=data_path, filename=file)
+            for file in os.listdir(data_path)
+        ]
 
         self.invalid_file_names = (
             validator(all_files) if validator is not None else set()
@@ -92,9 +98,9 @@ class SC2ReplaypackDataset(Dataset):
 
         # Load all of the files:
         self.list_of_files = [
-            os.path.join(data_path, file)
-            for (data_path, file) in all_files
-            if file not in self.invalid_file_names
+            sc2_replay_file_info.get_full_path()
+            for sc2_replay_file_info in all_files
+            if sc2_replay_file_info not in self.invalid_file_names
         ]
         self.len = len(self.list_of_files)
 
