@@ -6,10 +6,6 @@ from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 class SC2EGSetDatasetTest(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        return super().setUpClass()
-
     def test_loading_replaypacks(self):
 
         sc2egset_dataset = SC2EGSetDataset(

@@ -11,7 +11,6 @@ from src.dataset.utils.dataset_utils import (
 
 
 class SC2ReplaypackDatasetTest(unittest.TestCase):
-    @unittest.skip("reason for skipping")
     def test_unpack_load_replaypack(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
@@ -31,6 +30,7 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         # It is possible to retrieve a single file by index:
         self.assertIsInstance(sc2_replaypack_dataset[0], SC2ReplayData)
 
+    # REVIEW: Is this test needed?
     @unittest.skip("reason for skipping")
     def test_parsing_replaypack_replays(self):
 
@@ -47,7 +47,6 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
             self.assertIsInstance(replay_data, SC2ReplayData)
 
     def test_replaypack_integrity_validation(self):
-
         files_rejected = 0
 
         def validator(list_of_replays):
