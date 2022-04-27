@@ -1,5 +1,5 @@
 from struct import unpack
-from typing import Any, List, Tuple
+from typing import Any, Callable, List, Tuple
 from torch.utils.data import Dataset
 from src.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
@@ -21,6 +21,8 @@ class SC2EGSetDataset(Dataset):
     :type unpack_n_workers: int, optional
     :param transform: PyTorch transform. function that takes SC2ReplayData and return something
     :type transform: Func[SC2ReplayData, T]
+    :param validator: _description_, defaults to None
+    :type validator: Callable | None, optional
     """
 
     def __init__(
@@ -30,7 +32,8 @@ class SC2EGSetDataset(Dataset):
         names_urls: List[Tuple[str, str]] = AVAILABLE_REPLAYPACKS,
         download: bool = True,
         unpack_n_workers: int = 16,
-        transform=None,
+        transform: Callable | None = None,
+        validator: Callable | None = None,
     ):
 
         # PyTorch fields:
@@ -44,6 +47,7 @@ class SC2EGSetDataset(Dataset):
         self.names_urls = names_urls
         self.download = download
         self.unpack_n_workers = unpack_n_workers
+        self.validator = validator
 
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
@@ -65,6 +69,7 @@ class SC2EGSetDataset(Dataset):
                 url=url,
                 download=self.download,
                 unpack_n_workers=self.unpack_n_workers,
+                validator=self.validator,
             )
             self.replaypacks.append(replaypack)
             self.len += len(replaypack)
