@@ -22,13 +22,13 @@ def validate_chunk(
     :rtype: Set[str]
     """
     result = set()
-    for (path, file) in list_of_replays:
+    for file_info in list_of_replays:
         try:
             replay_data = SC2ReplayData.from_file(
-                replay_filepath=os.path.join(path, file)
+                replay_filepath=file_info.get_full_path()
             )
         except:
-            result.add(file)
+            result.add(file_info)
 
     return result
 
