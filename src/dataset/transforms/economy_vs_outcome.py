@@ -78,7 +78,7 @@ def average_player_stats(
 
 def economy_average_vs_outcome(
     sc2_replay: SC2ReplayData,
-) -> Tuple[torch.Tensor, torch.Tensor]:
+) -> Tuple[torch.Tensor, int]:
     """
     Transform that exposes logic for obtaining averaged economy statistics.
 
