@@ -37,27 +37,29 @@ def read_validation_file(
     ]
 
     # REVIEW: This is probably inefficient too:
-    return set(validated_file_list), set(skip_file_list)
+    return (set(validated_file_list), set(skip_file_list))
 
 
 # REVIEW: Verify this:
 def save_validation_file(
-    file_set: Set[SC2ReplayFileInfo],
+    validated_files: Set[SC2ReplayFileInfo],
     skip_files: Set[SC2ReplayFileInfo],
     path: Path = Path("validator_file.json"),
 ) -> None:
     """
     Attempts to save the validation file to a specified path
 
-    :param path: Specifies the path to the file that will be saved.
+    :param validated_files: Specifies the list of replays that were verified as ones that were processed.
+    :type validated_files: Set[SC2ReplayFileInfo]
+    :param skip_files: Specifies the list of replays that were verified as ones that should be skipped.
+    :type skip_files: Set[SC2ReplayFileInfo]
+    :param path: Specifies the path to the file that will be saved, Defaults to Path("validator_file.json")
     :type path: Path
-    :param file_list: Specifies the list of replays that were verified as ones that should be skipped, Defaults to Path("validator_file.json").
-    :type file_list: List[SC2ReplayFileInfo]
     """
 
-    file_list = list(file_set)
+    validated_file_list = list(validated_files)
     # Converting incorrect files to Paths:
-    path_file_list = [Path(file.get_full_path()) for file in file_list]
+    path_file_list = [Path(file.get_full_path()) for file in validated_file_list]
     # Initializing the dict that will be serialized to a file:
     file_dict = {
         "validated_files": list(path_file_list),
