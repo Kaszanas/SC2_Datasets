@@ -2,10 +2,9 @@ import unittest
 from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
     SC2ReplayFileInfo,
 )
-from src.dataset.validators.integrity_validator import (
-    validate_integrity_singleprocess,
-    validate_replays_integrity,
-)
+from src.dataset.validators.multiprocess_validator import validate_integrity_mp
+from src.dataset.validators.singleprocess_validator import validate_integrity_sp
+
 import test.test_utils.test_utils as test_utils
 
 from pathlib import Path
@@ -31,16 +30,24 @@ class IntegrityValidatorTest(unittest.TestCase):
             ),
         ]
 
-    def test_integrity_validator(self):
-        bad_replays = validate_integrity_singleprocess(
+    def test_singleprocess_integrity_validator(self):
+        validated, skip_files = validate_integrity_sp(
             list_of_replays=self.list_of_replays
         )
         self.assertIsInstance(next(iter(bad_replays)), SC2ReplayFileInfo)
-        self.assertEqual(len(bad_replays), 1)
+        self.assertEqual(len(validated), 2)
+        self.assertEqual(len(skip_files), 1)
 
     def test_multiprocessing_integrity_validator(self):
-        bad_replays = validate_replays_integrity(
+        validated, skip_files = validate_integrity_mp(
             list_of_replays=self.list_of_replays, n_workers=2
         )
-        self.assertIsInstance(next(iter(bad_replays)), SC2ReplayFileInfo)
-        self.assertEqual(len(bad_replays), 1)
+        self.assertIsInstance(next(iter(skip_files)), SC2ReplayFileInfo)
+        self.assertEqual(len(validated), 2)
+        self.assertEqual(len(skip_files), 1)
+
+    def test_persistent_mp_integrity_validator(self):
+        pass
+
+    def test_persistent_sp_integrity_validator(self):
+        pass
