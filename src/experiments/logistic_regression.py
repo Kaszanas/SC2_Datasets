@@ -32,9 +32,7 @@ if __name__ == "__main__":
     # )
 
     datamodule = SC2EGSetDataModule(
-        unpack_dir=os.path.abspath(
-            "G:\\Projects\\SC2EGSet_Experiments\\test\\test_files\\unpack"
-        ),
+        unpack_dir=os.path.abspath("./test/test_files/unpack"),
         download=False,
         num_workers=4,
         unpack_n_workers=8,
