@@ -6,7 +6,7 @@ from tqdm import tqdm
 from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
     SC2ReplayFileInfo,
 )
-from src.dataset.validators.integrity_validator import validate_chunk
+from src.dataset.validators.validate_chunk import validate_chunk
 from src.dataset.validators.validator_utils import (
     read_validation_file,
     save_validation_file,
@@ -14,7 +14,7 @@ from src.dataset.validators.validator_utils import (
 
 
 # REVIEW: Verify this:
-def validate_replays_integrity_mp(
+def validate_integrity_mp(
     list_of_replays: List[SC2ReplayFileInfo],
     n_workers: int,
 ) -> Tuple[Set[SC2ReplayFileInfo], Set[SC2ReplayFileInfo]]:
@@ -26,8 +26,8 @@ def validate_replays_integrity_mp(
     :type list_of_replays: List[SC2ReplayFileInfo]
     :param n_workers: Specifies the number of workers (processes) that will be used for validating replays.
     :type n_workers: int
-    :return: Returns a list of replays that did not pass the validation.
-    :rtype: Set[str]
+    :return: Returns a tuple that contains (validated replays, files to be skipped).
+    :rtype: Tuple[Set[SC2ReplayFileInfo], Set[SC2ReplayFileInfo]]
     """
 
     chunksize = round(len(list_of_replays) / n_workers)
@@ -81,7 +81,7 @@ def validate_integrity_persist_mp(
     # Validate replays:
     files_to_validate = set(list_of_replays) - validated_files
     # TODO: Pass skip files here so that they can be expanded?
-    validated_replays, skip_files = validate_replays_integrity_mp(
+    validated_replays, skip_files = validate_integrity_mp(
         list_of_replays=list(files_to_validate), n_workers=n_workers
     )
 

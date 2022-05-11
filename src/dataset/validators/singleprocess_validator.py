@@ -1,16 +1,17 @@
-# REVIEW: Verify this:
 from pathlib import Path
-from typing import List, Set
+from typing import List, Set, Tuple
+
 from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
     SC2ReplayFileInfo,
 )
-from src.dataset.validators.integrity_validator import validate_chunk
+from src.dataset.validators.validate_chunk import validate_chunk
 from src.dataset.validators.validator_utils import (
     read_validation_file,
     save_validation_file,
 )
 
 
+# REVIEW: Verify this:
 def validate_integrity_persist_sp(
     list_of_replays: List[SC2ReplayFileInfo],
     validation_file_path: Path,
@@ -33,27 +34,42 @@ def validate_integrity_persist_sp(
     # Validate replays:
     files_to_validate = set(list_of_replays) - validated_files
     # TODO: Pass skip files here so that they can be expanded?
-    skip_files = validate_integrity_sp(list_of_replays=list(files_to_validate))
+    validated_replays, skip_files = validate_integrity_sp(
+        list_of_replays=list(files_to_validate)
+    )
 
     # Save to a file:
-    save_validation_file(file_list=list(validated_replays), path=validation_file_path)
+    save_validation_file(
+        validated_files=list(validated_replays),
+        skip_files=skip_files,
+        path=validation_file_path,
+    )
 
     return skip_files
 
 
 def validate_integrity_sp(
     list_of_replays: List[SC2ReplayFileInfo],
-) -> Set[SC2ReplayFileInfo]:
+) -> Tuple[Set[SC2ReplayFileInfo], Set[SC2ReplayFileInfo]]:
     """
     Exposes logic for single process integrity validation of a replay.
 
     :param list_of_replays: Specifies the SC2ReplayInfo information of the files that will be validated.
     :type list_of_replays: List[SC2ReplayFileInfo]
-    :return: Returns a list of replays that did not pass the validation.
-    :rtype: Set[SC2ReplayFileInfo]
+    :return: Returns a tuple that contains (validated replays, files to be skipped).
+    :rtype: Tuple[Set[SC2ReplayFileInfo], Set[SC2ReplayFileInfo]]
     """
 
     # TODO: Convert this!
     validated_files = validate_chunk(list_of_replays=list_of_replays)
 
-    return validated_files
+    # Convert result to two sets:
+    validated = set()
+    skip_files = set()
+    for sc2_file_info, is_correct in validated_files:
+        if is_correct:
+            validated.add(sc2_file_info)
+        if not is_correct:
+            skip_files.add(sc2_file_info)
+
+    return (validated, skip_files)

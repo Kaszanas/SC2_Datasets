@@ -1,17 +1,10 @@
-from typing import List, Set, Tuple
+from typing import List, Tuple
 
-from pathlib import Path
-
-from tqdm import tqdm
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
     SC2ReplayFileInfo,
-)
-from src.dataset.validators.validator_utils import (
-    read_validation_file,
-    save_validation_file,
 )
 
 
