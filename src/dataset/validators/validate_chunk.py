@@ -28,14 +28,15 @@ def validate_chunk(
                 replay_filepath=file_info.get_full_path()
             )
         except:
+            validated_files.add(file_info)
             skip_files.add(file_info)
 
     # If file is in validated and skip the its skip
     # if file is only in validated then it's fine:
-    only_correct = validated_files - skip_files
+    # only_correct = validated_files - skip_files
 
     result_list = []
-    for file in list(only_correct):
+    for file in list(validated_files):
         result_list.append((file, True))
 
     for file in list(skip_files):

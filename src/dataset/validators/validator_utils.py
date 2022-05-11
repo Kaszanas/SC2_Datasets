@@ -21,7 +21,7 @@ def read_validation_file(
     """
 
     # Reading the file:
-    with path.open(mode="w+") as input_file:
+    with path.open(mode="w+", encoding="utf-8") as input_file:
         try:
             # Try reading the data from JSON:
             json_data = json.load(input_file)
@@ -63,13 +63,18 @@ def save_validation_file(
     :type path: Path
     """
 
-    validated_file_list = list(validated_files)
     # Converting incorrect files to Paths:
-    path_file_list = [Path(file.get_full_path()) for file in validated_file_list]
+    validated_file_list = [
+        Path(file.get_full_path()).as_posix() for file in list(validated_files)
+    ]
+    skip_file_list = [
+        Path(file.get_full_path()).as_posix() for file in list(skip_files)
+    ]
     # Initializing the dict that will be serialized to a file:
     file_dict = {
-        "validated_files": list(path_file_list),
-        "skip_files": list(skip_files),
+        "validated_files": validated_file_list,
+        "skip_files": skip_file_list,
     }
-    with path.open(mode="w") as output_file:
+    with open(path, mode="w", encoding="utf-8") as output_file:
+        print(output_file)
         json.dump(file_dict, output_file)
