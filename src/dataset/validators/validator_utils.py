@@ -1,10 +1,9 @@
 from pathlib import Path
-from typing import List, Set, Tuple
+from typing import Set, Tuple
 
 from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
     SC2ReplayFileInfo,
 )
-
 
 import json
 
@@ -22,11 +21,18 @@ def read_validation_file(
     """
 
     # Reading the file:
-    with path.open(mode="r") as input_file:
-        json_data = json.load(input_file)
-
-        validated_file_list = json_data["validated_files"]
-        skip_file_list = json_data["skip_files"]
+    with path.open(mode="w+") as input_file:
+        try:
+            # Try reading the data from JSON:
+            json_data = json.load(input_file)
+            validated_file_list = json_data["validated_files"]
+            skip_file_list = json_data["skip_files"]
+        except:
+            # If there is no content in the file, initlialize empty lists and write them to file:
+            initialize_content = {"validated_files": [], "skip_files": []}
+            json.dump(initialize_content, input_file)
+            validated_file_list = []
+            skip_file_list = []
 
     # REVIEW: This is memory inefficient for sure:
     # Converting filepaths to SC2ReplayFileInfo:

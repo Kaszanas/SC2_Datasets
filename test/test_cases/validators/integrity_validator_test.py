@@ -1,9 +1,16 @@
+import tempfile
 import unittest
 from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
     SC2ReplayFileInfo,
 )
-from src.dataset.validators.multiprocess_validator import validate_integrity_mp
-from src.dataset.validators.singleprocess_validator import validate_integrity_sp
+from src.dataset.validators.multiprocess_validator import (
+    validate_integrity_mp,
+    validate_integrity_persist_mp,
+)
+from src.dataset.validators.singleprocess_validator import (
+    validate_integrity_persist_sp,
+    validate_integrity_sp,
+)
 
 import test.test_utils.test_utils as test_utils
 
@@ -34,7 +41,7 @@ class IntegrityValidatorTest(unittest.TestCase):
         validated, skip_files = validate_integrity_sp(
             list_of_replays=self.list_of_replays
         )
-        self.assertIsInstance(next(iter(bad_replays)), SC2ReplayFileInfo)
+        self.assertIsInstance(next(iter(skip_files)), SC2ReplayFileInfo)
         self.assertEqual(len(validated), 2)
         self.assertEqual(len(skip_files), 1)
 
@@ -47,7 +54,19 @@ class IntegrityValidatorTest(unittest.TestCase):
         self.assertEqual(len(skip_files), 1)
 
     def test_persistent_mp_integrity_validator(self):
-        pass
+        with tempfile.TemporaryFile() as temp_file:
+            temp_file_path = Path(temp_file.name)
+            skip_files = validate_integrity_persist_mp(
+                list_of_replays=self.list_of_replays,
+                n_workers=4,
+                validation_file_path=temp_file_path,
+            )
 
     def test_persistent_sp_integrity_validator(self):
-        pass
+        with tempfile.TemporaryFile() as temp_file:
+            temp_file_path = Path(temp_file.name)
+            skip_files = validate_integrity_persist_sp(
+                list_of_replays=self.list_of_replays,
+                n_workers=4,
+                validation_file_path=temp_file_path,
+            )
