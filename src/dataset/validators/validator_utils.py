@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from typing import Set, Tuple
 
@@ -20,14 +21,23 @@ def read_validation_file(
     :rtype: List[SC2ReplayFileInfo]
     """
 
+    if not path.is_file():
+        path.open(mode="w").close()
+
     # Reading the file:
-    with path.open(mode="w+", encoding="utf-8") as input_file:
+    loaded_data = False
+    with path.open(mode="r", encoding="utf-8") as input_file:
         try:
             # Try reading the data from JSON:
             json_data = json.load(input_file)
             validated_file_list = json_data["validated_files"]
             skip_file_list = json_data["skip_files"]
-        except:
+            loaded_data = True
+        except Exception as e:
+            logging.error(f"Error while parsing json!", exc_info=e)
+
+    if not loaded_data:
+        with path.open(mode="w", encoding="utf-8") as input_file:
             # If there is no content in the file, initlialize empty lists and write them to file:
             initialize_content = {"validated_files": [], "skip_files": []}
             json.dump(initialize_content, input_file)
@@ -40,6 +50,11 @@ def read_validation_file(
     skip_file_list = [
         SC2ReplayFileInfo(directory=i_path.parent, filename=i_path.name)
         for i_path in skip_file_str_to_paths
+    ]
+    validated_file_str_to_path = [Path(i_file) for i_file in validated_file_list]
+    validated_file_list = [
+        SC2ReplayFileInfo(directory=i_path.parent, filename=i_path.name)
+        for i_path in validated_file_str_to_path
     ]
 
     # REVIEW: This is probably inefficient too:
@@ -78,3 +93,4 @@ def save_validation_file(
     with open(path, mode="w", encoding="utf-8") as output_file:
         print(output_file)
         json.dump(file_dict, output_file)
+        print("something")

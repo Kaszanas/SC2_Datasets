@@ -17,3 +17,5 @@ data/
 tb_logs/
 
 test_replay1.json
+
+validation_file.json

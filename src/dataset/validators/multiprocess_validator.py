@@ -60,7 +60,7 @@ def validate_integrity_mp(
 def validate_integrity_persist_mp(
     list_of_replays: List[SC2ReplayFileInfo],
     n_workers: int,
-    validation_file_path: Path("validator_file.json"),
+    validation_file_path: Path = Path("validator_file.json"),
 ) -> Set[SC2ReplayFileInfo]:
     """
     Exposes the logic for validating replays using multiple processes.
@@ -75,20 +75,27 @@ def validate_integrity_persist_mp(
     :return: Returns a set of files that should be skipped in further processing.
     :rtype: Set[SC2ReplayFileInfo]
     """
-    # Try reading from a file:
-    validated_files, skip_files = read_validation_file(path=validation_file_path)
+
+    # Reading from a file:
+    read_validated_files, read_skip_files = read_validation_file(
+        path=validation_file_path
+    )
 
     # Validate replays:
-    files_to_validate = set(list_of_replays) - validated_files
+    files_to_validate = set(list_of_replays) - read_validated_files
     # TODO: Pass skip files here so that they can be expanded?
-    validated_replays, skip_files = validate_integrity_mp(
+    validated_files, skip_files = validate_integrity_mp(
         list_of_replays=list(files_to_validate), n_workers=n_workers
     )
 
-    # Save to a file:
+    # Updating the sets of validated and skip_files:
+    read_validated_files.update(validated_files)
+    read_skip_files.update(skip_files)
+
+    # Saving to a file:
     save_validation_file(
-        validated_files=list(validated_replays),
-        skip_files=skip_files,
+        validated_files=read_validated_files,
+        skip_files=read_skip_files,
         path=validation_file_path,
     )
 

@@ -28,20 +28,26 @@ def validate_integrity_persist_sp(
     :rtype: Set[SC2ReplayFileInfo]
     """
 
-    # Try reading from a file:
-    validated_files, skip_files = read_validation_file(path=validation_file_path)
+    # Reading from a file:
+    read_validated_files, read_skip_files = read_validation_file(
+        path=validation_file_path
+    )
 
     # Validate replays:
-    files_to_validate = set(list_of_replays) - validated_files
+    files_to_validate = set(list_of_replays) - read_validated_files
     # TODO: Pass skip files here so that they can be expanded?
-    validated_replays, skip_files = validate_integrity_sp(
+    validated_files, skip_files = validate_integrity_sp(
         list_of_replays=list(files_to_validate)
     )
 
+    # Updating the sets of validated and skip_files:
+    read_validated_files.update(validated_files)
+    read_skip_files.update(skip_files)
+
     # Save to a file:
     save_validation_file(
-        validated_files=list(validated_replays),
-        skip_files=skip_files,
+        validated_files=read_validated_files,
+        skip_files=read_skip_files,
         path=validation_file_path,
     )
 
