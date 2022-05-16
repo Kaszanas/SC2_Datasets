@@ -86,8 +86,8 @@ class SC2ReplaypackDataset(Dataset):
             unpack_n_workers=self.unpack_n_workers,
         )
 
-        # TODO: ReplayFile class so that there is no tuples:
-
+        # TODO: Consider deleting SC2ReplayFile info and replacing it with:
+        # os.path.join or pathlib.Path() so that working with sets is possible.
         # Validate here:
         all_files = [
             SC2ReplayFileInfo(directory=data_path, filename=file)

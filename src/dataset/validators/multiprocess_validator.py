@@ -13,7 +13,6 @@ from src.dataset.validators.validator_utils import (
 )
 
 
-# REVIEW: Verify this:
 def validate_integrity_mp(
     list_of_replays: List[SC2ReplayFileInfo],
     n_workers: int,
@@ -50,13 +49,12 @@ def validate_integrity_mp(
     for sc2_file_info, is_correct in result:
         if is_correct:
             validated.add(sc2_file_info)
-        if not is_correct:
+        else:
             skip_files.add(sc2_file_info)
 
     return (validated, skip_files)
 
 
-# REVIEW: Verify this:
 def validate_integrity_persist_mp(
     list_of_replays: List[SC2ReplayFileInfo],
     n_workers: int,

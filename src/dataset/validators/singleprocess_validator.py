@@ -11,7 +11,6 @@ from src.dataset.validators.validator_utils import (
 )
 
 
-# REVIEW: Verify this:
 def validate_integrity_persist_sp(
     list_of_replays: List[SC2ReplayFileInfo],
     validation_file_path: Path,
@@ -33,9 +32,12 @@ def validate_integrity_persist_sp(
         path=validation_file_path
     )
 
-    # Validate replays:
+    # TODO: fix SC2ReplayFileInfo hashing and equality?
+    # Validate only the files we haven't already validated:
     files_to_validate = set(list_of_replays) - read_validated_files
     # TODO: Pass skip files here so that they can be expanded?
+    # TODO: Consider changing the input param to set
+    # Perform the validation:
     validated_files, skip_files = validate_integrity_sp(
         list_of_replays=list(files_to_validate)
     )
@@ -69,13 +71,14 @@ def validate_integrity_sp(
     # TODO: Convert this!
     validated_files = validate_chunk(list_of_replays=list_of_replays)
 
+    # REVIEW: revisit
     # Convert result to two sets:
     validated = set()
     skip_files = set()
     for sc2_file_info, is_correct in validated_files:
         if is_correct:
             validated.add(sc2_file_info)
-        if not is_correct:
+        else:
             skip_files.add(sc2_file_info)
 
     return (validated, skip_files)
