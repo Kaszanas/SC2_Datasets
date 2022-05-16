@@ -2,10 +2,6 @@ import logging
 from pathlib import Path
 from typing import Set, Tuple
 
-from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
-    SC2ReplayFileInfo,
-)
-
 import json
 
 # TODO: consider splitting file creation out from this method
@@ -44,28 +40,25 @@ def read_validation_file(
 
 
 def save_validation_file(
-    validated_files: Set[SC2ReplayFileInfo],
-    skip_files: Set[SC2ReplayFileInfo],
+    validated_files: Set[str],
+    skip_files: Set[str],
     path: Path = Path("validator_file.json"),
 ) -> None:
     """
     Attempts to save the validation file to a specified path
 
     :param validated_files: Specifies the list of replays that were verified as ones that were processed.
-    :type validated_files: Set[SC2ReplayFileInfo]
+    :type validated_files: Set[str]
     :param skip_files: Specifies the list of replays that were verified as ones that should be skipped.
-    :type skip_files: Set[SC2ReplayFileInfo]
+    :type skip_files: Set[str]
     :param path: Specifies the path to the file that will be saved, Defaults to Path("validator_file.json")
     :type path: Path
     """
 
-    # Converting incorrect files to Paths:
-    validated_file_list = [
-        Path(file.get_full_path()).as_posix() for file in list(validated_files)
-    ]
-    skip_file_list = [
-        Path(file.get_full_path()).as_posix() for file in list(skip_files)
-    ]
+    # Gettings paths as posix to be able to serialize them:
+    validated_file_list = [Path(file).as_posix() for file in validated_files]
+    skip_file_list = [Path(file).as_posix() for file in skip_files]
+
     # Initializing the dict that will be serialized to a file:
     file_dict = {
         "validated_files": validated_file_list,
