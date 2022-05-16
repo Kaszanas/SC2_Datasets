@@ -3,9 +3,6 @@ from typing import List, Set, Tuple
 from concurrent.futures import ProcessPoolExecutor
 from tqdm import tqdm
 
-from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
-    SC2ReplayFileInfo,
-)
 from src.dataset.validators.validate_chunk import validate_chunk
 from src.dataset.validators.validator_utils import (
     read_validation_file,

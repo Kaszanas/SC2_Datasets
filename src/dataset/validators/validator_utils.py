@@ -11,14 +11,14 @@ import json
 # TODO: consider splitting file creation out from this method
 def read_validation_file(
     path: Path,
-) -> Tuple[Set[SC2ReplayFileInfo], Set[SC2ReplayFileInfo]]:
+) -> Tuple[Set[str], Set[str]]:
     """
     Attempts to read the validation file from a specified path
 
     :param path: Specifies the path that will be used to read the validation file.
     :type path: Path
     :return: Returns a list of files that were validated as ones that should be skipped.
-    :rtype: List[SC2ReplayFileInfo]
+    :rtype: List[str]
     """
 
     if not path.is_file():
@@ -26,38 +26,21 @@ def read_validation_file(
             # If there is no content in the file, initlialize empty lists and write them to file:
             initialize_content = {"validated_files": [], "skip_files": []}
             json.dump(initialize_content, input_file)
-            validated_file_list = []
-            skip_file_list = []
 
-    validated_file_list = []
-    skip_file_list = []
-
+    validated_file_set = {}
+    skip_file_set = {}
     # Reading the file:
     with path.open(mode="r", encoding="utf-8") as input_file:
         try:
             # Try reading the data from JSON:
             json_data = json.load(input_file)
-            validated_file_list = json_data["validated_files"]
-            skip_file_list = json_data["skip_files"]
+            # Immediately converting the lists of strings denoting paths to sets:
+            validated_file_set = set(json_data["validated_files"])
+            skip_file_set = set(json_data["skip_files"])
         except Exception as e:
             logging.error(f"Error while parsing json!", exc_info=e)
 
-    # TODO: This is memory inefficient for sure, consider:
-    # https://stackoverflow.com/questions/29820026/temporary-variable-within-list-comprehension
-
-    # Converting filepaths to SC2ReplayFileInfo:
-    skip_file_str_to_paths = [Path(i_file) for i_file in skip_file_list]
-    skip_file_list = {
-        SC2ReplayFileInfo(directory=i_path.parent, filename=i_path.name)
-        for i_path in skip_file_str_to_paths
-    }
-    validated_file_str_to_path = [Path(i_file) for i_file in validated_file_list]
-    validated_file_list = {
-        SC2ReplayFileInfo(directory=i_path.parent, filename=i_path.name)
-        for i_path in validated_file_str_to_path
-    }
-
-    return (validated_file_list, skip_file_list)
+    return (validated_file_set, skip_file_set)
 
 
 def save_validation_file(
