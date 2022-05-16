@@ -1,13 +1,12 @@
 import os
+from pathlib import Path
 from typing import Any, Callable, Dict, List
+
 
 from torch.utils.data import Dataset
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from src.dataset.utils.download_utils import download_and_unpack_replaypack
 from src.dataset.utils.dataset_utils import load_replaypack_information
-from src.dataset.utils.sc2_replay_file_info.sc2_replay_file_info import (
-    SC2ReplayFileInfo,
-)
 
 
 class SC2ReplaypackDataset(Dataset):
@@ -86,19 +85,17 @@ class SC2ReplaypackDataset(Dataset):
             unpack_n_workers=self.unpack_n_workers,
         )
 
-        # TODO: Consider deleting SC2ReplayFile info and replacing it with:
-        # os.path.join or pathlib.Path() so that working with sets is possible.
-        # Validate here:
-        all_files = [
-            SC2ReplayFileInfo(directory=data_path, filename=file)
-            for file in os.listdir(data_path)
-        ]
+        # Getting the paths to the files that consist of the dataset,
+        # These will be used for validation at later step:
+        all_files = [Path(data_path, file).as_posix() for file in os.listdir(data_path)]
 
+        # Validating files:
         self.invalid_file_names = (
             validator(all_files) if validator is not None else set()
         )
 
-        # Load all of the files:
+        # Loading all of the files using,
+        # Skipping the ones that were deemed invalid by the validator:
         self.list_of_files = [
             sc2_replay_file_info.get_full_path()
             for sc2_replay_file_info in all_files

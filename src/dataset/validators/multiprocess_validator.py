@@ -14,19 +14,19 @@ from src.dataset.validators.validator_utils import (
 
 
 def validate_integrity_mp(
-    list_of_replays: List[SC2ReplayFileInfo],
+    list_of_replays: List[str],
     n_workers: int,
-) -> Tuple[Set[SC2ReplayFileInfo], Set[SC2ReplayFileInfo]]:
+) -> Tuple[Set[str], Set[str]]:
     """
     Exposes logic for multiprocess validation of the replays.
     Validates if the replay can be parsed by using SC2ReplayData by spawning multiple processes.
 
-    :param list_of_replays: Specifies a list of replays in a form of SC2ReplayFileInfo.
-    :type list_of_replays: List[SC2ReplayFileInfo]
+    :param list_of_replays: Specifies a list of replays.
+    :type list_of_replays: List[str]
     :param n_workers: Specifies the number of workers (processes) that will be used for validating replays.
     :type n_workers: int
     :return: Returns a tuple that contains (validated replays, files to be skipped).
-    :rtype: Tuple[Set[SC2ReplayFileInfo], Set[SC2ReplayFileInfo]]
+    :rtype: Tuple[Set[str], Set[str]]
     """
 
     chunksize = round(len(list_of_replays) / n_workers)
@@ -56,22 +56,22 @@ def validate_integrity_mp(
 
 
 def validate_integrity_persist_mp(
-    list_of_replays: List[SC2ReplayFileInfo],
+    list_of_replays: List[str],
     n_workers: int,
     validation_file_path: Path = Path("validator_file.json"),
-) -> Set[SC2ReplayFileInfo]:
+) -> Set[str]:
     """
     Exposes the logic for validating replays using multiple processes.
     This function uses a validation file that persists the files which were previously checked.
 
     :param list_of_replays: Specifies the list of replays that are supposed to be validated.
-    :type list_of_replays: List[SC2ReplayFileInfo]
+    :type list_of_replays: List[str]
     :param n_workers: Specifies the number of workers that will be used to validate the files.
     :type n_workers: int
     :param validation_file_path: Specifies the path to the validation file which will be read to obtain the
     :type validation_file_path: Path
     :return: Returns a set of files that should be skipped in further processing.
-    :rtype: Set[SC2ReplayFileInfo]
+    :rtype: Set[str]
     """
 
     # Reading from a file:
@@ -81,7 +81,6 @@ def validate_integrity_persist_mp(
 
     # Validate replays:
     files_to_validate = set(list_of_replays) - read_validated_files
-    # TODO: Pass skip files here so that they can be expanded?
     validated_files, skip_files = validate_integrity_mp(
         list_of_replays=list(files_to_validate), n_workers=n_workers
     )
