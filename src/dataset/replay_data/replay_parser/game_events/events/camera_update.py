@@ -13,8 +13,6 @@ from src.dataset.replay_data.replay_parser.game_events.game_event import GameEve
 # it needs to be verified if such null values are a problem for later calculations with the dataset?
 # Should this be encoded somehow?
 # TODO: Document the docstrings
-
-
 class CameraUpdate(GameEvent):
 
     """_summary_

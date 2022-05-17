@@ -12,7 +12,7 @@ This repository contains the official API for interacting with SC2EGSet: StarCra
 # Installation
 
 ```
-pip install ...
+pip install sc2egset_dataset
 ```
 
 ## Citation

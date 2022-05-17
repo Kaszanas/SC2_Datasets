@@ -7,8 +7,6 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d i
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 # TODO: Document the docstrings
-
-
 class CameraSave(GameEvent):
 
     """

@@ -1,4 +1,3 @@
-from struct import unpack
 from typing import Any, Callable, Dict, List, Set, Tuple
 from torch.utils.data import Dataset
 from src.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
@@ -42,8 +41,6 @@ class SC2EGSetDataset(Dataset):
         # Custom fields:
         self.download_dir = download_dir
         self.unpack_dir = unpack_dir
-        # TODO: What to do with the transform?
-        # I don't think that it will be used:
         self.names_urls = names_urls
         self.download = download
         self.unpack_n_workers = unpack_n_workers
