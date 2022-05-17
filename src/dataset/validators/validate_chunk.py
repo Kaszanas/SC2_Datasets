@@ -16,13 +16,25 @@ def validate_chunk(
     :rtype: List[Tuple[str, bool]]
     """
 
-    result = []
+    # Initializing sets:
+    validated_files = set()
+    skip_files = set()
 
     for file_path in list_of_replays:
+        # We are keeping track of all of the files that are validated:
+        validated_files.add(file_path)
         try:
+            # Trying to parse the SC2 replay:
             replay_data = SC2ReplayData.from_file(replay_filepath=file_path)
-            result.append((file_path, True))
         except:
-            result.append((file_path, False))
+            # If the file cannot be parsed it is added to files that should be skipped:
+            skip_files.add(file_path)
+
+    result = []
+    # Converting the sets to a single result list:
+    for file in validated_files:
+        result.append((file, True))
+    for file in skip_files:
+        result.append((file, False))
 
     return result
