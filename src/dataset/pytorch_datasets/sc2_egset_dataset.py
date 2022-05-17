@@ -1,5 +1,5 @@
 from struct import unpack
-from typing import Any, Callable, List, Tuple
+from typing import Any, Callable, Dict, List, Set, Tuple
 from torch.utils.data import Dataset
 from src.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
@@ -49,6 +49,8 @@ class SC2EGSetDataset(Dataset):
         self.unpack_n_workers = unpack_n_workers
         self.validator = validator
 
+        self.skipped_files: Dict[str, Set[str]] = {}
+
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
         self.len = 0
@@ -61,7 +63,9 @@ class SC2EGSetDataset(Dataset):
 
         self.replaypacks: List[SC2ReplaypackDataset] = []
 
+        # Iterating over the provided URLs:
         for replaypack_name, url in self.names_urls:
+            # Initializing SC2ReplaypackDataset cumulatively calculating its length:
             replaypack = SC2ReplaypackDataset(
                 replaypack_name=replaypack_name,
                 download_dir=self.download_dir,
@@ -71,6 +75,10 @@ class SC2EGSetDataset(Dataset):
                 unpack_n_workers=self.unpack_n_workers,
                 validator=self.validator,
             )
+
+            # Retrieving files that were skipped when initializing a dataset,
+            # This is based on validator:
+            self.skipped_files[replaypack_name] = replaypack.skipped_files
             self.replaypacks.append(replaypack)
             self.len += len(replaypack)
 
@@ -86,9 +94,9 @@ class SC2EGSetDataset(Dataset):
 
         :param index: Specifies the index of an item that should be retrieved.
         :type index: Any
-        :raises IndexError: _description_
-        :raises IndexError: _description_
-        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset.
+        :raises IndexError: To support negative indexing, if the index is less than zero twice, IndexError is raised.
+        :raises IndexError: If the index is greater than length of the dataset IndexError is raised.
+        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset, or a result of a transform that was passed to the dataset.
         :rtype: Tuple[Any, Any] | SC2ReplayData
         """
 

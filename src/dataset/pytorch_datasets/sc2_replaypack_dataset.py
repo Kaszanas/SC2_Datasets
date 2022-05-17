@@ -90,16 +90,14 @@ class SC2ReplaypackDataset(Dataset):
         all_files = [Path(data_path, file).as_posix() for file in os.listdir(data_path)]
 
         # Validating files:
-        self.invalid_file_names = (
-            validator(all_files) if validator is not None else set()
-        )
+        self.skip_files = validator(all_files) if validator is not None else set()
 
         # Loading all of the files using,
-        # Skipping the ones that were deemed invalid by the validator:
+        # Skipping the ones that were returned from validator:
         self.list_of_files = [
             sc2_replay_file_info.get_full_path()
             for sc2_replay_file_info in all_files
-            if sc2_replay_file_info not in self.invalid_file_names
+            if sc2_replay_file_info not in self.skip_files
         ]
         self.len = len(self.list_of_files)
 
