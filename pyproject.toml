@@ -1,18 +1,3 @@
 [build-system]
 requires = ["setuptools>=42"]
 build-backend = "setuptools.build_meta"
-
-[project]
-name = "SC2EGSet_Dataset"
-description = "library providing PyTorch and PyTorch Lightning API for pre-processed StarCraft II datasets"
-readme = "README.md"
-license = {text = "GNU GPL v3"}
-keywords = ["starcraft",
-            "machine learning",
-            "dataset"]
-dependencies = ["torch",
-                "torchaudio",
-                "torchmetrics",
-                "torchvision",
-                "pytorch-lightning",
-                "tqdm"]
