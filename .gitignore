@@ -19,3 +19,6 @@ tb_logs/
 test_replay1.json
 
 validation_file.json
+
+dist/
+SC2EGSet_Dataset.egg-info/
