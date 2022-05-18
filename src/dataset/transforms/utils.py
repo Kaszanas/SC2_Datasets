@@ -91,3 +91,23 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
         player_apm[toon_desc_map.toon_player_info.playerID] = apm
 
     return player_apm
+
+
+def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
+    """
+    Exposes logic for selecting game outcome of a 1v1 game. Maps loss to 0, and win to 1
+
+    :param sc2_replay: Specifies the replay that the outcome will be selected from.
+    :type sc2_replay: SC2ReplayData
+    :return: Returns a dictionary mapping loss to 0, and win to 1 for playerIDs
+    :rtype: Dict[str, int]
+    """
+
+    player_outcome = {"1": 0, "2": 0}
+
+    result_dict = {"Loss": 0, "Win": 1}
+    for toon_desc_map in sc2_replay.toonPlayerDescMap:
+        result = result_dict[toon_desc_map.toon_player_info.result]
+        player_outcome[toon_desc_map.toon_player_info.playerID] = result
+
+    return player_outcome
