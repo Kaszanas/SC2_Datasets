@@ -1,28 +1,26 @@
 from typing import Any, Dict
 
-import torch
-
 
 class Details:
     """
-    _summary_
+    Data type containing some "details" information about an StarCraft II game.
 
-    :param gameSpeed: _description_
+    :param gameSpeed: Game speed setting as set in the game options. Can be one of "slower", "slow", "normal", "fast", or "faster". Typically competitive or ranked games are played on "faster" setting. Additional information is available at: https://liquipedia.net/starcraft2/Game_Speed
     :type gameSpeed: str
-    :param isBlizzardMap: _description_
+    :param isBlizzardMap: Specifies if the map that  was used in the replay was approved by Blizzard (game publisher)
     :type isBlizzardMap: bool
-    :param timeUTC: _description_
+    :param timeUTC: Denotes the time at which the game was started.
     :type timeUTC: str
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Details":
         """
-        _summary_
+        Static method returning initialized Details class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
-        :return: _description_
+        :return: Returns an initialized Details class.
         :rtype: Details
         """
         return Details(
@@ -41,6 +39,3 @@ class Details:
         self.gameSpeed = gameSpeed
         self.isBlizzardMap = isBlizzardMap
         self.timeUTC = timeUTC
-
-    def to_tensor(self) -> torch.Tensor:
-        pass
