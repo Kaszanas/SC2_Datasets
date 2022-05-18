@@ -14,7 +14,7 @@ from src.dataset.lightning_datamodules.sc2_replaypack_datamodule import (
 
 from src.experiments.logistic_model import LogisticRegression
 
-from src.dataset.transforms.economy_vs_outcome import economy_average_vs_outcome
+from src.dataset.transforms.pytorch.economy_vs_outcome import economy_average_vs_outcome
 
 
 # This is required because num_workers needs this guard
