@@ -10,10 +10,11 @@ from src.dataset.replay_data.replay_parser.tracker_events.events.player_stats.pl
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
+from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 def filter_player_stats(
-    player_tracker_events: List[TrackerEvent],
+    tracker_events: List[TrackerEvent],
 ) -> Dict[str, List[PlayerStats]]:
     """
     Filters PlayerStats events and places them in lists based on the playerId
@@ -25,7 +26,7 @@ def filter_player_stats(
     """
     player_stats_events = {"1": [], "2": []}
     # Filter PlayerStats:
-    for event in player_tracker_events:
+    for event in tracker_events:
         if type(event).__name__ == "PlayerStats":
             if event.playerId == 1:
                 player_stats_events["1"].append(event)
@@ -36,7 +37,7 @@ def filter_player_stats(
 
 
 def average_player_stats(
-    player_tracker_events: List[TrackerEvent],
+    tracker_events: List[TrackerEvent],
 ) -> Dict[str, List[float]]:
     """
     Exposes the logic of selecting and averaging PlayerStats events from within TrackerEvents list.
@@ -47,7 +48,7 @@ def average_player_stats(
     :rtype: Dict[str, List[float]]
     """
 
-    player_stats_dict = filter_player_stats(player_tracker_events=player_tracker_events)
+    player_stats_dict = filter_player_stats(tracker_events=tracker_events)
 
     average_player_features = {}
     for key, list_of_events in player_stats_dict.items():
@@ -71,3 +72,22 @@ def average_player_stats(
         ]
 
     return average_player_features
+
+
+def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
+    """
+    Exposes logic for selecting APM from replay data.
+
+    :return: Returns player id to APM mapping.
+    :rtype: Dict[str, int]
+    """
+
+    # Initializing dictionary for holding APM:
+    player_apm = {"1": 0, "2": 0}
+
+    # Selecting from sc2_replay and placing it in the dictionary:
+    for toon_desc_map in sc2_replay.toonPlayerDescMap:
+        apm = toon_desc_map.toon_player_info.APM
+        player_apm[toon_desc_map.toon_player_info.playerID] = apm
+
+    return player_apm
