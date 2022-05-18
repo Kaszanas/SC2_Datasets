@@ -1,7 +1,5 @@
 from typing import Dict
 
-import torch
-
 
 class Color:
     """
@@ -46,6 +44,3 @@ class Color:
         self.b = b
         self.g = g
         self.r = r
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

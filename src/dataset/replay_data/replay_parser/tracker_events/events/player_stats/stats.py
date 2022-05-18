@@ -1,6 +1,5 @@
 from typing import Dict
 
-import torch
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
@@ -234,18 +233,3 @@ class Stats(TrackerEvent):
         self.vespeneUsedInProgressEconomy = vespeneUsedInProgressEconomy
         self.vespeneUsedInProgressTechnology = vespeneUsedInProgressTechnology
         self.workersActiveCount = workersActiveCount
-
-    def to_tensor(self, required_grad: bool) -> torch.Tensor:
-        """
-        _summary_
-
-        :param required_grad: _description_
-        :type required_grad: bool
-        :return: _description_
-        :rtype: torch.Tensor
-        """
-        return torch.tensor(
-            data=list(self.__dict__.values()),
-            dtype=torch.int32,
-            requires_grad=required_grad,
-        )

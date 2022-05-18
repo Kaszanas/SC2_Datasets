@@ -1,7 +1,6 @@
 from types import NoneType
 from typing import Dict
 
-import torch
 
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
@@ -63,6 +62,3 @@ class Cmd(GameEvent):
         self.sequence = sequence
         self.unitGroup = unitGroup
         self.userid = userid
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

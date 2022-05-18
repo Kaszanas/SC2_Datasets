@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-import torch
+
 from src.dataset.replay_data.replay_parser.toon_player_desc_map.color import Color
 
 
@@ -128,6 +128,3 @@ class ToonPlayerInfo:
         self.clanTag = clanTag
         self.handicap = handicap
         self.color = color
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

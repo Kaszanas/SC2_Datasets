@@ -2,8 +2,6 @@ import abc
 from types import NotImplementedType
 from typing import Dict, Literal
 
-import torch
-
 # TODO: from_dict documentation
 
 

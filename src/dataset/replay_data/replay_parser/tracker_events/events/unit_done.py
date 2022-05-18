@@ -1,6 +1,5 @@
 from typing import Dict
 
-import torch
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
@@ -52,6 +51,3 @@ class UnitDone(TrackerEvent):
         self.loop = loop
         self.unitTagIndex = unitTagIndex
         self.unitTagRecycle = unitTagRecycle
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

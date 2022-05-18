@@ -1,6 +1,6 @@
 from typing import Dict
 
-import torch
+
 from src.dataset.replay_data.replay_parser.message_events.message_event import (
     MessageEvent,
 )
@@ -57,6 +57,3 @@ class Chat(MessageEvent):
         self.recipient = recipient
         self.string = string
         self.userid = userid
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

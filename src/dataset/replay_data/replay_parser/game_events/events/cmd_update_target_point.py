@@ -1,6 +1,5 @@
 from typing import Dict
 
-import torch
 from src.dataset.replay_data.replay_parser.game_events.events.nested.target_3d import (
     Target3D,
 )
@@ -51,6 +50,3 @@ class CmdUpdateTargetPoint(GameEvent):
         self.loop = loop
         self.target = target
         self.userid = userid
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

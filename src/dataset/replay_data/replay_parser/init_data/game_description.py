@@ -66,6 +66,3 @@ class GameDescription:
         self.mapSizeX = mapSizeX
         self.mapSizeY = mapSizeY
         self.maxPlayers = maxPlayers
-
-    def to_tensor(self):
-        pass

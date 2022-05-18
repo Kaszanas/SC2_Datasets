@@ -1,4 +1,3 @@
-import torch
 from src.dataset.replay_data.replay_parser.game_events.events.nested.target_3d import (
     Target3D,
 )
@@ -43,6 +42,3 @@ class TargetUnit:
         self.tag = tag
         self.targetUnitFlags = targetUnitFlags
         self.timer = timer
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

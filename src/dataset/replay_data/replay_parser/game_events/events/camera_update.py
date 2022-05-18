@@ -1,7 +1,6 @@
 from types import NoneType
 from typing import Dict
 
-import torch
 
 from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import (
     Target2D,
@@ -81,6 +80,3 @@ class CameraUpdate(GameEvent):
         self.target = target
         self.userid = userid
         self.yaw = yaw
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

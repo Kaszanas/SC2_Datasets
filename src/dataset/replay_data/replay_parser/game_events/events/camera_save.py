@@ -1,6 +1,5 @@
 from typing import Dict
 
-import torch
 from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import (
     Target2D,
 )
@@ -56,6 +55,3 @@ class CameraSave(GameEvent):
         self.target = target
         self.userid = userid
         self.which = which
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

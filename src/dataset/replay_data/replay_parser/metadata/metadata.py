@@ -1,7 +1,5 @@
 from typing import Any, Dict
 
-import torch
-
 
 class Metadata:
     """
@@ -51,6 +49,3 @@ class Metadata:
         self.durationSeconds = durationSeconds
         self.gameVersion = gameVersion
         self.mapName = mapName
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

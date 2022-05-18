@@ -1,5 +1,3 @@
-import torch
-from torch.autograd import Variable
 import torchvision.transforms as transforms
 import torchvision.datasets as dsets
 from pl_bolts.models.regression import LogisticRegression

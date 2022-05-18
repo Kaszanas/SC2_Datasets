@@ -1,6 +1,5 @@
 from typing import Dict
 
-import torch
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
@@ -60,6 +59,3 @@ class UnitOwnerChange(TrackerEvent):
         self.unitTagIndex = unitTagIndex
         self.unitTagRecycle = unitTagRecycle
         self.upkeepPlayerId = upkeepPlayerId
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

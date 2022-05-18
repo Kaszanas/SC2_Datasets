@@ -28,5 +28,4 @@ class InitData:
         )
 
     def __init__(self, gameDescription: GameDescription) -> None:
-
         self.gameDescription = gameDescription

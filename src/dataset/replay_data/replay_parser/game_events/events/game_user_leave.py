@@ -1,6 +1,6 @@
 from typing import Dict
 
-import torch
+
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 # TODO: Document the docstrings
@@ -48,6 +48,3 @@ class GameUserLeave(GameEvent):
         self.leaveReason = leaveReason
         self.loop = loop
         self.userid = userid
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

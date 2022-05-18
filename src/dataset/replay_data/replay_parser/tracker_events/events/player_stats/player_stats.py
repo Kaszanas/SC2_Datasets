@@ -1,6 +1,5 @@
 from typing import Dict
 
-import torch
 from src.dataset.replay_data.replay_parser.tracker_events.events.player_stats.stats import (
     Stats,
 )
@@ -54,20 +53,3 @@ class PlayerStats(TrackerEvent):
         self.loop = loop
         self.playerId = playerId
         self.stats = stats
-
-    def to_tensor(self, requires_grad: bool) -> torch.Tensor:
-        """
-        _summary_
-
-        :param requires_grad: _description_
-        :type requires_grad: bool
-        :return: _description_
-        :rtype: torch.Tensor
-        """
-        return torch.tensor(
-            data=[self.id, self.loop, self.playerId].extend(
-                list(self.stats.__dict__.values())
-            ),
-            dtype=torch.int32,
-            requires_grad=requires_grad,
-        )

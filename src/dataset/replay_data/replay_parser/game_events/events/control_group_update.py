@@ -53,6 +53,3 @@ class ControlGroupUpdate(GameEvent):
         self.id = id
         self.loop = loop
         self.userid = userid
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

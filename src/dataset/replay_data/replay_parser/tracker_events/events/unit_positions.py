@@ -1,7 +1,5 @@
 from typing import Dict, List
 
-import torch
-
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
@@ -51,6 +49,3 @@ class UnitPositions(TrackerEvent):
         self.id = id
         self.items = items
         self.loop = loop
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

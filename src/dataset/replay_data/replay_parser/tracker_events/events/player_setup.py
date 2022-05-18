@@ -1,6 +1,5 @@
 from typing import Dict
 
-import torch
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
@@ -61,6 +60,3 @@ class PlayerSetup(TrackerEvent):
         self.slotId = slotId
         self.type = type
         self.userId = userId
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

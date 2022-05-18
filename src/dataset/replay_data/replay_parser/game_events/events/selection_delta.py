@@ -1,6 +1,6 @@
 from typing import Dict
 
-import torch
+
 from src.dataset.replay_data.replay_parser.game_events.events.nested.delta import Delta
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
@@ -56,6 +56,3 @@ class SelectionDelta(GameEvent):
         self.id = id
         self.loop = loop
         self.userid = userid
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

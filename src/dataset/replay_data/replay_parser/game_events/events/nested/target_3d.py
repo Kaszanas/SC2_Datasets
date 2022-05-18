@@ -1,6 +1,3 @@
-import torch
-
-
 class Target3D:
 
     """
@@ -19,6 +16,3 @@ class Target3D:
         self.x = x
         self.y = y
         self.z = z
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

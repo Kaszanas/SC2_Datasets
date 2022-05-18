@@ -1,7 +1,6 @@
 from types import NoneType
 from typing import Dict, List
 
-import torch
 
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
@@ -46,9 +45,6 @@ class AddSubgroups(GameEvent):
         self.subgroupPriority = subgroupPriority
         self.unitLink = unitLink
 
-    def to_tensor(self) -> torch.Tensor:
-        pass
-
 
 class Delta(GameEvent):
 
@@ -86,6 +82,3 @@ class Delta(GameEvent):
         self.addUnitTags = addUnitTags
         self.removeMask = removeMask
         self.subgroupIndex = subgroupIndex
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

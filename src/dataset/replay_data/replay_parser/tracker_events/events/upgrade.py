@@ -1,6 +1,5 @@
 from typing import Dict
 
-import torch
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
@@ -57,6 +56,3 @@ class Upgrade(TrackerEvent):
         self.loop = loop
         self.playerId = playerId
         self.upgradeTypeName = upgradeTypeName
-
-    def to_tensor(self) -> torch.Tensor:
-        pass

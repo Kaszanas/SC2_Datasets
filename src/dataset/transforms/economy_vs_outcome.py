@@ -2,7 +2,7 @@ from typing import Dict, List, Tuple
 
 import functools
 import numpy as np
-import torch
+
 
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
