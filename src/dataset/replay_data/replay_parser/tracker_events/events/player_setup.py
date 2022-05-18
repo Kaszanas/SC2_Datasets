@@ -10,11 +10,12 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
 class PlayerSetup(TrackerEvent):
 
     """
-    _summary_
+    Data type that denotes a player setup event which is available in tracker events.
+    It contains basic information mapping userId to playerId to slotId.
 
     :param id: _description_
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies the time (in gameloop units) at which the event happened.
     :type loop: int
     :param playerId: _description_
     :type playerId: int

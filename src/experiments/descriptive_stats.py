@@ -25,6 +25,8 @@ if __name__ == "__main__":
 
     # TODO: Get the number of games that are in the dataset:
     # This will be done by reading the file:
+    for index in len(dataset):
+        replay_data = dataset[index]
 
     # TODO: Get the number of games that were skipped post-validation:
     # Also done by reading the file:
