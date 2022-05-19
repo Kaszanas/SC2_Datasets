@@ -14,7 +14,7 @@ def suite():
     start_dir = os.path.join(workspace_dir, "test/test_cases")
     suite = unittest.TestLoader().discover(
         start_dir=start_dir,
-        pattern="integrity_validator_test.py",  # *_test.py
+        pattern="playerstats_to_dict_test.py",  # *_test.py
     )
     return suite
 
