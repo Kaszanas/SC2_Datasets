@@ -28,8 +28,9 @@ class SC2EGSetDatasetTest(unittest.TestCase):
             download_dir=os.path.abspath("./test/test_files/download"),
             download=False,
         )
-        # Iterate over the whole dataset and test replay json parsing
-        for index in range(len(sc2egset_dataset)):
+        # Iterate over the whole dataset
+        # test replay json parsing every 100 replays:
+        for index in range(0, len(sc2egset_dataset), 100):
             sc2_replaydata = sc2egset_dataset[index]
 
             # Replay was parsed:
