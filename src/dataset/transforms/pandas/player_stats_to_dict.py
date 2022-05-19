@@ -10,80 +10,81 @@ from src.dataset.transforms.utils import filter_player_stats
 
 # TODO: Document this:
 # TODO: Consider renaming:
-def average_playerstats_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
+# REVIEW: Verify this code!
+def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
 
-    playerstats_dataframe = playerstats_to_dataframe(
-        tracker_events=sc2_replay.trackerEvents
-    )
+    final_dict_average = {}
 
-    dict_average_repr = average_playerstats_dataframe(
-        playerstats_df=playerstats_dataframe
-    )
+    # Getting the dataframe representation from tracker events:
+    playerID_df_repr = playerstats_to_dict(tracker_events=sc2_replay.trackerEvents)
+    for playerID, df_repr in playerID_df_repr.items():
+        # Initializing dataframe from dict:
+        dataframe = pd.DataFrame.from_dict(df_repr)
+        dict_average_repr = average_playerstats_dataframe(playerstats_df=dataframe)
 
-    return dict_average_repr
+        if playerID not in final_dict_average:
+            final_dict_average[playerID] = dict_average_repr
+
+    return final_dict_average
 
 
 # REVIEW: This needs to be reviewed:
 # TODO: Consider renaming:
 def playerstats_to_dict(
     tracker_events: List[TrackerEvent],
-) -> Dict[str, int]:
+) -> Dict[str, Dict[str, List[int]]]:
     """
     Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
     of the data that can be used to initialize a pandas DataFrame.
 
     Example return:
-    {"gameloop_1": [1,2],
-     "gameloop_2": [1,2],
-     "army_1": [120, 250],
-     "army_2: [50, 300]}
+    {"1": {"gameloop": [1,2],
+           "army": [120, 250]},
+     "2": {"gameloop": [1,2],
+           "army: [50, 300]}
+    }
 
     :param tracker_events: Specifies the list of TrackerEvents to be converted.
     :type tracker_events: List[TrackerEvent]
     :return: Returns a dictionary of features.
-    :rtype: Dict[str, int]
+    :rtype: Dict[str, Dict[str, List[int]]]
     """
 
     dataframe_representation = {}
     player_stats_dict = filter_player_stats(tracker_events=tracker_events)
-    # Iterating over playrs and their list of events:
     for playerID, list_of_events in player_stats_dict.items():
+        # Dataframe representation of playerID will be a dictionary
+        # of feature name mapping to the value:
+        if playerID not in dataframe_representation:
+            dataframe_representation[playerID] = {}
         for event in list_of_events:
-            # Adding the information about event gameloop to the dataframe representation:
-            gameloop_playerID = f"gameloop_{playerID}"
-            if gameloop_playerID not in dataframe_representation:
-                dataframe_representation[gameloop_playerID] = []
-            dataframe_representation[gameloop_playerID].append(event.loop)
-            # Iterating over features:
+            # Adding gameloop information to the dict:
+            if "gameloop" not in dataframe_representation[playerID]:
+                dataframe_representation[playerID]["gameloop"] = []
+            dataframe_representation[playerID]["gameloop"].append(event.loop)
+            # Adding all features to the dict:
             for feature_name, feature_value in event.stats.__dict__.items():
-                feature_name_playerID = f"{feature_name}_{playerID}"
-                # Constructing dataframe rows:
-                if feature_name_playerID not in dataframe_representation:
-                    dataframe_representation[feature_name_playerID] = []
-                dataframe_representation[feature_name_playerID].append(feature_value)
+                if feature_name not in dataframe_representation[playerID]:
+                    dataframe_representation[playerID][feature_name] = []
+                dataframe_representation[playerID][feature_name].append(feature_value)
+
+    # # Iterating over playrs and their list of events:
+    # for playerID, list_of_events in player_stats_dict.items():
+    #     for event in list_of_events:
+    #         # Adding the information about event gameloop to the dataframe representation:
+    #         gameloop_playerID = f"gameloop_{playerID}"
+    #         if gameloop_playerID not in dataframe_representation:
+    #             dataframe_representation[gameloop_playerID] = []
+    #         dataframe_representation[gameloop_playerID].append(event.loop)
+    #         # Iterating over features:
+    #         for feature_name, feature_value in event.stats.__dict__.items():
+    #             feature_name_playerID = f"{feature_name}_{playerID}"
+    #             # Constructing dataframe rows:
+    #             if feature_name_playerID not in dataframe_representation:
+    #                 dataframe_representation[feature_name_playerID] = []
+    #             dataframe_representation[feature_name_playerID].append(feature_value)
 
     return dataframe_representation
-
-
-# TODO: Consider renaming:
-def playerstats_to_dataframe(
-    tracker_events: List[TrackerEvent],
-) -> pd.DataFrame:
-    """
-    Exposes the logic of selecting and averaging PlayerStats events from within TrackerEvents list and returns a dictionary that can be treated as a pandas dataframe row.
-
-    :param player_tracker_events: Specifies a list of TrackerEvents as parsed from original JSON files.
-    :type player_tracker_events: List[TrackerEvent]
-    :return: Returns a dataframe representation of a game.
-    :rtype: pd.DataFrame
-    """
-
-    # Getting the dataframe representation from tracker events:
-    dataframe_representation = playerstats_to_dict(tracker_events=tracker_events)
-    # Initializing dataframe from dict:
-    dataframe = pd.DataFrame.from_dict(dataframe_representation)
-
-    return dataframe
 
 
 # TODO: Document this:
