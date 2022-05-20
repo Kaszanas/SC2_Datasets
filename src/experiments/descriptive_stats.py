@@ -10,23 +10,39 @@ from src.dataset.validators.multiprocess_validator import validate_integrity_per
 if __name__ == "__main__":
 
     unpack_dir = os.path.abspath("./test/test_files/unpack")
-    validation_file_path = Path("./src/experiments/validation_file.json").resolve()
 
     # TODO: Apply required validator as a lambda:
-    dataset = SC2EGSetDataset(
-        unpack_dir=unpack_dir,
-        download=False,
-        validator=lambda list_of_replays: validate_integrity_persist_mp(
-            list_of_replays=list_of_replays,
+
+    def validator(list_of_replays):
+        validation_file_path = Path("./src/experiments/validation_file.json").resolve()
+
+        replay_list = list_of_replays
+
+        files_to_skip = validate_integrity_persist_mp(
+            list_of_replays=replay_list,
             n_workers=8,
             validation_file_path=validation_file_path,
-        ),
+        )
+
+        return files_to_skip
+
+    dataset = SC2EGSetDataset(
+        unpack_dir=unpack_dir, download=False, validator=validator
     )
 
     # TODO: Get the number of games that are in the dataset:
     # This will be done by reading the file:
-    for index in len(dataset):
-        replay_data = dataset[index]
+    number_of_valid_replays = len(dataset)
+
+    print(number_of_valid_replays)
+
+    number_of_invalid_files = 0
+    for replaypack_name, skip_files in dataset.skip_files.items():
+        number_of_invalid_files += len(skip_files)
+
+    print(number_of_invalid_files)
+
+    print("something")
 
     # TODO: Get the number of games that were skipped post-validation:
     # Also done by reading the file:
