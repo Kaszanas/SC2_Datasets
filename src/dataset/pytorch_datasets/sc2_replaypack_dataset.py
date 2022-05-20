@@ -10,7 +10,6 @@ from src.dataset.utils.dataset_utils import load_replaypack_information
 
 
 class SC2ReplaypackDataset(Dataset):
-
     """
     Represents a Dataset for a single pre-processed replaypack.
 
@@ -90,12 +89,14 @@ class SC2ReplaypackDataset(Dataset):
         all_files = [Path(data_path, file).as_posix() for file in os.listdir(data_path)]
 
         # Validating files:
-        self.skip_files = validator(all_files) if validator is not None else set()
+        self.skip_files = set()
+        if validator is not None:
+            self.skip_files = validator(all_files)
 
         # Loading all of the files using,
         # Skipping the ones that were returned from validator:
         self.list_of_files = [
-            sc2_replay_file_info.get_full_path()
+            sc2_replay_file_info
             for sc2_replay_file_info in all_files
             if sc2_replay_file_info not in self.skip_files
         ]

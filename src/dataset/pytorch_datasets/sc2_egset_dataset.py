@@ -46,7 +46,7 @@ class SC2EGSetDataset(Dataset):
         self.unpack_n_workers = unpack_n_workers
         self.validator = validator
 
-        self.skipped_files: Dict[str, Set[str]] = {}
+        self.skip_files: Dict[str, Set[str]] = {}
 
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
@@ -75,7 +75,7 @@ class SC2EGSetDataset(Dataset):
 
             # Retrieving files that were skipped when initializing a dataset,
             # This is based on validator:
-            self.skipped_files[replaypack_name] = replaypack.skipped_files
+            self.skip_files[replaypack_name] = replaypack.skip_files
             self.replaypacks.append(replaypack)
             self.len += len(replaypack)
 
