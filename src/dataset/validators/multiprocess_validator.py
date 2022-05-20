@@ -78,9 +78,12 @@ def validate_integrity_persist_mp(
 
     # Validate replays:
     files_to_validate = set(list_of_replays) - read_validated_files
-    validated_files, skip_files = validate_integrity_mp(
-        list_of_replays=list(files_to_validate), n_workers=n_workers
-    )
+    validated_files = set()
+    skip_files = set()
+    if files_to_validate:
+        validated_files, skip_files = validate_integrity_mp(
+            list_of_replays=list(files_to_validate), n_workers=n_workers
+        )
 
     # Updating the sets of validated and skip_files:
     read_validated_files.update(validated_files)
@@ -93,4 +96,4 @@ def validate_integrity_persist_mp(
         path=validation_file_path,
     )
 
-    return skip_files
+    return read_skip_files

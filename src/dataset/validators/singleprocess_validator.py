@@ -48,7 +48,7 @@ def validate_integrity_persist_sp(
         path=validation_file_path,
     )
 
-    return skip_files
+    return read_skip_files
 
 
 def validate_integrity_sp(
