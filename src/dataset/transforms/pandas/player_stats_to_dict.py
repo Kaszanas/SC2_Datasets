@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import Any, List, Dict
 
 import pandas as pd
 
@@ -16,7 +16,7 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
     final_dict_average = {}
 
     # Getting the dataframe representation from tracker events:
-    playerID_df_repr = playerstats_to_dict(tracker_events=sc2_replay.trackerEvents)
+    playerID_df_repr = playerstats_to_dict(sc2_replay=sc2_replay)
     for playerID, df_repr in playerID_df_repr.items():
         # Initializing dataframe from dict:
         dataframe = pd.DataFrame.from_dict(df_repr)
@@ -31,27 +31,38 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
 # REVIEW: This needs to be reviewed:
 # TODO: Consider renaming:
 def playerstats_to_dict(
-    tracker_events: List[TrackerEvent],
-) -> Dict[str, Dict[str, List[int]]]:
+    sc2_replay: SC2ReplayData,
+    additional_data_dict: Dict[str, Dict[str, Any]],
+) -> Dict[str, Dict[str, List[Any]]]:
     """
     Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
     of the data that can be used to initialize a pandas DataFrame.
 
     Example return:
+    Without additional data:
     {"1": {"gameloop": [1,2],
            "army": [120, 250]},
      "2": {"gameloop": [1,2],
            "army: [50, 300]}
     }
 
-    :param tracker_events: Specifies the list of TrackerEvents to be converted.
-    :type tracker_events: List[TrackerEvent]
-    :return: Returns a dictionary of features.
-    :rtype: Dict[str, Dict[str, List[int]]]
+    With additional data (1 denoting a victory, 0 denoting a loss):
+    {"1": {"gameloop": [1,2],
+           "army": [120, 250],
+           "outcome": [1, 1]},
+     "2": {"gameloop": [1,2],
+           "army: [50, 300],
+           "outcome": [0, 0]}
+    }
+
+    :param sc2_replay: Specifies a replay that will be used to obtain the list of TrackerEvents to be converted.
+    :type sc2_replay: SC2ReplayData
+    :return: Returns a dictionary of features with additional information repeated for all of the occurences of events.
+    :rtype: Dict[str, Dict[str, List[Any]]]
     """
 
     dataframe_representation = {}
-    player_stats_dict = filter_player_stats(tracker_events=tracker_events)
+    player_stats_dict = filter_player_stats(sc2_replay=sc2_replay)
     for playerID, list_of_events in player_stats_dict.items():
         # Dataframe representation of playerID will be a dictionary
         # of feature name mapping to the value:
@@ -62,40 +73,32 @@ def playerstats_to_dict(
             if "gameloop" not in dataframe_representation[playerID]:
                 dataframe_representation[playerID]["gameloop"] = []
             dataframe_representation[playerID]["gameloop"].append(event.loop)
+            # Additional data needs to be added in case that there
+            # can be some information that is constant throughout the game
+            # This can be for example MMR of a player, APM of a player, outcome or other
+            # Appending additional data:
+            additional_data = additional_data_dict[playerID]
+            for key, additional_val in additional_data.items():
+                if key not in dataframe_representation[playerID]:
+                    dataframe_representation[playerID][key] = []
+                dataframe_representation[playerID][key].append(additional_val)
             # Adding all features to the dict:
             for feature_name, feature_value in event.stats.__dict__.items():
                 if feature_name not in dataframe_representation[playerID]:
                     dataframe_representation[playerID][feature_name] = []
                 dataframe_representation[playerID][feature_name].append(feature_value)
 
-    # # Iterating over playrs and their list of events:
-    # for playerID, list_of_events in player_stats_dict.items():
-    #     for event in list_of_events:
-    #         # Adding the information about event gameloop to the dataframe representation:
-    #         gameloop_playerID = f"gameloop_{playerID}"
-    #         if gameloop_playerID not in dataframe_representation:
-    #             dataframe_representation[gameloop_playerID] = []
-    #         dataframe_representation[gameloop_playerID].append(event.loop)
-    #         # Iterating over features:
-    #         for feature_name, feature_value in event.stats.__dict__.items():
-    #             feature_name_playerID = f"{feature_name}_{playerID}"
-    #             # Constructing dataframe rows:
-    #             if feature_name_playerID not in dataframe_representation:
-    #                 dataframe_representation[feature_name_playerID] = []
-    #             dataframe_representation[feature_name_playerID].append(feature_value)
-
     return dataframe_representation
 
 
-# TODO: Document this:
 # TODO: Consider renaming:
 def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> Dict[str, float]:
     """
-    _summary_
+    Averages a game dataframe
 
-    :param playerstats_df: _description_
+    :param playerstats_df: Specifies a dataframe that will be averaged.
     :type playerstats_df: pd.DataFrame
-    :return: _description_
+    :return: Returns a dictionary representation of the averaged values.
     :rtype: Dict[str, float]
     """
 
