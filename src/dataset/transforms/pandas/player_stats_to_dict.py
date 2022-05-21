@@ -29,7 +29,7 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
 # TODO: Consider renaming:
 def playerstats_to_dict(
     sc2_replay: SC2ReplayData,
-    additional_data_dict: Dict[str, Dict[str, Any]],
+    additional_data_dict: Dict[str, Dict[str, Any]] = {},
 ) -> Dict[str, Dict[str, List[Any]]]:
     """
     Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
