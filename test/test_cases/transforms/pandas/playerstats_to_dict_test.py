@@ -19,8 +19,28 @@ class PlayerStatsToDictTest(unittest.TestCase):
 
     def test_playerstats_to_dict(self):
 
+        res_dict = playerstats_to_dict(sc2_replay=self.sc2_replay_data)
+
+        # print(res_dict)
+
+        # Type assertions for data:
+        for playerID, feature_dict in res_dict.items():
+            self.assertIsInstance(playerID, str)
+            self.assertIsInstance(feature_dict, dict)
+            for key, feature_list in feature_dict.items():
+                self.assertIsInstance(key, str)
+                self.assertIsInstance(feature_list, list)
+
+    def test_playerstats_to_dict_additional_data(self):
+
+        additional_data = {
+            "1": {"outcome": 1},
+            "2": {"outcome": 2},
+        }
+
         res_dict = playerstats_to_dict(
-            tracker_events=self.sc2_replay_data.trackerEvents
+            sc2_replay=self.sc2_replay_data,
+            additional_data_dict=additional_data,
         )
 
         # print(res_dict)
@@ -29,6 +49,9 @@ class PlayerStatsToDictTest(unittest.TestCase):
         for playerID, feature_dict in res_dict.items():
             self.assertIsInstance(playerID, str)
             self.assertIsInstance(feature_dict, dict)
+            # Assertions for additional data:
+            self.assertTrue("outcome" in feature_dict)
+            self.assertTrue(feature_dict["outcome"] == playerID)
             for key, feature_list in feature_dict.items():
                 self.assertIsInstance(key, str)
                 self.assertIsInstance(feature_list, list)
@@ -47,7 +70,7 @@ class PlayerStatsToDictTest(unittest.TestCase):
 
     def test_average_playerstats_dataframe(self):
 
-        ps_dict = playerstats_to_dict(tracker_events=self.sc2_replay_data.trackerEvents)
+        ps_dict = playerstats_to_dict(sc2_replay=self.sc2_replay_data)
         for playerID, df_repr in ps_dict.items():
             # Initializing dataframe from dict:
             dataframe = pd.DataFrame.from_dict(df_repr)
