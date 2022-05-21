@@ -2,9 +2,6 @@ from typing import Any, List, Dict
 
 import pandas as pd
 
-from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
-    TrackerEvent,
-)
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from src.dataset.transforms.utils import filter_player_stats
 

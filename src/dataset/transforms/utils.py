@@ -3,18 +3,14 @@ import functools
 
 import numpy as np
 
-
 from src.dataset.replay_data.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
-)
-from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
-    TrackerEvent,
 )
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 def filter_player_stats(
-    tracker_events: List[TrackerEvent],
+    sc2_replay: SC2ReplayData,
 ) -> Dict[str, List[PlayerStats]]:
     """
     Filters PlayerStats events and places them in lists based on the playerId
@@ -26,7 +22,7 @@ def filter_player_stats(
     """
     player_stats_events = {"1": [], "2": []}
     # Filter PlayerStats:
-    for event in tracker_events:
+    for event in sc2_replay.trackerEvents:
         if type(event).__name__ == "PlayerStats":
             if event.playerId == 1:
                 player_stats_events["1"].append(event)
@@ -37,18 +33,18 @@ def filter_player_stats(
 
 
 def average_player_stats(
-    tracker_events: List[TrackerEvent],
+    sc2_replay: SC2ReplayData,
 ) -> Dict[str, List[float]]:
     """
     Exposes the logic of selecting and averaging PlayerStats events from within TrackerEvents list.
 
-    :param player_tracker_events: Specifies a list of TrackerEvents as parsed from original JSON files.
-    :type player_tracker_events: List[TrackerEvent]
+    :param player_tracker_events: Specifies a parsed replay that will be used to obtain a list of TrackerEvents as in the original JSON files.
+    :type player_tracker_events: SC2ReplayData
     :return: Returns a dictionary containing averaged features.
     :rtype: Dict[str, List[float]]
     """
 
-    player_stats_dict = filter_player_stats(tracker_events=tracker_events)
+    player_stats_dict = filter_player_stats(sc2_replay=sc2_replay)
 
     average_player_features = {}
     for key, list_of_events in player_stats_dict.items():
