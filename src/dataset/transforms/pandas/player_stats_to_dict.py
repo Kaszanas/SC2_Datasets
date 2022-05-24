@@ -35,6 +35,15 @@ def playerstats_to_dict(
     Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
     of the data that can be used to initialize a pandas DataFrame.
 
+    Example additional_data_dict:
+    {"1": {
+            "outcome": 1
+          }
+    "2": {
+            "outcome": 0
+         }
+    }
+
     Example return:
     Without additional data:
     {"1": {"gameloop": [1,2],
@@ -74,11 +83,12 @@ def playerstats_to_dict(
             # can be some information that is constant throughout the game
             # This can be for example MMR of a player, APM of a player, outcome or other
             # Appending additional data:
-            additional_data = additional_data_dict[playerID]
-            for key, additional_val in additional_data.items():
-                if key not in dataframe_representation[playerID]:
-                    dataframe_representation[playerID][key] = []
-                dataframe_representation[playerID][key].append(additional_val)
+            if additional_data_dict:
+                additional_data = additional_data_dict[playerID]
+                for key, additional_val in additional_data.items():
+                    if key not in dataframe_representation[playerID]:
+                        dataframe_representation[playerID][key] = []
+                    dataframe_representation[playerID][key].append(additional_val)
             # Adding all features to the dict:
             for feature_name, feature_value in event.stats.__dict__.items():
                 if feature_name not in dataframe_representation[playerID]:

@@ -26,8 +26,10 @@ def filter_player_stats(
         if type(event).__name__ == "PlayerStats":
             if event.playerId == 1:
                 player_stats_events["1"].append(event)
-            if event.playerId == 2:
+            elif event.playerId == 2:
                 player_stats_events["2"].append(event)
+            else:
+                raise Exception("There are more than player in TrackerEvents!")
 
     return player_stats_events
 

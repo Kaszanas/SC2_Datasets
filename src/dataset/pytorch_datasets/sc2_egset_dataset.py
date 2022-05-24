@@ -75,7 +75,8 @@ class SC2EGSetDataset(Dataset):
 
             # Retrieving files that were skipped when initializing a dataset,
             # This is based on validator:
-            self.skip_files[replaypack_name] = replaypack.skip_files
+            # TODO: This will be used later:
+            # self.skip_files[replaypack_name] = replaypack.skip_files
             self.replaypacks.append(replaypack)
             self.len += len(replaypack)
 
