@@ -90,6 +90,25 @@ class SC2ReplayData:
         self._messageEventsErr: bool = loaded_replay_object["messageEventsErr"]
         self._trackerEventsErr: bool = loaded_replay_object["trackerEvtsErr"]
 
+    def __hash__(self) -> int:
+        game_duration_ns = self.header.durationNanoseconds
+        game_time_utc = self.details.timeUTC
+        game_map = self.metadata.mapName
+        game_version = self.metadata.gameVersion
+        player_toon_map_len = len(self.toonPlayerDescMap)
+        player_tuple_toon = tuple(toon.toon for toon in self.toonPlayerDescMap)
+
+        return hash(
+            (
+                game_duration_ns,
+                game_time_utc,
+                game_map,
+                game_version,
+                player_toon_map_len,
+                player_tuple_toon,
+            )
+        )
+
     @property
     def initData(self):
         return self._init_data
