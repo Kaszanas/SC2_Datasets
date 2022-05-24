@@ -22,3 +22,5 @@ validation_file.json
 
 dist/
 SC2EGSet_Dataset.egg-info/
+
+*.csv
