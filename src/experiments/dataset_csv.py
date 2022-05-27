@@ -28,11 +28,16 @@ def create_additional_data(replay: SC2ReplayData) -> Dict[str, Any]:
         if playerID in additional_data:
             return {}
 
+        player_name = toon_desc_map.toon_player_info.nickname
+        player_toon = toon_desc_map.toon
+
         if playerID not in additional_data:
             # Addinga additional data that doesnt change:
             additional_data[playerID] = {
                 "game_hash": game_hash,
                 "map_name": map_name,
+                "player_name": player_name,
+                "player_toon": player_toon,
                 "game_time_gameloop": game_time_gameloop,
             }
 
@@ -60,6 +65,8 @@ def main():
     )
 
     failed_files = 0
+    incorrect_player_id = 0
+    exception_counter = 0
     processed_files = len(dataset)
     for i in tqdm(range(len(dataset))):
         try:
@@ -67,16 +74,20 @@ def main():
 
             additional_data = create_additional_data(replay=replay)
             if not additional_data:
+                # print("Empty additional data returned, incorrect player id.")
                 failed_files += 1
+                incorrect_player_id += 1
                 continue
 
             for playerID, additional_features in additional_data.items():
                 for toon_desc_map in replay.toonPlayerDescMap:
+                    if playerID != str(toon_desc_map.toon_player_info.playerID):
+                        continue
                     race = toon_desc_map.toon_player_info.race
                     outcome = toon_desc_map.toon_player_info.result
-                    if race not in additional_features:
+                    if "race" not in additional_features:
                         additional_data[playerID]["race"] = race
-                    if outcome not in additional_features:
+                    if "outcome" not in additional_features:
                         additional_data[playerID]["outcome"] = outcome
 
             single_game_df = playerstats_to_dict(
@@ -96,12 +107,14 @@ def main():
 
         except:
             failed_files += 1
-            print(f"Failed to process a file {i}")
+            exception_counter += 1
+            # print(f"Failed to process a file {i}")
 
     print(f"Processed files: {processed_files}")
     print(f"Failed files: {failed_files}")
+    print(f"Exceptions files: {exception_counter}")
+    print(f"Incorrect ID: {incorrect_player_id}")
 
 
-# REVIEW: This whole file
 if __name__ == "__main__":
     main()
