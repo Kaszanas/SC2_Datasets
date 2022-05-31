@@ -24,3 +24,6 @@ dist/
 SC2EGSet_Dataset.egg-info/
 
 *.csv
+
+*.png
+*.html

@@ -6,7 +6,7 @@ from typing import Any, Dict
 import pandas as pd
 from tqdm import tqdm
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from src.dataset.transforms.pandas.player_stats_to_dict import playerstats_to_dict
@@ -44,7 +44,7 @@ def create_additional_data(replay: SC2ReplayData) -> Dict[str, Any]:
     return additional_data
 
 
-def main():
+def dataset_to_csv():
     unpack_dir = os.path.abspath("./test/test_files/unpack")
 
     def validator(list_of_replays):
@@ -117,4 +117,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    dataset_to_csv()
