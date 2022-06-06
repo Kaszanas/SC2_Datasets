@@ -43,11 +43,11 @@ class PlayerStats(TrackerEvent):
         )
 
     def __init__(
-            self,
-            id: int,
-            loop: int,
-            playerId: int,
-            stats: Stats,
+        self,
+        id: int,
+        loop: int,
+        playerId: int,
+        stats: Stats,
     ) -> None:
         self.id = id
         self.loop = loop

@@ -35,16 +35,16 @@ class SC2EGSetDataModule(pl.LightningDataModule):
     """
 
     def __init__(
-            self,
-            download_dir: str = "./data/download",
-            unpack_dir: str = "./data/unpack",
-            download: bool = True,
-            transform=None,
-            dims=None,
-            batch_size: int = 256,
-            num_workers: int = 0,
-            unpack_n_workers: int = 16,
-            validator: Callable | None = None,
+        self,
+        download_dir: str = "./data/download",
+        unpack_dir: str = "./data/unpack",
+        download: bool = True,
+        transform=None,
+        dims=None,
+        batch_size: int = 256,
+        num_workers: int = 0,
+        unpack_n_workers: int = 16,
+        validator: Callable | None = None,
     ):
         super().__init__()
 

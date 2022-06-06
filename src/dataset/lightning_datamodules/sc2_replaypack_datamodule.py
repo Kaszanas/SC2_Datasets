@@ -35,18 +35,18 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     """
 
     def __init__(
-            self,
-            replaypack_name: str,
-            unpack_dir: str = "./data/unpack",
-            download_dir: str = "./data/download",
-            url: str = "",
-            download: bool = True,
-            transform: Callable | None = None,
-            dims=None,
-            batch_size: int = 256,
-            num_workers: int = 0,
-            unpack_n_workers: int = 16,
-            validator: Callable | None = None,
+        self,
+        replaypack_name: str,
+        unpack_dir: str = "./data/unpack",
+        download_dir: str = "./data/download",
+        url: str = "",
+        download: bool = True,
+        transform: Callable | None = None,
+        dims=None,
+        batch_size: int = 256,
+        num_workers: int = 0,
+        unpack_n_workers: int = 16,
+        validator: Callable | None = None,
     ):
         super().__init__()
 

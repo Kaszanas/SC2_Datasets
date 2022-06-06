@@ -39,12 +39,12 @@ class CommandManagerState(GameEvent):
         )
 
     def __init__(
-            self,
-            id: int,
-            loop: int,
-            sequence: int,
-            state: int,
-            userid: int,
+        self,
+        id: int,
+        loop: int,
+        sequence: int,
+        state: int,
+        userid: int,
     ) -> None:
         self.id = id
         self.loop = loop

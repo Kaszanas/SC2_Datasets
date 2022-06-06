@@ -48,15 +48,15 @@ class GameDescription:
         )
 
     def __init__(
-            self,
-            gameOptions: GameOptions,
-            gameSpeed: str,
-            isBlizzardMap: bool,
-            mapAuthorName: str,
-            mapFileSyncChecksum: int,
-            mapSizeX: int,
-            mapSizeY: int,
-            maxPlayers: int,
+        self,
+        gameOptions: GameOptions,
+        gameSpeed: str,
+        isBlizzardMap: bool,
+        mapAuthorName: str,
+        mapFileSyncChecksum: int,
+        mapSizeX: int,
+        mapSizeY: int,
+        maxPlayers: int,
     ) -> None:
         self.gameOptions = gameOptions
         self.gameSpeed = gameSpeed

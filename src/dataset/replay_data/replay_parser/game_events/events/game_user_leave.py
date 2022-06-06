@@ -37,11 +37,11 @@ class GameUserLeave(GameEvent):
         )
 
     def __init__(
-            self,
-            id: int,
-            leaveReason: int,
-            loop: int,
-            userid: int,
+        self,
+        id: int,
+        leaveReason: int,
+        loop: int,
+        userid: int,
     ) -> None:
         self.id = id
         self.leaveReason = leaveReason

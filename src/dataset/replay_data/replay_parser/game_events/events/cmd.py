@@ -46,13 +46,13 @@ class Cmd(GameEvent):
         )
 
     def __init__(
-            self,
-            id: int,
-            loop: int,
-            otherUnit: NoneType,
-            sequence: int,
-            unitGroup: NoneType | int,
-            userid: int,
+        self,
+        id: int,
+        loop: int,
+        otherUnit: NoneType,
+        sequence: int,
+        unitGroup: NoneType | int,
+        userid: int,
     ) -> None:
         self.id = id
         self.loop = loop

@@ -39,12 +39,12 @@ class ControlGroupUpdate(GameEvent):
         )
 
     def __init__(
-            self,
-            controlGroupIndex: int,
-            controlGroupUpdate: int,
-            id: int,
-            loop: int,
-            userid: int,
+        self,
+        controlGroupIndex: int,
+        controlGroupUpdate: int,
+        id: int,
+        loop: int,
+        userid: int,
     ) -> None:
         self.controlGroupIndex = controlGroupIndex
         self.controlGroupUpdate = controlGroupUpdate

@@ -31,15 +31,15 @@ class SC2ReplaypackDataset(Dataset):
     """
 
     def __init__(
-            self,
-            replaypack_name: str,
-            unpack_dir: str,
-            download_dir: str = "",
-            url: str = "",
-            download: bool = False,
-            unpack_n_workers: int = 16,
-            transform: None | Callable = None,
-            validator: None | Callable = None,
+        self,
+        replaypack_name: str,
+        unpack_dir: str,
+        download_dir: str = "",
+        url: str = "",
+        download: bool = False,
+        unpack_n_workers: int = 16,
+        transform: None | Callable = None,
+        validator: None | Callable = None,
     ):
         # PyTorch fields:
         self.transform = transform

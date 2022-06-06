@@ -42,12 +42,12 @@ class CameraSave(GameEvent):
         )
 
     def __init__(
-            self,
-            id: int,
-            loop: int,
-            target: Target2D,
-            userid: int,
-            which: int,
+        self,
+        id: int,
+        loop: int,
+        target: Target2D,
+        userid: int,
+        which: int,
     ) -> None:
         self.id = id
         self.loop = loop

@@ -42,9 +42,10 @@ class GameOptions:
         """
         _summary_
 
-        :param d: _description_
+        :param d: Describes a dictionary, it holds translations of a phrase or sentence
         :type d: Dict[str, Any]
-        :return: _description_
+        :return: Specifies a list of parameters about the game like a number of observers, fog of the game, if game was
+                 competitive etc.
         :rtype: GameOptions
         """
         return GameOptions(
@@ -66,22 +67,22 @@ class GameOptions:
         )
 
     def __init__(
-            self,
-            advancedSharedControl: bool,
-            amm: bool,
-            battleNet: bool,
-            clientDebugFlags: int,
-            competitive: bool,
-            cooperative: bool,
-            fog: int,
-            heroDuplicatesAllowed: bool,
-            lockTeams: bool,
-            noVictoryOrDefeat: bool,
-            observers: int,
-            practice: bool,
-            randomRaces: bool,
-            teamsTogether: bool,
-            userDifficulty: bool,
+        self,
+        advancedSharedControl: bool,
+        amm: bool,
+        battleNet: bool,
+        clientDebugFlags: int,
+        competitive: bool,
+        cooperative: bool,
+        fog: int,
+        heroDuplicatesAllowed: bool,
+        lockTeams: bool,
+        noVictoryOrDefeat: bool,
+        observers: int,
+        practice: bool,
+        randomRaces: bool,
+        teamsTogether: bool,
+        userDifficulty: bool,
     ) -> None:
         self.advancedSharedControl = advancedSharedControl
         self.amm = amm

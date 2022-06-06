@@ -57,16 +57,16 @@ class CameraUpdate(GameEvent):
         )
 
     def __init__(
-            self,
-            distance: NoneType | float | int,
-            follow: bool,
-            id: int,
-            loop: int,
-            pitch: NoneType | float | int,
-            reason: NoneType | str,
-            target: Target2D,
-            userid: int,
-            yaw: NoneType | float | int,
+        self,
+        distance: NoneType | float | int,
+        follow: bool,
+        id: int,
+        loop: int,
+        pitch: NoneType | float | int,
+        reason: NoneType | str,
+        target: Target2D,
+        userid: int,
+        yaw: NoneType | float | int,
     ) -> None:
         self.distance = distance
         self.follow = follow

@@ -41,11 +41,11 @@ class CmdUpdateTargetUnit(GameEvent):
         )
 
     def __init__(
-            self,
-            id: int,
-            loop: int,
-            target: TargetUnit,
-            userid: int,
+        self,
+        id: int,
+        loop: int,
+        target: TargetUnit,
+        userid: int,
     ) -> None:
         self.id = id
         self.loop = loop

@@ -26,14 +26,14 @@ class SC2EGSetDataset(Dataset):
     """
 
     def __init__(
-            self,
-            unpack_dir: str = "./data/unpack",
-            download_dir: str = "./data/download",
-            names_urls: List[Tuple[str, str]] = AVAILABLE_REPLAYPACKS,
-            download: bool = True,
-            unpack_n_workers: int = 16,
-            transform: Callable | None = None,
-            validator: Callable | None = None,
+        self,
+        unpack_dir: str = "./data/unpack",
+        download_dir: str = "./data/download",
+        names_urls: List[Tuple[str, str]] = AVAILABLE_REPLAYPACKS,
+        download: bool = True,
+        unpack_n_workers: int = 16,
+        transform: Callable | None = None,
+        validator: Callable | None = None,
     ):
 
         # PyTorch fields:
