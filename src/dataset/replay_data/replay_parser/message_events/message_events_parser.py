@@ -11,9 +11,9 @@ class MessageEventsParser:
         """
         _summary_
 
-        :param d: _description_
+        :param d: Specifies a dictionary, it holds translations of a phrase or sentence.
         :type d: Dict
-        :return: _description_
+        :return: Specifies an implementation of an abstract method from MessageEvent class
         :rtype: MessageEvent
         """
         type_name = d["evtTypeName"]
