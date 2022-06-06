@@ -1,7 +1,7 @@
 from typing import Dict
 
-
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+
 
 # TODO: Document the docstrings
 
@@ -37,13 +37,12 @@ class GameUserLeave(GameEvent):
         )
 
     def __init__(
-        self,
-        id: int,
-        leaveReason: int,
-        loop: int,
-        userid: int,
+            self,
+            id: int,
+            leaveReason: int,
+            loop: int,
+            userid: int,
     ) -> None:
-
         self.id = id
         self.leaveReason = leaveReason
         self.loop = loop

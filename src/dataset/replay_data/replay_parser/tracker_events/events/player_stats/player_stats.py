@@ -7,6 +7,7 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
+
 # TODO: Document the docstrings
 
 
@@ -42,13 +43,12 @@ class PlayerStats(TrackerEvent):
         )
 
     def __init__(
-        self,
-        id: int,
-        loop: int,
-        playerId: int,
-        stats: Stats,
+            self,
+            id: int,
+            loop: int,
+            playerId: int,
+            stats: Stats,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.playerId = playerId

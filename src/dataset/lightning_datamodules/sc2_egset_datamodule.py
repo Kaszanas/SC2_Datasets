@@ -1,47 +1,51 @@
 from typing import Callable, Optional
-import pytorch_lightning as pl
 
+import pytorch_lightning as pl
 from torch.utils.data import random_split
 from torch.utils.data.dataloader import DataLoader
+
 from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
 
 
 class SC2EGSetDataModule(pl.LightningDataModule):
-
     """
-    Defines a LightningDataModule abstraction for the SC2EGSet: StarCraft II Esport Game-State Dataset.
+    Defines a LightningDataModule abstraction for the SC2EGSet: StarCraft II Esport Game-State Dataset
 
-    :param download_dir:
+    :param download_dir: Specifies the path where the dataset will be downloaded
     :type download_dir: str, optional
-    :param unpack_dir: Specifies the path where the dataset will be unpacked into a custom directory structure, defaults to "./data/unpack"
+    :param unpack_dir: Specifies the path where the dataset will be unpacked into a custom directory structure, defaults
+                       to "./data/unpack"
     :type unpack_dir: str, optional
-    :param transform: _description_, defaults to None
+    :param transform:  Specifies the PyTorch transforms to be used on the replaypack (dataset),
+                       Deprecated since version v1.5: Will be removed in v1.7.0,
+                       defaults to None
     :type transform: _type_, optional
-    :param dims: _description_, defaults to None
+    :param dims: Specifies a tuple describing the shape of your data. Extra functionality exposed in size,
+           Deprecated since version v1.5: Will be removed in v1.7.0,
+           defaults to None
     :type dims: _type_, optional
-    :param batch_size: _description_, defaults to 256
+    :param batch_size: Specifies the size of collating individual fetched data samples, defaults to 256
     :type batch_size: int, optional
-    :param num_workers: _description_, defaults to 0
+    :param num_workers: Specifies the data loader instance how many sub-processes to use for data loading, defaults to 0
     :type num_workers: int, optional
     :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
     :type unpack_n_workers: int, optional
-    :param validator: _description_, defaults to None
+    :param validator: Specifies the validation option for fetched data, defaults to None
     :type validator: Callable | None, optional
     """
 
     def __init__(
-        self,
-        download_dir: str = "./data/download",
-        unpack_dir: str = "./data/unpack",
-        download: bool = True,
-        transform=None,
-        dims=None,
-        batch_size: int = 256,
-        num_workers: int = 0,
-        unpack_n_workers: int = 16,
-        validator: Callable | None = None,
+            self,
+            download_dir: str = "./data/download",
+            unpack_dir: str = "./data/unpack",
+            download: bool = True,
+            transform=None,
+            dims=None,
+            batch_size: int = 256,
+            num_workers: int = 0,
+            unpack_n_workers: int = 16,
+            validator: Callable | None = None,
     ):
-
         super().__init__()
 
         # PyTorch fields:
@@ -58,7 +62,6 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         self.validator = validator
 
     def prepare_data(self) -> None:
-
         # download, split, etc...
         # only called on 1 GPU/TPU in distributed
         self.dataset = SC2EGSetDataset(

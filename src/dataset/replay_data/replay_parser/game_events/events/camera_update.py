@@ -1,7 +1,6 @@
 from types import NoneType
 from typing import Dict
 
-
 from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import (
     Target2D,
 )
@@ -13,7 +12,6 @@ from src.dataset.replay_data.replay_parser.game_events.game_event import GameEve
 # Should this be encoded somehow?
 # TODO: Document the docstrings
 class CameraUpdate(GameEvent):
-
     """_summary_
 
     :param distance: _description_
@@ -59,18 +57,17 @@ class CameraUpdate(GameEvent):
         )
 
     def __init__(
-        self,
-        distance: NoneType | float | int,
-        follow: bool,
-        id: int,
-        loop: int,
-        pitch: NoneType | float | int,
-        reason: NoneType | str,
-        target: Target2D,
-        userid: int,
-        yaw: NoneType | float | int,
+            self,
+            distance: NoneType | float | int,
+            follow: bool,
+            id: int,
+            loop: int,
+            pitch: NoneType | float | int,
+            reason: NoneType | str,
+            target: Target2D,
+            userid: int,
+            yaw: NoneType | float | int,
     ) -> None:
-
         self.distance = distance
         self.follow = follow
         self.id = id

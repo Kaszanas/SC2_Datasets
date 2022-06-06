@@ -1,7 +1,7 @@
 from typing import Dict
 
-
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+
 
 # TODO: Document the docstrings
 
@@ -76,26 +76,25 @@ class UserOptions(GameEvent):
         )
 
     def __init__(
-        self,
-        baseBuildNum: int,
-        buildNum: int,
-        cameraFollow: bool,
-        debugPauseEnabled: bool,
-        developmentCheatsEnabled: bool,
-        gameFullyDownloaded: bool,
-        hotkeyProfile: str,
-        id: int,
-        isMapToMapTransition: bool,
-        loop: int,
-        multiplayerCheatsEnabled: bool,
-        platformMac: bool,
-        syncChecksummingEnabled: bool,
-        testCheatsEnabled: bool,
-        useGalaxyAsserts: bool,
-        userid: int,
-        versionFlags: int,
+            self,
+            baseBuildNum: int,
+            buildNum: int,
+            cameraFollow: bool,
+            debugPauseEnabled: bool,
+            developmentCheatsEnabled: bool,
+            gameFullyDownloaded: bool,
+            hotkeyProfile: str,
+            id: int,
+            isMapToMapTransition: bool,
+            loop: int,
+            multiplayerCheatsEnabled: bool,
+            platformMac: bool,
+            syncChecksummingEnabled: bool,
+            testCheatsEnabled: bool,
+            useGalaxyAsserts: bool,
+            userid: int,
+            versionFlags: int,
     ) -> None:
-
         self.baseBuildNum = baseBuildNum
         self.buildNum = buildNum
         self.cameraFollow = cameraFollow

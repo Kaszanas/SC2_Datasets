@@ -1,8 +1,7 @@
 from typing import Dict
 
-import torch
-
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+
 
 # TODO: Document the docstrings
 
@@ -40,14 +39,13 @@ class ControlGroupUpdate(GameEvent):
         )
 
     def __init__(
-        self,
-        controlGroupIndex: int,
-        controlGroupUpdate: int,
-        id: int,
-        loop: int,
-        userid: int,
+            self,
+            controlGroupIndex: int,
+            controlGroupUpdate: int,
+            id: int,
+            loop: int,
+            userid: int,
     ) -> None:
-
         self.controlGroupIndex = controlGroupIndex
         self.controlGroupUpdate = controlGroupUpdate
         self.id = id

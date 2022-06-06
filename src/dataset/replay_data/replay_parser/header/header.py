@@ -33,11 +33,11 @@ class Header:
         )
 
     def __init__(
-        self,
-        elapsedGameLoops: int,
-        durationNanoseconds: int,
-        durationSeconds: int,
-        version: str,
+            self,
+            elapsedGameLoops: int,
+            durationNanoseconds: int,
+            durationSeconds: int,
+            version: str,
     ) -> None:
         self.elapsedGameLoops = elapsedGameLoops
         self.durationNanoseconds = durationNanoseconds

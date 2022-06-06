@@ -10,9 +10,9 @@ class GameEvent(metaclass=abc.ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass: type) -> Literal[True] | NotImplementedType:
         return (
-            hasattr(subclass, "from_dict")
-            and callable(subclass.from_dict)
-            or NotImplemented
+                hasattr(subclass, "from_dict")
+                and callable(subclass.from_dict)
+                or NotImplemented
         )
 
     @abc.abstractmethod

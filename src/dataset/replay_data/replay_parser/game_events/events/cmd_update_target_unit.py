@@ -5,11 +5,11 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.target_unit
 )
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
+
 # TODO: Document the docstrings
 
 
 class CmdUpdateTargetUnit(GameEvent):
-
     """
     _summary_
 
@@ -41,13 +41,12 @@ class CmdUpdateTargetUnit(GameEvent):
         )
 
     def __init__(
-        self,
-        id: int,
-        loop: int,
-        target: TargetUnit,
-        userid: int,
+            self,
+            id: int,
+            loop: int,
+            target: TargetUnit,
+            userid: int,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.target = target

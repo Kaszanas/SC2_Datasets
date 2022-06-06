@@ -2,39 +2,38 @@ from typing import Any, Dict
 
 
 class GameOptions:
-
     """
     _summary_
 
-    :param advancedSharedControl: _description_
+    :param advancedSharedControl: Specifies if advanced shared control is enabled
     :type advancedSharedControl: bool
-    :param amm: _description_
+    :param amm: Specifies if AMM (AutoMM - Automated Match Making) is enabled
     :type amm: bool
-    :param battleNet: _description_
+    :param battleNet: Specifies if game was played on Battle.net
     :type battleNet: bool
-    :param clientDebugFlags: _description_
+    :param clientDebugFlags: Specifies the client debug flag
     :type clientDebugFlags: int
-    :param competitive: _description_
+    :param competitive: It means either ranked or unranked,
     :type competitive: bool
-    :param cooperative: _description_
+    :param cooperative: Specifies if game was cooperative
     :type cooperative: bool
-    :param fog: _description_
+    :param fog: Specifies the value of fog in the game
     :type fog: int
-    :param heroDuplicatesAllowed: _description_
+    :param heroDuplicatesAllowed: Specifies if hero can be duplicated
     :type heroDuplicatesAllowed: bool
-    :param lockTeams: _description_
+    :param lockTeams: Specifies if teams are locked
     :type lockTeams: bool
-    :param noVictoryOrDefeat: _description_
+    :param noVictoryOrDefeat: There is no information about this parameter
     :type noVictoryOrDefeat: bool
-    :param observers: _description_
+    :param observers: Specifies count of observers watching the game
     :type observers: int
-    :param practice: _description_
+    :param practice: There is no information about this parameter
     :type practice: bool
-    :param randomRaces: _description_
+    :param randomRaces: Specifies if random races are in the game
     :type randomRaces: bool
-    :param teamsTogether: _description_
+    :param teamsTogether: Specifies if teams of players are in the game
     :type teamsTogether: bool
-    :param userDifficulty: _description_
+    :param userDifficulty: There is no information about this parameter
     :type userDifficulty: bool
     """
 
@@ -67,24 +66,23 @@ class GameOptions:
         )
 
     def __init__(
-        self,
-        advancedSharedControl: bool,
-        amm: bool,
-        battleNet: bool,
-        clientDebugFlags: int,
-        competitive: bool,
-        cooperative: bool,
-        fog: int,
-        heroDuplicatesAllowed: bool,
-        lockTeams: bool,
-        noVictoryOrDefeat: bool,
-        observers: int,
-        practice: bool,
-        randomRaces: bool,
-        teamsTogether: bool,
-        userDifficulty: bool,
+            self,
+            advancedSharedControl: bool,
+            amm: bool,
+            battleNet: bool,
+            clientDebugFlags: int,
+            competitive: bool,
+            cooperative: bool,
+            fog: int,
+            heroDuplicatesAllowed: bool,
+            lockTeams: bool,
+            noVictoryOrDefeat: bool,
+            observers: int,
+            practice: bool,
+            randomRaces: bool,
+            teamsTogether: bool,
+            userDifficulty: bool,
     ) -> None:
-
         self.advancedSharedControl = advancedSharedControl
         self.amm = amm
         self.battleNet = battleNet

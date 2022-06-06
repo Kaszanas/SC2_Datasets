@@ -1,27 +1,28 @@
 from typing import Any, Dict
+
 from src.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
 
 
 class GameDescription:
-
     """
     _summary_
 
-    :param gameOptions: _description_
+    :param gameOptions: Specifies options in the game, for example you can set: fog, random races, competitive, etc.
     :type gameOptions: GameOptions
-    :param gameSpeed: _description_
+    :param gameSpeed: Specifies the speed at which your game runs. Enum: [Slower, Slow, Normal, Fast, Faster].
+                      Default is Faster
     :type gameSpeed: str
-    :param isBlizzardMap: _description_
+    :param isBlizzardMap: Specifies if map have been created by Blizzard
     :type isBlizzardMap: bool
-    :param mapAuthorName: _description_
+    :param mapAuthorName: Nickname or fullname of the map's author
     :type mapAuthorName: str
-    :param mapFileSyncChecksum: _description_
+    :param mapFileSyncChecksum: Specifies the map file sync checksum
     :type mapFileSyncChecksum: int
-    :param mapSizeX: _description_
+    :param mapSizeX: X coordinate size of map in pixels.
     :type mapSizeX: int
-    :param mapSizeY: _description_
+    :param mapSizeY: Y coordinate size of map in pixels.
     :type mapSizeY: int
-    :param maxPlayers: _description_
+    :param maxPlayers: Specifies how many players can play on this map at once.
     :type maxPlayers: int
     """
 
@@ -47,17 +48,16 @@ class GameDescription:
         )
 
     def __init__(
-        self,
-        gameOptions: GameOptions,
-        gameSpeed: str,
-        isBlizzardMap: bool,
-        mapAuthorName: str,
-        mapFileSyncChecksum: int,
-        mapSizeX: int,
-        mapSizeY: int,
-        maxPlayers: int,
+            self,
+            gameOptions: GameOptions,
+            gameSpeed: str,
+            isBlizzardMap: bool,
+            mapAuthorName: str,
+            mapFileSyncChecksum: int,
+            mapSizeX: int,
+            mapSizeY: int,
+            maxPlayers: int,
     ) -> None:
-
         self.gameOptions = gameOptions
         self.gameSpeed = gameSpeed
         self.isBlizzardMap = isBlizzardMap

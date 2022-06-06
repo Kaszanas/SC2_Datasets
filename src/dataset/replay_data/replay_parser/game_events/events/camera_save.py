@@ -5,9 +5,9 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d i
 )
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
+
 # TODO: Document the docstrings
 class CameraSave(GameEvent):
-
     """
     _summary_
 
@@ -42,14 +42,13 @@ class CameraSave(GameEvent):
         )
 
     def __init__(
-        self,
-        id: int,
-        loop: int,
-        target: Target2D,
-        userid: int,
-        which: int,
+            self,
+            id: int,
+            loop: int,
+            target: Target2D,
+            userid: int,
+            which: int,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.target = target

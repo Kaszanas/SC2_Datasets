@@ -30,12 +30,11 @@ class Details:
         )
 
     def __init__(
-        self,
-        gameSpeed: str,
-        isBlizzardMap: bool,
-        timeUTC: str,
+            self,
+            gameSpeed: str,
+            isBlizzardMap: bool,
+            timeUTC: str,
     ) -> None:
-
         self.gameSpeed = gameSpeed
         self.isBlizzardMap = isBlizzardMap
         self.timeUTC = timeUTC

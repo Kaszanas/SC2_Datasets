@@ -4,11 +4,11 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
+
 # TODO: Document the docstrings
 
 
 class Stats(TrackerEvent):
-
     """
     Stats holds specific fields on the economy of a player and is used in PlayerStats event.
 
@@ -151,48 +151,47 @@ class Stats(TrackerEvent):
         )
 
     def __init__(
-        self,
-        foodMade: int,
-        foodUsed: int,
-        mineralsCollectionRate: int,
-        mineralsCurrent: int,
-        mineralsFriendlyFireArmy: int,
-        mineralsFriendlyFireEconomy: int,
-        mineralsFriendlyFireTechnology: int,
-        mineralsKilledArmy: int,
-        mineralsKilledEconomy: int,
-        mineralsKilledTechnology: int,
-        mineralsLostArmy: int,
-        mineralsLostEconomy: int,
-        mineralsLostTechnology: int,
-        mineralsUsedActiveForces: int,
-        mineralsUsedCurrentArmy: int,
-        mineralsUsedCurrentEconomy: int,
-        mineralsUsedCurrentTechnology: int,
-        mineralsUsedInProgressArmy: int,
-        mineralsUsedInProgressEconomy: int,
-        mineralsUsedInProgressTechnology: int,
-        vespeneCollectionRate: int,
-        vespeneCurrent: int,
-        vespeneFriendlyFireArmy: int,
-        vespeneFriendlyFireEconomy: int,
-        vespeneFriendlyFireTechnology: int,
-        vespeneKilledArmy: int,
-        vespeneKilledEconomy: int,
-        vespeneKilledTechnology: int,
-        vespeneLostArmy: int,
-        vespeneLostEconomy: int,
-        vespeneLostTechnology: int,
-        vespeneUsedActiveForces: int,
-        vespeneUsedCurrentArmy: int,
-        vespeneUsedCurrentEconomy: int,
-        vespeneUsedCurrentTechnology: int,
-        vespeneUsedInProgressArmy: int,
-        vespeneUsedInProgressEconomy: int,
-        vespeneUsedInProgressTechnology: int,
-        workersActiveCount: int,
+            self,
+            foodMade: int,
+            foodUsed: int,
+            mineralsCollectionRate: int,
+            mineralsCurrent: int,
+            mineralsFriendlyFireArmy: int,
+            mineralsFriendlyFireEconomy: int,
+            mineralsFriendlyFireTechnology: int,
+            mineralsKilledArmy: int,
+            mineralsKilledEconomy: int,
+            mineralsKilledTechnology: int,
+            mineralsLostArmy: int,
+            mineralsLostEconomy: int,
+            mineralsLostTechnology: int,
+            mineralsUsedActiveForces: int,
+            mineralsUsedCurrentArmy: int,
+            mineralsUsedCurrentEconomy: int,
+            mineralsUsedCurrentTechnology: int,
+            mineralsUsedInProgressArmy: int,
+            mineralsUsedInProgressEconomy: int,
+            mineralsUsedInProgressTechnology: int,
+            vespeneCollectionRate: int,
+            vespeneCurrent: int,
+            vespeneFriendlyFireArmy: int,
+            vespeneFriendlyFireEconomy: int,
+            vespeneFriendlyFireTechnology: int,
+            vespeneKilledArmy: int,
+            vespeneKilledEconomy: int,
+            vespeneKilledTechnology: int,
+            vespeneLostArmy: int,
+            vespeneLostEconomy: int,
+            vespeneLostTechnology: int,
+            vespeneUsedActiveForces: int,
+            vespeneUsedCurrentArmy: int,
+            vespeneUsedCurrentEconomy: int,
+            vespeneUsedCurrentTechnology: int,
+            vespeneUsedInProgressArmy: int,
+            vespeneUsedInProgressEconomy: int,
+            vespeneUsedInProgressTechnology: int,
+            workersActiveCount: int,
     ) -> None:
-
         # This calculation is required for raw data ingestion:
         self.foodMade = int(foodMade / 4096)
         self.foodUsed = int(foodUsed / 4096)

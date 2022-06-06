@@ -1,8 +1,8 @@
 from types import NoneType
 from typing import Dict
 
-
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+
 
 # TODO: Can the sequence be an int here?
 # Should this be encoded somehow if there is a NoneType detected?
@@ -11,7 +11,6 @@ from src.dataset.replay_data.replay_parser.game_events.game_event import GameEve
 
 
 class Cmd(GameEvent):
-
     """_summary_
 
     :param id: _description_
@@ -47,15 +46,14 @@ class Cmd(GameEvent):
         )
 
     def __init__(
-        self,
-        id: int,
-        loop: int,
-        otherUnit: NoneType,
-        sequence: int,
-        unitGroup: NoneType | int,
-        userid: int,
+            self,
+            id: int,
+            loop: int,
+            otherUnit: NoneType,
+            sequence: int,
+            unitGroup: NoneType | int,
+            userid: int,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.otherUnit = otherUnit

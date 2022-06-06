@@ -1,9 +1,8 @@
 import json
-from typing import Any, Dict
 import logging
+from typing import Any, Dict
 
 from src.dataset.replay_data.replay_parser.details.details import Details
-
 from src.dataset.replay_data.replay_parser.game_events.game_events_parser import (
     GameEventsParser,
 )
@@ -22,7 +21,6 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser 
 
 
 class SC2ReplayData:
-
     """
     _summary_
 
@@ -34,7 +32,6 @@ class SC2ReplayData:
     def from_file(replay_filepath: str) -> "SC2ReplayData":
         """
         _summary_
-
         :param replay_filepath: _description_
         :type replay_filepath: str
         :return: _description_
