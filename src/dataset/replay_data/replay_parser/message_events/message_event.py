@@ -20,10 +20,10 @@ class MessageEvent(metaclass=abc.ABCMeta):
         """
         _summary_
 
-        :param dict: _description_
+        :param dict: Specifies a dictionary, it holds translations of a phrase or sentence.
         :type dict: Dict
-        :raises NotImplementedError: _description_
-        :return: _description_
+        :raises NotImplementedError: Raises an error if not implemented, this is only an abstract method
+        :return: Specifies a sheet of method to must be implemented in other classes
         :rtype: MessageEvent
         """
         raise NotImplementedError
