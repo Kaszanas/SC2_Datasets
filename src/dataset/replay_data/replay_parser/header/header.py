@@ -22,7 +22,7 @@ class Header:
 
         :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
-        :return: _description_
+        :return: Returns an initialized Header class.
         :rtype: Header
         """
         return Header(

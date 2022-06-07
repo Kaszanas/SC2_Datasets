@@ -7,20 +7,21 @@ from src.dataset.replay_data.replay_parser.init_data.game_description import (
 class InitData:
 
     """
-    _summary_
+    Data type containing some "init data" information about StarCraft II game.
 
-    :param gameDescription: _description_
+    :param gameDescription: Specifies the object that contains list of parameters which
+                            are describing the game
     :type gameDescription: GameDescription
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "InitData":
         """
-        _summary_
+        Static method returning initialized InitData class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
-        :return: _description_
+        :return: Returns an initialized InitData class.
         :rtype: InitData
         """
         return InitData(

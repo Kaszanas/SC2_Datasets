@@ -3,7 +3,7 @@ from typing import Any, Dict
 
 class GameOptions:
     """
-    _summary_
+    GameOptions represents the replay game options
 
     :param advancedSharedControl: Specifies if advanced shared control is enabled
     :type advancedSharedControl: bool
@@ -40,7 +40,7 @@ class GameOptions:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameOptions":
         """
-        _summary_
+        Static method returning initialized GameOptions class from a dictionary. This helps with the original JSON parsing.
 
         :param d: Describes a dictionary, it holds translations of a phrase or sentence
         :type d: Dict[str, Any]
