@@ -9,7 +9,7 @@ def groupby_fields_mean(
     unique_field: str = "game_hash",
 ) -> Dict[str, pd.DataFrame]:
     """
-    Helper function exposing logic for performing multiple groupby operations on a pandas dataframe.
+    Helper function exposing logic for performing multiple group by operations on a pandas dataframe.
     Returns a result as a dictionary.
 
     Example output:
@@ -18,13 +18,14 @@ def groupby_fields_mean(
         "field2": pd.DataFrame
     }
 
-    :param data: Specifies the dataframe that is the input data which will be used for the groupby operation.
+    :param data: Specifies the dataframe that is the input data which will be used for the group by operation.
     :type data: pd.DataFrame
-    :param fields: Specifies the columns that will act as a single groupby items.
+    :param fields: Specifies the columns that will act as a single group by items.
     :type fields: List[str]
-    :param fields: Specifies Specifies which columns should be dropped.
+    :param fields: Specifies which columns should be dropped.
     :type fields: List[str]
-    :param unique_field: Specifies one unique field which will be duplicate for both of the players, defaults to "game_hash"
+    :param unique_field: Specifies one unique field which will be duplicate for both of the players,
+                         defaults to "game_hash"
     :type unique_field: str, optional
     :return: Returns a mapping of field name to result grouped dictionary.
     :rtype: Dict[str, pd.DataFrame]
