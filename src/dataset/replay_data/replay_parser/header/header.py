@@ -7,7 +7,7 @@ class Header:
 
     :param elapsedGameLoops: Specifies how much game loops (game-engine ticks) the game lasted.
     :type elapsedGameLoops: int
-    :param durationNanoseconds: Specifies how much nanoseconds the game lasted.
+    :param durationNanoseconds: Specifies how many nanoseconds the game lasted.
     :type durationNanoseconds: int
     :param durationSeconds: Specifies how much seconds the game lasted.
     :type durationSeconds: int
@@ -18,9 +18,9 @@ class Header:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Header":
         """
-        _summary_
+        Static method returning initialized Header class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
         :return: _description_
         :rtype: Header

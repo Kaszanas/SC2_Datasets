@@ -12,7 +12,7 @@ class Metadata:
     :param durationSeconds: _description_
     :type durationSeconds: int
     :param gameVersion: _description_
-    :type gameVersion: str
+    :type gameVersion: str1
     :param mapName: _description_
     :type mapName: str
     """

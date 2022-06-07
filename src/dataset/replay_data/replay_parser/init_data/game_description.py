@@ -33,7 +33,7 @@ class GameDescription:
 
         :param d: _description_
         :type d: Dict[str, Any]
-        :return: _description_
+        :return: Returns an initialized GameDescription class.
         :rtype: GameDescription
         """
         return GameDescription(
