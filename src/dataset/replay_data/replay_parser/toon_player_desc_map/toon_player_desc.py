@@ -8,23 +8,23 @@ from src.dataset.replay_data.replay_parser.toon_player_desc_map.toon_player_info
 
 class ToonPlayerDesc:
     """
-    _summary_
+    Specifies ToonPlayerDesc class representation
 
-    :param toon: _description_
+    :param toon: There is no valuable information about this parameter
     :type toon: Toon
-    :param toon_player_info: _description_
+    :param toon_player_info: Specific a ToonPlayerInfo class object, which include list of parameters
     :type toon_player_info: ToonPlayerInfo
     """
 
     @staticmethod
     def from_dict(toon: str, d: Dict[str, Any]) -> "ToonPlayerDesc":
         """
-        _summary_
+        Static method returning initialized ToonPlayerDesc class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
-        :return: _description_
-        :rtype: ToonPlayerDescMap
+        :return: Returns an initialized ToonPlayerDesc class.
+        :rtype: ToonPlayerDesc
         """
         return ToonPlayerDesc(
             toon=toon,
