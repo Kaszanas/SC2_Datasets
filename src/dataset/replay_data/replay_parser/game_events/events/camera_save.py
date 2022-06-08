@@ -6,16 +6,15 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d i
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
-# TODO: Document the docstrings
 class CameraSave(GameEvent):
     """
     CameraSave represents the replay information about saved camera in the game.
 
-    :param id: _description_
+    :param id: Highly likely this field specifies an id of CameraSave object, many elements have the same id in
     :type id: int
     :param loop: Specifies the loop number when the camera location was set in the game
     :type loop: int
-    :param target: Specifies the Target class object which includes x and y coordinates, where the camera location was set
+    :param target: Specifies the Target class object which includes x and y coordinates, where the camera location was set in the game
     :type target: Target
     :param userid: Specifies the id of the player who saved the camera location
     :type userid: int
