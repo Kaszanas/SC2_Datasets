@@ -5,7 +5,7 @@ from src.dataset.replay_data.replay_parser.init_data.game_options import GameOpt
 
 class GameDescription:
     """
-    GameDescription specifies an information about many parameters about  StarCraft II game.
+    GameDescription specifies an information about some basic parameters of a StarCraft II replay.
 
     :param gameOptions: Specifies options in the game, for example you can set: fog, random races, competitive, etc.
     :type gameOptions: GameOptions
