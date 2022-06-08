@@ -6,21 +6,22 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.target_3d i
 class TargetUnit:
 
     """
-    _summary_
+    Specifies which unit was targeted.
+    We were not able to verify precise meaning of this data type.
 
-    :param snapshotControlPlayerId: _description_
+    :param snapshotControlPlayerId: Most likely specifies which player had control over the unit.
     :type snapshotControlPlayerId: int
-    :param snapshotPoint: _description_
+    :param snapshotPoint: Most likely specifies at which point the unit was targeted.
     :type snapshotPoint: Target3D
-    :param snapshotUnitLink: _description_
+    :param snapshotUnitLink: This is an unknown parameter.
     :type snapshotUnitLink: int
-    :param snapshotUpkeepPlayerId: _description_
+    :param snapshotUpkeepPlayerId: Most likely specifies which of the players' supply was affected.
     :type snapshotUpkeepPlayerId: int
-    :param tag: _description_
+    :param tag: Most likely specifies a unit tag.
     :type tag: int
-    :param targetUnitFlags: _description_
+    :param targetUnitFlags: This is an unknown parameter.
     :type targetUnitFlags: int
-    :param timer: _description_
+    :param timer: This is an unknown parameter.
     :type timer: int
     """
 
