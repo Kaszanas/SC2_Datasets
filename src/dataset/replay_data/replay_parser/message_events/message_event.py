@@ -3,7 +3,6 @@ from types import NotImplementedType
 from typing import Dict, Literal
 
 
-# TODO: from_dict documentation
 
 
 class MessageEvent(metaclass=abc.ABCMeta):
@@ -18,10 +17,10 @@ class MessageEvent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def from_dict(d: Dict) -> "MessageEvent":
         """
-        _summary_
+        Abstract method returning an abstraction for MessageEvent. This helps with implementation, with the original JSON parsing.
 
-        :param dict: Specifies a dictionary, it holds translations of a phrase or sentence.
-        :type dict: Dict
+        :param d: Specifies a dictionary, it holds translations of a phrase or sentence.
+        :type d: Dict
         :raises NotImplementedError: Raises an error if not implemented, this is only an abstract method
         :return: Specifies a sheet of method to must be implemented in other classes
         :rtype: MessageEvent
