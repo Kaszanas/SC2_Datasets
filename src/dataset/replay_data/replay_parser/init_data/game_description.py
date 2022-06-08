@@ -5,7 +5,7 @@ from src.dataset.replay_data.replay_parser.init_data.game_options import GameOpt
 
 class GameDescription:
     """
-    _summary_
+    GameDescription specifies an information about many parameters about  StarCraft II game.
 
     :param gameOptions: Specifies options in the game, for example you can set: fog, random races, competitive, etc.
     :type gameOptions: GameOptions
@@ -29,9 +29,9 @@ class GameDescription:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameDescription":
         """
-        _summary_
+        Static method returning initialized GameDescription class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
         :return: Returns an initialized GameDescription class.
         :rtype: GameDescription
