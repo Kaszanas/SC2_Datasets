@@ -15,7 +15,7 @@ class GameEvent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def from_dict(d: Dict) -> "GameEvent":
         """
-        Abstract method returning an abstraction for GameEvent. This method helps with implementation, with the original JSON parsing.
+        Abstract method returning some GameEvent. This method helps with implementation, with the original JSON parsing.
 
         :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict

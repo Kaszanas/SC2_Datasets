@@ -17,7 +17,7 @@ class MessageEvent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def from_dict(d: Dict) -> "MessageEvent":
         """
-        Abstract method returning an abstraction for MessageEvent. This method helps with implementation, with the original JSON parsing.
+        Abstract method returning some MessageEvent. This method helps with implementation, with the original JSON parsing.
 
         :param d: Specifies a dictionary, it holds translations of a phrase or sentence.
         :type d: Dict

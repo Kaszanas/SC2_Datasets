@@ -18,7 +18,7 @@ class ToonPlayerInfo:
     :param SQ: Specifies spending quotient value, ratio between resources mining and spending,
                more information: https://tl.net/forum/starcraft-2/266019-do-you-macro-like-a-pro
     :type SQ: int
-    :param supplyCappedPercent: Specifies a 'supply block' value in seconds, at the end of the game.
+    :param supplyCappedPercent: Specifies a 'supply block' percent of game time that a player was supply capped.
     :type supplyCappedPercent: int
     :param startDir: Specifies  the start direction of the player, expressed in clock
     :type startDir: int
@@ -46,7 +46,7 @@ class ToonPlayerInfo:
     :type isInClan: bool
     :param clanTag: Specifies the shortcut of the player's clan
     :type clanTag: str
-    :param handicap: Specifies a percentage value of units' maximum health points
+    :param handicap: Specifies a percentage value of units and structures maximum health points
     :type handicap: int
     :param color: Specifies the color RGBA palette of the player
     :type color: Color

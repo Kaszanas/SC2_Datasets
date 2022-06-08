@@ -10,7 +10,7 @@ class ToonPlayerDesc:
     """
     Specifies ToonPlayerDesc class representation
 
-    :param toon: Specifies a unique value of the player's account folder, example: 3-S2-1-6904171
+    :param toon: Specifies a player's unique account identifier, example: 3-S2-1-6904171
     :type toon: Toon
     :param toon_player_info: Specific a ToonPlayerInfo class object, which include list of parameters
     :type toon_player_info: ToonPlayerInfo
