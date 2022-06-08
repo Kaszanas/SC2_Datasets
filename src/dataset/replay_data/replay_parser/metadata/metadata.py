@@ -3,34 +3,31 @@ from typing import Any, Dict
 
 class Metadata:
     """
-    _summary_
+    Specifies a class which includes parameters about the game, like version, build, map etc. the game was played
 
-    :param baseBuild: _description_
+    :param baseBuild: Specifies a build number of the game engine.
     :type baseBuild: str
-    :param dataBuild: _description_
+    :param dataBuild: Specifies a number of the build
     :type dataBuild: str
-    :param durationSeconds: _description_
-    :type durationSeconds: int
-    :param gameVersion: _description_
-    :type gameVersion: str1
-    :param mapName: _description_
+    :param gameVersion: Specifies a number of game version when the game was played
+    :type gameVersion: str
+    :param mapName: Specifies a name of the mapa on what the game was played
     :type mapName: str
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Metadata":
         """
-        _summary_
+        Static method returning initialized Metadata class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
-        :return: _description_
+        :return: Returns an initialized Metadata class.
         :rtype: Metadata
         """
         return Metadata(
             baseBuild=d["baseBuild"],
             dataBuild=d["dataBuild"],
-            durationSeconds=d["durationSeconds"],
             gameVersion=d["gameVersion"],
             mapName=d["mapName"],
         )
@@ -39,13 +36,11 @@ class Metadata:
         self,
         baseBuild: str,
         dataBuild: str,
-        durationSeconds: int,
         gameVersion: str,
         mapName: str,
     ) -> None:
 
         self.baseBuild = baseBuild
         self.dataBuild = dataBuild
-        self.durationSeconds = durationSeconds
         self.gameVersion = gameVersion
         self.mapName = mapName

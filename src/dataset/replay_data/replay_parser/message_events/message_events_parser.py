@@ -9,7 +9,7 @@ class MessageEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> MessageEvent:
         """
-        _summary_
+        Static method returning initialized Header class from a dictionary. This helps with the original JSON parsing.
 
         :param d: Specifies a dictionary, it holds translations of a phrase or sentence.
         :type d: Dict
