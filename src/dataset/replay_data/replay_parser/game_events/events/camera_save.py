@@ -12,7 +12,7 @@ class CameraSave(GameEvent):
 
     :param id: Highly likely this field specifies an id of CameraSave object, many elements have the same id in
     :type id: int
-    :param loop: Specifies the loop number when the camera location was set in the game
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
     :param target: Specifies the Target class object which includes x and y coordinates, where the camera location was set in the game
     :type target: Target

@@ -7,10 +7,6 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d i
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
-# TODO: There are some null values in the data
-# it needs to be verified if such null values are a problem for later calculations with the dataset?
-# Should this be encoded somehow?
-# TODO: Document the docstrings
 class CameraUpdate(GameEvent):
     """
     CameraUpdate represents the replay information about updated camera location in the game.
@@ -21,7 +17,7 @@ class CameraUpdate(GameEvent):
     :type follow: bool
     :param id: There is no valuable information about this parameter
     :type id: int
-    :param loop: There is no valuable information about this parameter
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
     :param pitch: Specifies angle in the vertical plane, vertical elevation of the camera.
     :type pitch: NoneType | float | int
