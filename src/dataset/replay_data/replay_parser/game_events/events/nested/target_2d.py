@@ -4,7 +4,7 @@ class Target2D:
 
     :param x: Specifies the x value of the target.
     :type x: float
-    :param y: Specifies the y value of the target
+    :param y: Specifies the y value of the target.
     :type y: float
     """
 
