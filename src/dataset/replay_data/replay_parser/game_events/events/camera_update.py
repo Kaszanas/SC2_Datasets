@@ -12,37 +12,38 @@ from src.dataset.replay_data.replay_parser.game_events.game_event import GameEve
 # Should this be encoded somehow?
 # TODO: Document the docstrings
 class CameraUpdate(GameEvent):
-    """_summary_
+    """
+    CameraUpdate represents the replay information about updated camera location in the game.
 
-    :param distance: _description_
+    :param distance: There is no valuable information about this parameter
     :type distance: NoneType | float | int
-    :param follow: _description_
+    :param follow: There is no valuable information about this parameter
     :type follow: bool
-    :param id: _description_
+    :param id: There is no valuable information about this parameter
     :type id: int
-    :param loop: _description_
+    :param loop: There is no valuable information about this parameter
     :type loop: int
-    :param pitch: _description_
+    :param pitch: Specifies angle in the vertical plane, vertical elevation of the camera.
     :type pitch: NoneType | float | int
-    :param reason: _description_
+    :param reason: There is no valuable information about this parameter
     :type reason: NoneType | str
-    :param target: _description_
+    :param target: Specifies the Target class object which includes x and y coordinates, where the camera location was set
     :type target: Target
-    :param userid: _description_
+    :param userid: Specifies the id of the player who saved the camera location
     :type userid: int
-    :param yaw: _description_
+    :param yaw: Specifies the angle in the horizontal plane of the camera
     :type yaw: NoneType | float | int
     """
 
     @staticmethod
     def from_dict(d: Dict):
         """
-        _summary_
+        Static method returning initialized CameraUpdate class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
-        :rtype: _type_
+        :return: Returns an initialized CameraUpdate class.
+        :rtype: CameraUpdate
         """
         return CameraUpdate(
             distance=d["distance"],
