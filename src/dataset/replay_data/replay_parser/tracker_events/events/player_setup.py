@@ -27,6 +27,7 @@ class PlayerSetup(TrackerEvent):
     :type userId: int
     """
 
+    @staticmethod
     def from_dict(d: Dict) -> "PlayerSetup":
         """
         _summary_
