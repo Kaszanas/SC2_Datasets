@@ -1,10 +1,10 @@
 class Target2D:
     """
-    _summary_
+    Data type holding information about a 2D target point in space.
 
-    :param x: _description_
+    :param x: Specifies the x value of the target.
     :type x: float
-    :param y: _description_
+    :param y: Specifies the y value of the target
     :type y: float
     """
 
