@@ -8,7 +8,7 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
 class UnitDone(TrackerEvent):
 
     """
-    UnitDone is containing some "details" information about unit at the moment of its build finished in the game
+    UnitDone is containing some "details" information about unit at the moment of it has built in the game
 
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
