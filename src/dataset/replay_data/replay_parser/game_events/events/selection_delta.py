@@ -16,7 +16,7 @@ class SelectionDelta(GameEvent):
     :type id: int
     :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
-    :param userid: Specifies id number of player who has done selection option in the game, example: in 1v1 game: [0,1]
+    :param userid: Specifies id number of player who has done selection option in the game
     :type userid: int
     """
 
