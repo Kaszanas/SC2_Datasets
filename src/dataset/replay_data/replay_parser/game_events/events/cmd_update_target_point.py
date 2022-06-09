@@ -8,7 +8,7 @@ from src.dataset.replay_data.replay_parser.game_events.game_event import GameEve
 
 class CmdUpdateTargetPoint(GameEvent):
     """
-    Data type containing information about camera update to some target point.
+    Data type containing information about command update issued to some target point.
 
     :param id: Specifies the event ID that should directly map to the event name which is denoted by the class.
     :type id: int
