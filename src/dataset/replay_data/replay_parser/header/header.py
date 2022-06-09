@@ -7,7 +7,7 @@ class Header:
 
     :param elapsedGameLoops: Specifies how much game loops (game-engine ticks) the game lasted.
     :type elapsedGameLoops: int
-    :param version: Specifies the game version that was used to play the game.
+    :param version: Specifies the game version that players have used to play the game.
     :type version: str
     """
 

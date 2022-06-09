@@ -2,8 +2,6 @@ import abc
 from types import NotImplementedType
 from typing import Dict, Literal
 
-# TODO: from_dict documentation
-
 
 class TrackerEvent(metaclass=abc.ABCMeta):
     @classmethod
@@ -17,12 +15,12 @@ class TrackerEvent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def from_dict(d: Dict) -> "TrackerEvent":
         """
-        _summary_
+        Abstract method returning some TrackerEvent. This method helps with implementation, with the original JSON parsing.
 
-        :param dict: _description_
-        :type dict: Dict
-        :raises NotImplementedError: _description_
-        :return: _description_
-        :rtype: MessageEvent
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :type d: Dict
+        :raises NotImplementedError: Raises an error if not implemented, this is only an abstract method
+        :return: Returns a method sheet which must be implemented
+        :rtype: TrackerEvent
         """
         raise NotImplementedError

@@ -31,18 +31,16 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
-# TODO: from_dict documentation
-
 
 class TrackerEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> TrackerEvent:
         """
-        _summary_
+        Static method returning initialized TrackerEvent class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized TrackerEvent class.
         :rtype: TrackerEvent
         """
         type_name = d["evtTypeName"]

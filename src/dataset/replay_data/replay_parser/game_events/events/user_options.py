@@ -3,56 +3,55 @@ from typing import Dict
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
-# TODO: Document the docstrings
-
-
 class UserOptions(GameEvent):
-    """_summary_
+    """
+    UserOptions is containing some "details" information about player's settings, profiles, configuration in the game.
 
-    :param baseBuildNum: _description_
+    :param baseBuildNum: Specifies a unique version number of the game build, highly likely game engine number
     :type baseBuildNum: int
-    :param buildNum: _description_
+    :param buildNum: Specifies a unique version number of the build, highly likely game build number
     :type buildNum: int
-    :param cameraFollow: _description_
+    :param cameraFollow: Specifies if the camera object is following an object
     :type cameraFollow: bool
-    :param debugPauseEnabled: _description_
+    :param debugPauseEnabled: There is no valuable information about this parameter
     :type debugPauseEnabled: bool
-    :param developmentCheatsEnabled: _description_
+    :param developmentCheatsEnabled: Specifies if cheat option for developers have been enabled
     :type developmentCheatsEnabled: bool
-    :param gameFullyDownloaded: _description_
+    :param gameFullyDownloaded: Specifies if the game was fully downloaded, with campaign, better graphic settings, etc.
     :type gameFullyDownloaded: bool
-    :param hotkeyProfile: _description_
+    :param hotkeyProfile: Specifies the name of the player's hotkey group, the player was playing on in the game
     :type hotkeyProfile: str
-    :param id: _description_
+    :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param isMapToMapTransition: _description_
+    :param isMapToMapTransition: There is no valuable information about this parameter
     :type isMapToMapTransition: bool
-    :param loop: _description_
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
-    :param multiplayerCheatsEnabled: _description_
+    :param multiplayerCheatsEnabled: Specifies if the game was having cheat options enabled in the game
     :type multiplayerCheatsEnabled: bool
-    :param platformMac: _description_
+    :param platformMac: Specifies if the game has been played on the Mac operating system
     :type platformMac: bool
-    :param syncChecksummingEnabled: _description_
+    :param syncChecksummingEnabled: There is no valuable information about this parameter
     :type syncChecksummingEnabled: bool
-    :param testCheatsEnabled: _description_
+    :param testCheatsEnabled: Specifies if the game was having tests on, to detect cheats
     :type testCheatsEnabled: bool
-    :param useGalaxyAsserts: _description_
+    :param useGalaxyAsserts: There is no valuable information about this parameter
     :type useGalaxyAsserts: bool
-    :param userid: _description_
+    :param userid: Specifies the id of the player who has been the owner of the options in the game
     :type userid: int
-    :param versionFlags: _description_
+    :param versionFlags: There is no valuable information about this parameter, might it be a player's setting version,
+                         default = 0
     :type versionFlags: int
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "UserOptions":
         """
-        _summary_
+        Static method returning initialized UserOptions class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized UserOptions class.
         :rtype: UserOptions
         """
         return UserOptions(

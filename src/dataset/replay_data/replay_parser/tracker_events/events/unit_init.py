@@ -4,41 +4,39 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
-# TODO: Document the docstrings
-
 
 class UnitInit(TrackerEvent):
 
     """
-    _summary_
+    UnitInit holds information about initializing object in the game
 
-    :param controlPlayerId: _description_
+    :param controlPlayerId: Specifies the information about player id who made the unit in the game
     :type controlPlayerId: int
-    :param id: _description_
+    :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
-    :param unitTagIndex: _description_
+    :param unitTagIndex: Specifies a pointer for a specific unit which was initialized in the game
     :type unitTagIndex: int
-    :param unitTagRecycle: _description_
+    :param unitTagRecycle: There is no specific information about this parameter
     :type unitTagRecycle: int
-    :param unitTypeName: _description_
+    :param unitTypeName: Specifies a unit name in the game, which was initialized in the game
     :type unitTypeName: str
-    :param upkeepPlayerId: _description_
+    :param upkeepPlayerId: Specifies an id number of player who was having the control of the unit in the game
     :type upkeepPlayerId: int
-    :param x: _description_
+    :param x: Specifies x coordinate of map in pixels where the object was initialized.
     :type x: int
-    :param y: _description_
+    :param y: Specifies y coordinate of map in pixels where the object was initialized.
     :type y: int
     """
 
     def from_dict(d: Dict) -> "UnitInit":
         """
-        _summary_
+        Static method returning initialized UnitInit class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized UnitInit class.
         :rtype: UnitInit
         """
         return UnitInit(

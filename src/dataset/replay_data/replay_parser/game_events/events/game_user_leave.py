@@ -3,30 +3,28 @@ from typing import Dict
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
-# TODO: Document the docstrings
-
-
 class GameUserLeave(GameEvent):
     """
-    _summary_
+    GameUserLeave is containing some "details" information about player's leaving the game like time, reason, etc.
 
-    :param id: _description_
+    :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param leaveReason: _description_
+    :param leaveReason: Specifies a number which determinate leaving reason, there are no more details
     :type leaveReason: int
-    :param loop: _description_
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
-    :param userid: _description_
+    :param userid: Specifies id number of player who has left the game
     :type userid: int
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "GameUserLeave":
-        """_summary_
+        """
+        Static method returning initialized GameUserLeave class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized GameUserLeave class.
         :rtype: GameUserLeave
         """
         return GameUserLeave(

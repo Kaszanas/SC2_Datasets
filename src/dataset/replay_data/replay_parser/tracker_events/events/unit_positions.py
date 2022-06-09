@@ -4,30 +4,29 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
-# TODO: Document the docstrings
-
 
 class UnitPositions(TrackerEvent):
 
-    """_summary_
+    """
+    UnitPositions holds some detail information about how the unit position was changing during the game.
 
-    :param firstUnitIndex: _description_
+    :param firstUnitIndex: Specifies a pointer for a specific unit which was doing some changes
     :type firstUnitIndex: int
-    :param id: _description_
+    :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param items: _description_
+    :param items: Specifies a list of int values, there is no specific information what the numbers mean
     :type items: List[int]
-    :param loop: _description_
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
     """
 
     def from_dict(d: Dict) -> "UnitPositions":
         """
-        _summary_
+        Static method returning initialized UnitPositions class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized Header class.
         :rtype: UnitPositions
         """
         return UnitPositions(

@@ -4,33 +4,30 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.delta impor
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
-# TODO: Document the docstrings
-
-
 class SelectionDelta(GameEvent):
     """
-    _summary_
+    SelectionDelta is containing some "details" information about player's selection during the game
 
-    :param controlGroupId: _description_
+    :param controlGroupId: Specifies the event id of the control group, which has been selected
     :type controlGroupId: int
-    :param delta: _description_
+    :param delta: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type delta: Delta
-    :param id: _description_
+    :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
-    :param userid: _description_
+    :param userid: Specifies id number of player who has done selection option in the game
     :type userid: int
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "SelectionDelta":
         """
-        _summary_
+        Static method returning initialized SelectionDelta class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized SelectionDelta class.
         :rtype: SelectionDelta
         """
         return SelectionDelta(

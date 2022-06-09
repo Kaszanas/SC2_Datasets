@@ -3,8 +3,6 @@ from types import NotImplementedType
 from typing import Dict, Literal
 
 
-
-
 class MessageEvent(metaclass=abc.ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass: type) -> Literal[True] | NotImplementedType:

@@ -4,34 +4,33 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
-# TODO: Document the docstrings
-
 
 class Upgrade(TrackerEvent):
 
     """
-    _summary_
+    Upgrade type containing some "details" information like which player is doing an upgrade, game loop, upgrade in game name etc.
 
-    :param count: _description_
+    :param count: Specifies a number value, highly likely this parameter serves for adding value of upgrades to summary.
+                  Default value of the parameter is 1.
     :type count: int
-    :param id: _description_
+    :param id: Specifies an event unique number
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies a game loop when the upgrade was started in the game
     :type loop: int
-    :param playerId: _description_
+    :param playerId: Specifies an id of the player who was doing the upgrade in the game
     :type playerId: int
-    :param upgradeTypeName: _description_
+    :param upgradeTypeName: Specifies a name that upgrade has in the game
     :type upgradeTypeName: str
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "Upgrade":
         """
-        _summary_
+        Static method returning initialized Upgrade class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized Upgrade class.
         :rtype: Upgrade
         """
         return Upgrade(

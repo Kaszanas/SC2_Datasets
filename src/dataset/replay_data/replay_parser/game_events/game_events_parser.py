@@ -41,13 +41,11 @@ from src.dataset.replay_data.replay_parser.game_events.events.user_options impor
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
-
-
 class GameEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> GameEvent:
         """
-        Static method returning initialized GameEventsParser class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized GameEvent class from a dictionary. This helps with the original JSON parsing.
 
         :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict

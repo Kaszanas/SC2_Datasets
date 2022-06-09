@@ -10,7 +10,7 @@ from tqdm import tqdm
 # REVIEW: Check this:
 def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
     """
-    Helper function for unpacking a chunk of files from a an archive
+    Helper function for unpacking a chunk of files from an archive
 
     :param zip_path: Specifies the path to the archive file that will be extracted.
     :type zip_path: str

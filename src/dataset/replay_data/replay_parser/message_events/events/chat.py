@@ -5,13 +5,11 @@ from src.dataset.replay_data.replay_parser.message_events.message_event import (
     MessageEvent,
 )
 
-# TODO: Docstrings
-
 
 class Chat(MessageEvent):
 
     """
-    _summary_
+    Chat holds information about messages between players during the game
 
     :param id: Specifies id of the chat event
     :type id: int
@@ -28,7 +26,7 @@ class Chat(MessageEvent):
     @staticmethod
     def from_dict(d: Dict) -> "Chat":
         """
-        _summary_
+        Static method returning initialized Chat class from a dictionary. This helps with the original JSON parsing.
 
         :param d: Specifies a dictionary, it holds translations of a phrase or sentence.
         :type d: Dict
