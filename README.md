@@ -5,18 +5,19 @@ This repository contains the official API for interacting with SC2EGSet: StarCra
 # Prerequisites
 
 0. Install Python >= 3.10
-1. Place the dataset into the ```./data``` directory
-2. Run the ```src/main.py```
-
 
 # Installation
 
-```
-pip install sc2egset_dataset
-```
+As of now the code requires manual installation through provided ```requirements.txt``` with a minimal version of Python highlighted above.
+
+## Usage
+
+Please refer to the docstrings provided in the code implementation for in-depth usage information.
+
+Officially hosted automatically generated documentation is going to be generated in the next update of this repository.
 
 ## Citation
 
 ```
-Fill This
+Fill This!
 ```
