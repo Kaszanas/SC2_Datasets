@@ -15,7 +15,7 @@ class UserOptions(GameEvent):
     :type cameraFollow: bool
     :param debugPauseEnabled: There is no valuable information about this parameter
     :type debugPauseEnabled: bool
-    :param developmentCheatsEnabled: Specifies if cheat option for developers was enabled
+    :param developmentCheatsEnabled: Specifies if cheat option for developers have been enabled
     :type developmentCheatsEnabled: bool
     :param gameFullyDownloaded: Specifies if the game was fully downloaded, with campaign, better graphic settings, etc.
     :type gameFullyDownloaded: bool
@@ -29,7 +29,7 @@ class UserOptions(GameEvent):
     :type loop: int
     :param multiplayerCheatsEnabled: Specifies if the game was having cheat options enabled in the game
     :type multiplayerCheatsEnabled: bool
-    :param platformMac: Specifies if the game was played on the Mac operating system
+    :param platformMac: Specifies if the game has been played on the Mac operating system
     :type platformMac: bool
     :param syncChecksummingEnabled: There is no valuable information about this parameter
     :type syncChecksummingEnabled: bool
@@ -37,7 +37,7 @@ class UserOptions(GameEvent):
     :type testCheatsEnabled: bool
     :param useGalaxyAsserts: There is no valuable information about this parameter
     :type useGalaxyAsserts: bool
-    :param userid: Specifies the id of the player who was the owner of the options in the game, example: in 1v1 game: [0,1]
+    :param userid: Specifies the id of the player who has been the owner of the options in the game, example: in 1v1 game: [0,1]
     :type userid: int
     :param versionFlags: There is no valuable information about this parameter, might it be a player's setting version,
                          default = 0

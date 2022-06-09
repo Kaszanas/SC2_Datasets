@@ -9,7 +9,7 @@ class GameOptions:
     :type advancedSharedControl: bool
     :param amm: Specifies if AMM (AutoMM - Automated Match Making) is enabled
     :type amm: bool
-    :param battleNet: Specifies if game was played on Battle.net
+    :param battleNet: Specifies if game has been played on Battle.net
     :type battleNet: bool
     :param clientDebugFlags: Specifies the client debug flag
     :type clientDebugFlags: int
@@ -44,7 +44,7 @@ class GameOptions:
 
         :param d: Describes a dictionary, it holds translations of a phrase or sentence
         :type d: Dict[str, Any]
-        :return: Specifies a list of parameters about the game like a number of observers, fog of the game, if game was
+        :return: Specifies a list of parameters about the game like a number of observers, fog of the game, if the game was
                  competitive etc.
         :rtype: GameOptions
         """

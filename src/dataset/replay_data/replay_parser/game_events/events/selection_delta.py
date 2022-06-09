@@ -8,7 +8,7 @@ class SelectionDelta(GameEvent):
     """
     SelectionDelta is containing some "details" information about player's selection during the game
 
-    :param controlGroupId: Specifies the event id of the control group, which was selected
+    :param controlGroupId: Specifies the event id of the control group, which has been selected
     :type controlGroupId: int
     :param delta: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type delta: Delta
