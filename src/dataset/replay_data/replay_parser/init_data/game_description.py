@@ -1,38 +1,39 @@
 from typing import Any, Dict
+
 from src.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
 
 
 class GameDescription:
-
     """
-    _summary_
+    GameDescription specifies an information about some basic parameters of a StarCraft II replay.
 
-    :param gameOptions: _description_
+    :param gameOptions: Specifies options in the game, for example you can set: fog, random races, competitive, etc.
     :type gameOptions: GameOptions
-    :param gameSpeed: _description_
+    :param gameSpeed: Specifies the speed at which your game runs. Enum: [Slower, Slow, Normal, Fast, Faster].
+                      Default is Faster
     :type gameSpeed: str
-    :param isBlizzardMap: _description_
+    :param isBlizzardMap: Specifies if map have been created by Blizzard
     :type isBlizzardMap: bool
-    :param mapAuthorName: _description_
+    :param mapAuthorName: Nickname or fullname of the map's author
     :type mapAuthorName: str
-    :param mapFileSyncChecksum: _description_
+    :param mapFileSyncChecksum: Specifies the map file sync checksum
     :type mapFileSyncChecksum: int
-    :param mapSizeX: _description_
+    :param mapSizeX: X coordinate size of map in pixels.
     :type mapSizeX: int
-    :param mapSizeY: _description_
+    :param mapSizeY: Y coordinate size of map in pixels.
     :type mapSizeY: int
-    :param maxPlayers: _description_
+    :param maxPlayers: Specifies how many players can play on this map at once.
     :type maxPlayers: int
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameDescription":
         """
-        _summary_
+        Static method returning initialized GameDescription class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
-        :return: _description_
+        :return: Returns an initialized GameDescription class.
         :rtype: GameDescription
         """
         return GameDescription(
@@ -57,7 +58,6 @@ class GameDescription:
         mapSizeY: int,
         maxPlayers: int,
     ) -> None:
-
         self.gameOptions = gameOptions
         self.gameSpeed = gameSpeed
         self.isBlizzardMap = isBlizzardMap

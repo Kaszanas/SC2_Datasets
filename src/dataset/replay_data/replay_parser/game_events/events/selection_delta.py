@@ -1,14 +1,13 @@
 from typing import Dict
 
-
 from src.dataset.replay_data.replay_parser.game_events.events.nested.delta import Delta
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+
 
 # TODO: Document the docstrings
 
 
 class SelectionDelta(GameEvent):
-
     """
     _summary_
 
@@ -50,7 +49,6 @@ class SelectionDelta(GameEvent):
         loop: int,
         userid: int,
     ) -> None:
-
         self.controlGroupId = controlGroupId
         self.delta = delta
         self.id = id

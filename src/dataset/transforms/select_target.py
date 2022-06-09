@@ -4,7 +4,7 @@ from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 class SelectTarget:
-    def __call__(self, sc2_replay_data: SC2ReplayData, target: str) -> Tuple[]:
+    def __call__(self, sc2_replay_data: SC2ReplayData, target: str) -> Tuple[Any]:
         """
         _summary_
 

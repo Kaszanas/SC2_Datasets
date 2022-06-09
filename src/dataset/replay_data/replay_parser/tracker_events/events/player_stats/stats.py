@@ -4,11 +4,9 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
-# TODO: Document the docstrings
 
 
 class Stats(TrackerEvent):
-
     """
     Stats holds specific fields on the economy of a player and is used in PlayerStats event.
 
@@ -26,7 +24,7 @@ class Stats(TrackerEvent):
     :type mineralsFriendlyFireEconomy: int
     :param mineralsFriendlyFireTechnology: Specifies how much minerals were lost in friendly fire on technology.
     :type mineralsFriendlyFireTechnology: int
-    :param mineralsKilledArmy: Specifies how much minerals player killed in his oponents army.
+    :param mineralsKilledArmy: Specifies how much minerals a player killed in his oponent's army.
     :type mineralsKilledArmy: int
     :param mineralsKilledEconomy: Specifies how much minerals player killed in his oponents economy.
     :type mineralsKilledEconomy: int
@@ -95,11 +93,11 @@ class Stats(TrackerEvent):
     @staticmethod
     def from_dict(d: Dict) -> "Stats":
         """
-        _summary_
+        Static method returning initialized Stats class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized Stats class.
         :rtype: Stats
         """
         return Stats(
@@ -192,7 +190,6 @@ class Stats(TrackerEvent):
         vespeneUsedInProgressTechnology: int,
         workersActiveCount: int,
     ) -> None:
-
         # This calculation is required for raw data ingestion:
         self.foodMade = int(foodMade / 4096)
         self.foodUsed = int(foodUsed / 4096)

@@ -9,6 +9,10 @@
 # Abstract game event type. Needs to support at least the following:
 # {'UserOptions', 'CameraUpdate', 'ControlGroupUpdate', 'GameUserLeave', 'CommandManagerState', 'CameraSave', 'CmdUpdateTargetPoint', 'CmdUpdateTargetUnit', 'Cmd', 'SelectionDelta'}
 from typing import Dict
+
+from src.dataset.replay_data.replay_parser.game_events.events.camera_save import (
+    CameraSave,
+)
 from src.dataset.replay_data.replay_parser.game_events.events.camera_update import (
     CameraUpdate,
 )
@@ -28,9 +32,6 @@ from src.dataset.replay_data.replay_parser.game_events.events.control_group_upda
 from src.dataset.replay_data.replay_parser.game_events.events.game_user_leave import (
     GameUserLeave,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import (
-    Target2D,
-)
 from src.dataset.replay_data.replay_parser.game_events.events.selection_delta import (
     SelectionDelta,
 )
@@ -39,22 +40,18 @@ from src.dataset.replay_data.replay_parser.game_events.events.user_options impor
 )
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
-from src.dataset.replay_data.replay_parser.game_events.events.camera_save import (
-    CameraSave,
-)
 
-# TODO: from_dict documentation
 
 
 class GameEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> GameEvent:
         """
-        _summary_
+        Static method returning initialized GameEventsParser class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized GameEvent class.
         :rtype: GameEvent
         """
         type_name = d["evtTypeName"]

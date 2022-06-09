@@ -35,7 +35,6 @@ class Details:
         isBlizzardMap: bool,
         timeUTC: str,
     ) -> None:
-
         self.gameSpeed = gameSpeed
         self.isBlizzardMap = isBlizzardMap
         self.timeUTC = timeUTC

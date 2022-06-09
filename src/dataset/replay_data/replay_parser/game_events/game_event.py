@@ -3,9 +3,6 @@ from types import NotImplementedType
 from typing import Dict, Literal
 
 
-# TODO: from_dict documentation
-
-
 class GameEvent(metaclass=abc.ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass: type) -> Literal[True] | NotImplementedType:
@@ -18,12 +15,12 @@ class GameEvent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def from_dict(d: Dict) -> "GameEvent":
         """
-        _summary_
+        Abstract method returning some GameEvent. This method helps with implementation, with the original JSON parsing.
 
-        :param dict: _description_
-        :type dict: Dict
-        :raises NotImplementedError: _description_
-        :return: _description_
-        :rtype: MessageEvent
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :type d: Dict
+        :raises NotImplementedError: Raises an error if method is not implemented
+        :return: Returns a method sheet which must be implemented
+        :rtype: GameEvent
         """
         raise NotImplementedError

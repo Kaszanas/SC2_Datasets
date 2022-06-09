@@ -5,32 +5,31 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d i
 )
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
-# TODO: Document the docstrings
+
 class CameraSave(GameEvent):
-
     """
-    _summary_
+    CameraSave represents the replay information about saved camera in the game.
 
-    :param id: _description_
+    :param id: Highly likely this field specifies an id of CameraSave object, many elements have the same id in
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
-    :param target: _description_
+    :param target: Specifies the Target class object which includes x and y coordinates, where the camera location was set in the game
     :type target: Target
-    :param userid: _description_
+    :param userid: Specifies the id of the player who saved the camera location
     :type userid: int
-    :param which: _description_
+    :param which: Specifies a hotkey [0-9] to which camera location was set
     :type which: int
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "CameraSave":
         """
-        _summary_
+        Static method returning initialized CameraSave class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized CameraSave class.
         :rtype: CameraSave
         """
         return CameraSave(
@@ -49,7 +48,6 @@ class CameraSave(GameEvent):
         userid: int,
         which: int,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.target = target

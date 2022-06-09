@@ -3,26 +3,26 @@ from typing import Dict
 
 class Color:
     """
-    _summary_
+    Specifies RGBA model color representation
 
-    :param a: _description_
+    :param a: Specifies an alpha parameter of RGBA
     :type a: int
-    :param b: _description_
+    :param b: Specifies a blue parameter of RGBA
     :type b: int
-    :param g: _description_
+    :param g: Specifies a green parameter of RGBA
     :type g: int
-    :param r: _description_
+    :param r: Specifies a red parameter of RGBA
     :type r: int
     """
 
     @staticmethod
     def from_dict(d: Dict[str, int]) -> "Color":
         """
-        _summary_
+        Static method returning initialized Color class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, int]
-        :return: _description_
+        :return: Returns an initialized Color class.
         :rtype: Color
         """
         return Color(

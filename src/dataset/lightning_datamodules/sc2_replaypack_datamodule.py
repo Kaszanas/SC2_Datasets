@@ -1,6 +1,6 @@
 from typing import Callable, Optional
-import pytorch_lightning as pl
 
+import pytorch_lightning as pl
 from torch.utils.data import random_split
 from torch.utils.data.dataloader import DataLoader
 
@@ -8,7 +8,6 @@ from src.dataset.pytorch_datasets.sc2_replaypack_dataset import SC2ReplaypackDat
 
 
 class SC2ReplaypackDataModule(pl.LightningDataModule):
-
     """
     Defines a LightningDataModule abstraction for a single StarCraft II replaypack.
 
@@ -22,13 +21,16 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     :type url: str, optional
     :param download: Specifies if the dataset should be downloaded. Otherwise the dataset is loaded from the unpack_dir and a custom directory structure is assumed, defaults to True
     :type download: bool, optional
-    :param transform: Specifies the PyTorch transforms to be used on the replaypack (dataset), defaults to None
+    :param transform: Specifies the PyTorch transforms to be used on the replaypack (dataset),
+                      Deprecated since version v1.5: Will be removed in v1.7.0,
+                      defaults to None
     :type transform: _type_, optional
-    :param dims: _description_, defaults to None
+    :param dims: Specifies a tuple describing the shape of your data. Extra functionality exposed in size,
+                 Deprecated since version v1.5: Will be removed in v1.7.0, defaults to None
     :type dims: _type_, optional
     :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
     :type unpack_n_workers: int, optional
-    :param validator: _description_, defaults to None
+    :param validator: Specifies the validation option for fetched data, defaults to None
     :type validator: Callable | None, optional
     """
 
@@ -46,7 +48,6 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         unpack_n_workers: int = 16,
         validator: Callable | None = None,
     ):
-
         super().__init__()
 
         # PyTorch fields:

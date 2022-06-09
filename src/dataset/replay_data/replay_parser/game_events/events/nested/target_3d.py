@@ -1,13 +1,13 @@
 class Target3D:
 
     """
-    _summary_
+    Data type holding information about a 3D target point in space.
 
-    :param x: _description_
+    :param x: Specifies the x value of the target.
     :type x: float
-    :param y: _description_
+    :param y: Specifies the y value of the target.
     :type y: float
-    :param z: _description_
+    :param z: Specifies the z value of the target.
     :type z: float
     """
 

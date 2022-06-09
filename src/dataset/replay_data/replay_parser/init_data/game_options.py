@@ -2,50 +2,50 @@ from typing import Any, Dict
 
 
 class GameOptions:
-
     """
-    _summary_
+    GameOptions represents the replay game options
 
-    :param advancedSharedControl: _description_
+    :param advancedSharedControl: Specifies if advanced shared control is enabled
     :type advancedSharedControl: bool
-    :param amm: _description_
+    :param amm: Specifies if AMM (AutoMM - Automated Match Making) is enabled
     :type amm: bool
-    :param battleNet: _description_
+    :param battleNet: Specifies if game was played on Battle.net
     :type battleNet: bool
-    :param clientDebugFlags: _description_
+    :param clientDebugFlags: Specifies the client debug flag
     :type clientDebugFlags: int
-    :param competitive: _description_
+    :param competitive: It means either ranked or unranked,
     :type competitive: bool
-    :param cooperative: _description_
+    :param cooperative: Specifies if game was cooperative
     :type cooperative: bool
-    :param fog: _description_
+    :param fog: Specifies the value of fog in the game
     :type fog: int
-    :param heroDuplicatesAllowed: _description_
+    :param heroDuplicatesAllowed: Specifies if hero can be duplicated
     :type heroDuplicatesAllowed: bool
-    :param lockTeams: _description_
+    :param lockTeams: Specifies if teams are locked
     :type lockTeams: bool
-    :param noVictoryOrDefeat: _description_
+    :param noVictoryOrDefeat: There is no information about this parameter
     :type noVictoryOrDefeat: bool
-    :param observers: _description_
+    :param observers: Specifies count of observers watching the game
     :type observers: int
-    :param practice: _description_
+    :param practice: There is no information about this parameter
     :type practice: bool
-    :param randomRaces: _description_
+    :param randomRaces: Specifies if random races are in the game
     :type randomRaces: bool
-    :param teamsTogether: _description_
+    :param teamsTogether: Specifies if teams of players are in the game
     :type teamsTogether: bool
-    :param userDifficulty: _description_
+    :param userDifficulty: There is no information about this parameter
     :type userDifficulty: bool
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameOptions":
         """
-        _summary_
+        Static method returning initialized GameOptions class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Describes a dictionary, it holds translations of a phrase or sentence
         :type d: Dict[str, Any]
-        :return: _description_
+        :return: Specifies a list of parameters about the game like a number of observers, fog of the game, if game was
+                 competitive etc.
         :rtype: GameOptions
         """
         return GameOptions(
@@ -84,7 +84,6 @@ class GameOptions:
         teamsTogether: bool,
         userDifficulty: bool,
     ) -> None:
-
         self.advancedSharedControl = advancedSharedControl
         self.amm = amm
         self.battleNet = battleNet

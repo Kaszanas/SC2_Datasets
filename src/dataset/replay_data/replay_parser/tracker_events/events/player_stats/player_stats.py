@@ -7,8 +7,6 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
-# TODO: Document the docstrings
-
 
 class PlayerStats(TrackerEvent):
     """
@@ -27,11 +25,11 @@ class PlayerStats(TrackerEvent):
     @staticmethod
     def from_dict(d: Dict) -> "PlayerStats":
         """
-        _summary_
+        Static method returning initialized PlayerStats class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized PlayerStats class.
         :rtype: PlayerStats
         """
         return PlayerStats(
@@ -48,7 +46,6 @@ class PlayerStats(TrackerEvent):
         playerId: int,
         stats: Stats,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.playerId = playerId

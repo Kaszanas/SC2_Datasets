@@ -1,7 +1,7 @@
 from typing import Dict
 
-
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+
 
 # TODO: Document the docstrings
 
@@ -95,7 +95,6 @@ class UserOptions(GameEvent):
         userid: int,
         versionFlags: int,
     ) -> None:
-
         self.baseBuildNum = baseBuildNum
         self.buildNum = buildNum
         self.cameraFollow = cameraFollow

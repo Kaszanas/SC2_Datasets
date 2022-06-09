@@ -13,15 +13,15 @@ class Chat(MessageEvent):
     """
     _summary_
 
-    :param id: _description_
+    :param id: Specifies id of the chat event
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies game loop number when the event occurred
     :type loop: int
-    :param recipient: _description_
+    :param recipient: Specifies the message recipient of the event
     :type recipient: int
-    :param string: _description_
+    :param string: Specifies the message in the chat event
     :type string: str
-    :param userid: _description_
+    :param userid: Specifies user id causing the event
     :type userid: int
     """
 
@@ -30,9 +30,9 @@ class Chat(MessageEvent):
         """
         _summary_
 
-        :param d: _description_
+        :param d: Specifies a dictionary, it holds translations of a phrase or sentence.
         :type d: Dict
-        :return: _description_
+        :return: Specifies a list of chat parameters like a user id, recipient etc.
         :rtype: Chat
         """
         return Chat(

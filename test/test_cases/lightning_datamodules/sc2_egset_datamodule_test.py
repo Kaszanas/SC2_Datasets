@@ -9,7 +9,6 @@ class SC2EGSetDataModuleTest(unittest.TestCase):
         return super().setUp()
 
     def test_initialize_datamodule(self):
-
         sc2_egset_datamodule = SC2EGSetDataModule(
             unpack_dir=os.path.abspath("./test/test_files/unpack"),
             download=False,

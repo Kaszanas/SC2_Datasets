@@ -2,11 +2,11 @@ import os
 from pathlib import Path
 from typing import Any, Callable, Dict, List
 
-
 from torch.utils.data import Dataset
+
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from src.dataset.utils.download_utils import download_and_unpack_replaypack
 from src.dataset.utils.dataset_utils import load_replaypack_information
+from src.dataset.utils.download_utils import download_and_unpack_replaypack
 
 
 class SC2ReplaypackDataset(Dataset):
@@ -26,7 +26,7 @@ class SC2ReplaypackDataset(Dataset):
     :type download: bool, optional
     :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
     :type unpack_n_workers: int, optional
-    :param validator: _description_, defaults to None
+    :param validator: Specifies a validator for input data, defaults to None
     :type validator: Callable | None, optional
     """
 
