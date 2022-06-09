@@ -37,7 +37,7 @@ class UserOptions(GameEvent):
     :type testCheatsEnabled: bool
     :param useGalaxyAsserts: There is no valuable information about this parameter
     :type useGalaxyAsserts: bool
-    :param userid: Specifies the id of the player who was the owner of the options in the game
+    :param userid: Specifies the id of the player who was the owner of the options in the game, example: in 1v1 game: [0,1]
     :type userid: int
     :param versionFlags: There is no valuable information about this parameter, might it be a player's setting version,
                          default = 0
