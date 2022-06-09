@@ -22,19 +22,20 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser 
 
 class SC2ReplayData:
     """
-    _summary_
+    Specifies a data type that holds information parsed from json representation of a replay.
 
-    :param loaded_replay_object: _description_
+    :param loaded_replay_object: Specifies a parsed Python deserialized json object loaded into memory
     :type loaded_replay_object: Any
     """
 
     @staticmethod
     def from_file(replay_filepath: str) -> "SC2ReplayData":
         """
-        _summary_
-        :param replay_filepath: _description_
+        Static method returning initialized SC2ReplayData class from a dictionary. This helps with the original JSON parsing.
+
+        :param replay_filepath: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type replay_filepath: str
-        :return: _description_
+        :return: Returns an initialized SC2ReplayData object
         :rtype: SC2ReplayData
         """
         logging.info(f"\nAttempting to parse: {replay_filepath}")
@@ -88,7 +89,7 @@ class SC2ReplayData:
         self._trackerEventsErr: bool = loaded_replay_object["trackerEvtsErr"]
 
     def __hash__(self) -> int:
-        game_duration_ns = self.header.durationNanoseconds
+        game_duration_loops = self.header.elapsedGameLoops
         game_time_utc = self.details.timeUTC
         game_map = self.metadata.mapName
         game_version = self.metadata.gameVersion
@@ -97,7 +98,7 @@ class SC2ReplayData:
 
         return hash(
             (
-                game_duration_ns,
+                game_duration_loops,
                 game_time_utc,
                 game_map,
                 game_version,
@@ -108,7 +109,7 @@ class SC2ReplayData:
 
     @property
     def initData(self):
-        return self._init_data
+        return self._initData
 
     @property
     def header(self):
