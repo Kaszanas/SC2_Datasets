@@ -8,15 +8,16 @@ from src.dataset.replay_data.replay_parser.game_events.game_event import GameEve
 class AddSubgroups(GameEvent):
 
     """
-    _summary_
+    AddSubgroups is a data type holding information about some subgroup change.
+    We were not able to resolve its specific meaning.
 
-    :param count: _description_
+    :param count: Specifies some unknown count parameter.
     :type count: int
-    :param intraSubgroupPriority: _description_
+    :param intraSubgroupPriority: Specifies some priority within the intra subgroup.
     :type intraSubgroupPriority: int
-    :param subgroupPriority: _description_
+    :param subgroupPriority: Specifies some subgroup priority.
     :type subgroupPriority: int
-    :param unitLink: _description_
+    :param unitLink: Most likely specifies which units were affected.
     :type unitLink: int
     """
 
@@ -49,15 +50,16 @@ class AddSubgroups(GameEvent):
 class Delta(GameEvent):
 
     """
-    _summary_
+    Most likely specifies a change in which units belong to some subgroups.
+    We are unsure of the precise definition of this data type.
 
-    :param addSubgroups: _description_
+    :param addSubgroups: Most likely specifies a class with additional information on which subgroups were added.
     :type addSubgroups: AddSubgroups
-    :param addUnitTags: _description_
+    :param addUnitTags: Most likely specifies which unit tags were added to a subgroup.
     :type addUnitTags: List[int]
-    :param removeMask: _description_
+    :param removeMask: This is an unknown parameter. We were not able to interpret it.
     :type removeMask: NoneType
-    :param subgroupIndex: _description_
+    :param subgroupIndex: Most likely specifies which subgroup was changed.
     :type subgroupIndex: int
     """
 

@@ -6,31 +6,28 @@ from src.dataset.replay_data.replay_parser.game_events.events.nested.target_unit
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
-# TODO: Document the docstrings
-
-
 class CmdUpdateTargetUnit(GameEvent):
     """
-    _summary_
+    Data type containing information about command update issued to some target unit.
 
-    :param id: _description_
+    :param id: Specifies the event ID that should directly map to the event name which is denoted by the class.
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies the time in gameloop units when the event happened.
     :type loop: int
-    :param target: _description_
+    :param target: Most likely specifies a target unit which receivedr the command.
     :type target: TargetUnit
-    :param userid: _description_
+    :param userid: Most likely specifies the user id that issued the command.
     :type userid: int
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "CmdUpdateTargetUnit":
         """
-        _summary_
+        Static method returning initialized CmdUpdateTargetPoint class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized CmdUpdateTargetPoint class.
         :rtype: CmdUpdateTargetUnit
         """
         return CmdUpdateTargetUnit(
