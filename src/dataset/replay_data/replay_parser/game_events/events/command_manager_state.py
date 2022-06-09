@@ -3,31 +3,32 @@ from typing import Dict
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 
 
-# TODO: Document the docstrings
-
-
 class CommandManagerState(GameEvent):
-    """_summary_
+    """
+    CommandManagerState type containing information about some states during the game, time, player, etc.
 
-    :param id: _description_
+    :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
-    :param sequence: _description_
+    :param sequence: Highly likely this parameter specifies an id parameter which sequence the player has made,
+                     there is no specific information about this parameter
     :type sequence: int
-    :param state: _description_
+    :param state: Highly likely this parameter specifies an id parameter which state the player has made,
+                  there is no specific information about this parameter
     :type state: int
-    :param userid: _description_
+    :param userid: Specifies id number of player who has managed the state, example: in 1v1 game: [0,1]
     :type userid: int
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "CommandManagerState":
-        """_summary_
+        """
+        Static method returning initialized CommandManagerState class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized CommandManagerState class.
         :rtype: CommandManagerState
         """
         return CommandManagerState(
