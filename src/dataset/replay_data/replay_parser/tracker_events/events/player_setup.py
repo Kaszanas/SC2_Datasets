@@ -25,6 +25,7 @@ class PlayerSetup(TrackerEvent):
     :type userId: int
     """
 
+    @staticmethod
     def from_dict(d: Dict) -> "PlayerSetup":
         """
         Static method returning initialized PlayerSetup class from a dictionary. This helps with the original JSON parsing.
