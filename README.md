@@ -30,7 +30,7 @@ Officially hosted and automatically generated documentation is going to be provi
   year         = 2022,
   publisher    = {Zenodo},
   version      = {0.9.0},
-  doi          = {10.5281/zenodo.6629006},
-  url          = {https://doi.org/10.5281/zenodo.6629006}
+  doi          = {10.5281/zenodo.6629005},
+  url          = {https://doi.org/10.5281/zenodo.6629005}
 }
 ```
