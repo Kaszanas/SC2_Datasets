@@ -9,7 +9,7 @@ class UnitOwnerChange(TrackerEvent):
     """
     UnitOwnerChange holds some detail information about how the unit position was changing during the game.
 
-    :param controlPlayerId: Highly likely this parameter holds information about player id who made the unit in the game
+    :param controlPlayerId: Specifies the information about player id who made the unit in the game
     :type controlPlayerId: int
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
