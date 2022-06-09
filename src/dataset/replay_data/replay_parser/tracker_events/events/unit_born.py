@@ -4,41 +4,39 @@ from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 
-# TODO: Document the docstrings
-
 
 class UnitBorn(TrackerEvent):
 
     """
-    _summary_
+    UnitBorn is containing some "details" information about unit at the moment of it has appeared in the game
 
-    :param controlPlayerId: _description_
+    :param controlPlayerId: Specifies the information about player id who made the unit in the game
     :type controlPlayerId: int
-    :param id: _description_
+    :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param loop: _description_
+    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
-    :param unitTagIndex: _description_
+    :param unitTagIndex: Specifies a pointer for a specific unit which was creating in the game
     :type unitTagIndex: int
-    :param unitTagRecycle: _description_
+    :param unitTagRecycle: There is no specific information about this parameter
     :type unitTagRecycle: int
-    :param unitTypeName: _description_
+    :param unitTypeName: Specifies the in game unit name that was created in the game
     :type unitTypeName: str
-    :param upkeepPlayerId: _description_
+    :param upkeepPlayerId: Specifies an id number of player who was having the control of the unit in the game
     :type upkeepPlayerId: int
-    :param x: _description_
+    :param x: Specifies x coordinate of map in pixels where the object was created.
     :type x: int
-    :param y: _description_
+    :param y: Specifies y coordinate of map in pixels where the object was created.
     :type y: int
     """
 
     def from_dict(d: Dict) -> "UnitBorn":
         """
-        _summary_
+        Static method returning initialized UnitBorn class from a dictionary. This helps with the original JSON parsing.
 
-        :param d: _description_
+        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :return: _description_
+        :return: Returns an initialized UnitBorn class.
         :rtype: UnitBorn
         """
         return UnitBorn(
@@ -65,27 +63,6 @@ class UnitBorn(TrackerEvent):
         x: int,
         y: int,
     ) -> None:
-        """_summary_
-
-        :param controlPlayerId: _description_
-        :type controlPlayerId: int
-        :param id: _description_
-        :type id: int
-        :param loop: _description_
-        :type loop: int
-        :param unitTagIndex: _description_
-        :type unitTagIndex: int
-        :param unitTagRecycle: _description_
-        :type unitTagRecycle: int
-        :param unitTypeName: _description_
-        :type unitTypeName: str
-        :param upkeepPlayerId: _description_
-        :type upkeepPlayerId: int
-        :param x: _description_
-        :type x: int
-        :param y: _description_
-        :type y: int
-        """
         self.controlPlayerId = controlPlayerId
         self.id = id
         self.loop = loop
