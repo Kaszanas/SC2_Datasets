@@ -5,6 +5,13 @@ This repository contains the official API for interacting with SC2EGSet: StarCra
 # Prerequisites
 
 0. Install Python >= 3.10
+1. Create a virtual environment and install the PyTorch by hand with the following versions:
+```
+torch==1.11.0+cu113
+torchaudio==0.11.0+cu113
+torchmetrics==0.7.2
+torchvision==0.12.0+cu113
+```
 
 # Installation
 
