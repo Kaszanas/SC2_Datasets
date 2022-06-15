@@ -1,7 +1,12 @@
 import json
 import unittest
+<<<<<<< HEAD
 from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
 from src.dataset.replay_data.replay_parser.game_events.game_events_parser import (
+=======
+from src.dataset.replay_structures.game_events.game_event import GameEvent
+from src.dataset.replay_structures.game_events.game_events_parser import (
+>>>>>>> 1.0.0
     GameEventsParser,
 )
 

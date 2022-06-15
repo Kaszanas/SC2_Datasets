@@ -35,14 +35,21 @@ def load_replaypack_information(
     # and loading replaypack information files:
     # REVIEW: Check the logic for unpacking and the loading of supplementary files:
     for file in replaypack_files:
+<<<<<<< HEAD
         if file.endswith("_data.zip"):
             data_path = os.path.join(replaypack_path, replaypack_name + "_data")
             # Unpack the .zip archive only if it is not unpacked already:
             if not os.path.isdir(data_path):
+=======
+
+        match file:
+            case file.endswith("_data.zip"):
+>>>>>>> 1.0.0
                 data_path = unpack_zipfile(
                     destination_dir=replaypack_path,
                     subdir=replaypack_name + "_data",
                     zip_path=os.path.join(replaypack_path, file),
+<<<<<<< HEAD
                     n_workers=unpack_n_workers,
                 )
         if file.endswith("_summary.json"):
@@ -54,5 +61,16 @@ def load_replaypack_information(
         if file.endswith(".log") and not file.endswith("main_log.log"):
             with open(os.path.join(replaypack_path, file)) as processed_info_file:
                 processed_info = json.load(processed_info_file)
+=======
+                )
+            # TODO: ADD THE LOADING LOGIC
+            case file.endswith("_summary.json"):
+                summary_content = ""
+            case file.endswith("_mapping.json"):
+                mapping_content = ""
+            case file.endswith(".log"):
+                if not file.endswith("main_log.log"):
+                    processed_info = ""
+>>>>>>> 1.0.0
 
     return (data_path, summary_content, mapping_content, processed_info)

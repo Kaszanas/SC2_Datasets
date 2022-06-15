@@ -1,9 +1,14 @@
 import json
 import unittest
+<<<<<<< HEAD
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
 from src.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser import (
+=======
+from src.dataset.replay_structures.tracker_events.tracker_event import TrackerEvent
+from src.dataset.replay_structures.tracker_events.tracker_events_parser import (
+>>>>>>> 1.0.0
     TrackerEventsParser,
 )
 import test.test_utils.test_utils as test_utils

@@ -1,0 +1,29 @@
+class Metadata:
+    """_summary_
+
+    :param baseBuild: _description_
+    :type baseBuild: str
+    :param dataBuild: _description_
+    :type dataBuild: str
+    :param durationSeconds: _description_
+    :type durationSeconds: int
+    :param gameVersion: _description_
+    :type gameVersion: str
+    :param mapName: _description_
+    :type mapName: str
+    """
+
+    def __init__(
+        self,
+        baseBuild: str,
+        dataBuild: str,
+        durationSeconds: int,
+        gameVersion: str,
+        mapName: str,
+    ) -> None:
+
+        self.baseBuild = baseBuild
+        self.dataBuild = dataBuild
+        self.durationSeconds = durationSeconds
+        self.gameVersion = gameVersion
+        self.mapName = mapName
