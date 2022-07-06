@@ -1,0 +1,41 @@
+/* site */
+body {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+
+}
+
+/* left-sidebar title*/
+.sidebar-brand-text {
+
+    font-size: x-large;
+}
+
+/* left-side sidebar */
+.sidebar-drawer {
+    width: 15%;
+
+}
+
+/* right-side sidebar */
+.toc-drawer {
+    font-size: large;
+    width: 15%;
+
+}
+
+/* center of the site */
+.content {
+    width: 70%;
+    overflow-wrap: anywhere;
+
+}
+/* footer, author, copyright and @  */
+.left-details{
+    margin: auto;
+}
+/*  footer, author, copyright  */
+.copyright{
+    font-weight: bold;
+}
