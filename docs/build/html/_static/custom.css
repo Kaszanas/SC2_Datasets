@@ -1,41 +1,56 @@
 /* site */
 body {
-    width: 80%;
+    width: 100%;
     height: 100%;
     margin: auto;
 
 }
 
+.main {
+    justify-content: space-between;
+}
+
 /* left-sidebar title*/
 .sidebar-brand-text {
-
     font-size: x-large;
 }
 
 /* left-side sidebar */
 .sidebar-drawer {
-    width: 15%;
-
+    width: 20%;
+    display: block;
 }
 
-/* right-side sidebar */
-.toc-drawer {
-    font-size: large;
-    width: 15%;
+.sidebar-sticky {
+    width: 100%;
+    /* width: fit-content; */
+}
 
+.sidebar-container {
+    width: 100%;
+    margin: 0;
+}
+
+/* right-side sidebar: */
+.toc-drawer {
+    /* align-items: flex-end; */
+    font-size: large;
+    width: 30%;
 }
 
 /* center of the site */
 .content {
-    width: 70%;
+    width: fit-content;
     overflow-wrap: anywhere;
 
 }
+
 /* footer, author, copyright and @  */
-.left-details{
+.left-details {
     margin: auto;
 }
+
 /*  footer, author, copyright  */
-.copyright{
+.copyright {
     font-weight: bold;
 }
