@@ -22,6 +22,12 @@ def validate_integrity_persist_sp(
     :type validation_file_path: Path
     :return: Returns a set of files that should be skipped in further processing.
     :rtype: Set[str]
+
+    **Correct Usage Examples:**
+
+
+    **Incorrect Usage Examples:**
+
     """
 
     # Reading from a file:
@@ -61,6 +67,12 @@ def validate_integrity_sp(
     :type list_of_replays: List[str]
     :return: Returns a tuple that contains (validated replays, files to be skipped).
     :rtype: Tuple[Set[str], Set[str]]
+
+    **Correct Usage Examples:**
+
+
+    **Incorrect Usage Examples:**
+
     """
 
     # TODO: Convert this!

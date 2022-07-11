@@ -93,6 +93,8 @@ def validate_integrity_mp(
     return (validated, skip_files)
 
 
+# REVIEW: This function:
+# TODO: Add temporary files to be used as a validator file:
 def validate_integrity_persist_mp(
     list_of_replays: List[str],
     n_workers: int,
@@ -110,6 +112,34 @@ def validate_integrity_persist_mp(
     :type validation_file_path: Path
     :return: Returns a set of files that should be skipped in further processing.
     :rtype: Set[str]
+
+    **Correct Usage Examples:**
+
+    Persistent validators save the validation information to a specified filepath.
+    Only the files that ought to be skipped are returned as a set from this function.
+
+    >>> from pathlib import Path
+    >>> replays_to_skip = validate_integrity_persist_mp(
+    ...                         list_of_replays=[
+    ...                               "test/test_files/single_replay/test_replay.json",
+    ...                               "test/test_files/single_replay/test_bit_flip_example.json"],
+    ...                         n_workers=1,
+    ...                         validation_file_path=Path("validator_file.json"))
+    >>> assert len(replays_to_skip) == 1
+
+    **Incorrect Usage Examples:**
+
+    Setting number of workers to zero or less than zero will result in failure.
+
+    >>> from pathlib import Path
+    >>> replays_to_skip = validate_integrity_persist_mp(
+    ...                                 list_of_replays=[
+    ...                                        "test/test_files/single_replay/test_replay.json"],
+    ...                                 n_workers=0,
+    ...                                 validation_file_path=Path("validator_file.json"))
+    Traceback (most recent call last):
+    ...
+    Exception: Number of workers cannot be equal or less than zero!
     """
 
     # Reading from a file:
