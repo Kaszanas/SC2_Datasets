@@ -9,7 +9,7 @@ from src.dataset.validators.validator_utils import (
     save_validation_file,
 )
 
-
+# REVIEW: Check the doctests and error handling:
 def validate_integrity_mp(
     list_of_replays: List[str],
     n_workers: int,
@@ -24,7 +24,48 @@ def validate_integrity_mp(
     :type n_workers: int
     :return: Returns a tuple that contains (validated replays, files to be skipped).
     :rtype: Tuple[Set[str], Set[str]]
+
+    **Correct Usage Examples:**
+
+    Validators can be used to check if a file is correct before loading it for some modeling task.
+    Below you will find a sample execution that should contain one correct file and one incorrect file.
+    This results in the final tuple containing two sets. The first tuple denotes all of the validated files (files that were checked) whereas the second tuple denotes all of the files that should be skipped in modeling tasks.
+
+    >>> validated_replays = validate_integrity_mp(
+    ...                         list_of_replays=[
+    ...                               "./test/test_files/single_replay/test_replay.json",
+    ...                               "./test/test_files/single_replay/test_bit_flip_example.json"],
+    ...                         n_workers=1)
+    >>> assert len(validated_replays[0]) == 2
+    >>> assert len(validated_replays[1]) == 1
+
+    **Incorrect Usage Examples:**
+
+    Setting number of workers to zero or less than zero will result in failure.
+
+    >>> validated_replays = validate_integrity_mp(
+    ...                                 list_of_replays=[
+    ...                                        "./test/test_files/single_replay/test_replay.json"],
+    ...                                 n_workers=0)
+    Traceback (most recent call last):
+    ...
+    Exception: Number of workers cannot be equal or less than zero!
+
+    Passing an empty list to the validator will result in failure.
+
+    >>> validated_replays = validate_integrity_mp(list_of_replays=[], n_workers=1)
+    Traceback (most recent call last):
+    ...
+    Exception: List of replays cannot be empty!
+
+    Moreover, some thought needs to be put towards having more workers than replays.
     """
+
+    if not list_of_replays:
+        raise Exception("List of replays cannot be empty!")
+
+    if n_workers <= 0:
+        raise Exception("Number of workers cannot be equal or less than zero!")
 
     chunksize = round(len(list_of_replays) / n_workers)
 
