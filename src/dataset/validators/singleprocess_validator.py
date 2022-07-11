@@ -70,10 +70,28 @@ def validate_integrity_sp(
 
     **Correct Usage Examples:**
 
+    Validators can be used to check if a file is correct before loading it for some modeling task.
+    Below you will find a sample execution that should contain one correct file and one incorrect file.
+    This results in the final tuple containing two sets. The first tuple denotes all of the validated files (files that were checked) whereas the second tuple denotes all of the files that should be skipped in modeling tasks.
+
+    >>> validated_replays = validate_integrity_sp(
+    ...                         list_of_replays=[
+    ...                               "./test/test_files/single_replay/test_replay.json",
+    ...                               "./test/test_files/single_replay/test_bit_flip_example.json"])
+    >>> assert len(validated_replays[0]) == 2
+    >>> assert len(validated_replays[1]) == 1
+
 
     **Incorrect Usage Examples:**
 
+    >>> validated_replays = validate_integrity_sp(list_of_replays=[])
+    Traceback (most recent call last):
+    ...
+    Exception: List of replays cannot be empty!
     """
+
+    if not list_of_replays:
+        raise Exception("List of replays cannot be empty!")
 
     # TODO: Convert this!
     validated_files = validate_chunk(list_of_replays=list_of_replays)
