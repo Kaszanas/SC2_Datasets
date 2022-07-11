@@ -51,18 +51,8 @@ def validate_integrity_mp(
     ...
     Exception: Number of workers cannot be equal or less than zero!
 
-    Passing an empty list to the validator will result in failure.
-
-    >>> validated_replays = validate_integrity_mp(list_of_replays=[], n_workers=1)
-    Traceback (most recent call last):
-    ...
-    Exception: List of replays cannot be empty!
-
     Moreover, some thought needs to be put towards having more workers than replays.
     """
-
-    if not list_of_replays:
-        raise Exception("List of replays cannot be empty!")
 
     if n_workers <= 0:
         raise Exception("Number of workers cannot be equal or less than zero!")

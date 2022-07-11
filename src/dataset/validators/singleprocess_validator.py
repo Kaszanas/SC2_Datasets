@@ -8,6 +8,8 @@ from src.dataset.validators.validator_utils import (
 )
 
 
+# REVIEW: This function:
+# TODO: Add temporary files to be used as a validator file:
 def validate_integrity_persist_sp(
     list_of_replays: List[str],
     validation_file_path: Path,
@@ -25,9 +27,16 @@ def validate_integrity_persist_sp(
 
     **Correct Usage Examples:**
 
+    Persistent validators save the validation information to a specified filepath.
+    Only the files that ought to be skipped are returned as a set from this function.
 
-    **Incorrect Usage Examples:**
-
+    >>> from pathlib import Path
+    >>> replays_to_skip = validate_integrity_persist_sp(
+    ...                         list_of_replays=[
+    ...                               "test/test_files/single_replay/test_replay.json",
+    ...                               "test/test_files/single_replay/test_bit_flip_example.json"],
+    ...                         validation_file_path=Path("validator_file.json"))
+    >>> assert len(replays_to_skip) == 1
     """
 
     # Reading from a file:
@@ -80,18 +89,7 @@ def validate_integrity_sp(
     ...                               "./test/test_files/single_replay/test_bit_flip_example.json"])
     >>> assert len(validated_replays[0]) == 2
     >>> assert len(validated_replays[1]) == 1
-
-
-    **Incorrect Usage Examples:**
-
-    >>> validated_replays = validate_integrity_sp(list_of_replays=[])
-    Traceback (most recent call last):
-    ...
-    Exception: List of replays cannot be empty!
     """
-
-    if not list_of_replays:
-        raise Exception("List of replays cannot be empty!")
 
     # TODO: Convert this!
     validated_files = validate_chunk(list_of_replays=list_of_replays)
