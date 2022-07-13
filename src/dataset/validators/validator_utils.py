@@ -19,7 +19,9 @@ def read_validation_file(
     **Correct Usage Examples:**
 
     This function is a helper that is required to have persistent validators which are
-    able to skip the files that were previously processed.
+    able to skip the files that were previously processed. It is tasked with reading the validation file.
+    Return of this function shoud contain information on which files were validated
+    (all of the validated files), and which files ought to be skipped.
 
     >>> from pathlib import Path
     >>> validator_file_content = read_validation_file(path=Path("validator_file.json"))
@@ -63,6 +65,16 @@ def save_validation_file(
     :type skip_files: Set[str]
     :param path: Specifies the path to the file that will be saved, Defaults to Path("validator_file.json")
     :type path: Path
+
+    **Correct Usage Examples:**
+
+    This function is a helper that is required to have persistent validators which are
+    able to skip the files that were previously processed. It is tasked with saving the information that was processed by the validators so that future runs of the program can use this information.
+
+    >>> from pathlib import Path
+    >>> validated_files = {"validated_file_0.json", "validated_file_1.json"}
+    >>> skip_files = {"validated_file_0.json"}
+    >>> validator_file_content = save_validation_file(validated_files=validated_files, skip_files=skip_files)
     """
 
     # Gettings paths as posix to be able to serialize them:

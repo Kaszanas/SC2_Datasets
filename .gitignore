@@ -36,3 +36,5 @@ docs/build/
 # Please refer to the DOCS_README
 src.*.rst
 src.rst
+
+validator_file.json
