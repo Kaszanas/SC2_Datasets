@@ -14,6 +14,17 @@ def validate_chunk(
     :type list_of_replays: List[str]
     :return: Returns a tuple of SC2ReplayFile info and a boolean denoting if the file should be skipped in final processing.
     :rtype: List[Tuple[str, bool]]
+
+    **Correct Usage Examples:**
+
+    Validate chunk is defined as a smallest piece of code that is used to build up validators.
+    This function is especially relevant when working with multiprocessing.
+
+    >>> validated_chunk = validate_chunk(
+    ...                         list_of_replays=[
+    ...                               "./test/test_files/single_replay/test_replay.json",
+    ...                               "./test/test_files/single_replay/test_bit_flip_example.json"])
+    >>> assert len(validated_chunk) == 3
     """
 
     # Initializing sets:
