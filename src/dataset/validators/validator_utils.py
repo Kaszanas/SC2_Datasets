@@ -15,6 +15,16 @@ def read_validation_file(
     :type path: Path
     :return: Returns a list of files that were validated as ones that should be skipped.
     :rtype: List[str]
+
+    **Correct Usage Examples:**
+
+    This function is a helper that is required to have persistent validators which are
+    able to skip the files that were previously processed.
+
+    >>> from pathlib import Path
+    >>> validator_file_content = read_validation_file(path=Path("validator_file.json"))
+    >>> assert len(validator_file_content[0]) == 2
+    >>> assert len(validator_file_content[1]) == 1
     """
 
     if not path.is_file():
