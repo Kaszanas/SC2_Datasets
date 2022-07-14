@@ -21,7 +21,37 @@ def download_replaypack(
     :raises Exception: If more than one file is downloaded, exception is thrown.
     :return: Returns the filepath to the downloaded .zip archive.
     :rtype: str
+
+    **Correct Usage Examples:**
+
+    The parameters should be set as in the example
+
+    >>> download_replaypack_object = download_replaypack(
+    ...    destination_dir=replaypack_download_dir,
+    ...    replaypack_name=replaypack_name,
+    ...    replaypack_url=url)
+
+    >>> assert type(unpack_chunk_object[0]) == str
+    >>> assert type(unpack_chunk_object[1]) == str
+    >>> assert type(unpack_chunk_object[2]) == str
+    >>> assert len(os.listdir(destination_dir)) == 0
+    >>> assert existing_files[0].endswith(".zip")
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
+    If the destination directory is empty.
+
+    If the downloaded file has no .zip extension.
+
+    It may throw:
+
+    Exception: There is more than one file in the destination directory!
+
+    Exception: The file that was detected does not end with a .zip extension! Wrong file was downloaded!
     """
+
 
     # Check if there is something in the destination directory:
     existing_files = os.listdir(destination_dir)
@@ -66,6 +96,28 @@ def download_and_unpack_replaypack(
     :type replaypack_name: str
     :param url: Specifies the url that will be used to download the replaypack.
     :type url: str
+
+    **Correct Usage Examples:**
+
+    The parameters should be set as in the example
+
+    >>> download_and_unpack_replaypack_object = download_and_unpack_replaypack(
+    ...            replaypack_download_dir="/directory/replaypack_download_dir",
+    ...            replaypack_unpack_dir="/directory/replaypack_unpack_dir",
+    ...            replaypack_name="replaypack_name",
+    ...            url="url")
+
+    >>> assert type(download_and_unpack_replaypack_object[0]) == str
+    >>> assert type(download_and_unpack_replaypack_object[1]) == str
+    >>> assert type(download_and_unpack_replaypack_object[2]) == str
+    >>> assert type(download_and_unpack_replaypack_object[3]) == str
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
+    If the parameters aren't set
+
     """
 
     # Downloading the replaypack:

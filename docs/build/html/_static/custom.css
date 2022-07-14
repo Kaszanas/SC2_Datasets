@@ -44,6 +44,10 @@ body {
     overflow-wrap: anywhere;
 
 }
+/* left-sidebar-tree list */
+.sidebar-tree ul{
+
+}
 
 /* footer, author, copyright and @  */
 .left-details {
