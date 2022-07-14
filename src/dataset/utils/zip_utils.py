@@ -1,11 +1,12 @@
 # Unpacks zip file at zip_path to a destination directory, into a subdirectory.
-from concurrent.futures import ProcessPoolExecutor
-import os
-from typing import List
-import zipfile
 import logging
+import os
+import zipfile
+from concurrent.futures import ProcessPoolExecutor
+from typing import List
 
 from tqdm import tqdm
+
 
 # REVIEW: Check this:
 def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
@@ -18,6 +19,23 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
     :type filenames: List[str]
     :param path_to_extract: Specifies the path to which the files will be extracted to.
     :type path_to_extract: str
+
+    **Correct Usage Examples:**
+
+    The parameters should be set as in the example
+
+    >>> unpack_chunk_object = unpack_chunk(
+    ... zip_path="./directory/zip_path",
+    ... filenames="./directory/filenames",)
+    ... path_to_extract="./directory/path_to_extract")
+
+    >>> assert type(unpack_chunk_object[0]) == str
+    >>> assert type(unpack_chunk_object[1]) == list[str]
+    >>> assert type(unpack_chunk_object[2]) == str
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type
     """
 
     with zipfile.ZipFile(zip_path, "r") as zip_file:
@@ -33,7 +51,7 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
 
 # REVIEW: Check this:
 def unpack_zipfile(
-    destination_dir: str, subdir: str, zip_path: str, n_workers: int
+        destination_dir: str, subdir: str, zip_path: str, n_workers: int
 ) -> str:
     """
     Helper function that unpacks the content of .zip archive.
@@ -48,7 +66,38 @@ def unpack_zipfile(
     :type n_workers: int
     :return: Returns a path to the extracted content.
     :rtype: str
+
+    **Correct Usage Examples:**
+
+    The parameters should be set as in the example
+
+    >>> unpack_zipfile_object = unpack_zipfile(
+    ... destination_dir="./directory/destination_dir",
+    ... subdir="./directory/subdir",)
+    ... zip_path="./directory/zip_path",)
+    ... n_workers=1)
+
+    >>> assert type(unpack_chunk_object[0]) == str
+    >>> assert type(unpack_chunk_object[1]) == list[str]
+    >>> assert type(unpack_chunk_object[2]) == str
+    >>> assert type(unpack_chunk_object[3]) == int
+
+    **Incorrect Usage Examples:**
+
+    Setting number of workers to zero or less than zero will result in failure.
+
+    >>> unpack_zipfile_object = unpack_zipfile(
+    ... destination_dir="./directory/destination_dir",
+    ... subdir="./directory/subdir",)
+    ... zip_path="./directory/zip_path",)
+    ... n_workers=0)
+    Traceback (most recent call last):
+    ...
+    Exception: Number of workers cannot be equal or less than zero!
     """
+
+    if n_workers <= 0:
+        raise Exception("Number of workers cannot be equal or less than zero!")
 
     file_list: List[str] = []
     path_to_extract = os.path.join(destination_dir, subdir)
@@ -64,10 +113,10 @@ def unpack_zipfile(
 
     with ProcessPoolExecutor(n_workers) as exe:
         for index in tqdm(
-            range(0, len(file_list), chunksize),
-            desc=f"Extracting {os.path.basename(destination_dir)}: ",
+                range(0, len(file_list), chunksize),
+                desc=f"Extracting {os.path.basename(destination_dir)}: ",
         ):
-            filenames = file_list[index : (index + chunksize)]
+            filenames = file_list[index: (index + chunksize)]
             _ = exe.submit(unpack_chunk, zip_path, filenames, path_to_extract)
 
     return path_to_extract

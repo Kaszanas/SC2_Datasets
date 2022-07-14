@@ -22,6 +22,23 @@ def load_replaypack_information(
             summary information that was generated when extracting the data from replays,
             mapping information that specifies what was the directory structure pre-extraction, and log file which contaions how many files were successfully extracted.
     :rtype: Tuple[str, Dict[str, str], Dict[str, str]]
+
+    **Correct Usage Examples:**
+
+    The parameters should be set as in the example
+
+    >>> load_replaypack_information_object = load_replaypack_information(
+            replaypack_name="replaypack_name",
+            replaypack_path="replaypack_path",
+            unpack_n_workers=1)
+
+    >>> assert type(unpack_chunk_object[0]) == str
+    >>> assert type(unpack_chunk_object[1]) == str
+    >>> assert type(unpack_chunk_object[2]) == int
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
     """
 
     replaypack_files = os.listdir(replaypack_path)
