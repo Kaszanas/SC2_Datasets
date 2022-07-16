@@ -13,6 +13,7 @@ class Details:
     :type timeUTC: str
     """
 
+    # REVIEW: Doctests for this:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Details":
         """
@@ -22,6 +23,27 @@ class Details:
         :type d: Dict[str, Any]
         :return: Returns an initialized Details class.
         :rtype: Details
+
+        **Correct Usage Examples:**
+
+        Using from_dict factory method provides ease of use when parsing a replay pre-processed with [SC2InfoExtractorGo](https://github.com/Kaszanas/SC2InfoExtractorGo). This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+
+        >>> details_dict = {"gameSpeed": "Faster", "isBlizzardMap": True, "timeUTC": "2017-04-29T05:15:32.4903483+02:00"}
+        >>> details_object = Details.from_dict(d=details_dict)
+        >>> assert isinstance(details_object, Details)
+        >>> assert details_object.gameSpeed == "Faster"
+        >>> assert details_object.isBlizzardMap == True
+        >>> assert details_object.timeUTC == "2017-04-29T05:15:32.4903483+02:00"
+
+        **Incorrect Usage Examples:**
+
+        Passing a Python dictionary with missing or incorrect fields would result in a failure as follows:
+
+        >>> details_dict = {"WRONG_FIELD": "Faster"}
+        >>> details_object = Details.from_dict(d=details_dict)
+        Traceback (most recent call last):
+        ...
+        KeyError: 'gameSpeed'
         """
         return Details(
             gameSpeed=d["gameSpeed"],
