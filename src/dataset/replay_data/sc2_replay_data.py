@@ -28,6 +28,7 @@ class SC2ReplayData:
     :type loaded_replay_object: Any
     """
 
+    # REVIEW: Doctests, and commented out code:
     @staticmethod
     def from_file(replay_filepath: str) -> "SC2ReplayData":
         """
@@ -37,6 +38,23 @@ class SC2ReplayData:
         :type replay_filepath: str
         :return: Returns an initialized SC2ReplayData object
         :rtype: SC2ReplayData
+
+        **Correct Usage Examples:**
+
+        The factory method ``from_file`` assists with initializing a ``SC2ReplayData`` class.
+        All that is required is a known path to the file that should be parsed.
+
+        >>> replay_data = SC2ReplayData.from_file("test/test_files/single_replay/test_replay.json")
+        >>> assert isinstance(replay_data, SC2ReplayData)
+
+        **Incorrect Usage Examples:**
+
+        Providing incorrect path to some ``replay.json`` file will result in failure to parse which can be seen as below:
+
+        >>> replay_data = SC2ReplayData.from_file("file_doesnt_exist.json")
+        Traceback (most recent call last):
+        ...
+        FileNotFoundError: [Errno 2] No such file or directory: 'file_doesnt_exist.json'
         """
         logging.info(f"\nAttempting to parse: {replay_filepath}")
         with open(replay_filepath, encoding="utf-8") as replay_file:
@@ -88,7 +106,17 @@ class SC2ReplayData:
         self._messageEventsErr: bool = loaded_replay_object["messageEventsErr"]
         self._trackerEventsErr: bool = loaded_replay_object["trackerEvtsErr"]
 
+    # REVIEW: Should the __hash__ be tested?
     def __hash__(self) -> int:
+        """
+        Custom hashing function based on the fields that were read from replay.
+        This hashing function returns a result of hash() call on a tuple constructed as follows:
+            (game_duration_loops, game_time_utc, game_map, game_version, player_toon_map_len, player_tuple_toon,)
+
+        :return: Returns an int (hash) representation of the SC2ReplayData class.
+        :rtype: int
+        """
+
         game_duration_loops = self.header.elapsedGameLoops
         game_time_utc = self.details.timeUTC
         game_map = self.metadata.mapName
@@ -107,6 +135,7 @@ class SC2ReplayData:
             )
         )
 
+    # REVIEW: Should the properties be documented?
     @property
     def initData(self):
         return self._initData
