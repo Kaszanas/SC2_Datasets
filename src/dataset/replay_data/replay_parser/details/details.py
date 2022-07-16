@@ -26,7 +26,9 @@ class Details:
 
         **Correct Usage Examples:**
 
-        Using from_dict factory method provides ease of use when parsing a replay pre-processed with [SC2InfoExtractorGo](https://github.com/Kaszanas/SC2InfoExtractorGo). This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_. This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+
+        .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
         >>> details_dict = {"gameSpeed": "Faster", "isBlizzardMap": True, "timeUTC": "2017-04-29T05:15:32.4903483+02:00"}
         >>> details_object = Details.from_dict(d=details_dict)
