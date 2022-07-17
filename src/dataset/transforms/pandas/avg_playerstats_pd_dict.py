@@ -33,9 +33,9 @@ def avg_playerstats_pd_dict_transform(
     The parameters should be set as in the example below.
 
     >>> avg_playerstats_pd_dict_transform_object = avg_playerstats_pd_dict_transform(
-    ...        sc2_replay= sc2_replay: Dict)
+    ...        sc2_replay= sc2_replay: SC2ReplayData)
 
-    >>> assert type(avg_playerstats_pd_dict_transform_object[0]) == Dict
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
 

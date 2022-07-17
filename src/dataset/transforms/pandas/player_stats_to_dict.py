@@ -35,7 +35,7 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
     >>> playerstats_average_to_dict_object = playerstats_average_to_dict(
     ...        sc2_replay= sc2_replay: SC2ReplayData)
 
-    >>> assert type(playerstats_average_to_dict_object[0]) == SC2ReplayData
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
 
@@ -114,7 +114,7 @@ def playerstats_to_dict(
     >>> playerstats_to_dict_object = playerstats_to_dict(
     ...        sc2_replay= sc2_replay:SC2ReplayData)
 
-    >>> assert type(playerstats_to_dict_object[0]) == SC2ReplayData
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
 
 
     Prameter named 'additional_data_dict' is optional, you can leave it blank.
@@ -130,8 +130,8 @@ def playerstats_to_dict(
     ...        sc2_replay= sc2_replay: SC2ReplayData,
     ...        additional_data_dict = additional_data: Dict)
 
-    >>> assert type(playerstats_to_dict_object[0]) == SC2ReplayData
-    >>> assert type(playerstats_to_dict_object[1]) == Dict
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
+    >>> assert isinstance(additional_data_dict, Dict)
 
     **Incorrect Usage Examples:**
 
@@ -192,7 +192,7 @@ def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> Dict[str, flo
     >>> average_playerstats_dataframe_object = average_playerstats_dataframe(
     ...        playerstats_df= playerstats_df: pd.DataFrame)
 
-    >>> assert type(average_playerstats_dataframe_object[0]) == pd.DataFrame
+    >>> assert isinstance(playerstats_df, pd.DataFrame)
 
     **Incorrect Usage Examples:**
 

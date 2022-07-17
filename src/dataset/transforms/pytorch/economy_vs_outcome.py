@@ -29,7 +29,7 @@ def economy_average_vs_outcome(
     >>> economy_average_vs_outcome_object = economy_average_vs_outcome(
     ...        sc2_replay= sc2_replay: SC2ReplayData)
 
-    >>> assert type(economy_average_vs_outcome_object[0]) == SC2ReplayData
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
 

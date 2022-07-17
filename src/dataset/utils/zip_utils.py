@@ -32,12 +32,12 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
 
     >>> unpack_chunk_object = unpack_chunk(
     ... zip_path="./directory/zip_path",
-    ... filenames="./directory/filenames",)
+    ... filenames="./directory/filenames",
     ... path_to_extract="./directory/path_to_extract")
 
-    >>> assert type(unpack_chunk_object[0]) == str
-    >>> assert type(unpack_chunk_object[1]) == list[str]
-    >>> assert type(unpack_chunk_object[2]) == str
+    >>> assert isinstance(zip_path, str)
+    >>> assert all(isinstance(filename, str) for filename in filenames)
+    >>> assert isinstance(path_to_extract, str)
 
     **Incorrect Usage Examples:**
 
@@ -85,14 +85,15 @@ def unpack_zipfile(
 
     >>> unpack_zipfile_object = unpack_zipfile(
     ... destination_dir="./directory/destination_dir",
-    ... subdir="./directory/subdir",)
-    ... zip_path="./directory/zip_path",)
+    ... subdir="./directory/subdir",
+    ... zip_path="./directory/zip_path",
     ... n_workers=1)
 
-    >>> assert type(unpack_chunk_object[0]) == str
-    >>> assert type(unpack_chunk_object[1]) == list[str]
-    >>> assert type(unpack_chunk_object[2]) == str
-    >>> assert type(unpack_chunk_object[3]) == int
+    >>> assert isinstance(destination_dir, str)
+    >>> assert isinstance(subdir, str)
+    >>> assert isinstance(zip_path, str)
+    >>> assert isinstance(n_workers, int)
+    >>> assert n_workers >= 1
 
     **Incorrect Usage Examples:**
 

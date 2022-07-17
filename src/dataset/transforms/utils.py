@@ -169,7 +169,7 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     >>> select_outcome_1v1_object = select_outcome_1v1(
     ...        sc2_replay= sc2_replay: SC2ReplayData)
 
-    >>> assert type(select_outcome_1v1_object[0]) == SC2ReplayData
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
 

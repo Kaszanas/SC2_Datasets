@@ -39,9 +39,10 @@ def load_replaypack_information(
     ...        replaypack_path="replaypack_path",
     ...        unpack_n_workers=1)
 
-    >>> assert type(unpack_chunk_object[0]) == str
-    >>> assert type(unpack_chunk_object[1]) == str
-    >>> assert type(unpack_chunk_object[2]) == int
+    >>> assert isinstance(replaypack_name, str)
+    >>> assert isinstance(replaypack_path, str)
+    >>> assert isinstance(unpack_n_workers, int)
+    >>> assert unpack_n_workers >= 1
 
     **Incorrect Usage Examples:**
 

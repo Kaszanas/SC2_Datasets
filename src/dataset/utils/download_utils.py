@@ -37,9 +37,9 @@ def download_replaypack(
     ...    replaypack_name=replaypack_name,
     ...    replaypack_url=url)
 
-    >>> assert type(unpack_chunk_object[0]) == str
-    >>> assert type(unpack_chunk_object[1]) == str
-    >>> assert type(unpack_chunk_object[2]) == str
+    >>> assert isinstance(destination_dir, str)
+    >>> assert isinstance(replaypack_name, str)
+    >>> assert isinstance(replaypack_url, str)
     >>> assert len(os.listdir(destination_dir)) == 0
     >>> assert existing_files[0].endswith(".zip")
 
@@ -119,10 +119,10 @@ def download_and_unpack_replaypack(
     ...            replaypack_name="replaypack_name",
     ...            url="url")
 
-    >>> assert type(download_and_unpack_replaypack_object[0]) == str
-    >>> assert type(download_and_unpack_replaypack_object[1]) == str
-    >>> assert type(download_and_unpack_replaypack_object[2]) == str
-    >>> assert type(download_and_unpack_replaypack_object[3]) == str
+    >>> assert isinstance(replaypack_download_dir, str)
+    >>> assert isinstance(replaypack_unpack_dir, str)
+    >>> assert isinstance(replaypack_name, str)
+    >>> assert isinstance(url, str)
 
     **Incorrect Usage Examples:**
 
