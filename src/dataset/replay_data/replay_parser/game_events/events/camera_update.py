@@ -31,6 +31,7 @@ class CameraUpdate(GameEvent):
     :type yaw: NoneType | float | int
     """
 
+    # REVIEW: Doctests here:
     @staticmethod
     def from_dict(d: Dict):
         """
@@ -40,6 +41,48 @@ class CameraUpdate(GameEvent):
         :type d: Dict
         :return: Returns an initialized CameraUpdate class.
         :rtype: CameraUpdate
+
+        **Correct Usage Examples:**
+
+        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_. This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+
+        .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
+
+        >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D
+        >>> camera_update_dict = {"distance": None,
+        ...                       "follow": False,
+        ...                       "id": 49,
+        ...                       "loop": 136,
+        ...                       "pitch": None,
+        ...                       "reason": None,
+        ...                       "target": {
+        ...                           "x": 1.002,
+        ...                           "y": 4.148},
+        ...                       "userid": {"userId": 1},
+        ...                       "yaw": None}
+        >>> camera_update_object = CameraUpdate.from_dict(d=camera_update_dict)
+        >>> assert isinstance(camera_update_object, CameraUpdate)
+        >>> assert camera_update_object.distance == None
+        >>> assert camera_update_object.follow == False
+        >>> assert camera_update_object.id == 49
+        >>> assert camera_update_object.loop == 136
+        >>> assert camera_update_object.pitch == None
+        >>> assert camera_update_object.reason == None
+        >>> assert camera_update_object.target.x == 1.002
+        >>> assert camera_update_object.target.y == 4.148
+        >>> assert camera_update_object.userid == 1
+        >>> assert camera_update_object.yaw == None
+
+
+        **Incorrect Usage Examples:**
+
+        Passing a Python dictionary with missing or incorrect fields would result in a failure as follows:
+
+        >>> camera_update_dict = {"WRONG_FIELD": 5}
+        >>> details_object = CameraUpdate.from_dict(d=camera_update_dict)
+        Traceback (most recent call last):
+        ...
+        KeyError: 'distance'
         """
         return CameraUpdate(
             distance=d["distance"],
