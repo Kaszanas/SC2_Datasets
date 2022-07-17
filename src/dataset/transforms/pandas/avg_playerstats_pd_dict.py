@@ -38,6 +38,12 @@ def avg_playerstats_pd_dict_transform(
     >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
+    >>> wrong_type_object = int(2)
+    >>> avg_playerstats_pd_dict_transform_object = avg_playerstats_pd_dict_transform(
+    ...        sc2_replay= wrong_type_object)
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
 

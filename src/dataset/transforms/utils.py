@@ -172,6 +172,12 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
+    >>> wrong_type_object = int(2)
+    >>> select_outcome_1v1_object = select_outcome_1v1(
+    ...        sc2_replay= wrong_type_object)
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
     """

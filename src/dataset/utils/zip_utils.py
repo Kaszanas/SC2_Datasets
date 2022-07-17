@@ -41,7 +41,16 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
 
     **Incorrect Usage Examples:**
 
-    If you don't set parameters or paste incorect parameters' type
+    >>> wrong_type_object = int(2)
+    >>> unpack_chunk_object = unpack_chunk(
+    ... zip_path=wrong_type_object,
+    ... filenames="./directory/filenames",
+    ... path_to_extract="./directory/path_to_extract")
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
+
+    If you don't set parameters or paste incorect parameters' type.
     """
 
     with zipfile.ZipFile(zip_path, "r") as zip_file:

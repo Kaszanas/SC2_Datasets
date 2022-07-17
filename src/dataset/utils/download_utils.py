@@ -44,6 +44,14 @@ def download_replaypack(
     >>> assert existing_files[0].endswith(".zip")
 
     **Incorrect Usage Examples:**
+    >>> wrong_type_object = int(2)
+    >>> download_replaypack_object = download_replaypack(
+    ...    destination_dir=wrong_type_object,
+    ...    replaypack_name=replaypack_name,
+    ...    replaypack_url=url)
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
 
@@ -125,6 +133,15 @@ def download_and_unpack_replaypack(
     >>> assert isinstance(url, str)
 
     **Incorrect Usage Examples:**
+    >>> wrong_type_object = int(2)
+    >>> download_and_unpack_replaypack_object = download_and_unpack_replaypack(
+    ...            replaypack_download_dir=wrong_type_object,
+    ...            replaypack_unpack_dir="/directory/replaypack_unpack_dir",
+    ...            replaypack_name="replaypack_name",
+    ...            url="url")
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
 

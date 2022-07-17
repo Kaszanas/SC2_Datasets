@@ -33,6 +33,13 @@ def economy_average_vs_outcome(
 
     **Incorrect Usage Examples:**
 
+    >>> wrong_type_object = int(2)
+    >>> economy_average_vs_outcome_object = economy_average_vs_outcome(
+    ...        sc2_replay= wrong_type_object)
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
+
     If you don't set parameters or paste incorect parameters' type.
 
     """
