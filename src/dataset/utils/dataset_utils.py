@@ -25,12 +25,19 @@ def load_replaypack_information(
 
     **Correct Usage Examples:**
 
-    The parameters should be set as in the example
+    The use of this method is intended to download a .zip replaypack of SC2 games and unpack the downloaded files
+    to the folder.
+
+    You should set every parameter, replaypack_download_dir, replaypack_unpack_dir, replaypack_name and url.
+
+    May help you to download and unpack downloaded files.
+
+    The parameters should be set as in the example below.
 
     >>> load_replaypack_information_object = load_replaypack_information(
-            replaypack_name="replaypack_name",
-            replaypack_path="replaypack_path",
-            unpack_n_workers=1)
+    ...        replaypack_name="replaypack_name",
+    ...        replaypack_path="replaypack_path",
+    ...        unpack_n_workers=1)
 
     >>> assert type(unpack_chunk_object[0]) == str
     >>> assert type(unpack_chunk_object[1]) == str

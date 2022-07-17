@@ -17,12 +17,30 @@ def avg_playerstats_pd_dict_transform(
     sc2_replay: SC2ReplayData,
 ) -> Dict[str, int | float]:
     """
-    Exposes logic for compising a row containing features for classification task.
+    Exposes logic for composing a row containing features for classification task.
 
     :param sc2_replay: Specifies the parsed structure of a replay.
     :type sc2_replay: SC2ReplayData
-    :return: _description_
-    :rtype: _type_
+    :return: Returns a dictionary representation of the averaged values.
+    :rtype: Dict[str, float]
+
+    **Correct Usage Examples:**
+
+    This method may help you to transforming reply to the dict type.
+
+    You should set sc2_replay parameter.
+
+    The parameters should be set as in the example below.
+
+    >>> avg_playerstats_pd_dict_transform_object = avg_playerstats_pd_dict_transform(
+    ...        sc2_replay= sc2_replay: Dict)
+
+    >>> assert type(avg_playerstats_pd_dict_transform_object[0]) == Dict
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
     """
 
     # Select average PlayerStats

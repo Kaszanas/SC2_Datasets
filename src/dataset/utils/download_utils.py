@@ -1,13 +1,13 @@
 import os
 from typing import Dict, Tuple
+
 import requests
 
 from src.dataset.utils.zip_utils import unpack_zipfile
-from src.dataset.utils.dataset_utils import load_replaypack_information
 
 
 def download_replaypack(
-    destination_dir: str, replaypack_name: str, replaypack_url: str
+        destination_dir: str, replaypack_name: str, replaypack_url: str
 ) -> str:
     """
     Exposes logic for downloading a single StarCraft II replaypack from an url.
@@ -24,7 +24,13 @@ def download_replaypack(
 
     **Correct Usage Examples:**
 
-    The parameters should be set as in the example
+    The use of this method is intended to download a .zip replaypack of SC2 games.
+
+    You should set every parameter, destination_dir, replaypack_name and replaypack_url.
+
+    May help you to download the SC2 replaypack with .zip extension
+
+    The parameters should be set as in the example below.
 
     >>> download_replaypack_object = download_replaypack(
     ...    destination_dir=replaypack_download_dir,
@@ -52,7 +58,6 @@ def download_replaypack(
     Exception: The file that was detected does not end with a .zip extension! Wrong file was downloaded!
     """
 
-
     # Check if there is something in the destination directory:
     existing_files = os.listdir(destination_dir)
     if len(existing_files) > 1:
@@ -78,10 +83,10 @@ def download_replaypack(
 
 
 def download_and_unpack_replaypack(
-    replaypack_download_dir: str,
-    replaypack_unpack_dir: str,
-    replaypack_name: str,
-    url: str,
+        replaypack_download_dir: str,
+        replaypack_unpack_dir: str,
+        replaypack_name: str,
+        url: str,
 ) -> Tuple[str, Dict[str, str], Dict[str, str]]:
     """
     Helper function that downloads a replaypack from a specified url.
@@ -99,7 +104,14 @@ def download_and_unpack_replaypack(
 
     **Correct Usage Examples:**
 
-    The parameters should be set as in the example
+    The use of this method is intended to download a .zip replaypack of SC2 games and unpack the downloaded files
+    to the folder.
+
+    You should set every parameter, replaypack_download_dir, replaypack_unpack_dir, replaypack_name and url.
+
+    May help you to download and unpack downloaded files.
+
+    The parameters should be set as in the example below.
 
     >>> download_and_unpack_replaypack_object = download_and_unpack_replaypack(
     ...            replaypack_download_dir="/directory/replaypack_download_dir",

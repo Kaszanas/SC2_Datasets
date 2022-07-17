@@ -16,6 +16,25 @@ def economy_average_vs_outcome(
     :type sc2_replay: SC2ReplayData
     :return: Returns a tensor containing features and a target.
     :rtype: Tuple[torch.Tensor, torch.Tensor]
+
+    **Correct Usage Examples:**
+
+    This method may help you to operate with data on the game replay.
+    Obtains averaged ecomomy statistics.
+
+    You should set sc2_replay parameter.
+
+    The parameters should be set as in the example below.
+
+    >>> economy_average_vs_outcome_object = economy_average_vs_outcome(
+    ...        sc2_replay= sc2_replay: SC2ReplayData)
+
+    >>> assert type(economy_average_vs_outcome_object[0]) == SC2ReplayData
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
     """
 
     average_player_features = average_player_stats(

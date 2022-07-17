@@ -5,10 +5,43 @@ import pandas as pd
 from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from src.dataset.transforms.utils import filter_player_stats
 
+
 # TODO: Document this:
 # TODO: Consider renaming:
 # REVIEW: Verify this code!
 def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
+
+    """
+    Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
+    of the data that can be used to initialize a pandas DataFrame.
+
+    :param sc2_replay: Specifies a dataframe that will be averaged.
+    :type sc2_replay: SC2ReplayData
+    :return: Returns a dictionary representation of the averaged values.
+    :rtype: Dict[str, float]
+
+    **Correct Usage Examples:**
+
+    This method may help you to operate with data on the game replay.
+
+    Can be used for converting average player statistics to the dictionary representation.
+
+    Then you can use it for DataFrame initialization in panda.
+
+    You should set sc2_replay parameter.
+
+    The parameters should be set as in the examples below.
+
+    >>> playerstats_average_to_dict_object = playerstats_average_to_dict(
+    ...        sc2_replay= sc2_replay: SC2ReplayData)
+
+    >>> assert type(playerstats_average_to_dict_object[0]) == SC2ReplayData
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
+    """
 
     final_dict_average = {}
 
@@ -28,8 +61,8 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
 # REVIEW: This needs to be reviewed:
 # TODO: Consider renaming:
 def playerstats_to_dict(
-    sc2_replay: SC2ReplayData,
-    additional_data_dict: Dict[str, Dict[str, Any]] = {},
+        sc2_replay: SC2ReplayData,
+        additional_data_dict: Dict[str, Dict[str, Any]] = {},
 ) -> Dict[str, Dict[str, List[Any]]]:
     """
     Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
@@ -65,6 +98,45 @@ def playerstats_to_dict(
     :type sc2_replay: SC2ReplayData
     :return: Returns a dictionary of features with additional information repeated for all of the occurences of events.
     :rtype: Dict[str, Dict[str, List[Any]]]
+
+    **Correct Usage Examples:**
+
+    This method may help you to operate with data on the game replay.
+
+    Can be used for converting list to the dictionary representation.
+
+    Then you can use it for DataFrame initialization in panda.
+
+    You should set sc2_replay parameter.
+
+    The parameters should be set as in the examples below.
+
+    >>> playerstats_to_dict_object = playerstats_to_dict(
+    ...        sc2_replay= sc2_replay:SC2ReplayData)
+
+    >>> assert type(playerstats_to_dict_object[0]) == SC2ReplayData
+
+
+    Prameter named 'additional_data_dict' is optional, you can leave it blank.
+
+    If you want to use this parameter, be sure that your parameter looks similar as in the example.
+
+    >>> additional_data = {
+    ...        "1": {"outcome": 1},
+    ...        "2": {"outcome": 2},
+    ...     }
+
+    >>> playerstats_to_dict_object = playerstats_to_dict(
+    ...        sc2_replay= sc2_replay: SC2ReplayData,
+    ...        additional_data_dict = additional_data: Dict)
+
+    >>> assert type(playerstats_to_dict_object[0]) == SC2ReplayData
+    >>> assert type(playerstats_to_dict_object[1]) == Dict
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
     """
 
     dataframe_representation = {}
@@ -107,6 +179,25 @@ def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> Dict[str, flo
     :type playerstats_df: pd.DataFrame
     :return: Returns a dictionary representation of the averaged values.
     :rtype: Dict[str, float]
+
+    **Correct Usage Examples:**
+
+    This method may help you to operate with data on the game replay.
+    Obtains averaged game dataframe information.
+
+    You should set sc2_replay parameter.
+
+    The parameters should be set as in the example below.
+
+    >>> average_playerstats_dataframe_object = average_playerstats_dataframe(
+    ...        playerstats_df= playerstats_df: pd.DataFrame)
+
+    >>> assert type(average_playerstats_dataframe_object[0]) == pd.DataFrame
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
     """
 
     mean_playerstats = playerstats_df.mean().to_dict()

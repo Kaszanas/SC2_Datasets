@@ -1,5 +1,4 @@
 from typing import Dict, List
-import functools
 
 import numpy as np
 
@@ -15,11 +14,33 @@ def filter_player_stats(
     """
     Filters PlayerStats events and places them in lists based on the playerId
 
-    :param player_tracker_events: Specifies a list of TrackerEvent instances as parsed from the original JSON files.
-    :type player_tracker_events: List[TrackerEvent]
+    :param sc2_replay: Specifies the replay that the outcome will be selected from.
+    :type sc2_replay: SC2ReplayData
     :return: Returns a dictionary containing a mapping from playerId to the respective player stats.
     :rtype: Dict[str, List[PlayerStats]]
+
+    **Correct Usage Examples:**
+
+    The use of this method is intended to filter player's events from the game based on playerId
+
+    You should set sc2_replay parameter.
+
+    May help you in analysing on the dataset.
+
+    The parameters should be set as in the example below.
+
+    >>> filter_player_stats_object = filter_player_stats(
+    ...        sc2_replay= sc2_replay: SC2ReplayData)
+
+    >>> assert type(filter_player_stats_object[0]) == SC2ReplayData
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
+    Will throw an exception if the player's id in the game is greater than 2.
     """
+
     player_stats_events = {"1": [], "2": []}
     # Filter PlayerStats:
     for event in sc2_replay.trackerEvents:
@@ -40,10 +61,27 @@ def average_player_stats(
     """
     Exposes the logic of selecting and averaging PlayerStats events from within TrackerEvents list.
 
-    :param player_tracker_events: Specifies a parsed replay that will be used to obtain a list of TrackerEvents as in the original JSON files.
-    :type player_tracker_events: SC2ReplayData
+    :param sc2_replay: Specifies the replay that the outcome will be selected from.
+    :type sc2_replay: SC2ReplayData
     :return: Returns a dictionary containing averaged features.
     :rtype: Dict[str, List[float]]
+
+    **Correct Usage Examples:**
+
+    The use of this method is intended to average stats of the player from the game.
+
+    You should set sc2_replay parameter.
+
+    The parameters should be set as in the example below.
+
+    >>> average_player_stats_object = average_player_stats(
+    ...        sc2_replay= sc2_replay: SC2ReplayData)
+
+    >>> assert type(average_player_stats_object[0]) == SC2ReplayData
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
     """
 
     player_stats_dict = filter_player_stats(sc2_replay=sc2_replay)
@@ -76,8 +114,28 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     """
     Exposes logic for selecting APM from replay data.
 
+    :param sc2_replay: Specifies the replay that the outcome will be selected from.
+    :type sc2_replay: SC2ReplayData
     :return: Returns player id to APM mapping.
     :rtype: Dict[str, int]
+
+    **Correct Usage Examples:**
+
+    The use of this method is intended to check the value of the correct APM from the selected replay.
+
+    You should set sc2_replay parameter.
+
+    The parameters should be set as in the example below.
+
+    >>> select_apm_1v1_object = select_apm_1v1(
+    ...        sc2_replay= sc2_replay: SC2ReplayData)
+
+    >>> assert type(select_apm_1v1_object[0]) == SC2ReplayData
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
+
     """
 
     # Initializing dictionary for holding APM:
@@ -99,6 +157,23 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     :type sc2_replay: SC2ReplayData
     :return: Returns a dictionary mapping loss to 0, and win to 1 for playerIDs
     :rtype: Dict[str, int]
+
+    **Correct Usage Examples:**
+
+    The use of this method is intended to check logic value of the selected 1v1 game, lose or win
+
+    You should set sc2_replay parameter.
+
+    The parameters should be set as in the example below.
+
+    >>> select_outcome_1v1_object = select_outcome_1v1(
+    ...        sc2_replay= sc2_replay: SC2ReplayData)
+
+    >>> assert type(select_outcome_1v1_object[0]) == SC2ReplayData
+
+    **Incorrect Usage Examples:**
+
+    If you don't set parameters or paste incorect parameters' type.
     """
 
     player_outcome = {"1": 0, "2": 0}

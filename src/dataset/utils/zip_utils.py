@@ -22,7 +22,13 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
 
     **Correct Usage Examples:**
 
-    The parameters should be set as in the example
+    The use of this method is intended to extract a zipfile from the .zip file.
+
+    You should set every parameter, zip_path, filenames and path_to_extract.
+
+    May help you to work with dataset.
+
+    The parameters should be set as in the example below.
 
     >>> unpack_chunk_object = unpack_chunk(
     ... zip_path="./directory/zip_path",
@@ -69,7 +75,13 @@ def unpack_zipfile(
 
     **Correct Usage Examples:**
 
-    The parameters should be set as in the example
+    The use of this method is intended to extract a zipfile.
+
+    You should set every parameter, destination, subdir, zip_path and n_workers.
+
+    May help you to work with dataset.
+
+    The parameters should be set as in the example below.
 
     >>> unpack_zipfile_object = unpack_zipfile(
     ... destination_dir="./directory/destination_dir",
