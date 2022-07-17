@@ -32,9 +32,16 @@ def filter_player_stats(
     >>> filter_player_stats_object = filter_player_stats(
     ...        sc2_replay= sc2_replay: SC2ReplayData)
 
-    >>> assert type(filter_player_stats_object[0]) == SC2ReplayData
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
+
+    >>> wrong_type_object = int(2)
+    >>> filter_player_stats_object = filter_player_stats(
+    ...        sc2_replay= wrong_type_object)
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
 
@@ -77,9 +84,16 @@ def average_player_stats(
     >>> average_player_stats_object = average_player_stats(
     ...        sc2_replay= sc2_replay: SC2ReplayData)
 
-    >>> assert type(average_player_stats_object[0]) == SC2ReplayData
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
+
+    >>> wrong_type_object = int(2)
+    >>> average_player_stats_object = average_player_stats(
+    ...        sc2_replay= wrong_type_object)
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
     """
@@ -130,9 +144,16 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     >>> select_apm_1v1_object = select_apm_1v1(
     ...        sc2_replay= sc2_replay: SC2ReplayData)
 
-    >>> assert type(select_apm_1v1_object[0]) == SC2ReplayData
+    >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
+
+    >>> wrong_type_object = int(2)
+    >>> select_apm_1v1_object = select_apm_1v1(
+    ...        sc2_replay= wrong_type_object)
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
 
@@ -172,6 +193,13 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
+
+    >>> wrong_type_object = int(2)
+    >>> select_outcome_1v1_object = select_outcome_1v1(
+    ...        sc2_replay= wrong_type_object)
+    Traceback (most recent call last):
+    ...
+    TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
     """
