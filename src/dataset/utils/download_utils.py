@@ -44,6 +44,7 @@ def download_replaypack(
     >>> assert existing_files[0].endswith(".zip")
 
     **Incorrect Usage Examples:**
+
     >>> wrong_type_object = int(2)
     >>> download_replaypack_object = download_replaypack(
     ...    destination_dir=wrong_type_object,
@@ -133,6 +134,7 @@ def download_and_unpack_replaypack(
     >>> assert isinstance(url, str)
 
     **Incorrect Usage Examples:**
+
     >>> wrong_type_object = int(2)
     >>> download_and_unpack_replaypack_object = download_and_unpack_replaypack(
     ...            replaypack_download_dir=wrong_type_object,

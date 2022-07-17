@@ -38,6 +38,7 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
     >>> assert isinstance(sc2_replay, SC2ReplayData)
 
     **Incorrect Usage Examples:**
+
     >>> wrong_type_object = int(2)
     >>> playerstats_average_to_dict_object = playerstats_average_to_dict(
     ...        sc2_replay= wrong_type_object)
@@ -140,6 +141,7 @@ def playerstats_to_dict(
     >>> assert isinstance(additional_data_dict, Dict)
 
     **Incorrect Usage Examples:**
+
     >>> wrong_type_object = int(2)
     >>> playerstats_to_dict_object = playerstats_to_dict(
     ...        sc2_replay= sc2_replay,
@@ -208,6 +210,7 @@ def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> Dict[str, flo
     >>> assert isinstance(playerstats_df, pd.DataFrame)
 
     **Incorrect Usage Examples:**
+
     >>> wrong_type_object = int(2)
     >>> average_playerstats_dataframe_object = average_playerstats_dataframe(
     ...        playerstats_df= wrong_type_object)
