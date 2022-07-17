@@ -36,9 +36,12 @@ class CameraSave(GameEvent):
 
         **Correct Usage Examples:**
 
-        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_. This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_.
 
-        .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
+        This method requires a dictionary representation of data to be passed as a parameter because of the built in json
+        parser provided by the Python standard library.
+
+        _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
         >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D
         >>> camera_save_dict = {"id": 5,
