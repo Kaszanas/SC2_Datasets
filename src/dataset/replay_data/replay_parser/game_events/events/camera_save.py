@@ -22,6 +22,7 @@ class CameraSave(GameEvent):
     :type which: int
     """
 
+    # REVIEW: Doctests here:
     @staticmethod
     def from_dict(d: Dict) -> "CameraSave":
         """
@@ -31,6 +32,42 @@ class CameraSave(GameEvent):
         :type d: Dict
         :return: Returns an initialized CameraSave class.
         :rtype: CameraSave
+
+
+        **Correct Usage Examples:**
+
+        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_. This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+
+        .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
+
+        >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D
+        >>> camera_save_dict = {"id": 5,
+        ...                     "loop": 22,
+        ...                     "target": {
+        ...                        "x": 3.578125,
+        ...                        "y": 0.742431640625},
+        ...                     "userid": {
+        ...                        "userId": 0},
+        ...                     "which": 0}
+        >>> camera_save_object = CameraSave.from_dict(d=camera_save_dict)
+        >>> assert isinstance(camera_save_object, CameraSave)
+        >>> assert camera_save_object.id == 5
+        >>> assert camera_save_object.loop == 22
+        >>> assert isinstance(camera_save_object.target, Target2D)
+        >>> assert camera_save_object.target.x == 3.578125
+        >>> assert camera_save_object.target.y == 0.742431640625
+        >>> assert camera_save_object.userid == 0
+        >>> assert camera_save_object.loop == 22
+
+        **Incorrect Usage Examples:**
+
+        Passing a Python dictionary with missing or incorrect fields would result in a failure as follows:
+
+        >>> camera_save_dict = {"WRONG_FIELD": 5}
+        >>> details_object = CameraSave.from_dict(d=camera_save_dict)
+        Traceback (most recent call last):
+        ...
+        KeyError: 'id'
         """
         return CameraSave(
             id=d["id"],
