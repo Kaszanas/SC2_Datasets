@@ -24,28 +24,32 @@ def validate_chunk(
     ...                         list_of_replays=[
     ...                               "./test/test_files/single_replay/test_replay.json",
     ...                               "./test/test_files/single_replay/test_bit_flip_example.json"])
-    >>> assert len(validated_chunk) == 3
+    >>> assert len(validated_chunk) == 2
+    >>> assert validated_chunk[0][1] is True
+    >>> assert validated_chunk[1][1] is False
     """
 
     # Initializing sets:
-    validated_files = set()
-    skip_files = set()
+    # validated_files = set()
+    # skip_files = set()
 
+    result = []
     for file_path in list_of_replays:
         # We are keeping track of all of the files that are validated:
-        validated_files.add(file_path)
+        # validated_files.add(file_path)
         try:
             # Trying to parse the SC2 replay:
             replay_data = SC2ReplayData.from_file(replay_filepath=file_path)
+            result.append((file_path, True))
         except:
             # If the file cannot be parsed it is added to files that should be skipped:
-            skip_files.add(file_path)
+            # skip_files.add(file_path)
+            result.append((file_path, False))
 
-    result = []
     # Converting the sets to a single result list:
-    for file in validated_files:
-        result.append((file, True))
-    for file in skip_files:
-        result.append((file, False))
+    # for file in validated_files:
+    #     result.append((file, True))
+    # for file in skip_files:
+    #     result.append((file, False))
 
     return result

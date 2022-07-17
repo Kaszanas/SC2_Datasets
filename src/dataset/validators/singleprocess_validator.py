@@ -45,7 +45,7 @@ def validate_integrity_persist_sp(
     )
 
     # Validate only the files we haven't already validated:
-    files_to_validate = set(list_of_replays) - read_validated_files
+    files_to_validate = set(list_of_replays) - read_validated_files - read_skip_files
     # TODO: Consider changing the input param to set
     # Perform the validation:
     validated_files, skip_files = validate_integrity_sp(
@@ -81,7 +81,7 @@ def validate_integrity_sp(
 
     Validators can be used to check if a file is correct before loading it for some modeling task.
     Below you will find a sample execution that should contain one correct file and one incorrect file.
-    This results in the final tuple containing two sets. The first tuple denotes all of the validated files (files that were checked) whereas the second tuple denotes all of the files that should be skipped in modeling tasks.
+    This results in the final tuple containing two sets. The first tuple denotes correctly validated files, whereas the second tuple denotes the files that should be skipped in modeling tasks.
 
     >>> validated_replays = validate_integrity_sp(
     ...                         list_of_replays=[

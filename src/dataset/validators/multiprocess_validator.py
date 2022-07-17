@@ -3,13 +3,15 @@ from typing import List, Set, Tuple
 from concurrent.futures import ProcessPoolExecutor
 from tqdm import tqdm
 
+import math
+
 from src.dataset.validators.validate_chunk import validate_chunk
 from src.dataset.validators.validator_utils import (
     read_validation_file,
     save_validation_file,
 )
 
-# REVIEW: Check the doctests and error handling:
+
 def validate_integrity_mp(
     list_of_replays: List[str],
     n_workers: int,
@@ -18,46 +20,53 @@ def validate_integrity_mp(
     Exposes logic for multiprocess validation of the replays.
     Validates if the replay can be parsed by using SC2ReplayData by spawning multiple processes.
 
-    :param list_of_replays: Specifies a list of replays.
+    :param list_of_replays: Specifies a list of replays that should be checked by the validator.
     :type list_of_replays: List[str]
-    :param n_workers: Specifies the number of workers (processes) that will be used for validating replays.
+    :param n_workers: Specifies the number of workers (processes) that will be used for validating replays. Must be a positive int.
     :type n_workers: int
-    :return: Returns a tuple that contains (validated replays, files to be skipped).
+    :return: Returns a tuple that contains (all validated replays, files to be skipped).
     :rtype: Tuple[Set[str], Set[str]]
 
     **Correct Usage Examples:**
 
     Validators can be used to check if a file is correct before loading it for some modeling task.
     Below you will find a sample execution that should contain one correct file and one incorrect file.
-    This results in the final tuple containing two sets. The first tuple denotes all of the validated files (files that were checked) whereas the second tuple denotes all of the files that should be skipped in modeling tasks.
+    This results in the final tuple containing two sets. The first tuple denotes correctly validated files, whereas the second tuple denotes the files that should be skipped in modeling tasks.
 
     >>> validated_replays = validate_integrity_mp(
     ...                         list_of_replays=[
     ...                               "./test/test_files/single_replay/test_replay.json",
     ...                               "./test/test_files/single_replay/test_bit_flip_example.json"],
     ...                         n_workers=1)
-    >>> assert len(validated_replays[0]) == 2
+    >>> assert len(validated_replays[0]) == 1
     >>> assert len(validated_replays[1]) == 1
 
-    **Incorrect Usage Examples:**
-
-    Setting number of workers to zero or less than zero will result in failure.
+    Example using more workers than replays:
 
     >>> validated_replays = validate_integrity_mp(
-    ...                                 list_of_replays=[
-    ...                                        "./test/test_files/single_replay/test_replay.json"],
-    ...                                 n_workers=0)
-    Traceback (most recent call last):
-    ...
-    Exception: Number of workers cannot be equal or less than zero!
+    ...                         list_of_replays=[
+    ...                               "./test/test_files/single_replay/test_replay.json",
+    ...                               "./test/test_files/single_replay/test_bit_flip_example.json"],
+    ...                         n_workers=8)
+    >>> assert len(validated_replays[0]) == 1
+    >>> assert len(validated_replays[1]) == 1
 
-    Moreover, some thought needs to be put towards having more workers than replays.
+    Example showing passing an empty list to the valdation function:
+
+    >>> validated_replays = validate_integrity_mp(
+    ...                         list_of_replays=[],
+    ...                         n_workers=8)
+    >>> assert len(validated_replays[0]) == 0
+    >>> assert len(validated_replays[1]) == 0
     """
 
     if n_workers <= 0:
         raise Exception("Number of workers cannot be equal or less than zero!")
 
-    chunksize = round(len(list_of_replays) / n_workers)
+    if len(list_of_replays) == 0:
+        return (set(), set())
+
+    chunksize = math.ceil(len(list_of_replays) / n_workers)
 
     futures = []
     # Iterate and submit jobs to the ProcessPoolExecutor:
@@ -116,20 +125,6 @@ def validate_integrity_persist_mp(
     ...                         n_workers=1,
     ...                         validation_file_path=Path("validator_file.json"))
     >>> assert len(replays_to_skip) == 1
-
-    **Incorrect Usage Examples:**
-
-    Setting number of workers to zero or less than zero will result in failure.
-
-    >>> from pathlib import Path
-    >>> replays_to_skip = validate_integrity_persist_mp(
-    ...                                 list_of_replays=[
-    ...                                        "test/test_files/single_replay/test_replay.json"],
-    ...                                 n_workers=0,
-    ...                                 validation_file_path=Path("validator_file.json"))
-    Traceback (most recent call last):
-    ...
-    Exception: Number of workers cannot be equal or less than zero!
     """
 
     # Reading from a file:
@@ -138,7 +133,7 @@ def validate_integrity_persist_mp(
     )
 
     # Validate replays:
-    files_to_validate = set(list_of_replays) - read_validated_files
+    files_to_validate = set(list_of_replays) - read_validated_files - read_skip_files
     validated_files = set()
     skip_files = set()
     if files_to_validate:
