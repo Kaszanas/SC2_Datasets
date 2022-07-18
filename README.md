@@ -1,27 +1,28 @@
 # SC2EGSet: StarCraft II Esport Game State Dataset
 
-This repository contains the official API for interacting with SC2EGSet: StarCraft II Esport Game State Dataset, which was built on top of the SC2ReSet: StarCraft II Replaypack Set. We provide PyTorch and PyTorch Lightning abstractions for the dataset download, unpacking, loading, and manipulation.
+This project contains official API implementation for the [SC2EGSet: StarCraft II Esport Game State Dataset](https://doi.org/10.5281/zenodo.5503997), which is built based on [SC2ReSet: StarCraft II Esport Replaypack Set](https://doi.org/10.5281/zenodo.5575796).
+Contents of this library provide PyTorch and PyTorch Lightning API for pre-processed StarCraft II dataset.
 
-# Prerequisites
+## Installation
 
-0. Install Python >= 3.10
-1. Create a virtual environment and install the PyTorch by hand with the following versions:
+1. Manually install PyTorch  with minimal version of ```1.11.0+cu113```
+2. Perform the following command:
+
+```bash
+$ pip install sc2egset_dataset
 ```
-torch==1.11.0+cu113
-torchaudio==0.11.0+cu113
-torchmetrics==0.7.2
-torchvision==0.12.0+cu113
-```
-
-# Installation
-
-As of now the code requires manual installation through provided ```requirements.txt``` with a minimal version of Python as highlighted above.
 
 ## Usage
 
-Please refer to the docstrings provided in the code implementation for in-depth usage information.
+- TODO
 
-Officially hosted and automatically generated documentation is going to be provided in the next update of this repository.
+## Contributing
+
+Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
+
+## License
+
+`sc2egset_dataset` was created by Andrzej Białecki. It is licensed under the terms of the GNU General Public License v3.0 license.
 
 ## Citation
 
