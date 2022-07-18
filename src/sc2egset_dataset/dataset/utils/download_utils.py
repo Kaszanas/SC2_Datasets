@@ -3,11 +3,11 @@ from typing import Dict, Tuple
 
 import requests
 
-from src.dataset.utils.zip_utils import unpack_zipfile
+from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 
 
 def download_replaypack(
-        destination_dir: str, replaypack_name: str, replaypack_url: str
+    destination_dir: str, replaypack_name: str, replaypack_url: str
 ) -> str:
     """
     Exposes logic for downloading a single StarCraft II replaypack from an url.
@@ -92,10 +92,10 @@ def download_replaypack(
 
 
 def download_and_unpack_replaypack(
-        replaypack_download_dir: str,
-        replaypack_unpack_dir: str,
-        replaypack_name: str,
-        url: str,
+    replaypack_download_dir: str,
+    replaypack_unpack_dir: str,
+    replaypack_name: str,
+    url: str,
 ) -> Tuple[str, Dict[str, str], Dict[str, str]]:
     """
     Helper function that downloads a replaypack from a specified url.

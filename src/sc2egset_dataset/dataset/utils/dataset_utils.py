@@ -1,7 +1,7 @@
 import json
 import os
 
-from src.dataset.utils.zip_utils import unpack_zipfile
+from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 
 from typing import Dict, Tuple
 

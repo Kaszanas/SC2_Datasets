@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 # TODO: Verify if it is possible to return two sets:

@@ -5,8 +5,8 @@ from tqdm import tqdm
 
 import math
 
-from src.dataset.validators.validate_chunk import validate_chunk
-from src.dataset.validators.validator_utils import (
+from sc2egset_dataset.dataset.validators.validate_chunk import validate_chunk
+from sc2egset_dataset.dataset.validators.validator_utils import (
     read_validation_file,
     save_validation_file,
 )
