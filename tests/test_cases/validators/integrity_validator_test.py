@@ -1,16 +1,16 @@
 import json
 import tempfile
 import unittest
-from src.dataset.validators.multiprocess_validator import (
+from sc2egset_dataset.dataset.validators.multiprocess_validator import (
     validate_integrity_mp,
     validate_integrity_persist_mp,
 )
-from src.dataset.validators.singleprocess_validator import (
+from sc2egset_dataset.dataset.validators.singleprocess_validator import (
     validate_integrity_persist_sp,
     validate_integrity_sp,
 )
 
-import test.test_utils.test_utils as test_utils
+import tests.test_utils.test_utils as test_utils
 
 from pathlib import Path
 

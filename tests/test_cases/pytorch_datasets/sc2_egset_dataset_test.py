@@ -1,8 +1,8 @@
 import os
 import unittest
 
-from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
-from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2egset_dataset.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
+from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 class SC2EGSetDatasetTest(unittest.TestCase):

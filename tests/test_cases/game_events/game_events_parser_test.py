@@ -1,11 +1,13 @@
 import json
 import unittest
-from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
-from src.dataset.replay_data.replay_parser.game_events.game_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event import (
+    GameEvent,
+)
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_events_parser import (
     GameEventsParser,
 )
 
-import test.test_utils.test_utils as test_utils
+import tests.test_utils.test_utils as test_utils
 
 
 class GameEventsParserTest(unittest.TestCase):

@@ -1,12 +1,12 @@
 import json
 import unittest
-from src.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
     TrackerEvent,
 )
-from src.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
-import test.test_utils.test_utils as test_utils
+import tests.test_utils.test_utils as test_utils
 
 
 class TrackerEventsParserTest(unittest.TestCase):

@@ -1,12 +1,12 @@
 import json
 import unittest
-from src.dataset.replay_data.replay_parser.message_events.message_event import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_event import (
     MessageEvent,
 )
-from src.dataset.replay_data.replay_parser.message_events.message_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_events_parser import (
     MessageEventsParser,
 )
-import test.test_utils.test_utils as test_utils
+import tests.test_utils.test_utils as test_utils
 
 
 class MessageEventsParserTest(unittest.TestCase):

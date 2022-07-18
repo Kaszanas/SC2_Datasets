@@ -1,7 +1,9 @@
 import os
 import unittest
 
-from src.dataset.lightning_datamodules.sc2_egset_datamodule import SC2EGSetDataModule
+from sc2egset_dataset.dataset.lightning_datamodules.sc2_egset_datamodule import (
+    SC2EGSetDataModule,
+)
 
 
 class SC2EGSetDataModuleTest(unittest.TestCase):
