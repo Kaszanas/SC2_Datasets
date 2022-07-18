@@ -1,6 +1,10 @@
-name: ci
+name: continuous integration (ci)
 
 on: [push, pull_request]
+
+# To successfully find the files that are required for testing:
+env:
+  TEST_WORKSPACE: $GITHUB_WORKSPACE
 
 jobs:
   ci:
@@ -22,6 +26,12 @@ jobs:
 
       - name: Install package
         run: poetry install
+
+      - name: Run pylama to check src directory
+        run: pylama --async src/
+
+      - name: Run pylama on the tests directory
+        run: pylama --async tests/
 
       - name: Test with pytest
         run: poetry run pytest tests/ --cov=sc2egset_dataset --cov-report=xml
