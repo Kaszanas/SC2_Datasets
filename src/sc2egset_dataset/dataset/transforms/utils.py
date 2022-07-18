@@ -2,10 +2,10 @@ from typing import Dict, List
 
 import numpy as np
 
-from src.dataset.replay_data.replay_parser.tracker_events.events.player_stats.player_stats import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
 )
-from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 def filter_player_stats(
