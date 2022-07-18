@@ -15,7 +15,8 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
 
     :param zip_path: Specifies the path to the archive file that will be extracted.
     :type zip_path: str
-    :param filenames: specifies a list of the filenames which are within the archive and will be extracted.
+    :param filenames: specifies a list of the filenames which are within the archive
+    and will be extracted.
     :type filenames: List[str]
     :param path_to_extract: Specifies the path to which the files will be extracted to.
     :type path_to_extract: str
@@ -59,14 +60,14 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
                 zip_file.extract(filename, path_to_extract)
             except zipfile.error as e:
                 logging.error(
-                    f"zipfile error was raised",
+                    f"zipfile error was raised: {e}",
                     exc_info=True,
                 )
 
 
 # REVIEW: Check this:
 def unpack_zipfile(
-        destination_dir: str, subdir: str, zip_path: str, n_workers: int
+    destination_dir: str, subdir: str, zip_path: str, n_workers: int
 ) -> str:
     """
     Helper function that unpacks the content of .zip archive.
@@ -135,10 +136,10 @@ def unpack_zipfile(
 
     with ProcessPoolExecutor(n_workers) as exe:
         for index in tqdm(
-                range(0, len(file_list), chunksize),
-                desc=f"Extracting {os.path.basename(destination_dir)}: ",
+            range(0, len(file_list), chunksize),
+            desc=f"Extracting {os.path.basename(destination_dir)}: ",
         ):
-            filenames = file_list[index: (index + chunksize)]
+            filenames = file_list[index : (index + chunksize)]
             _ = exe.submit(unpack_chunk, zip_path, filenames, path_to_extract)
 
     return path_to_extract

@@ -14,9 +14,11 @@ def download_replaypack(
 
     :param destination_dir: Specifies the destination directory where the replaypack will be saved.
     :type destination_dir: str
-    :param replaypack_name: Specifies the name of a replaypack that will be used for the downloaded .zip archive.
+    :param replaypack_name: Specifies the name of a replaypack that will
+    be used for the downloaded .zip archive.
     :type replaypack_name: str
-    :param replaypack_url: Specifies the url that is a direct link to the .zip which will be downloaded.
+    :param replaypack_url: Specifies the url that is a direct link
+    to the .zip which will be downloaded.
     :type replaypack_url: str
     :raises Exception: If more than one file is downloaded, exception is thrown.
     :return: Returns the filepath to the downloaded .zip archive.
@@ -24,47 +26,32 @@ def download_replaypack(
 
     **Correct Usage Examples:**
 
-    The use of this method is intended to download a .zip replaypack of SC2 games.
+    The use of this method is intended
+    to download a .zip replaypack containing StarCraft II games.
 
-    You should set every parameter, destination_dir, replaypack_name and replaypack_url.
+    Replaypack download directory should be empty before running
+    this function.
 
-    May help you to download the SC2 replaypack with .zip extension
+    Replaypack name will be used as the name for the downloaded .zip archive.
+
+    Replaypack url should be valid and poiting directly to a .zip archive hosted
+    on some server.
 
     The parameters should be set as in the example below.
 
+    >>> replaypack_download_dir = "datasets/download_directory"
+    >>> replaypack_name = "TournamentName"
+    >>> replaypack_url = "some_url"
     >>> download_replaypack_object = download_replaypack(
     ...    destination_dir=replaypack_download_dir,
     ...    replaypack_name=replaypack_name,
-    ...    replaypack_url=url)
+    ...    replaypack_url=replaypack_url)
 
-    >>> assert isinstance(destination_dir, str)
+    >>> assert isinstance(replaypack_download_dir, str)
     >>> assert isinstance(replaypack_name, str)
     >>> assert isinstance(replaypack_url, str)
-    >>> assert len(os.listdir(destination_dir)) == 0
+    >>> assert len(os.listdir(replaypack_download_dir)) == 0
     >>> assert existing_files[0].endswith(".zip")
-
-    **Incorrect Usage Examples:**
-
-    >>> wrong_type_object = int(2)
-    >>> download_replaypack_object = download_replaypack(
-    ...    destination_dir=wrong_type_object,
-    ...    replaypack_name=replaypack_name,
-    ...    replaypack_url=url)
-    Traceback (most recent call last):
-    ...
-    TypeError: unsupported operand type(s) ...
-
-    If you don't set parameters or paste incorect parameters' type.
-
-    If the destination directory is empty.
-
-    If the downloaded file has no .zip extension.
-
-    It may throw:
-
-    Exception: There is more than one file in the destination directory!
-
-    Exception: The file that was detected does not end with a .zip extension! Wrong file was downloaded!
     """
 
     # Check if there is something in the destination directory:
@@ -77,7 +64,8 @@ def download_replaypack(
         if existing_files[0].endswith(".zip"):
             return existing_files[0]
         raise Exception(
-            "The file that was detected does not end with a .zip extension! Wrong file was downloaded!"
+            "The file that was detected does not end with a .zip extension!\
+            Wrong file was downloaded!"
         )
 
     # Send a request and save the response content into a .zip file.
@@ -104,7 +92,8 @@ def download_and_unpack_replaypack(
 
     :param replaypack_download_dir: Specifies a directory where the .zip archive will be downloaded.
     :type replaypack_download_dir: str
-    :param replaypack_unpack_dir: Specifies a directory where the .zip file will be extracted under a replaypack_name directory.
+    :param replaypack_unpack_dir: Specifies a directory where the .zip file will be extracted
+    under a replaypack_name directory.
     :type replaypack_unpack_dir: str
     :param replaypack_name: Specifies a replaypack name which will be used to create paths.
     :type replaypack_name: str
@@ -113,12 +102,11 @@ def download_and_unpack_replaypack(
 
     **Correct Usage Examples:**
 
-    The use of this method is intended to download a .zip replaypack of SC2 games and unpack the downloaded files
-    to the folder.
+    The use of this method is intended to download a .zip replaypack of SC2 games
+    and unpack the downloaded files to the folder.
 
-    You should set every parameter, replaypack_download_dir, replaypack_unpack_dir, replaypack_name and url.
-
-    May help you to download and unpack downloaded files.
+    You should set every parameter:
+    replaypack_download_dir, replaypack_unpack_dir, replaypack_name and url.
 
     The parameters should be set as in the example below.
 
@@ -159,7 +147,7 @@ def download_and_unpack_replaypack(
     )
 
     # Unpacking the replaypack:
-    replaypack_path = unpack_zipfile(
+    _ = unpack_zipfile(
         destination_dir=replaypack_unpack_dir,
         subdir=replaypack_name,
         zip_path=download_path,

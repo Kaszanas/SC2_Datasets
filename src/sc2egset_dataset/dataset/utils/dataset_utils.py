@@ -12,23 +12,27 @@ def load_replaypack_information(
     """
     Helper function that loads replaypack information from a standard directory structure.
 
-    :param replaypack_name: Specifies the replaypack name that will be used as a subdirectory where replaypack .json files will be extracted.
+    :param replaypack_name: Specifies the replaypack name that will be used
+    as a subdirectory where replaypack .json files will be extracted.
     :type replaypack_name: str
     :param replaypack_path: Specifies the path to the extracted replaypack.
     :type replaypack_path: str
-    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive.
+    :param unpack_n_workers: Specifies the number of workers that will
+    be used for unpacking the archive.
     :type unpack_n_workers: int
-    :return: Returns path to the directory that contains .json files with data extracted from replays,
-            summary information that was generated when extracting the data from replays,
-            mapping information that specifies what was the directory structure pre-extraction, and log file which contaions how many files were successfully extracted.
+    :return: Returns path to the directory that contains .json files
+    with data extracted from replays, summary information that
+    was generated when extracting the data from replays,
+    mapping information that specifies what was the directory
+    structure pre-extraction, and log file which contaions
+    how many files were successfully extracted.
     :rtype: Tuple[str, Dict[str, str], Dict[str, str]]
 
     **Correct Usage Examples:**
 
-    The use of this method is intended to download a .zip replaypack of SC2 games and unpack the downloaded files
+    The use of this method is intended to download a .zip replaypack
+    of SC2 games and unpack the downloaded files
     to the folder.
-
-    You should set every parameter, replaypack_download_dir, replaypack_unpack_dir, replaypack_name and url.
 
     May help you to download and unpack downloaded files.
 
@@ -43,19 +47,6 @@ def load_replaypack_information(
     >>> assert isinstance(replaypack_path, str)
     >>> assert isinstance(unpack_n_workers, int)
     >>> assert unpack_n_workers >= 1
-
-    **Incorrect Usage Examples:**
-
-    >>> wrong_type_object = int(2)
-    >>> load_replaypack_information_object = load_replaypack_information(
-    ...        replaypack_name=wrong_type_object,
-    ...        replaypack_path="replaypack_path",
-    ...        unpack_n_workers=1)
-    Traceback (most recent call last):
-    ...
-    TypeError: unsupported operand type(s) ...
-
-    If you don't set parameters or paste incorect parameters' type.
     """
 
     replaypack_files = os.listdir(replaypack_path)
