@@ -1,7 +1,11 @@
 from typing import Dict
 
-from src.dataset.replay_data.replay_parser.game_events.events.nested.delta import Delta
-from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.nested.delta import (
+    Delta,
+)
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event import (
+    GameEvent,
+)
 
 
 class SelectionDelta(GameEvent):

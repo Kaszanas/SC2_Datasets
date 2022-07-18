@@ -1,7 +1,9 @@
 from types import NoneType
 from typing import Dict
 
-from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event import (
+    GameEvent,
+)
 
 # TODO: Can the sequence be an int here?
 # Should this be encoded somehow if there is a NoneType detected?

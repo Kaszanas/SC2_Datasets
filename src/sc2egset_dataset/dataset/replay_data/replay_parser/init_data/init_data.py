@@ -1,5 +1,5 @@
 from typing import Any, Dict
-from src.dataset.replay_data.replay_parser.init_data.game_description import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.init_data.game_description import (
     GameDescription,
 )
 

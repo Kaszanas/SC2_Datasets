@@ -1,7 +1,9 @@
 from typing import Any, Dict
 
 
-from src.dataset.replay_data.replay_parser.toon_player_desc_map.color import Color
+from sc2egset_dataset.dataset.replay_data.replay_parser.toon_player_desc_map.color import (
+    Color,
+)
 
 
 class ToonPlayerInfo:

@@ -1,6 +1,8 @@
 from typing import Any, Dict
 
-from src.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
+from sc2egset_dataset.dataset.replay_data.replay_parser.init_data.game_options import (
+    GameOptions,
+)
 
 
 class GameDescription:

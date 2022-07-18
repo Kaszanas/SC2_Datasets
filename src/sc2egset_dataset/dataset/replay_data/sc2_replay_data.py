@@ -2,20 +2,24 @@ import json
 import logging
 from typing import Any, Dict
 
-from src.dataset.replay_data.replay_parser.details.details import Details
-from src.dataset.replay_data.replay_parser.game_events.game_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.details.details import Details
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_events_parser import (
     GameEventsParser,
 )
-from src.dataset.replay_data.replay_parser.header.header import Header
-from src.dataset.replay_data.replay_parser.init_data.init_data import InitData
-from src.dataset.replay_data.replay_parser.message_events.message_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.header.header import Header
+from sc2egset_dataset.dataset.replay_data.replay_parser.init_data.init_data import (
+    InitData,
+)
+from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_events_parser import (
     MessageEventsParser,
 )
-from src.dataset.replay_data.replay_parser.metadata.metadata import Metadata
-from src.dataset.replay_data.replay_parser.toon_player_desc_map.toon_player_desc import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.metadata.metadata import (
+    Metadata,
+)
+from sc2egset_dataset.dataset.replay_data.replay_parser.toon_player_desc_map.toon_player_desc import (
     ToonPlayerDesc,
 )
-from src.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
 

@@ -1,4 +1,4 @@
-from src.dataset.replay_data.replay_parser.game_events.events.nested.target_3d import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.nested.target_3d import (
     Target3D,
 )
 

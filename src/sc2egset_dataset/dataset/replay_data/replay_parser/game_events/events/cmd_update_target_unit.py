@@ -1,9 +1,11 @@
 from typing import Dict
 
-from src.dataset.replay_data.replay_parser.game_events.events.nested.target_unit import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.nested.target_unit import (
     TargetUnit,
 )
-from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event import (
+    GameEvent,
+)
 
 
 class CmdUpdateTargetUnit(GameEvent):

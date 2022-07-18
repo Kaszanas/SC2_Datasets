@@ -10,35 +10,39 @@
 # {'UserOptions', 'CameraUpdate', 'ControlGroupUpdate', 'GameUserLeave', 'CommandManagerState', 'CameraSave', 'CmdUpdateTargetPoint', 'CmdUpdateTargetUnit', 'Cmd', 'SelectionDelta'}
 from typing import Dict
 
-from src.dataset.replay_data.replay_parser.game_events.events.camera_save import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.camera_save import (
     CameraSave,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.camera_update import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.camera_update import (
     CameraUpdate,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.cmd import Cmd
-from src.dataset.replay_data.replay_parser.game_events.events.cmd_update_target_point import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.cmd import (
+    Cmd,
+)
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.cmd_update_target_point import (
     CmdUpdateTargetPoint,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.cmd_update_target_unit import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.cmd_update_target_unit import (
     CmdUpdateTargetUnit,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.command_manager_state import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.command_manager_state import (
     CommandManagerState,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.control_group_update import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.control_group_update import (
     ControlGroupUpdate,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.game_user_leave import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.game_user_leave import (
     GameUserLeave,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.selection_delta import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.selection_delta import (
     SelectionDelta,
 )
-from src.dataset.replay_data.replay_parser.game_events.events.user_options import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.user_options import (
     UserOptions,
 )
-from src.dataset.replay_data.replay_parser.game_events.game_event import GameEvent
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event import (
+    GameEvent,
+)
 
 
 class GameEventsParser:
