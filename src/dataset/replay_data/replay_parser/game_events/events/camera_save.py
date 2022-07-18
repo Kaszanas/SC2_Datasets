@@ -41,7 +41,7 @@ class CameraSave(GameEvent):
         This method requires a dictionary representation of data to be passed as a parameter because of the built in json
         parser provided by the Python standard library.
 
-        _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
+        .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
         >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D
         >>> camera_save_dict = {"id": 5,
@@ -61,16 +61,6 @@ class CameraSave(GameEvent):
         >>> assert camera_save_object.target.y == 0.742431640625
         >>> assert camera_save_object.userid == 0
         >>> assert camera_save_object.loop == 22
-
-        **Incorrect Usage Examples:**
-
-        Passing a Python dictionary with missing or incorrect fields would result in a failure as follows:
-
-        >>> camera_save_dict = {"WRONG_FIELD": 5}
-        >>> details_object = CameraSave.from_dict(d=camera_save_dict)
-        Traceback (most recent call last):
-        ...
-        KeyError: 'id'
         """
         return CameraSave(
             id=d["id"],

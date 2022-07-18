@@ -36,16 +36,6 @@ class Details:
         >>> assert details_object.gameSpeed == "Faster"
         >>> assert details_object.isBlizzardMap == True
         >>> assert details_object.timeUTC == "2017-04-29T05:15:32.4903483+02:00"
-
-        **Incorrect Usage Examples:**
-
-        Passing a Python dictionary with missing or incorrect fields would result in a failure as follows:
-
-        >>> details_dict = {"WRONG_FIELD": "Faster"}
-        >>> details_object = Details.from_dict(d=details_dict)
-        Traceback (most recent call last):
-        ...
-        KeyError: 'gameSpeed'
         """
         return Details(
             gameSpeed=d["gameSpeed"],
