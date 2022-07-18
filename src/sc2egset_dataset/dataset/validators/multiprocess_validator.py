@@ -22,16 +22,21 @@ def validate_integrity_mp(
 
     :param list_of_replays: Specifies a list of replays that should be checked by the validator.
     :type list_of_replays: List[str]
-    :param n_workers: Specifies the number of workers (processes) that will be used for validating replays. Must be a positive int.
+    :param n_workers: Specifies the number of workers (processes)
+    that will be used for validating replays. Must be a positive int.
     :type n_workers: int
     :return: Returns a tuple that contains (all validated replays, files to be skipped).
     :rtype: Tuple[Set[str], Set[str]]
 
     **Correct Usage Examples:**
 
-    Validators can be used to check if a file is correct before loading it for some modeling task.
-    Below you will find a sample execution that should contain one correct file and one incorrect file.
-    This results in the final tuple containing two sets. The first tuple denotes correctly validated files, whereas the second tuple denotes the files that should be skipped in modeling tasks.
+    Validators can be used to check if a file is correct before
+    loading it for some modeling task. Below you will find a sample
+    execution that should contain one correct file and one incorrect file.
+    This results in the final tuple containing two sets.
+    The first tuple denotes correctly validated files,
+    whereas the second tuple denotes the files that should
+    be skipped in modeling tasks.
 
     >>> validated_replays = validate_integrity_mp(
     ...                         list_of_replays=[
@@ -77,7 +82,7 @@ def validate_integrity_mp(
 
     # Calculate results from futures:
     result = []
-    for future in tqdm(futures, desc=f"Validating files: "):
+    for future in tqdm(futures, desc="Validating files: "):
         result.extend(future.result())
 
     # Convert result to two sets:
@@ -107,7 +112,8 @@ def validate_integrity_persist_mp(
     :type list_of_replays: List[str]
     :param n_workers: Specifies the number of workers that will be used to validate the files.
     :type n_workers: int
-    :param validation_file_path: Specifies the path to the validation file which will be read to obtain the
+    :param validation_file_path: Specifies the path to the validation
+    file which will be read to obtain the
     :type validation_file_path: Path
     :return: Returns a set of files that should be skipped in further processing.
     :rtype: Set[str]

@@ -20,7 +20,8 @@ def validate_integrity_persist_sp(
 
     :param list_of_replays: Specifies the list of replays that are supposed to be validated.
     :type list_of_replays: List[str]
-    :param validation_file_path: Specifies the path to the validation file which will be read to obtain the
+    :param validation_file_path: Specifies the path to the validation file
+    which will be read to obtain the
     :type validation_file_path: Path
     :return: Returns a set of files that should be skipped in further processing.
     :rtype: Set[str]
@@ -72,7 +73,8 @@ def validate_integrity_sp(
     """
     Exposes logic for single process integrity validation of a replay.
 
-    :param list_of_replays: Specifies the SC2ReplayInfo information of the files that will be validated.
+    :param list_of_replays: Specifies the SC2ReplayInfo information
+    of the files that will be validated.
     :type list_of_replays: List[str]
     :return: Returns a tuple that contains (validated replays, files to be skipped).
     :rtype: Tuple[Set[str], Set[str]]
@@ -80,8 +82,11 @@ def validate_integrity_sp(
     **Correct Usage Examples:**
 
     Validators can be used to check if a file is correct before loading it for some modeling task.
-    Below you will find a sample execution that should contain one correct file and one incorrect file.
-    This results in the final tuple containing two sets. The first tuple denotes correctly validated files, whereas the second tuple denotes the files that should be skipped in modeling tasks.
+    Below you will find a sample execution which
+    should contain one correct file and one incorrect file.
+    This results in the final tuple containing two sets.
+    The first tuple denotes correctly validated files,
+    whereas the second tuple denotes the files that should be skipped in modeling tasks.
 
     >>> validated_replays = validate_integrity_sp(
     ...                         list_of_replays=[

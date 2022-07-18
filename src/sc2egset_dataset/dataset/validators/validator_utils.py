@@ -4,6 +4,7 @@ from typing import Set, Tuple
 
 import json
 
+
 # TODO: consider splitting file creation out from this method
 def read_validation_file(
     path: Path,
@@ -19,7 +20,8 @@ def read_validation_file(
     **Correct Usage Examples:**
 
     This function is a helper that is required to have persistent validators which are
-    able to skip the files that were previously processed. It is tasked with reading the validation file.
+    able to skip the files that were previously processed.
+    It is tasked with reading the validation file.
     Return of this function shoud contain information on which files were validated
     (all of the validated files), and which files ought to be skipped.
 
@@ -46,7 +48,7 @@ def read_validation_file(
             validated_file_set = set(json_data["validated_files"])
             skip_file_set = set(json_data["skip_files"])
         except Exception as e:
-            logging.error(f"Error while parsing json!", exc_info=e)
+            logging.error("Error while parsing json!", exc_info=e)
 
     return (validated_file_set, skip_file_set)
 
@@ -59,22 +61,29 @@ def save_validation_file(
     """
     Attempts to save the validation file to a specified path
 
-    :param validated_files: Specifies the list of replays that were verified as ones that were processed.
+    :param validated_files: Specifies the list of replays that were verified
+    as ones that were processed.
     :type validated_files: Set[str]
-    :param skip_files: Specifies the list of replays that were verified as ones that should be skipped.
+    :param skip_files: Specifies the list of replays that were verified
+    as ones that should be skipped.
     :type skip_files: Set[str]
-    :param path: Specifies the path to the file that will be saved, Defaults to Path("validator_file.json")
+    :param path: Specifies the path to the file that will be saved,
+    Defaults to Path("validator_file.json")
     :type path: Path
 
     **Correct Usage Examples:**
 
     This function is a helper that is required to have persistent validators which are
-    able to skip the files that were previously processed. It is tasked with saving the information that was processed by the validators so that future runs of the program can use this information.
+    able to skip the files that were previously processed.
+    It is tasked with saving the information that was processed
+    by the validators so that future runs of the program can use this information.
 
     >>> from pathlib import Path
     >>> validated_files = {"validated_file_0.json", "validated_file_1.json"}
     >>> skip_files = {"validated_file_0.json"}
-    >>> validator_file_content = save_validation_file(validated_files=validated_files, skip_files=skip_files)
+    >>> validator_file_content = save_validation_file(
+    ...                                         validated_files=validated_files,
+    ...                                         skip_files=skip_files)
     """
 
     # Gettings paths as posix to be able to serialize them:
