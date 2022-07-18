@@ -47,7 +47,114 @@ class GameOptions:
         :return: Specifies a list of parameters about the game like a number of observers, fog of the game, if the game was
                  competitive etc.
         :rtype: GameOptions
+
+        **Correct Usage Examples:**
+
+        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_
+
+        This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+
+        _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
+
+        The use of this method is intended to get game options information from the game's json representation.
+
+        >>> game_options_dict = {
+        ...        "advancedSharedControl": False,
+        ...        "amm": False,
+        ...        "battleNet": False,
+        ...        "clientDebugFlags": 265,
+        ...        "competitive": False,
+        ...        "cooperative": False,
+        ...        "fog": 0,
+        ...        "heroDuplicatesAllowed": True,
+        ...        "lockTeams": True,
+        ...        "noVictoryOrDefeat": False,
+        ...        "observers": 0,
+        ...        "practice": False,
+        ...        "randomRaces": False,
+        ...        "teamsTogether": False,
+        ...        "userDifficulty": 0}
+        ...
+        >>> game_options_object = GameOptions.from_dict(d=game_options_dict)
+        ...
+        >>> assert isinstance(game_options_object, GameOptions)
+        >>> assert isinstance(game_options_object.advancedSharedControl, bool)
+        >>> assert isinstance(game_options_object.amm, bool)
+        >>> assert isinstance(game_options_object.battleNet, bool)
+        >>> assert isinstance(game_options_object.clientDebugFlags, int)
+        >>> assert isinstance(game_options_object.competitive, bool)
+        >>> assert isinstance(game_options_object.cooperative, bool)
+        >>> assert isinstance(game_options_object.fog, int)
+        >>> assert isinstance(game_options_object.heroDuplicatesAllowed, bool)
+        >>> assert isinstance(game_options_object.lockTeams, bool)
+        >>> assert isinstance(game_options_object.noVictoryOrDefeat, bool)
+        >>> assert isinstance(game_options_object.observers, int)
+        >>> assert isinstance(game_options_object.practice, bool)
+        >>> assert isinstance(game_options_object.randomRaces, bool)
+        >>> assert isinstance(game_options_object.teamsTogether, bool)
+        >>> assert isinstance(game_options_object.userDifficulty, int)
+        ...
+        >>> assert game_options_object.advancedSharedControl == False
+        >>> assert game_options_object.amm == False
+        >>> assert game_options_object.battleNet == False
+        >>> assert game_options_object.clientDebugFlags == 265
+        >>> assert game_options_object.competitive == False
+        >>> assert game_options_object.cooperative == False
+        >>> assert game_options_object.fog == 0
+        >>> assert game_options_object.heroDuplicatesAllowed == True
+        >>> assert game_options_object.lockTeams == True
+        >>> assert game_options_object.noVictoryOrDefeat == False
+        >>> assert game_options_object.observers == 0
+        >>> assert game_options_object.practice == False
+        >>> assert game_options_object.randomRaces == False
+        >>> assert game_options_object.teamsTogether == False
+        >>> assert game_options_object.userDifficulty == 0
+        ...
+        >>> assert game_options_object.clientDebugFlags >= 0
+        >>> assert game_options_object.fog >= 0
+        >>> assert game_options_object.observers >= 0
+        >>> assert game_options_object.userDifficulty >= 0
+
+        **Incorrect Usage Examples:**
+
+        >>> advancedSharedControl_wrong = "False"
+        >>> amm_wrong = True
+        >>> battleNet_wrong = "wrong type"
+        >>> clientDebugFlags_wrong = int(2)
+        >>> competitive_wrong = str(2)
+        >>> cooperative_wrong = str(2)
+        >>> fog_wrong = str(2)
+        >>> heroDuplicatesAllowed_wrong = str(2)
+        >>> lockTeams_wrong = str(2)
+        >>> noVictoryOrDefeat_wrong = str(2)
+        >>> observers_wrong = str(2)
+        >>> practice_wrong = str(2)
+        >>> randomRaces_wrong = str(2)
+        >>> teamsTogether_wrong = str(2)
+        >>> userDifficulty_wrong = str(2)
+
+        >>> GameOptions(
+        ...    advancedSharedControl=advancedSharedControl_wrong,
+        ...    amm=amm_wrong,
+        ...    battleNet=battleNet_wrong,
+        ...    clientDebugFlags=clientDebugFlags_wrong,
+        ...    competitive=competitive_wrong,
+        ...    cooperative=cooperative_wrong,
+        ...    fog=fog_wrong,
+        ...    heroDuplicatesAllowed=heroDuplicatesAllowed_wrong,
+        ...    lockTeams=lockTeams_wrong,
+        ...    noVictoryOrDefeat=observers_wrong,
+        ...    observers=practice_wrong,
+        ...    practice=practice_wrong,
+        ...    randomRaces=randomRaces_wrong,
+        ...    teamsTogether=teamsTogether_wrong,
+        ...    userDifficulty=userDifficulty_wrong)
+        Traceback (most recent call last):
+        ...
+        TypeError: unsupported operand type(s) ...
+
         """
+
         return GameOptions(
             advancedSharedControl=d["advancedSharedControl"],
             amm=d["amm"],
