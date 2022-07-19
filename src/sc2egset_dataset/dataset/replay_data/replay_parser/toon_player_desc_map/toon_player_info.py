@@ -17,12 +17,15 @@ class ToonPlayerInfo:
     :type playerID: int
     :param userID: Specifies id number of player in the game, example: in 1v1 game: [0,1]
     :type userID: int
-    :param SQ: Specifies spending quotient value, ratio between resources mining and spending,
-               more information: https://tl.net/forum/starcraft-2/266019-do-you-macro-like-a-pro
+    :param SQ: Specifies spending quotient value,
+    ratio between resources mining and spending,
+    more information: https://tl.net/forum/starcraft-2/266019-do-you-macro-like-a-pro
     :type SQ: int
-    :param supplyCappedPercent: Specifies a 'supply block' percent of game time that a player was supply capped.
+    :param supplyCappedPercent: Specifies a 'supply block' percent of game time
+    that a player was supply capped.
     :type supplyCappedPercent: int
-    :param startDir: Specifies  the start direction of the player, expressed in clock
+    :param startDir: Specifies  the start direction of the player,
+    expressed in clock
     :type startDir: int
     :param startLocX: Specifies x coordinate of player's starting location
     :type startLocX: int
@@ -57,9 +60,11 @@ class ToonPlayerInfo:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "ToonPlayerInfo":
         """
-        Static method returning initialized ToonPlayerInfo class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized ToonPlayerInfo class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
         :return: Returns an initialized ToonPlayerInfo class.
         :rtype: ToonPlayerInfo

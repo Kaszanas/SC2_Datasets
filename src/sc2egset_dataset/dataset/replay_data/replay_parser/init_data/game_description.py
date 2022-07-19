@@ -7,12 +7,14 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.init_data.game_options i
 
 class GameDescription:
     """
-    GameDescription specifies an information about some basic parameters of a StarCraft II replay.
+    GameDescription specifies an information about some basic parameters
+    of a StarCraft II replay.
 
-    :param gameOptions: Specifies options in the game, for example you can set: fog, random races, competitive, etc.
+    :param gameOptions: Specifies options in the game,
+    for example you can set: fog, random races, competitive, etc.
     :type gameOptions: GameOptions
-    :param gameSpeed: Specifies the speed at which your game runs. Enum: [Slower, Slow, Normal, Fast, Faster].
-                      Default is Faster
+    :param gameSpeed: Specifies the speed at which your game runs.
+    Enum: [Slower, Slow, Normal, Fast, Faster]. Default is Faster
     :type gameSpeed: str
     :param isBlizzardMap: Specifies if map have been created by Blizzard
     :type isBlizzardMap: bool
@@ -31,22 +33,27 @@ class GameDescription:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameDescription":
         """
-        Static method returning initialized GameDescription class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized GameDescription class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file that is
+        a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
         :return: Returns an initialized GameDescription class.
         :rtype: GameDescription
 
         **Correct Usage Examples:**
 
-        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_
+        Using from_dict factory method provides ease of use when parsing
+        a replay pre-processed with SC2InfoExtractorGo_
 
-        This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+        This method requires a dictionary representation of data to be passed
+        as a parameter because of the built in json parser provided by the Python standard library.
 
         _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
-        The use of this method is intended to get game description information from the game's json representation.
+        The use of this method is intended to get game description information
+        from the game's json representation.
 
         >>> from src.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
         >>> game_options_object = {

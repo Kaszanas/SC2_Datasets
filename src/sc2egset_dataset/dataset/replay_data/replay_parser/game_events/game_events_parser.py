@@ -1,13 +1,3 @@
-#  { event["evtTypeName"] for event in json_obj["gameEvents"]}
-#
-# event_type_to_example = {}
-# for event in json_obj["gameEvents"]:
-#     if event["evtTypeName"] not in event_type_to_example:
-#         event_type_to_example[event["evtTypeName"]] = event
-
-
-# Abstract game event type. Needs to support at least the following:
-# {'UserOptions', 'CameraUpdate', 'ControlGroupUpdate', 'GameUserLeave', 'CommandManagerState', 'CameraSave', 'CmdUpdateTargetPoint', 'CmdUpdateTargetUnit', 'Cmd', 'SelectionDelta'}
 from typing import Dict
 
 from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.camera_save import (
@@ -19,16 +9,16 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.camer
 from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.cmd import (
     Cmd,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.cmd_update_target_point import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.cmd_update_target_point import (  # noqa
     CmdUpdateTargetPoint,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.cmd_update_target_unit import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.cmd_update_target_unit import (  # noqa
     CmdUpdateTargetUnit,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.command_manager_state import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.command_manager_state import (  # noqa
     CommandManagerState,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.control_group_update import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.control_group_update import (  # noqa
     ControlGroupUpdate,
 )
 from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.game_user_leave import (
@@ -49,9 +39,11 @@ class GameEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> GameEvent:
         """
-        Static method returning initialized GameEvent class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized GameEvent class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized GameEvent class.
         :rtype: GameEvent

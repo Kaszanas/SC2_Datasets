@@ -40,23 +40,28 @@ class GameOptions:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameOptions":
         """
-        Static method returning initialized GameOptions class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized GameOptions class from a dictionary.
+        This helps with the original JSON parsing.
 
         :param d: Describes a dictionary, it holds translations of a phrase or sentence
         :type d: Dict[str, Any]
-        :return: Specifies a list of parameters about the game like a number of observers, fog of the game, if the game was
-                 competitive etc.
+        :return: Specifies a list of parameters about the game like
+        a number of observers, fog of the game, if the game was competitive etc.
         :rtype: GameOptions
 
         **Correct Usage Examples:**
 
-        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_
+        Using from_dict factory method provides ease of use when parsing
+        a replay pre-processed with SC2InfoExtractorGo_
 
-        This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+        This method requires a dictionary representation of data to be passed
+        as a parameter because of the built
+        in json parser provided by the Python standard library.
 
         _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
-        The use of this method is intended to get game options information from the game's json representation.
+        The use of this method is intended to get game options information
+        from the game's json representation.
 
         >>> game_options_dict = {
         ...        "advancedSharedControl": False,

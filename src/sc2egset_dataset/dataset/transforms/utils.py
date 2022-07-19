@@ -2,6 +2,7 @@ from typing import Dict, List
 
 import numpy as np
 
+# pylama:ignore=E501
 from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
 )
@@ -135,9 +136,8 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     **Correct Usage Examples:**
 
-    The use of this method is intended to check the value of the correct APM from the selected replay.
-
-    You should set sc2_replay parameter.
+    The use of this method is intended to check the value
+    of the correct APM from the selected replay.
 
     The parameters should be set as in the example below.
 

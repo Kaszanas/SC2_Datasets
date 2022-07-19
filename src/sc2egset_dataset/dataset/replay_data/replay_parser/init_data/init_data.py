@@ -9,17 +9,19 @@ class InitData:
     """
     Data type containing some "init data" information about StarCraft II game.
 
-    :param gameDescription: Specifies the object that contains list of parameters which
-                            are describing the game
+    :param gameDescription: Specifies the object that contains list
+    of parameters which are describing the game
     :type gameDescription: GameDescription
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "InitData":
         """
-        Static method returning initialized InitData class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized InitData class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
         :return: Returns an initialized InitData class.
         :rtype: InitData
@@ -35,7 +37,7 @@ class InitData:
         The use of this method is intended to get initialization information from the game's json representation.
 
         >>> from src.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
-        >>> from src.dataset.replay_data.replay_parser.init_data.game_description import GameDescription
+        >>> from src.dataset.replay_data.replay_parser.init_data.game_description import GameDescription # noqa
         >>> gameDescription_dict ={
         ...      "gameOptions": {
         ...        "advancedSharedControl": False,

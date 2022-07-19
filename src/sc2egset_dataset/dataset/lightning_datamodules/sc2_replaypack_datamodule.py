@@ -13,22 +13,28 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
 
     :param replaypack_name: Specifies a replaypack name which will be used as a directory name.
     :type replaypack_name: str
-    :param unpack_dir: Specifies the path where the replaypack (dataset) will be unpacked into a custom directory structure, defaults to "./data/unpack"
+    :param unpack_dir: Specifies the path where the replaypack (dataset)
+    will be unpacked into a custom directory structure, defaults to "./data/unpack"
     :type unpack_dir: str, optional
-    :param download_dir: Specifies the path where the replaypack (dataset) will be downloaded, defaults to "./data/unpack"
+    :param download_dir: Specifies the path where the replaypack (dataset)
+    will be downloaded, defaults to "./data/unpack"
     :type download_dir: str, optional
-    :param url: Specifies the url which will be used to download the replaypack (dataset), defaults to ""
+    :param url: Specifies the url which will be used to download
+    the replaypack (dataset), defaults to ""
     :type url: str, optional
-    :param download: Specifies if the dataset should be downloaded. Otherwise the dataset is loaded from the unpack_dir and a custom directory structure is assumed, defaults to True
+    :param download: Specifies if the dataset should be downloaded.
+    Otherwise the dataset is loaded from the unpack_dir
+    and a custom directory structure is assumed, defaults to True
     :type download: bool, optional
     :param transform: Specifies the PyTorch transforms to be used on the replaypack (dataset),
-                      Deprecated since version v1.5: Will be removed in v1.7.0,
-                      defaults to None
+    Deprecated since version v1.5: Will be removed in v1.7.0, defaults to None
     :type transform: _type_, optional
-    :param dims: Specifies a tuple describing the shape of your data. Extra functionality exposed in size,
-                 Deprecated since version v1.5: Will be removed in v1.7.0, defaults to None
+    :param dims: Specifies a tuple describing the shape of your data.
+    Extra functionality exposed in size,
+    Deprecated since version v1.5: Will be removed in v1.7.0, defaults to None
     :type dims: _type_, optional
-    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
+    :param unpack_n_workers: Specifies the number of workers
+    that will be used for unpacking the archive, defaults to 16
     :type unpack_n_workers: int, optional
     :param validator: Specifies the validation option for fetched data, defaults to None
     :type validator: Callable | None, optional

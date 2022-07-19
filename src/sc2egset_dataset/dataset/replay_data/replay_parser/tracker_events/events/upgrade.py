@@ -8,10 +8,11 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_e
 class Upgrade(TrackerEvent):
 
     """
-    Upgrade type containing some "details" information like which player is doing an upgrade, game loop, upgrade in game name etc.
+    Upgrade type containing some "details" information
+    on which player is doing an upgrade, game loop, upgrade in game name etc.
 
-    :param count: Specifies a number value, highly likely this parameter serves for adding value of upgrades to summary.
-                  Default value of the parameter is 1.
+    :param count: Specifies a number, highly likely this parameter serves
+    for adding value of upgrades to summary. Default value of the parameter is 1.
     :type count: int
     :param id: Specifies an event unique number
     :type id: int
@@ -26,9 +27,11 @@ class Upgrade(TrackerEvent):
     @staticmethod
     def from_dict(d: Dict) -> "Upgrade":
         """
-        Static method returning initialized Upgrade class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized Upgrade class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file that
+        is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized Upgrade class.
         :rtype: Upgrade

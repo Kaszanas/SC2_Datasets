@@ -8,19 +8,23 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_e
 class UnitDied(TrackerEvent):
 
     """
-    UnitDied is containing some "details" information about unit at the moment of it has died in the game
+    UnitDied is containing some "details" information about unit
+    at the moment of it has died in the game
 
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param killerPlayerId: Specifies an id number of played who has controlled and destroyed the unit in the game
+    :param killerPlayerId: Specifies an id number of played who has controlled
+    and destroyed the unit in the game
     :type killerPlayerId: int
-    :param killerUnitTagIndex: Specifies a pointer for a specific unit who has destroyed the unit in the game
+    :param killerUnitTagIndex: Specifies a pointer for a specific unit
+    which destroyed the unit in the game
     :type killerUnitTagIndex: int
     :param killerUnitTagRecycle: There is no specific information about this parameter
     :type killerUnitTagRecycle: int
-    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
+    :param loop: Specifies the game loop number (game-engine tick) at which the event occurred
     :type loop: int
-    :param unitTagIndex: Specifies a pointer for a specific unit which was destroyed in the game
+    :param unitTagIndex: Specifies a pointer for a specific unit which
+    was destroyed in the game
     :type unitTagIndex: int
     :param unitTagRecycle: There is no specific information about this parameter
     :type unitTagRecycle: int
@@ -32,9 +36,11 @@ class UnitDied(TrackerEvent):
 
     def from_dict(d: Dict) -> "UnitDied":
         """
-        Static method returning initialized UnitDied class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized UnitDied class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file that
+        is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized UnitDied class.
         :rtype: UnitDied

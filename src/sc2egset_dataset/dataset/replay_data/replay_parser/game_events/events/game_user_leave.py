@@ -7,13 +7,15 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event i
 
 class GameUserLeave(GameEvent):
     """
-    GameUserLeave is containing some "details" information about player's leaving the game like time, reason, etc.
+    GameUserLeave is information about a player leaving the game.
 
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param leaveReason: Specifies a number which determinate leaving reason, there are no more details
+    :param leaveReason: Specifies a number which determinate leaving reason,
+    there are no more details
     :type leaveReason: int
-    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
+    :param loop: Specifies the game loop number (game-engine tick)
+     at which the event occurred
     :type loop: int
     :param userid: Specifies id number of player who has left the game
     :type userid: int
@@ -22,9 +24,11 @@ class GameUserLeave(GameEvent):
     @staticmethod
     def from_dict(d: Dict) -> "GameUserLeave":
         """
-        Static method returning initialized GameUserLeave class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized GameUserLeave class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized GameUserLeave class.
         :rtype: GameUserLeave

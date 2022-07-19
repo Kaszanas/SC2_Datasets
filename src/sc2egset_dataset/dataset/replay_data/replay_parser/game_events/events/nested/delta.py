@@ -55,7 +55,8 @@ class Delta(GameEvent):
     Most likely specifies a change in which units belong to some subgroups.
     We are unsure of the precise definition of this data type.
 
-    :param addSubgroups: Most likely specifies a class with additional information on which subgroups were added.
+    :param addSubgroups: Most likely specifies a class with additional information
+    on which subgroups were added.
     :type addSubgroups: AddSubgroups
     :param addUnitTags: Most likely specifies which unit tags were added to a subgroup.
     :type addUnitTags: List[int]

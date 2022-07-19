@@ -1,6 +1,6 @@
 from typing import Dict
 
-from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.nested.target_unit import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.nested.target_unit import (  # noqa
     TargetUnit,
 )
 from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event import (
@@ -12,7 +12,8 @@ class CmdUpdateTargetUnit(GameEvent):
     """
     Data type containing information about command update issued to some target unit.
 
-    :param id: Specifies the event ID that should directly map to the event name which is denoted by the class.
+    :param id: Specifies the event ID that should directly map
+    to the event name which is denoted by the class.
     :type id: int
     :param loop: Specifies the time in gameloop units when the event happened.
     :type loop: int
@@ -25,9 +26,11 @@ class CmdUpdateTargetUnit(GameEvent):
     @staticmethod
     def from_dict(d: Dict) -> "CmdUpdateTargetUnit":
         """
-        Static method returning initialized CmdUpdateTargetUnit class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized CmdUpdateTargetUnit class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized CmdUpdateTargetUnit class.
         :rtype: CmdUpdateTargetUnit

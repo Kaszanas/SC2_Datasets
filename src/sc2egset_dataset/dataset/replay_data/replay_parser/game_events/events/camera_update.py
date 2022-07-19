@@ -11,7 +11,8 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event i
 
 class CameraUpdate(GameEvent):
     """
-    CameraUpdate represents the replay information about updated camera location in the game.
+    CameraUpdate represents the replay information
+    about updated camera location in the game.
 
     :param distance: There is no valuable information about this parameter
     :type distance: NoneType | float | int
@@ -19,13 +20,16 @@ class CameraUpdate(GameEvent):
     :type follow: bool
     :param id: There is no valuable information about this parameter
     :type id: int
-    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
+    :param loop: Specifies the game loop number (game-engine tick)
+    at which the event occurred
     :type loop: int
-    :param pitch: Specifies angle in the vertical plane, vertical elevation of the camera.
+    :param pitch: Specifies angle in the vertical plane,
+    vertical elevation of the camera.
     :type pitch: NoneType | float | int
     :param reason: There is no valuable information about this parameter
     :type reason: NoneType | str
-    :param target: Specifies the Target class object which includes x and y coordinates, where the camera location was set
+    :param target: Specifies the Target class object which includes x and y coordinates,
+    where the camera location was set
     :type target: Target
     :param userid: Specifies the id of the player who saved the camera location
     :type userid: int
@@ -37,20 +41,26 @@ class CameraUpdate(GameEvent):
     @staticmethod
     def from_dict(d: Dict):
         """
-        Static method returning initialized CameraUpdate class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized CameraUpdate class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized CameraUpdate class.
         :rtype: CameraUpdate
 
         **Correct Usage Examples:**
 
-        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_. This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+        Using from_dict factory method provides ease of use when parsing
+        a replay pre-processed with SC2InfoExtractorGo_.
+        This method requires a dictionary representation
+        of data to be passed as a parameter because
+        of the built-in json parser provided by the Python standard library.
 
         .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
-        >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D
+        >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D  #noqa
         >>> camera_update_dict = {"distance": None,
         ...                       "follow": False,
         ...                       "id": 49,

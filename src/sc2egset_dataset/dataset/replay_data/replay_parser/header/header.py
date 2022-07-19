@@ -14,22 +14,28 @@ class Header:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Header":
         """
-        Static method returning initialized Header class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized Header class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
         :return: Returns an initialized Header class.
         :rtype: Header
 
         **Correct Usage Examples:**
 
-        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_
+        Using from_dict factory method provides ease of use when parsing
+        a replay pre-processed with SC2InfoExtractorGo_
 
-        This method requires a dictionary representation of data to be passed as a parameter because of the built in json parser provided by the Python standard library.
+        This method requires a dictionary representation of data
+        to be passed as a parameter because of the built in json parser provided
+        by the Python standard library.
 
         _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
-        The use of this method is intended to get header information from the game's json representation.
+        The use of this method is intended to get header information from
+        the game's json representation.
 
         >>> elapsedGameLoops = 10000
         >>> version = "3.12.0.51702"

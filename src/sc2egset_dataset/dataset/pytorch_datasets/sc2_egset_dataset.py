@@ -11,13 +11,17 @@ class SC2EGSetDataset(Dataset):
     """
     Inherits from PyTorch Dataset and ensures that the dataset for SC2EGSet is downloaded.
 
-    :param unpack_dir: Specifies the path of a directory where the dataset files will be unpacked.
+    :param unpack_dir: Specifies the path of a directory
+    where the dataset files will be unpacked.
     :type unpack_dir: str
-    :param download_dir: Specifies the path of a directory where the dataset files will be downloaded.
+    :param download_dir: Specifies the path of a directory where
+    the dataset files will be downloaded.
     :type download_dir: str
-    :param names_urls: Specifies the URL of the dataset which will be used to download the files.
+    :param names_urls: Specifies the URL of the dataset which
+    will be used to download the files.
     :type names_urls: List[Tuple[str, str]]
-    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
+    :param unpack_n_workers: Specifies the number of workers
+    that will be used for unpacking the archive, defaults to 16
     :type unpack_n_workers: int, optional
     :param transform: PyTorch transform. function that takes SC2ReplayData and return something
     :type transform: Func[SC2ReplayData, T]
@@ -93,14 +97,18 @@ class SC2EGSetDataset(Dataset):
 
         :param index: Specifies the index of an item that should be retrieved.
         :type index: Any
-        :raises IndexError: To support negative indexing, if the index is less than zero twice, IndexError is raised.
-        :raises IndexError: If the index is greater than length of the dataset IndexError is raised.
-        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset, or a result of a transform that was passed to the dataset.
+        :raises IndexError: To support negative indexing,
+        if the index is less than zero twice, IndexError is raised.
+        :raises IndexError: If the index is greater than length
+        of the dataset IndexError is raised.
+        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,
+        or a result of a transform that was passed to the dataset.
         :rtype: Tuple[Any, Any] | SC2ReplayData
         """
 
         # If the index is negative, treat it as if expressed from the back of the sequence.
-        # For example, if index is -1 and lenght is 10, it means we are looking for the last element, which is at index 10 + (-1) = 9
+        # For example, if index is -1 and lenght is 10,
+        # it means we are looking for the last element, which is at index 10 + (-1) = 9
         if index < 0:
             index = self.len + index
 

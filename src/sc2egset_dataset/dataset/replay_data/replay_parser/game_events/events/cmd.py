@@ -15,25 +15,30 @@ class Cmd(GameEvent):
 
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
+    :param loop: Specifies the game loop number (game-engine tick)
+    at which the event occurred
     :type loop: int
     :param otherUnit: There is no specific information about this parameter
     :type otherUnit: NoneType
-    :param sequence: Highly likely this parameter specifies an id parameter which sequence user has typed in the console,
-                     there is no specific information about this parameter
+    :param sequence: Highly likely this parameter specifies
+    an id parameter which sequence user has typed in the console,
+    there is no specific information about this parameter
     :type sequence: int
     :param unitGroup: There is no specific information about this parameter
     :type unitGroup: NoneType | int
-    :param userid: Highly likely this parameter specifies a user's id who has been using interface, there is no specific information.
+    :param userid: Highly likely this parameter specifies
+    a user's id who has been using interface, there is no specific information.
     :type userid: int
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "Cmd":
         """
-        Static method returning initialized Cmd class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized Cmd class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized Cmd class.
         :rtype: Cmd

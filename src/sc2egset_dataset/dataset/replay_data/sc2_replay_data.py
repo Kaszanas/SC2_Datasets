@@ -10,16 +10,16 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.header.header import Hea
 from sc2egset_dataset.dataset.replay_data.replay_parser.init_data.init_data import (
     InitData,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_events_parser import (  # noqa
     MessageEventsParser,
 )
 from sc2egset_dataset.dataset.replay_data.replay_parser.metadata.metadata import (
     Metadata,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.toon_player_desc_map.toon_player_desc import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.toon_player_desc_map.toon_player_desc import (  # noqa
     ToonPlayerDesc,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_events_parser import (  # noqa
     TrackerEventsParser,
 )
 
@@ -28,7 +28,8 @@ class SC2ReplayData:
     """
     Specifies a data type that holds information parsed from json representation of a replay.
 
-    :param loaded_replay_object: Specifies a parsed Python deserialized json object loaded into memory
+    :param loaded_replay_object: Specifies a parsed Python deserialized json object
+    loaded into memory
     :type loaded_replay_object: Any
     """
 
@@ -36,9 +37,11 @@ class SC2ReplayData:
     @staticmethod
     def from_file(replay_filepath: str) -> "SC2ReplayData":
         """
-        Static method returning initialized SC2ReplayData class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized SC2ReplayData class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param replay_filepath: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param replay_filepath: Specifies a dictionary as available
+        in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type replay_filepath: str
         :return: Returns an initialized SC2ReplayData object
         :rtype: SC2ReplayData
@@ -53,7 +56,8 @@ class SC2ReplayData:
 
         **Incorrect Usage Examples:**
 
-        Providing incorrect path to some ``replay.json`` file will result in failure to parse which can be seen as below:
+        Providing incorrect path to some ``replay.json`` file will result
+        in failure to parse which can be seen as below:
 
         >>> replay_data = SC2ReplayData.from_file("file_doesnt_exist.json")
         Traceback (most recent call last):
@@ -114,8 +118,10 @@ class SC2ReplayData:
     def __hash__(self) -> int:
         """
         Custom hashing function based on the fields that were read from replay.
-        This hashing function returns a result of hash() call on a tuple constructed as follows:
-            (game_duration_loops, game_time_utc, game_map, game_version, player_toon_map_len, player_tuple_toon,)
+        This hashing function returns a result of hash() call
+        on a tuple constructed as follows:
+        (game_duration_loops, game_time_utc, game_map, game_version,
+        player_toon_map_len, player_tuple_toon,)
 
         :return: Returns an int (hash) representation of the SC2ReplayData class.
         :rtype: int

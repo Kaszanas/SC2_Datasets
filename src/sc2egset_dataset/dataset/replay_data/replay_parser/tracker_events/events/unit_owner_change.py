@@ -7,7 +7,8 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_e
 
 class UnitOwnerChange(TrackerEvent):
     """
-    UnitOwnerChange holds some detail information about how the unit position was changing during the game.
+    UnitOwnerChange holds some detail information about how the unit position
+    was changing during the game.
 
     :param controlPlayerId: Specifies the information about player id who made the unit in the game
     :type controlPlayerId: int
@@ -19,15 +20,18 @@ class UnitOwnerChange(TrackerEvent):
     :type unitTagIndex: int
     :param unitTagRecycle: There is no specific information about this parameter
     :type unitTagRecycle: int
-    :param upkeepPlayerId: Specifies an id number of player who was having the control of the unit in the game
+    :param upkeepPlayerId: Specifies an id number of player who was having
+    the control of the unit in the game
     :type upkeepPlayerId: int
     """
 
     def from_dict(d: Dict[str, int]) -> "UnitOwnerChange":
         """
-        Static method returning initialized UnitOwnerChange class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized UnitOwnerChange class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file that
+        is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized UnitOwnerChange class.
         :rtype: UnitOwnerChange

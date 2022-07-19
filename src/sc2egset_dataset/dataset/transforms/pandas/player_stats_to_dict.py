@@ -68,8 +68,8 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
 # REVIEW: This needs to be reviewed:
 # TODO: Consider renaming:
 def playerstats_to_dict(
-        sc2_replay: SC2ReplayData,
-        additional_data_dict: Dict[str, Dict[str, Any]] = {},
+    sc2_replay: SC2ReplayData,
+    additional_data_dict: Dict[str, Dict[str, Any]] = {},
 ) -> Dict[str, Dict[str, List[Any]]]:
     """
     Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
@@ -101,9 +101,11 @@ def playerstats_to_dict(
            "outcome": [0, 0]}
     }
 
-    :param sc2_replay: Specifies a replay that will be used to obtain the list of TrackerEvents to be converted.
+    :param sc2_replay: Specifies a replay that will be used to obtain
+    the list of TrackerEvents to be converted.
     :type sc2_replay: SC2ReplayData
-    :return: Returns a dictionary of features with additional information repeated for all of the occurences of events.
+    :return: Returns a dictionary of features with additional information
+    repeated for all of the occurences of events.
     :rtype: Dict[str, Dict[str, List[Any]]]
 
     **Correct Usage Examples:**

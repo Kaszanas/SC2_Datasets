@@ -18,9 +18,11 @@ class Color:
     @staticmethod
     def from_dict(d: Dict[str, int]) -> "Color":
         """
-        Static method returning initialized Color class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized Color class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, int]
         :return: Returns an initialized Color class.
         :rtype: Color

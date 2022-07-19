@@ -26,9 +26,11 @@ class UnitTypeChange(TrackerEvent):
     @staticmethod
     def from_dict(d: Dict) -> "UnitTypeChange":
         """
-        Static method returning initialized UnitTypeChange class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized UnitTypeChange class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file that
+        is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized UnitTypeChange class.
         :rtype: UnitTypeChange

@@ -8,13 +8,15 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_e
 class UnitPositions(TrackerEvent):
 
     """
-    UnitPositions holds some detail information about how the unit position was changing during the game.
+    UnitPositions holds some detail information about how
+    the unit position was changing during the game.
 
     :param firstUnitIndex: Specifies a pointer for a specific unit which was doing some changes
     :type firstUnitIndex: int
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param items: Specifies a list of int values, there is no specific information what the numbers mean
+    :param items: Specifies a list of int values, there is no specific information what
+    the numbers mean
     :type items: List[int]
     :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
     :type loop: int
@@ -22,9 +24,11 @@ class UnitPositions(TrackerEvent):
 
     def from_dict(d: Dict) -> "UnitPositions":
         """
-        Static method returning initialized UnitPositions class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized UnitPositions class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file that
+        is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized Header class.
         :rtype: UnitPositions

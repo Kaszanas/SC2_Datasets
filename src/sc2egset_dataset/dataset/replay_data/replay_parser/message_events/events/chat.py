@@ -26,7 +26,8 @@ class Chat(MessageEvent):
     @staticmethod
     def from_dict(d: Dict) -> "Chat":
         """
-        Static method returning initialized Chat class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized Chat class from a dictionary.
+        This helps with the original JSON parsing.
 
         :param d: Specifies a dictionary, it holds translations of a phrase or sentence.
         :type d: Dict
@@ -35,14 +36,17 @@ class Chat(MessageEvent):
 
         **Correct Usage Examples:**
 
-        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_
+        Using from_dict factory method provides ease of use when parsing
+        a replay pre-processed with SC2InfoExtractorGo_
 
-        This method requires a dictionary representation of data to be passed as a parameter because of the built in json
+        This method requires a dictionary representation of data to be passed
+        as a parameter because of the built in json
         parser provided by the Python standard library.
 
         _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
-        The use of this method is intended to get chat information from the game's json representation.
+        The use of this method is intended to get chat information
+        from the game's json representation.
 
         >>> chat_dict ={
         ...      "id": 0,

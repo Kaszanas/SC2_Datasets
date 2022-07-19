@@ -1,3 +1,7 @@
+"""
+    Module docstring
+"""
+
 AVAILABLE_REPLAYPACKS = [
     (
         "2016_IEM_10_Taipei",
@@ -25,7 +29,7 @@ AVAILABLE_REPLAYPACKS = [
     ),
     (
         "2017_IEM_XI_World_Championship_Katowice",
-        "https://zenodo.org/record/6629349/files/2017_IEM_XI_World_Championship_Katowice.zip?download=1",
+        "https://zenodo.org/record/6629349/files/2017_IEM_XI_World_Championship_Katowice.zip?download=1",  # noqa
     ),
     (
         "2017_WCS_Austin",
@@ -177,7 +181,7 @@ AVAILABLE_REPLAYPACKS = [
     ),
     (
         "2021_Cheeseadelphia_Winter_Championship",
-        "https://zenodo.org/record/6629349/files/2021_Cheeseadelphia_Winter_Championship.zip?download=1",
+        "https://zenodo.org/record/6629349/files/2021_Cheeseadelphia_Winter_Championship.zip?download=1",  # noqa
     ),
     (
         "2021_Dreamhack_SC2_Masters_Fall",
@@ -213,7 +217,7 @@ AVAILABLE_REPLAYPACKS = [
     ),
     (
         "2022_Dreamhack_SC2_Masters_Last_Chance2021",
-        "https://zenodo.org/record/6629349/files/2022_Dreamhack_SC2_Masters_Last_Chance2021.zip?download=1",
+        "https://zenodo.org/record/6629349/files/2022_Dreamhack_SC2_Masters_Last_Chance2021.zip?download=1",  # noqa
     ),
     (
         "2022_IEM_Katowice",

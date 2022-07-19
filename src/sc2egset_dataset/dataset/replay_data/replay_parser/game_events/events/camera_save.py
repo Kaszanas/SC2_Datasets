@@ -12,11 +12,14 @@ class CameraSave(GameEvent):
     """
     CameraSave represents the replay information about saved camera in the game.
 
-    :param id: Highly likely this field specifies an id of CameraSave object, many elements have the same id in
+    :param id: Highly likely this field specifies an id of CameraSave object,
+    many elements have the same id in
     :type id: int
-    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
+    :param loop: Specifies the game loop number (game-engine tick)
+    at which the event occurred
     :type loop: int
-    :param target: Specifies the Target class object which includes x and y coordinates, where the camera location was set in the game
+    :param target: Specifies the Target class object which includes x and y coordinates,
+    where the camera location was set in the game
     :type target: Target
     :param userid: Specifies the id of the player who saved the camera location
     :type userid: int
@@ -28,9 +31,11 @@ class CameraSave(GameEvent):
     @staticmethod
     def from_dict(d: Dict) -> "CameraSave":
         """
-        Static method returning initialized CameraSave class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized CameraSave class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized CameraSave class.
         :rtype: CameraSave
@@ -38,14 +43,16 @@ class CameraSave(GameEvent):
 
         **Correct Usage Examples:**
 
-        Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_.
+        Using from_dict factory method provides ease of use when parsing
+        a replay pre-processed with SC2InfoExtractorGo_.
 
-        This method requires a dictionary representation of data to be passed as a parameter because of the built in json
+        This method requires a dictionary representation
+        of data to be passed as a parameter because of the built in json
         parser provided by the Python standard library.
 
         .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
-        >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D
+        >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D  #noqa
         >>> camera_save_dict = {"id": 5,
         ...                     "loop": 22,
         ...                     "target": {

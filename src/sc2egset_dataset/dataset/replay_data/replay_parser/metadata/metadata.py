@@ -3,7 +3,8 @@ from typing import Any, Dict
 
 class Metadata:
     """
-    Specifies a class which includes parameters about the game, like version, build, map etc. the game was played
+    Specifies a class which includes parameters about the game,
+    like version, build, map etc. the game was played
 
     :param baseBuild: Specifies a build number of the game engine.
     :type baseBuild: str
@@ -18,9 +19,11 @@ class Metadata:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Metadata":
         """
-        Static method returning initialized Metadata class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized Metadata class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file
+        that is a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
         :return: Returns an initialized Metadata class.
         :rtype: Metadata

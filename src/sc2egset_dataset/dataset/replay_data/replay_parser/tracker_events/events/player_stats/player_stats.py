@@ -1,5 +1,6 @@
 from typing import Dict
 
+# pylama:ignore=E501
 from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.player_stats.stats import (
     Stats,
 )
@@ -25,9 +26,11 @@ class PlayerStats(TrackerEvent):
     @staticmethod
     def from_dict(d: Dict) -> "PlayerStats":
         """
-        Static method returning initialized PlayerStats class from a dictionary. This helps with the original JSON parsing.
+        Static method returning initialized PlayerStats class from a dictionary.
+        This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is a result of pre-processing some .SC2Replay file.
+        :param d: Specifies a dictionary as available in the JSON file that
+        is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized PlayerStats class.
         :rtype: PlayerStats

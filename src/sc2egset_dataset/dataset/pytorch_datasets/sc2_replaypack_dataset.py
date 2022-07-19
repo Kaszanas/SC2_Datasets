@@ -13,18 +13,21 @@ class SC2ReplaypackDataset(Dataset):
     """
     Represents a Dataset for a single pre-processed replaypack.
 
-
-    :param replaypack_name: Specifies the name of a replaypack. This can be a name of the tournament or any other arbitrary name.
+    :param replaypack_name: Specifies the name of a replaypack.
+    This can be a name of the tournament or any other arbitrary name.
     :type replaypack_name: str
     :param download_dir: Specifies the directory where the initial archive will be downloaded.
     :type download_dir: str
     :param unpack_dir: Specifies the directory where the archive will be extracted.
     :type unpack_dir: str
-    :param url: Specifies the url which will be used to download the .zip archive, defaults to ""
+    :param url: Specifies the url which will be used to download
+    the .zip archive, defaults to ""
     :type url: str, optional
-    :param download: Specifies if the dataset should be downloaded or if it is pre-downloaded and extracted, defaults to False
+    :param download: Specifies if the dataset should be downloaded
+    or if it is pre-downloaded and extracted, defaults to False
     :type download: bool, optional
-    :param unpack_n_workers: Specifies the number of workers that will be used for unpacking the archive, defaults to 16
+    :param unpack_n_workers: Specifies the number of workers that will
+    be used for unpacking the archive, defaults to 16
     :type unpack_n_workers: int, optional
     :param validator: Specifies a validator for input data, defaults to None
     :type validator: Callable | None, optional
