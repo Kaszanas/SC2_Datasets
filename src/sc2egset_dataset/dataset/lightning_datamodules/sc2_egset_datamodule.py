@@ -4,7 +4,7 @@ import pytorch_lightning as pl
 from torch.utils.data import random_split
 from torch.utils.data.dataloader import DataLoader
 
-from src.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
+from sc2egset_dataset.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
 
 
 class SC2EGSetDataModule(pl.LightningDataModule):

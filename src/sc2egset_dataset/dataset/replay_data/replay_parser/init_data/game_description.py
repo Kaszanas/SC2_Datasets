@@ -55,7 +55,7 @@ class GameDescription:
         The use of this method is intended to get game description information
         from the game's json representation.
 
-        >>> from src.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
+        >>> from sc2egset_dataset.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
         >>> game_options_object = {
         ...        "advancedSharedControl": False,
         ...        "amm": False,

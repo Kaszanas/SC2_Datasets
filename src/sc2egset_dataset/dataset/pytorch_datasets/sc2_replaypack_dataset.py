@@ -4,9 +4,9 @@ from typing import Any, Callable, Dict, List
 
 from torch.utils.data import Dataset
 
-from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from src.dataset.utils.dataset_utils import load_replaypack_information
-from src.dataset.utils.download_utils import download_and_unpack_replaypack
+from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2egset_dataset.dataset.utils.dataset_utils import load_replaypack_information
+from sc2egset_dataset.dataset.utils.download_utils import download_and_unpack_replaypack
 
 
 class SC2ReplaypackDataset(Dataset):

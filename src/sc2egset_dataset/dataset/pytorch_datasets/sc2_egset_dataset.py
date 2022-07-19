@@ -2,9 +2,11 @@ from typing import Any, Callable, Dict, List, Set, Tuple
 
 from torch.utils.data import Dataset
 
-from src.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
-from src.dataset.pytorch_datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
-from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2egset_dataset.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
+from sc2egset_dataset.dataset.pytorch_datasets.sc2_replaypack_dataset import (
+    SC2ReplaypackDataset,
+)
+from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
 class SC2EGSetDataset(Dataset):

@@ -60,7 +60,7 @@ class CameraUpdate(GameEvent):
 
         .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
-        >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D  #noqa
+        >>> from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D  #noqa
         >>> camera_update_dict = {"distance": None,
         ...                       "follow": False,
         ...                       "id": 49,

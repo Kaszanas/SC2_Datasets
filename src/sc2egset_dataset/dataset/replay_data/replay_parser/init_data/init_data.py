@@ -36,8 +36,8 @@ class InitData:
 
         The use of this method is intended to get initialization information from the game's json representation.
 
-        >>> from src.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
-        >>> from src.dataset.replay_data.replay_parser.init_data.game_description import GameDescription # noqa
+        >>> from sc2egset_dataset.dataset.replay_data.replay_parser.init_data.game_options import GameOptions
+        >>> from sc2egset_dataset.dataset.replay_data.replay_parser.init_data.game_description import GameDescription # noqa
         >>> gameDescription_dict ={
         ...      "gameOptions": {
         ...        "advancedSharedControl": False,

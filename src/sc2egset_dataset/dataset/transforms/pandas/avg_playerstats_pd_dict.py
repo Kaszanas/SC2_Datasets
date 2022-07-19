@@ -2,12 +2,12 @@ from typing import Dict
 
 import pandas as pd
 
-from src.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from src.dataset.transforms.pandas.player_stats_to_dict import (
+from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2egset_dataset.dataset.transforms.pandas.player_stats_to_dict import (
     average_playerstats_to_dict,
 )
 
-from src.dataset.transforms.utils import (
+from sc2egset_dataset.dataset.transforms.utils import (
     select_apm_1v1,
     select_outcome,
 )

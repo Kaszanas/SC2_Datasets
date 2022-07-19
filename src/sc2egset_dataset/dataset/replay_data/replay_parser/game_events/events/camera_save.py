@@ -52,7 +52,7 @@ class CameraSave(GameEvent):
 
         .. _SC2InfoExtractorGo: https://github.com/Kaszanas/SC2InfoExtractorGo
 
-        >>> from src.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D  #noqa
+        >>> from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.events.nested.target_2d import Target2D  #noqa
         >>> camera_save_dict = {"id": 5,
         ...                     "loop": 22,
         ...                     "target": {
