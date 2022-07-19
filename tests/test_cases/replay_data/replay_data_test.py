@@ -19,4 +19,4 @@ class SC2ReplayDataTest(unittest.TestCase):
 
         # Empty json should raise a KeyError:
         with self.assertRaises(KeyError):
-            sc2_replay_data = SC2ReplayData(loaded_replay_object={})
+            _ = SC2ReplayData(loaded_replay_object={})

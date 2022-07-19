@@ -3,7 +3,7 @@ import unittest
 from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_event import (
     MessageEvent,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_events_parser import (
+from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_events_parser import (  # noqa
     MessageEventsParser,
 )
 import tests.test_utils.test_utils as test_utils

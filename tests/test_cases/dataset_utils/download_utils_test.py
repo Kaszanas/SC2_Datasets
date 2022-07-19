@@ -20,5 +20,6 @@
 
     Exception: There is more than one file in the destination directory!
 
-    Exception: The file that was detected does not end with a .zip extension! Wrong file was downloaded!
+    Exception: The file that was detected does not end with a .zip extension!
+    Wrong file was downloaded!
 """

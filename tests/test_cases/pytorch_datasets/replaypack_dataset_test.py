@@ -7,7 +7,6 @@ from sc2egset_dataset.dataset.pytorch_datasets.sc2_replaypack_dataset import (
     SC2ReplaypackDataset,
 )
 from sc2egset_dataset.dataset.utils.dataset_utils import (
-    validate_replays_integrity,
     validate_integrity_singleprocess,
 )
 
