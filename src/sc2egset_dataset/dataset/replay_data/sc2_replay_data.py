@@ -53,16 +53,6 @@ class SC2ReplayData:
 
         >>> replay_data = SC2ReplayData.from_file("test/test_files/single_replay/test_replay.json")
         >>> assert isinstance(replay_data, SC2ReplayData)
-
-        **Incorrect Usage Examples:**
-
-        Providing incorrect path to some ``replay.json`` file will result
-        in failure to parse which can be seen as below:
-
-        >>> replay_data = SC2ReplayData.from_file("file_doesnt_exist.json")
-        Traceback (most recent call last):
-        ...
-        FileNotFoundError: [Errno 2] No such file or directory: 'file_doesnt_exist.json'
         """
         logging.info(f"\nAttempting to parse: {replay_filepath}")
         with open(replay_filepath, encoding="utf-8") as replay_file:

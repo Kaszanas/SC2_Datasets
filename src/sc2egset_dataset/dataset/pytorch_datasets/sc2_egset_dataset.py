@@ -13,16 +13,16 @@ class SC2EGSetDataset(Dataset):
     """
     Inherits from PyTorch Dataset and ensures that the dataset for SC2EGSet is downloaded.
 
-    :param unpack_dir: Specifies the path of a directory
+    :param unpack_dir: Specifies the path of a directory\
     where the dataset files will be unpacked.
     :type unpack_dir: str
-    :param download_dir: Specifies the path of a directory where
+    :param download_dir: Specifies the path of a directory where\
     the dataset files will be downloaded.
     :type download_dir: str
-    :param names_urls: Specifies the URL of the dataset which
+    :param names_urls: Specifies the URL of the dataset which\
     will be used to download the files.
     :type names_urls: List[Tuple[str, str]]
-    :param unpack_n_workers: Specifies the number of workers
+    :param unpack_n_workers: Specifies the number of workers\
     that will be used for unpacking the archive, defaults to 16
     :type unpack_n_workers: int, optional
     :param transform: PyTorch transform. function that takes SC2ReplayData and return something

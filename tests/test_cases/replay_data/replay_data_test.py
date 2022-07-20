@@ -3,6 +3,18 @@ import unittest
 from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 import tests.test_utils.test_utils as test_utils
 
+"""
+    **Incorrect Usage Examples:**
+
+    Providing incorrect path to some ``replay.json`` file will result
+    in failure to parse which can be seen as below:
+
+    >>> replay_data = SC2ReplayData.from_file("file_doesnt_exist.json")
+    Traceback (most recent call last):
+    ...
+    FileNotFoundError: [Errno 2] No such file or directory: 'file_doesnt_exist.json'
+"""
+
 
 class SC2ReplayDataTest(unittest.TestCase):
     @classmethod
