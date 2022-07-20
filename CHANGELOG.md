@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
-## v0.1.0 (13/07/2022)
+## v1.0.0 (TBD)
+
+- Inroduced poetry to the project.
+- Added GitHub Actions for continuous integration (CI):
+    - Linter execution
+    - Testing
+    - Documentation building
+
+## v0.9.0 (09/06/2022)
 
 - First release of `sc2egset_dataset`!
