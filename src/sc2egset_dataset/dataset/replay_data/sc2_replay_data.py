@@ -28,7 +28,7 @@ class SC2ReplayData:
     """
     Specifies a data type that holds information parsed from json representation of a replay.
 
-    :param loaded_replay_object: Specifies a parsed Python deserialized json object
+    :param loaded_replay_object: Specifies a parsed Python deserialized json object\
     loaded into memory
     :type loaded_replay_object: Any
     """
@@ -40,7 +40,7 @@ class SC2ReplayData:
         Static method returning initialized SC2ReplayData class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param replay_filepath: Specifies a dictionary as available
+        :param replay_filepath: Specifies a dictionary as available\
         in the JSON file that is a result of pre-processing some .SC2Replay file.
         :type replay_filepath: str
         :return: Returns an initialized SC2ReplayData object

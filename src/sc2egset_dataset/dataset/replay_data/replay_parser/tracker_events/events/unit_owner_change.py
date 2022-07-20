@@ -20,7 +20,7 @@ class UnitOwnerChange(TrackerEvent):
     :type unitTagIndex: int
     :param unitTagRecycle: There is no specific information about this parameter
     :type unitTagRecycle: int
-    :param upkeepPlayerId: Specifies an id number of player who was having
+    :param upkeepPlayerId: Specifies an id number of player who was having\
     the control of the unit in the game
     :type upkeepPlayerId: int
     """
@@ -30,7 +30,7 @@ class UnitOwnerChange(TrackerEvent):
         Static method returning initialized UnitOwnerChange class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that
+        :param d: Specifies a dictionary as available in the JSON file that\
         is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized UnitOwnerChange class.

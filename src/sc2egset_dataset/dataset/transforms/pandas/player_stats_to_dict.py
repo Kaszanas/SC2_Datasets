@@ -47,7 +47,6 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
     TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
-
     """
 
     final_dict_average = {}

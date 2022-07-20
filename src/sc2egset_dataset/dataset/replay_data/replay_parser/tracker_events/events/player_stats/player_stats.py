@@ -29,7 +29,7 @@ class PlayerStats(TrackerEvent):
         Static method returning initialized PlayerStats class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that
+        :param d: Specifies a dictionary as available in the JSON file that\
         is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized PlayerStats class.

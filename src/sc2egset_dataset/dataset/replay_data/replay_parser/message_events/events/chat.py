@@ -100,7 +100,6 @@ class Chat(MessageEvent):
         Traceback (most recent call last):
         ...
         TypeError: unsupported operand type(s) ...
-
         """
 
         return Chat(

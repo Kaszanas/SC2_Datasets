@@ -15,7 +15,7 @@ class UnitPositions(TrackerEvent):
     :type firstUnitIndex: int
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param items: Specifies a list of int values, there is no specific information what
+    :param items: Specifies a list of int values, there is no specific information what\
     the numbers mean
     :type items: List[int]
     :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
@@ -27,7 +27,7 @@ class UnitPositions(TrackerEvent):
         Static method returning initialized UnitPositions class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that
+        :param d: Specifies a dictionary as available in the JSON file that\
         is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized Header class.

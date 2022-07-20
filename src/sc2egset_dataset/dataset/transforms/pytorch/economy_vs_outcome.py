@@ -41,7 +41,6 @@ def economy_average_vs_outcome(
     TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
-
     """
 
     average_player_features = average_player_stats(

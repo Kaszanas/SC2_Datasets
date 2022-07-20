@@ -13,7 +13,7 @@ def validate_chunk(
 
     :param list_of_replays: Specifies the list of replays that will be validated.
     :type list_of_replays: List[str]
-    :return: Returns a tuple of SC2ReplayFile info and a boolean denoting
+    :return: Returns a tuple of SC2ReplayFile info and a boolean denoting\
     if the file should be skipped in final processing.
     :rtype: List[Tuple[str, bool]]
 

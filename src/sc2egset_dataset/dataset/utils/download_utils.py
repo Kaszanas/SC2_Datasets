@@ -14,10 +14,10 @@ def download_replaypack(
 
     :param destination_dir: Specifies the destination directory where the replaypack will be saved.
     :type destination_dir: str
-    :param replaypack_name: Specifies the name of a replaypack that will
+    :param replaypack_name: Specifies the name of a replaypack that will\
     be used for the downloaded .zip archive.
     :type replaypack_name: str
-    :param replaypack_url: Specifies the url that is a direct link
+    :param replaypack_url: Specifies the url that is a direct link\
     to the .zip which will be downloaded.
     :type replaypack_url: str
     :raises Exception: If more than one file is downloaded, exception is thrown.

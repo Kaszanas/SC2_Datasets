@@ -42,7 +42,7 @@ class GameEventsParser:
         Static method returning initialized GameEvent class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file
+        :param d: Specifies a dictionary as available in the JSON file\
         that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized GameEvent class.

@@ -61,13 +61,13 @@ def save_validation_file(
     """
     Attempts to save the validation file to a specified path
 
-    :param validated_files: Specifies the list of replays that were verified
+    :param validated_files: Specifies the list of replays that were verified\
     as ones that were processed.
     :type validated_files: Set[str]
-    :param skip_files: Specifies the list of replays that were verified
+    :param skip_files: Specifies the list of replays that were verified\
     as ones that should be skipped.
     :type skip_files: Set[str]
-    :param path: Specifies the path to the file that will be saved,
+    :param path: Specifies the path to the file that will be saved,\
     Defaults to Path("validator_file.json")
     :type path: Path
 

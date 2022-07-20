@@ -13,10 +13,10 @@ class UnitDone(TrackerEvent):
 
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param loop: Specifies the game loop number (game-engine tick)
+    :param loop: Specifies the game loop number (game-engine tick)\
     at which the event occurred
     :type loop: int
-    :param unitTagIndex: Specifies a pointer for a specific unit
+    :param unitTagIndex: Specifies a pointer for a specific unit\
     which was finishing its build
     :type unitTagIndex: int
     :param unitTagRecycle: There is no specific information about this parameter

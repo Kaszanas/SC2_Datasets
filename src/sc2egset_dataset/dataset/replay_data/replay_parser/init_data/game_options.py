@@ -45,7 +45,7 @@ class GameOptions:
 
         :param d: Describes a dictionary, it holds translations of a phrase or sentence
         :type d: Dict[str, Any]
-        :return: Specifies a list of parameters about the game like
+        :return: Specifies a list of parameters about the game like\
         a number of observers, fog of the game, if the game was competitive etc.
         :rtype: GameOptions
 

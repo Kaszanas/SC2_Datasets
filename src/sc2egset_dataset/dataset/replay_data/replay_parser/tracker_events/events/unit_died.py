@@ -13,17 +13,17 @@ class UnitDied(TrackerEvent):
 
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param killerPlayerId: Specifies an id number of played who has controlled
+    :param killerPlayerId: Specifies an id number of played who has controlled\
     and destroyed the unit in the game
     :type killerPlayerId: int
-    :param killerUnitTagIndex: Specifies a pointer for a specific unit
+    :param killerUnitTagIndex: Specifies a pointer for a specific unit\
     which destroyed the unit in the game
     :type killerUnitTagIndex: int
     :param killerUnitTagRecycle: There is no specific information about this parameter
     :type killerUnitTagRecycle: int
     :param loop: Specifies the game loop number (game-engine tick) at which the event occurred
     :type loop: int
-    :param unitTagIndex: Specifies a pointer for a specific unit which
+    :param unitTagIndex: Specifies a pointer for a specific unit which\
     was destroyed in the game
     :type unitTagIndex: int
     :param unitTagRecycle: There is no specific information about this parameter

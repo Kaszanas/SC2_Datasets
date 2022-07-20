@@ -48,7 +48,6 @@ def avg_playerstats_pd_dict_transform(
     TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
-
     """
 
     # Select average PlayerStats

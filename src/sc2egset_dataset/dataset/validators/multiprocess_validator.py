@@ -22,7 +22,7 @@ def validate_integrity_mp(
 
     :param list_of_replays: Specifies a list of replays that should be checked by the validator.
     :type list_of_replays: List[str]
-    :param n_workers: Specifies the number of workers (processes)
+    :param n_workers: Specifies the number of workers (processes)\
     that will be used for validating replays. Must be a positive int.
     :type n_workers: int
     :return: Returns a tuple that contains (all validated replays, files to be skipped).
@@ -112,7 +112,7 @@ def validate_integrity_persist_mp(
     :type list_of_replays: List[str]
     :param n_workers: Specifies the number of workers that will be used to validate the files.
     :type n_workers: int
-    :param validation_file_path: Specifies the path to the validation
+    :param validation_file_path: Specifies the path to the validation\
     file which will be read to obtain the
     :type validation_file_path: Path
     :return: Returns a set of files that should be skipped in further processing.

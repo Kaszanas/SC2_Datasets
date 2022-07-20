@@ -18,10 +18,10 @@ class TrackerEvent(metaclass=abc.ABCMeta):
         Abstract method returning some TrackerEvent.
         This method helps with implementation, with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file
+        :param d: Specifies a dictionary as available in the JSON file\
         that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
-        :raises NotImplementedError: Raises an error if not implemented,
+        :raises NotImplementedError: Raises an error if not implemented,\
         this is only an abstract method
         :return: Returns a method sheet which must be implemented
         :rtype: TrackerEvent

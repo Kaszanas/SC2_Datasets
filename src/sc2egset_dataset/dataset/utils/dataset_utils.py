@@ -12,19 +12,19 @@ def load_replaypack_information(
     """
     Helper function that loads replaypack information from a standard directory structure.
 
-    :param replaypack_name: Specifies the replaypack name that will be used
+    :param replaypack_name: Specifies the replaypack name that will be used\
     as a subdirectory where replaypack .json files will be extracted.
     :type replaypack_name: str
     :param replaypack_path: Specifies the path to the extracted replaypack.
     :type replaypack_path: str
-    :param unpack_n_workers: Specifies the number of workers that will
+    :param unpack_n_workers: Specifies the number of workers that will\
     be used for unpacking the archive.
     :type unpack_n_workers: int
-    :return: Returns path to the directory that contains .json files
-    with data extracted from replays, summary information that
-    was generated when extracting the data from replays,
-    mapping information that specifies what was the directory
-    structure pre-extraction, and log file which contaions
+    :return: Returns path to the directory that contains .json files\
+    with data extracted from replays, summary information that\
+    was generated when extracting the data from replays,\
+    mapping information that specifies what was the directory\
+    structure pre-extraction, and log file which contaions\
     how many files were successfully extracted.
     :rtype: Tuple[str, Dict[str, str], Dict[str, str]]
 

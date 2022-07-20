@@ -10,10 +10,10 @@ class GameDescription:
     GameDescription specifies an information about some basic parameters
     of a StarCraft II replay.
 
-    :param gameOptions: Specifies options in the game,
+    :param gameOptions: Specifies options in the game,\
     for example you can set: fog, random races, competitive, etc.
     :type gameOptions: GameOptions
-    :param gameSpeed: Specifies the speed at which your game runs.
+    :param gameSpeed: Specifies the speed at which your game runs.\
     Enum: [Slower, Slow, Normal, Fast, Faster]. Default is Faster
     :type gameSpeed: str
     :param isBlizzardMap: Specifies if map have been created by Blizzard
@@ -36,7 +36,7 @@ class GameDescription:
         Static method returning initialized GameDescription class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that is
+        :param d: Specifies a dictionary as available in the JSON file that is\
         a result of pre-processing some .SC2Replay file.
         :type d: Dict[str, Any]
         :return: Returns an initialized GameDescription class.
@@ -133,7 +133,6 @@ class GameDescription:
         Traceback (most recent call last):
         ...
         TypeError: unsupported operand type(s) ...
-
         """
 
         return GameDescription(

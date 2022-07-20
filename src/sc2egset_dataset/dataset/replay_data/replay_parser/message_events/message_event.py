@@ -18,10 +18,10 @@ class MessageEvent(metaclass=abc.ABCMeta):
         Abstract method returning some MessageEvent.
         This method helps with implementation, with the original JSON parsing.
 
-        :param d: Specifies a dictionary, it holds translations
+        :param d: Specifies a dictionary, it holds translations\
         of a phrase or sentence.
         :type d: Dict
-        :raises NotImplementedError: Raises an error if not implemented,
+        :raises NotImplementedError: Raises an error if not implemented,\
         this is only an abstract method
         :return: Returns a method sheet which must be implemented
         :rtype: MessageEvent

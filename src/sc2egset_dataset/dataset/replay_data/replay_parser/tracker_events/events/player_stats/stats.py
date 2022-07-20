@@ -9,29 +9,29 @@ class Stats(TrackerEvent):
     """
     Stats holds specific fields on the economy of a player and is used in PlayerStats event.
 
-    :param foodMade: Specifies the amount of supply that a player created.
+    :param foodMade: Specifies the amount of supply that a player created.\
     This is a limit of units that can be made.
     :type foodMade: int
     :param foodUsed: Specifies how much of the supply is used for units.
     :type foodUsed: int
-    :param mineralsCollectionRate: Specifies the collection rate of minerals.
+    :param mineralsCollectionRate: Specifies the collection rate of minerals.\
     Most likely per minute.
     :type mineralsCollectionRate: int
     :param mineralsCurrent: Specifies how much minerals the player has in his "bank".
     :type mineralsCurrent: int
-    :param mineralsFriendlyFireArmy: Specifies how much minerals were lost
+    :param mineralsFriendlyFireArmy: Specifies how much minerals were lost\
     in friendly fire on army units.
     :type mineralsFriendlyFireArmy: int
-    :param mineralsFriendlyFireEconomy: Specifies how much minerals were lost
+    :param mineralsFriendlyFireEconomy: Specifies how much minerals were lost\
     in friendly fire on economy.
     :type mineralsFriendlyFireEconomy: int
-    :param mineralsFriendlyFireTechnology: Specifies how much minerals were lost
+    :param mineralsFriendlyFireTechnology: Specifies how much minerals were lost\
     in friendly fire on technology.
     :type mineralsFriendlyFireTechnology: int
-    :param mineralsKilledArmy: Specifies how much minerals a player killed
+    :param mineralsKilledArmy: Specifies how much minerals a player killed\
     in his oponent's army.
     :type mineralsKilledArmy: int
-    :param mineralsKilledEconomy: Specifies how much minerals player killed
+    :param mineralsKilledEconomy: Specifies how much minerals player killed\
     in his oponents economy.
     :type mineralsKilledEconomy: int
     :param mineralsKilledTechnology: Specifies how much minerals player killed
@@ -43,48 +43,48 @@ class Stats(TrackerEvent):
     :type mineralsLostEconomy: int
     :param mineralsLostTechnology: Specifies how much minerals player lost in his technology.
     :type mineralsLostTechnology: int
-    :param mineralsUsedActiveForces: Specifies how much minerals does the player
+    :param mineralsUsedActiveForces: Specifies how much minerals does the player\
     have in his active forces.
     :type mineralsUsedActiveForces: int
-    :param mineralsUsedCurrentArmy: Specifies how much minerals does the player
+    :param mineralsUsedCurrentArmy: Specifies how much minerals does the player\
     have in his army.
     :type mineralsUsedCurrentArmy: int
-    :param mineralsUsedCurrentEconomy: Specifies how much minerals does the player
+    :param mineralsUsedCurrentEconomy: Specifies how much minerals does the player\
     have in his economical units and structures.
     :type mineralsUsedCurrentEconomy: int
-    :param mineralsUsedCurrentTechnology: Specifies how much minerals does the player
+    :param mineralsUsedCurrentTechnology: Specifies how much minerals does the player\
     have in his technological units, upgrades, and structures.
     :type mineralsUsedCurrentTechnology: int
-    :param mineralsUsedInProgressArmy: Specifies how much minerals does the player
+    :param mineralsUsedInProgressArmy: Specifies how much minerals does the player\
     have in army that is currently being built.
     :type mineralsUsedInProgressArmy: int
-    :param mineralsUsedInProgressEconomy: Specifies how much minerals does the player
+    :param mineralsUsedInProgressEconomy: Specifies how much minerals does the player\
     have in economy that is currently being built.
     :type mineralsUsedInProgressEconomy: int
-    :param mineralsUsedInProgressTechnology: Specifies how much minerals does
+    :param mineralsUsedInProgressTechnology: Specifies how much minerals does\
     the player have in technology that is currently being built.
     :type mineralsUsedInProgressTechnology: int
-    :param vespeneCollectionRate: Specifies what is the vespene collection rate.
+    :param vespeneCollectionRate: Specifies what is the vespene collection rate.\
     Most likely per minute.
     :type vespeneCollectionRate: int
-    :param vespeneCurrent: Specifies the amount of vespene gas that the user has
+    :param vespeneCurrent: Specifies the amount of vespene gas that the user has\
     in his "bank".
     :type vespeneCurrent: int
-    :param vespeneFriendlyFireArmy: Specifies how much vespene was lost in friendly fire
+    :param vespeneFriendlyFireArmy: Specifies how much vespene was lost in friendly fire\
     on army units.
     :type vespeneFriendlyFireArmy: int
-    :param vespeneFriendlyFireEconomy: Specifies how much vespene was lost
+    :param vespeneFriendlyFireEconomy: Specifies how much vespene was lost\
     in friendly fire on economy.
     :type vespeneFriendlyFireEconomy: int
-    :param vespeneFriendlyFireTechnology: Specifies how much vespene was lost
+    :param vespeneFriendlyFireTechnology: Specifies how much vespene was lost\
     in friendly fire on technology.
     :type vespeneFriendlyFireTechnology: int
     :param vespeneKilledArmy: Specifies how much vespene player killed in his oponents army.
     :type vespeneKilledArmy: int
-    :param vespeneKilledEconomy: Specifies how much vespene player killed
+    :param vespeneKilledEconomy: Specifies how much vespene player killed\
     in his oponents economy.
     :type vespeneKilledEconomy: int
-    :param vespeneKilledTechnology: Specifies how much vespene player killed
+    :param vespeneKilledTechnology: Specifies how much vespene player killed\
     in his oponents technology.
     :type vespeneKilledTechnology: int
     :param vespeneLostArmy: Specifies how much vespene player lost in his army.
@@ -93,25 +93,25 @@ class Stats(TrackerEvent):
     :type vespeneLostEconomy: int
     :param vespeneLostTechnology: Specifies how much vespene player lost in his technology.
     :type vespeneLostTechnology: int
-    :param vespeneUsedActiveForces: Specifies how much vespene does the player
+    :param vespeneUsedActiveForces: Specifies how much vespene does the player\
     have in his active forces.
     :type vespeneUsedActiveForces: int
-    :param vespeneUsedCurrentArmy: Specifies how much vespene does the player
+    :param vespeneUsedCurrentArmy: Specifies how much vespene does the player\
     have in his army.
     :type vespeneUsedCurrentArmy: int
-    :param vespeneUsedCurrentEconomy: Specifies how much vespene does the player
+    :param vespeneUsedCurrentEconomy: Specifies how much vespene does the player\
     have in his economical units and structures.
     :type vespeneUsedCurrentEconomy: int
-    :param vespeneUsedCurrentTechnology: Specifies how much minerals does the player
+    :param vespeneUsedCurrentTechnology: Specifies how much minerals does the player\
     have in his technological units, upgrades, and structures.
     :type vespeneUsedCurrentTechnology: int
-    :param vespeneUsedInProgressArmy: Specifies how much vespene does the player
+    :param vespeneUsedInProgressArmy: Specifies how much vespene does the player\
     have in army that is currently being built.
     :type vespeneUsedInProgressArmy: int
-    :param vespeneUsedInProgressEconomy: Specifies how much minerals does the player
+    :param vespeneUsedInProgressEconomy: Specifies how much minerals does the player\
     have in economy that is currently being built.
     :type vespeneUsedInProgressEconomy: int
-    :param vespeneUsedInProgressTechnology: Specifies how much minerals does the player
+    :param vespeneUsedInProgressTechnology: Specifies how much minerals does the player\
     have in technology that is currently being built.
     :type vespeneUsedInProgressTechnology: int
     :param workersActiveCount: Specifies the number of workers that the player has.
@@ -124,7 +124,7 @@ class Stats(TrackerEvent):
         Static method returning initialized Stats class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file
+        :param d: Specifies a dictionary as available in the JSON file\
         that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized Stats class.

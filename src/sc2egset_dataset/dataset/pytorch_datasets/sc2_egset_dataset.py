@@ -99,11 +99,11 @@ class SC2EGSetDataset(Dataset):
 
         :param index: Specifies the index of an item that should be retrieved.
         :type index: Any
-        :raises IndexError: To support negative indexing,
+        :raises IndexError: To support negative indexing,\
         if the index is less than zero twice, IndexError is raised.
-        :raises IndexError: If the index is greater than length
+        :raises IndexError: If the index is greater than length\
         of the dataset IndexError is raised.
-        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,
+        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,\
         or a result of a transform that was passed to the dataset.
         :rtype: Tuple[Any, Any] | SC2ReplayData
         """

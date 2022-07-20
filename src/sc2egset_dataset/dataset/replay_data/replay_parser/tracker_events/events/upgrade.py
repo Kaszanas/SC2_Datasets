@@ -11,7 +11,7 @@ class Upgrade(TrackerEvent):
     Upgrade type containing some "details" information
     on which player is doing an upgrade, game loop, upgrade in game name etc.
 
-    :param count: Specifies a number, highly likely this parameter serves
+    :param count: Specifies a number, highly likely this parameter serves\
     for adding value of upgrades to summary. Default value of the parameter is 1.
     :type count: int
     :param id: Specifies an event unique number
@@ -30,7 +30,7 @@ class Upgrade(TrackerEvent):
         Static method returning initialized Upgrade class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that
+        :param d: Specifies a dictionary as available in the JSON file that\
         is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized Upgrade class.
