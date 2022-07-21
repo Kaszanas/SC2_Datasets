@@ -12,7 +12,7 @@ class CmdUpdateTargetUnit(GameEvent):
     """
     Data type containing information about command update issued to some target unit.
 
-    :param id: Specifies the event ID that should directly map
+    :param id: Specifies the event ID that should directly map\
     to the event name which is denoted by the class.
     :type id: int
     :param loop: Specifies the time in gameloop units when the event happened.
@@ -29,7 +29,7 @@ class CmdUpdateTargetUnit(GameEvent):
         Static method returning initialized CmdUpdateTargetUnit class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file
+        :param d: Specifies a dictionary as available in the JSON file\
         that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized CmdUpdateTargetUnit class.

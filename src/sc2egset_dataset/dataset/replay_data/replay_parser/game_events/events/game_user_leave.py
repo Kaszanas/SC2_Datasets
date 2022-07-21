@@ -11,11 +11,11 @@ class GameUserLeave(GameEvent):
 
     :param id: Specifies the ID of an event which corresponds to its name.
     :type id: int
-    :param leaveReason: Specifies a number which determinate leaving reason,
+    :param leaveReason: Specifies a number which determinate leaving reason,\
     there are no more details
     :type leaveReason: int
-    :param loop: Specifies the game loop number (game-engine tick)
-     at which the event occurred
+    :param loop: Specifies the game loop number (game-engine tick)\
+    at which the event occurred
     :type loop: int
     :param userid: Specifies id number of player who has left the game
     :type userid: int
@@ -27,7 +27,7 @@ class GameUserLeave(GameEvent):
         Static method returning initialized GameUserLeave class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file
+        :param d: Specifies a dictionary as available in the JSON file\
         that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized GameUserLeave class.

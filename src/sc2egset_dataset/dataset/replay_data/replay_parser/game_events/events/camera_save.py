@@ -12,13 +12,13 @@ class CameraSave(GameEvent):
     """
     CameraSave represents the replay information about saved camera in the game.
 
-    :param id: Highly likely this field specifies an id of CameraSave object,
+    :param id: Highly likely this field specifies an id of CameraSave object,\
     many elements have the same id in
     :type id: int
-    :param loop: Specifies the game loop number (game-engine tick)
+    :param loop: Specifies the game loop number (game-engine tick)\
     at which the event occurred
     :type loop: int
-    :param target: Specifies the Target class object which includes x and y coordinates,
+    :param target: Specifies the Target class object which includes x and y coordinates,\
     where the camera location was set in the game
     :type target: Target
     :param userid: Specifies the id of the player who saved the camera location
@@ -34,7 +34,7 @@ class CameraSave(GameEvent):
         Static method returning initialized CameraSave class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file
+        :param d: Specifies a dictionary as available in the JSON file\
         that is a result of pre-processing some .SC2Replay file.
         :type d: Dict
         :return: Returns an initialized CameraSave class.
