@@ -15,7 +15,7 @@ import tests.test_utils.test_utils as test_utils
 from pathlib import Path
 
 
-class IntegrityValidatorTest(unittest.TestCase):
+class TestIntegrityValidator(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.not_working_test_replay = Path(

@@ -6,7 +6,7 @@ from sc2egset_dataset.dataset.lightning_datamodules.sc2_egset_datamodule import 
 )
 
 
-class SC2EGSetDataModuleTest(unittest.TestCase):
+class TestSC2EGSetDataModule(unittest.TestCase):
     def setUp(self) -> None:
         return super().setUp()
 
