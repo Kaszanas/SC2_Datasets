@@ -57,7 +57,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 html_theme = "furo"
 
 html_static_path = []
-html_css_files = ["custom.css"]
+html_css_files = ["_static/custom.css"]
 
 html_title = project + " " + release + " Documentation"
 
