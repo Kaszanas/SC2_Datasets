@@ -17,6 +17,9 @@ pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
 black = "^22.6.0"
 pylama = {extras = ["all"], version = "^8.3.8"}
+myst-nb = "^0.16.0"
+sphinx-autoapi = "^1.8.4"
+furo = "^2022.6.21"
 
 
 [build-system]
