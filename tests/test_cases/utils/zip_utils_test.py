@@ -54,10 +54,6 @@ class ZipUtilsTest(unittest.TestCase):
         if self.unpacked.exists():
             shutil.rmtree(path=self.unpacked.as_posix())
 
-    def tearDown(self) -> None:
-        # Deleting the unpacked content after every test:
-        shutil.rmtree(path=self.unpacked)
-
     def test_unpack_zipfile(self):
 
         path_to_unpacked = unpack_zipfile(
