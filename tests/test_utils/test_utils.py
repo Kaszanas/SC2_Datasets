@@ -36,9 +36,9 @@ def get_assets_dir() -> str:
     logging.info(f"Successfully set workspace_dir = {workspace_dir}")
 
     logging.info(
-        "Attempting to set input_dir = os.path.join(workspace_dir, 'test/test_files/single_replay')"
+        "Attempting to set input_dir = os.path.join(workspace_dir, 'test/test_files')"
     )
-    input_dir = os.path.join(workspace_dir, "test/test_files/single_replay")
+    input_dir = os.path.join(workspace_dir, "test/test_files")
     logging.info(f"Successfully set input_dir = {input_dir}, returning input_dir")
 
     return input_dir
