@@ -1,8 +1,11 @@
 import unittest
 import os
 import shutil
+import zipfile
 
-from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+from pathlib import Path
+
+from sc2egset_dataset.dataset.utils.zip_utils import unpack_chunk, unpack_zipfile
 
 from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 
@@ -20,8 +23,6 @@ from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
     TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
-
-
 
     **Incorrect Usage Examples:**
 
@@ -49,19 +50,39 @@ class ZipUtilsTest(unittest.TestCase):
         cls.test_output_path = get_test_output_dir()
         cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
 
-    def tearDown(self) -> None:
+    def setUp(self) -> None:
+        if self.unpacked.exists():
+            shutil.rmtree(path=self.unpacked.as_posix())
 
+    def tearDown(self) -> None:
         # Deleting the unpacked content after every test:
         shutil.rmtree(path=self.unpacked)
 
     def test_unpack_zipfile(self):
 
-        self.unpacked = unpack_zipfile(
+        path_to_unpacked = unpack_zipfile(
             destination_dir=self.unpack_dir_path,
             subdir=self.test_replaypack_name,
             zip_path=self.replaypack_zip_path,
             n_workers=1,
         )
+        self.unpacked = Path(path_to_unpacked)
 
-    # def test_unpack_chunk(self):
-    #     pass
+    def test_unpack_chunk(self):
+
+        with zipfile.ZipFile(self.replaypack_zip_path, "r") as zip_file:
+            file_list = zip_file.namelist()
+
+        extraction_path = Path(
+            os.path.join(self.unpack_dir_path, self.test_replaypack_name)
+        )
+        if not extraction_path.exists():
+            extraction_path.mkdir()
+
+        self.unpacked = extraction_path.as_posix()
+
+        unpack_chunk(
+            zip_path=self.replaypack_zip_path,
+            filenames=file_list,
+            path_to_extract=extraction_path.as_posix(),
+        )
