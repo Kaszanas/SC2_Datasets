@@ -36,12 +36,25 @@ def get_assets_dir() -> str:
     logging.info(f"Successfully set workspace_dir = {workspace_dir}")
 
     logging.info(
-        "Attempting to set input_dir = os.path.join(workspace_dir, 'test/test_files')"
+        "Attempting to set input_dir = os.path.join(workspace_dir, 'tests/test_files')"
     )
-    input_dir = os.path.join(workspace_dir, "test/test_files")
+    input_dir = os.path.join(workspace_dir, "tests/test_files")
     logging.info(f"Successfully set input_dir = {input_dir}, returning input_dir")
 
     return input_dir
+
+
+def get_test_output_dir() -> str:
+    """
+    Getting path to the tests output directory.
+
+    :return: Returns a string representing the path to the test output directory.
+    :rtype: str
+    """
+
+    workspace_dir = get_workspace_dir()
+    test_output_dir = os.path.join(workspace_dir, "tests/test_output")
+    return test_output_dir
 
 
 class AssetError(Exception):

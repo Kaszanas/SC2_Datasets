@@ -21,6 +21,12 @@ import unittest
 
 
 class DownloadUtilsTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+
+        cls.test_output = ""
+
+        return super().setUpClass()
 
     # Executed after each test method:
     def tearDown(self) -> None:

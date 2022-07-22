@@ -1,4 +1,7 @@
 import unittest
+from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+
+from tests.test_utils.test_utils import get_specific_asset
 
 
 """
@@ -35,7 +38,8 @@ import unittest
 class ZipUtilsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        return super().setUpClass()
+
+        cls.replaypack_zip_path = get_specific_asset(filename="2022_TestReplaypack.zip")
 
     def tearDown(self) -> None:
 
@@ -44,7 +48,13 @@ class ZipUtilsTest(unittest.TestCase):
         return super().tearDown()
 
     def test_unpack_zipfile(self):
-        pass
+
+        unpacked = unpack_zipfile(
+            destination_dir="",
+            subdir="",
+            zip_path=self.replaypack_zip_path,
+            n_workers=1,
+        )
 
     def test_unpack_chunk(self):
         pass
