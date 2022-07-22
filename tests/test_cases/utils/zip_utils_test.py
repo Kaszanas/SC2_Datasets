@@ -50,11 +50,13 @@ class ZipUtilsTest(unittest.TestCase):
         cls.test_output_path = get_test_output_dir()
         cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
 
+        cls.unpacked = Path("not_existing_path")
+
     def setUp(self) -> None:
         if self.unpacked.exists():
             shutil.rmtree(path=self.unpacked.as_posix())
 
-    def test_unpack_zipfile(self):
+    def test_unpack_zipfile_correct(self):
 
         path_to_unpacked = unpack_zipfile(
             destination_dir=self.unpack_dir_path,
@@ -64,7 +66,19 @@ class ZipUtilsTest(unittest.TestCase):
         )
         self.unpacked = Path(path_to_unpacked)
 
-    def test_unpack_chunk(self):
+    def test_unpack_zipfile_incorrect(self):
+        parameters = [-1, 0]
+        for n_workers in parameters:
+            with self.subTest(n_workers):
+                with self.assertRaises(Exception):
+                    _ = unpack_zipfile(
+                        destination_dir=self.unpack_dir_path,
+                        subdir=self.test_replaypack_name,
+                        zip_path=self.replaypack_zip_path,
+                        n_workers=n_workers,
+                    )
+
+    def test_unpack_chunk_correct(self):
 
         with zipfile.ZipFile(self.replaypack_zip_path, "r") as zip_file:
             file_list = zip_file.namelist()
