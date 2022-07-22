@@ -5,7 +5,7 @@ from sc2egset_dataset.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSet
 from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 
 
-class TestSC2EGSetDataset(unittest.TestCase):
+class SC2EGSetDatasetTest(unittest.TestCase):
     def test_loading_replaypacks(self):
 
         sc2egset_dataset = SC2EGSetDataset(

@@ -9,7 +9,7 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_e
 import tests.test_utils.test_utils as test_utils
 
 
-class TestTrackerEventsParser(unittest.TestCase):
+class TrackerEventsParserTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.test_replay = test_utils.get_specific_asset(filename="test_replay.json")

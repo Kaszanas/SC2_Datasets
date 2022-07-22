@@ -13,7 +13,7 @@ from sc2egset_dataset.dataset.utils.dataset_utils import (
 # TODO: Rewrite or update these tests to better support validators:
 
 
-class TestSC2ReplaypackDataset(unittest.TestCase):
+class SC2ReplaypackDatasetTest(unittest.TestCase):
     def test_unpack_load_replaypack(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(

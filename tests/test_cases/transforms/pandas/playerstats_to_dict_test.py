@@ -12,7 +12,7 @@ from sc2egset_dataset.dataset.transforms.pandas.player_stats_to_dict import (
 import tests.test_utils.test_utils as test_utils
 
 
-class TestPlayerStatsToDict(unittest.TestCase):
+class PlayerStatsToDictTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.test_replay = test_utils.get_specific_asset(filename="test_replay.json")

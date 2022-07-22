@@ -6,7 +6,7 @@ from sc2egset_dataset.dataset.lightning_datamodules.sc2_replaypack_datamodule im
 )
 
 
-class TestSC2ReplaypackDataModule(unittest.TestCase):
+class SC2ReplaypackDataModuleTest(unittest.TestCase):
     def setUp(self) -> None:
         return super().setUp()
 
