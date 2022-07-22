@@ -35,9 +35,6 @@ def get_assets_dir() -> str:
     workspace_dir = get_workspace_dir()
     logging.info(f"Successfully set workspace_dir = {workspace_dir}")
 
-    logging.info(
-        "Attempting to set input_dir = os.path.join(workspace_dir, 'tests/test_files')"
-    )
     input_dir = os.path.join(workspace_dir, "tests/test_files")
     logging.info(f"Successfully set input_dir = {input_dir}, returning input_dir")
 
@@ -51,9 +48,15 @@ def get_test_output_dir() -> str:
     :return: Returns a string representing the path to the test output directory.
     :rtype: str
     """
-
+    logging.info(
+        "Entered get_assets_dir(), calling workspace_dir = get_workspace_dir()"
+    )
     workspace_dir = get_workspace_dir()
+    logging.info(f"Successfully set workspace_dir = {workspace_dir}")
+
     test_output_dir = os.path.join(workspace_dir, "tests/test_output")
+    logging.info(f"Successfully set input_dir = {test_output_dir}, returning input_dir")
+
     return test_output_dir
 
 
