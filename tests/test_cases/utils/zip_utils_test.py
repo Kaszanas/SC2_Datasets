@@ -33,8 +33,15 @@ import unittest
 
 
 class ZipUtilsTest(unittest.TestCase):
-    def setUp(self) -> None:
-        return super().setUp()
+    @classmethod
+    def setUpClass(cls) -> None:
+        return super().setUpClass()
+
+    def tearDown(self) -> None:
+
+        # TODO: Delete the unpacked content:
+
+        return super().tearDown()
 
     def test_unpack_zipfile(self):
         pass

@@ -21,8 +21,13 @@ import unittest
 
 
 class DownloadUtilsTest(unittest.TestCase):
-    def setUp(self) -> None:
-        return super().setUp()
+
+    # Executed after each test method:
+    def tearDown(self) -> None:
+
+        # TODO: Delete the path to downloaded and unpacked content.
+
+        return super().tearDown()
 
     def test_download_replaypack(self):
         pass
