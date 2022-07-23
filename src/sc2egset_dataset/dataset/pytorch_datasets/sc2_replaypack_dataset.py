@@ -78,9 +78,10 @@ class SC2ReplaypackDataset(Dataset):
         # Loading the dataset information, additional replaypack information is kept:
         (
             data_path,
-            self._replaypack_summary,
+            self._replaypack_main_log_obj_list,
+            self._replaypack_processed_failed,
             self._replaypack_dir_mapping,
-            self._replaypack_processed_info,
+            self._replaypack_summary,
         ) = load_replaypack_information(
             replaypack_name=self.replaypack_name,
             replaypack_path=os.path.join(self.unpack_dir, self.replaypack_name),

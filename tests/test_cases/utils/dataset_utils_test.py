@@ -35,16 +35,14 @@ class DatasetUtilsTest(unittest.TestCase):
                 )
             )
 
-    # @classmethod
-    # def tearDownClass(cls) -> None:
+    @classmethod
+    def tearDownClass(cls) -> None:
 
-    #     # Deletes the replaypack after the testing was finished:
-    #     if cls.unpacked.exists():
-    #         shutil.rmtree(path=cls.unpacked.as_posix())
+        # Deletes the replaypack after the testing was finished:
+        if cls.unpacked.exists():
+            shutil.rmtree(path=cls.unpacked.as_posix())
 
     def test_load_replaypack_information(self):
-
-        print(self.unpacked)
 
         (
             data_path,
@@ -56,8 +54,6 @@ class DatasetUtilsTest(unittest.TestCase):
             replaypack_path=self.unpacked,
             unpack_n_workers=1,
         )
-
-        print(log_list)
 
         self.assertIsInstance(data_path, str)
         self.assertIsInstance(summary_content, dict)

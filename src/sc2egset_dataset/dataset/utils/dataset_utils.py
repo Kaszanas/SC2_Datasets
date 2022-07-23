@@ -5,8 +5,6 @@ from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 
 from typing import Dict, Tuple
 
-# TODO: Standardize replaypack information in SC2DatasetPreparator
-
 
 def load_replaypack_information(
     replaypack_name: str,
@@ -55,10 +53,11 @@ def load_replaypack_information(
 
     replaypack_files = os.listdir(replaypack_path)
     # Initializing variables that should be returned:
-    data_path = ""
-    summary_content = {}
-    dir_mapping = {}
-    log_list = []
+    replaypack_data_path = ""
+    replaypack_main_log_obj_list = []
+    replaypack_processed_failed = {}
+    replaypack_summary = {}
+    replaypack_dir_mapping = {}
 
     # Extracting the nested .zip files,
     # and loading replaypack information files:
@@ -68,23 +67,32 @@ def load_replaypack_information(
             data_path = os.path.join(replaypack_path, replaypack_name + "_data")
             # Unpack the .zip archive only if it is not unpacked already:
             if not os.path.isdir(data_path):
-                data_path = unpack_zipfile(
+                replaypack_data_path = unpack_zipfile(
                     destination_dir=replaypack_path,
                     subdir=replaypack_name + "_data",
                     zip_path=os.path.join(replaypack_path, file),
                     n_workers=unpack_n_workers,
                 )
+        if file.endswith("_main_log.log"):
+            with open(os.path.join(replaypack_path, file)) as main_log_file:
+                # Reading the lines of the log file and parsing them:
+                for line in main_log_file.readlines():
+                    log_object = json.loads(line)
+                    replaypack_main_log_obj_list.append(log_object)
+        if file.endswith("_processed_failed.log"):
+            with open(os.path.join(replaypack_path, file)) as processed_files:
+                replaypack_processed_failed = json.load(processed_files)
+        if file.endswith("_processed_mapping.json"):
+            with open(os.path.join(replaypack_path, file)) as mapping_file:
+                replaypack_dir_mapping = json.load(mapping_file)
         if file.endswith("_summary.json"):
             with open(os.path.join(replaypack_path, file)) as summary_file:
-                summary_content = json.load(summary_file)
-        if file.endswith("_mapping.json"):
-            with open(os.path.join(replaypack_path, file)) as mapping_file:
-                dir_mapping = json.load(mapping_file)
-        if file.endswith(".log") and not file.endswith("main_log.log"):
-            with open(os.path.join(replaypack_path, file)) as processed_info_file:
-                # Reading the lines of the log file and parsing them:
-                for line in processed_info_file.readlines():
-                    processed_info = json.loads(line)
-                    log_list.append(processed_info)
+                replaypack_summary = json.load(summary_file)
 
-    return (data_path, summary_content, dir_mapping, log_list)
+    return (
+        replaypack_data_path,
+        replaypack_main_log_obj_list,
+        replaypack_processed_failed,
+        replaypack_dir_mapping,
+        replaypack_summary,
+    )
