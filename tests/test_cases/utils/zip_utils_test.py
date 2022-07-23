@@ -47,6 +47,7 @@ class ZipUtilsTest(unittest.TestCase):
         cls.replaypack_zip_path = get_specific_asset(
             filename=cls.test_replaypack_name + ".zip"
         )
+
         cls.test_output_path = get_test_output_dir()
         cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
 
