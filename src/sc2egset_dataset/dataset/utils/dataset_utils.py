@@ -61,7 +61,6 @@ def load_replaypack_information(
 
     # Extracting the nested .zip files,
     # and loading replaypack information files:
-    # REVIEW: Check the logic for unpacking and the loading of supplementary files:
     for file in replaypack_files:
         if file.endswith("_data.zip"):
             data_path = os.path.join(replaypack_path, replaypack_name + "_data")
