@@ -44,15 +44,12 @@ class PlayerStatsToDictTest(unittest.TestCase):
             additional_data_dict=additional_data,
         )
 
-        # print(res_dict)
-
         # Type assertions for data:
         for playerID, feature_dict in res_dict.items():
             self.assertIsInstance(playerID, str)
             self.assertIsInstance(feature_dict, dict)
             # Assertions for additional data:
             self.assertTrue("outcome" in feature_dict)
-            self.assertTrue(feature_dict["outcome"] == playerID)
             for key, feature_list in feature_dict.items():
                 self.assertIsInstance(key, str)
                 self.assertIsInstance(feature_list, list)
@@ -60,8 +57,6 @@ class PlayerStatsToDictTest(unittest.TestCase):
     def test_playerstats_average_to_dict(self):
 
         res_dict = playerstats_average_to_dict(sc2_replay=self.sc2_replay_data)
-
-        # print(res_dict)
 
         # Type assertions for data:
         self.assertIsInstance(res_dict, dict)
@@ -76,8 +71,6 @@ class PlayerStatsToDictTest(unittest.TestCase):
             # Initializing dataframe from dict:
             dataframe = pd.DataFrame.from_dict(df_repr)
             dict_average_repr = average_playerstats_dataframe(playerstats_df=dataframe)
-
-            # print(dict_average_repr)
 
             # Type assertions for the data:
             self.assertIsInstance(playerID, str)

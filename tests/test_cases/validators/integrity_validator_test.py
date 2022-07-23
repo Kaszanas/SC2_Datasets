@@ -34,7 +34,7 @@ class IntegrityValidatorTest(unittest.TestCase):
             list_of_replays=self.list_of_replays
         )
         self.assertIsInstance(next(iter(skip_files)), str)
-        self.assertEqual(len(validated), 2)
+        self.assertEqual(len(validated), 1)
         self.assertEqual(len(skip_files), 1)
 
     def test_multiprocessing_integrity_validator(self):
@@ -42,7 +42,7 @@ class IntegrityValidatorTest(unittest.TestCase):
             list_of_replays=self.list_of_replays, n_workers=2
         )
         self.assertIsInstance(next(iter(skip_files)), str)
-        self.assertEqual(len(validated), 2)
+        self.assertEqual(len(validated), 1)
         self.assertEqual(len(skip_files), 1)
 
     def test_persistent_mp_integrity_validator(self):
@@ -60,7 +60,7 @@ class IntegrityValidatorTest(unittest.TestCase):
                 deserialized = json.load(tf)
                 validated = deserialized["validated_files"]
                 skipped = deserialized["skip_files"]
-                self.assertEqual(len(validated), 2)
+                self.assertEqual(len(validated), 1)
                 self.assertEqual(len(skipped), 1)
 
         self.assertIsInstance(next(iter(skip_files)), str)
@@ -82,7 +82,7 @@ class IntegrityValidatorTest(unittest.TestCase):
                 deserialized = json.load(tf)
                 validated = deserialized["validated_files"]
                 skipped = deserialized["skip_files"]
-                self.assertEqual(len(validated), 2)
+                self.assertEqual(len(validated), 1)
                 self.assertEqual(len(skipped), 1)
 
         self.assertIsInstance(next(iter(skip_files)), str)
