@@ -5,9 +5,13 @@ from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 
 from typing import Dict, Tuple
 
+# TODO: Standardize replaypack information in SC2DatasetPreparator
+
 
 def load_replaypack_information(
-    replaypack_name: str, replaypack_path: str, unpack_n_workers: int
+    replaypack_name: str,
+    replaypack_path: str,
+    unpack_n_workers: int,
 ) -> Tuple[str, Dict[str, str], Dict[str, str]]:
     """
     Helper function that loads replaypack information from a standard directory structure.
@@ -53,8 +57,8 @@ def load_replaypack_information(
     # Initializing variables that should be returned:
     data_path = ""
     summary_content = {}
-    mapping_content = {}
-    processed_info = {}
+    dir_mapping = {}
+    log_list = []
 
     # Extracting the nested .zip files,
     # and loading replaypack information files:
@@ -75,9 +79,12 @@ def load_replaypack_information(
                 summary_content = json.load(summary_file)
         if file.endswith("_mapping.json"):
             with open(os.path.join(replaypack_path, file)) as mapping_file:
-                mapping_content = json.load(mapping_file)
+                dir_mapping = json.load(mapping_file)
         if file.endswith(".log") and not file.endswith("main_log.log"):
             with open(os.path.join(replaypack_path, file)) as processed_info_file:
-                processed_info = json.load(processed_info_file)
+                # Reading the lines of the log file and parsing them:
+                for line in processed_info_file.readlines():
+                    processed_info = json.loads(line)
+                    log_list.append(processed_info)
 
-    return (data_path, summary_content, mapping_content, processed_info)
+    return (data_path, summary_content, dir_mapping, log_list)

@@ -29,23 +29,37 @@ class DatasetUtilsTest(unittest.TestCase):
             cls.unpacked = Path(
                 unpack_zipfile(
                     destination_dir=cls.unpack_dir_path,
-                    subdir=cls.test_replaypack_name,
+                    subdir="",
                     zip_path=cls.replaypack_zip_path,
                     n_workers=1,
                 )
             )
 
-    @classmethod
-    def tearDownClass(cls) -> None:
+    # @classmethod
+    # def tearDownClass(cls) -> None:
 
-        # Deletes the replaypack after the testing was finished:
-        if cls.unpacked.exists():
-            shutil.rmtree(path=cls.unpacked.as_posix())
+    #     # Deletes the replaypack after the testing was finished:
+    #     if cls.unpacked.exists():
+    #         shutil.rmtree(path=cls.unpacked.as_posix())
 
     def test_load_replaypack_information(self):
 
-        loaded_information = load_replaypack_information(
+        print(self.unpacked)
+
+        (
+            data_path,
+            summary_content,
+            dir_mapping,
+            log_list,
+        ) = load_replaypack_information(
             replaypack_name=self.test_replaypack_name,
             replaypack_path=self.unpacked,
             unpack_n_workers=1,
         )
+
+        print(log_list)
+
+        self.assertIsInstance(data_path, str)
+        self.assertIsInstance(summary_content, dict)
+        self.assertIsInstance(dir_mapping, dict)
+        self.assertIsInstance(log_list, list)
