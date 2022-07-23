@@ -56,23 +56,18 @@ def download_replaypack(
 
     # Check if there is something in the destination directory:
     existing_files = os.listdir(destination_dir)
-    if len(existing_files) > 1:
-        raise Exception("There is more than one file in the destination directory!")
+
+    filename_with_ext = replaypack_name + ".zip"
+    download_filepath = os.path.join(destination_dir, filename_with_ext)
 
     # The file was previously downloaded so return it immediately:
     if existing_files:
-        if existing_files[0].endswith(".zip"):
-            return existing_files[0]
-        raise Exception(
-            "The file that was detected does not end with a .zip extension!\
-            Wrong file was downloaded!"
-        )
+        if download_filepath in existing_files:
+            return download_filepath
 
     # Send a request and save the response content into a .zip file.
     # The .zip file should be a replaypack:
     response = requests.get(url=replaypack_url)
-    filename_with_ext = replaypack_name + ".zip"
-    download_filepath = os.path.join(destination_dir, filename_with_ext)
     with open(download_filepath, "wb") as output_zip_file:
         output_zip_file.write(response.content)
 
@@ -84,7 +79,7 @@ def download_and_unpack_replaypack(
     replaypack_unpack_dir: str,
     replaypack_name: str,
     url: str,
-) -> Tuple[str, Dict[str, str], Dict[str, str]]:
+) -> str:
     """
     Helper function that downloads a replaypack from a specified url.
     The archive is saved to replaypack_download_dir using a replaypack_name.
@@ -99,6 +94,8 @@ def download_and_unpack_replaypack(
     :type replaypack_name: str
     :param url: Specifies the url that will be used to download the replaypack.
     :type url: str
+    :return: Returns the filepath to the directory where the .zip was extracted.
+    :rtype: str
 
     **Correct Usage Examples:**
 
@@ -136,3 +133,5 @@ def download_and_unpack_replaypack(
         zip_path=download_path,
         n_workers=1,
     )
+
+    return os.path.join(replaypack_unpack_dir, replaypack_name)

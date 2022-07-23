@@ -1,5 +1,15 @@
+import os
+from pathlib import Path
+import shutil
 import unittest
+from sc2egset_dataset.dataset.utils.download_utils import (
+    download_and_unpack_replaypack,
+    download_replaypack,
+)
 
+from tests.test_utils.test_utils import get_test_output_dir
+
+from tests.settings_test import TEST_REPLAYPACKS
 
 """
     **Incorrect Usage Examples:**
@@ -24,19 +34,36 @@ class DownloadUtilsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
 
-        cls.test_output = ""
+        # Defining basic paths used by the tests:
+        cls.test_output_path = get_test_output_dir()
+        cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
+        cls.download_dir_path = os.path.join(cls.test_output_path, "download")
 
-        return super().setUpClass()
+        # Initializing variables that have to be existing because of the setUp method:
+        cls.unpacked = Path("not_existing_path")
+        cls.downloaded = Path("not_existing_path")
 
-    # Executed after each test method:
-    def tearDown(self) -> None:
+    def setUp(self) -> None:
 
-        # TODO: Delete the path to downloaded and unpacked content.
+        if self.downloaded.exists():
+            shutil.rmtree(path=self.downloaded.as_posix())
 
-        return super().tearDown()
+        if self.unpacked.exists():
+            shutil.rmtree(path=self.unpacked.as_posix())
 
     def test_download_replaypack(self):
-        pass
+
+        self.downloaded = download_replaypack(
+            destination_dir=self.download_dir_path,
+            replaypack_name=TEST_REPLAYPACKS[0][0],
+            replaypack_url=TEST_REPLAYPACKS[0][1],
+        )
 
     def test_download_and_unpack_replaypack(self):
-        pass
+
+        self.unpacked = download_and_unpack_replaypack(
+            replaypack_download_dir=self.download_dir_path,
+            replaypack_unpack_dir=self.unpack_dir_path,
+            replaypack_name=TEST_REPLAYPACKS[0][0],
+            url=TEST_REPLAYPACKS[0][1],
+        )
