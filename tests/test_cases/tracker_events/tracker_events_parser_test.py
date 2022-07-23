@@ -18,7 +18,6 @@ class TrackerEventsParserTest(unittest.TestCase):
 
         with open(self.test_replay) as f:
             loaded_file = json.load(f)
-
             # Iterating over all of the tracker events and verifying
             # If the parsing works correctly:
             for tracker_event in loaded_file["trackerEvents"]:

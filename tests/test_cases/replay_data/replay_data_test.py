@@ -24,7 +24,6 @@ class SC2ReplayDataTest(unittest.TestCase):
     def test_loading_json(self):
 
         sc2_replay_data = SC2ReplayData.from_file(replay_filepath=self.test_replay)
-
         self.assertIsInstance(sc2_replay_data, SC2ReplayData)
 
     def test_empty_json(self):

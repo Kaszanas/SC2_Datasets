@@ -7,6 +7,7 @@ from torch.utils.data import Dataset
 from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from sc2egset_dataset.dataset.utils.dataset_utils import load_replaypack_information
 from sc2egset_dataset.dataset.utils.download_utils import download_and_unpack_replaypack
+from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 
 
 class SC2ReplaypackDataset(Dataset):
@@ -58,6 +59,10 @@ class SC2ReplaypackDataset(Dataset):
 
         self.replaypack_name = replaypack_name
         self.url = url
+        self.replaypack_unpack_path = Path(self.unpack_dir, self.replaypack_name)
+        self.downloaded_zip_path = Path(
+            self.download_dir, self.replaypack_name + ".zip"
+        )
 
         # Downloading the dataset:
         if download:
@@ -65,14 +70,29 @@ class SC2ReplaypackDataset(Dataset):
             # or if the download directory does not exist:
             if not url:
                 raise Exception("Detected empty URL! Cannot download a replaypack!")
-            if not os.path.isdir(self.download_dir):
-                raise Exception("Replaypack download directory does not exist!")
 
             download_and_unpack_replaypack(
                 replaypack_download_dir=self.download_dir,
                 replaypack_unpack_dir=self.unpack_dir,
                 replaypack_name=self.replaypack_name,
                 url=self.url,
+            )
+
+        # If the dataset is not unpacked, then look for it in the download folder.
+        # If it is there then unpack it and resume:
+        if not self.replaypack_unpack_path.exists():
+            if not self.downloaded_zip_path.exists():
+                raise Exception(
+                    "Dataset was not unpacked nor downloaded!\
+                                Please make sure that the replaypack exists!"
+                )
+            self.replaypack_unpack_path = Path(
+                unpack_zipfile(
+                    destination_dir=self.unpack_dir,
+                    subdir=self.replaypack_name,
+                    zip_path=self.replaypack_zip_path.as_posix(),
+                    n_workers=self.unpack_n_workers,
+                )
             )
 
         # Loading the dataset information, additional replaypack information is kept:
@@ -84,7 +104,7 @@ class SC2ReplaypackDataset(Dataset):
             self._replaypack_summary,
         ) = load_replaypack_information(
             replaypack_name=self.replaypack_name,
-            replaypack_path=os.path.join(self.unpack_dir, self.replaypack_name),
+            replaypack_path=self.replaypack_unpack_path.as_posix(),
             unpack_n_workers=self.unpack_n_workers,
         )
 
