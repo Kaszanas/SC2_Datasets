@@ -29,7 +29,7 @@ class DatasetUtilsTest(unittest.TestCase):
             cls.unpacked = Path(
                 unpack_zipfile(
                     destination_dir=cls.unpack_dir_path,
-                    subdir="",
+                    subdir=cls.test_replaypack_name,
                     zip_path=cls.replaypack_zip_path,
                     n_workers=1,
                 )
@@ -45,17 +45,19 @@ class DatasetUtilsTest(unittest.TestCase):
     def test_load_replaypack_information(self):
 
         (
-            data_path,
-            summary_content,
-            dir_mapping,
-            log_list,
+            replaypack_data_path,
+            replaypack_main_log_obj_list,
+            replaypack_processed_failed,
+            replaypack_dir_mapping,
+            replaypack_summary,
         ) = load_replaypack_information(
             replaypack_name=self.test_replaypack_name,
             replaypack_path=self.unpacked,
             unpack_n_workers=1,
         )
 
-        self.assertIsInstance(data_path, str)
-        self.assertIsInstance(summary_content, dict)
-        self.assertIsInstance(dir_mapping, dict)
-        self.assertIsInstance(log_list, list)
+        self.assertIsInstance(replaypack_data_path, str)
+        self.assertIsInstance(replaypack_main_log_obj_list, list)
+        self.assertIsInstance(replaypack_processed_failed, dict)
+        self.assertIsInstance(replaypack_dir_mapping, dict)
+        self.assertIsInstance(replaypack_summary, dict)
