@@ -42,7 +42,7 @@ class DatasetUtilsTest(unittest.TestCase):
         if cls.unpacked.exists():
             shutil.rmtree(path=cls.unpacked.as_posix())
 
-    def test_load_replaypack_information(self):
+    def test_load_replaypack_information_correct(self):
 
         (
             replaypack_data_path,
@@ -57,7 +57,25 @@ class DatasetUtilsTest(unittest.TestCase):
         )
 
         self.assertIsInstance(replaypack_data_path, str)
+
+        # Assertions for main_log:
         self.assertIsInstance(replaypack_main_log_obj_list, list)
+        self.assertEqual(len(replaypack_main_log_obj_list), 1)
+
+        # Assertions for processed_failed:
         self.assertIsInstance(replaypack_processed_failed, dict)
+        self.assertEqual(len(replaypack_processed_failed["processedFiles"]), 1)
+        self.assertEqual(len(replaypack_processed_failed["failedToProcess"]), 0)
+
+        # Assertions for replaypack mapping:
         self.assertIsInstance(replaypack_dir_mapping, dict)
+
+        # Assertions for replaypack_summary:
         self.assertIsInstance(replaypack_summary, dict)
+
+        # TODO: Some keys were not included here:
+        self.assertEqual(len(replaypack_summary["Summary"]["gameVersions"].items()), 1)
+        self.assertEqual(len(replaypack_summary["Summary"]["maps"].items()), 1)
+        self.assertEqual(len(replaypack_summary["Summary"]["gameTimes"].items()), 1)
+        self.assertEqual(len(replaypack_summary["Summary"]["dates"].items()), 1)
+        self.assertEqual(len(replaypack_summary["Summary"]["matchupCount"].items()), 1)
