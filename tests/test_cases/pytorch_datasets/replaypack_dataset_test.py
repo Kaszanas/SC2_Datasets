@@ -1,24 +1,63 @@
 import os
-from typing import Dict
+import shutil
 import unittest
+from pathlib import Path
+from typing import Dict
 
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from sc2egset_dataset.dataset.pytorch_datasets.sc2_replaypack_dataset import (
     SC2ReplaypackDataset,
 )
-from sc2egset_dataset.dataset.utils.dataset_utils import (
-    validate_integrity_singleprocess,
-)
+from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+
+from tests.settings_test import TEST_REPLAYPACKS
+from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 
 # TODO: Rewrite or update these tests to better support validators:
 
 
 class SC2ReplaypackDatasetTest(unittest.TestCase):
-    def test_unpack_load_replaypack(self):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.test_replaypack_name = "2022_TestReplaypack"
+        cls.replaypack_zip_path = get_specific_asset(
+            filename=cls.test_replaypack_name + ".zip"
+        )
+
+        cls.test_output_path = get_test_output_dir()
+        cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
+        cls.download_dir_path = os.path.join(cls.test_output_path, "download")
+
+        # Initializing the unpacked where it should be:
+        cls.unpacked = Path(cls.unpack_dir_path, cls.test_replaypack_name)
+        cls.download = Path(cls.download_dir_path, cls.test_replaypack_name)
+
+        # If it doesn't exist, unpack the test .zip archive:
+        if not cls.unpacked.exists():
+            # Unpacks the replaypack that will be used for testing:
+            cls.unpacked = Path(
+                unpack_zipfile(
+                    destination_dir=cls.unpack_dir_path,
+                    subdir=cls.test_replaypack_name,
+                    zip_path=cls.replaypack_zip_path,
+                    n_workers=1,
+                )
+            )
+
+    def setUp(self) -> None:
+
+        if self.download.exists():
+            shutil.rmtree(path=self.downloaded.as_posix())
+
+        if self.unpacked.exists():
+            shutil.rmtree(path=self.unpacked.as_posix())
+
+    def test_unpack_replaypack(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
-            replaypack_name="2020_IEM_Katowice",
-            replaypack_unpack_dir=os.path.abspath("./test/test_files/unpack"),
+            replaypack_name=self.test_replaypack_name,
+            unpack_dir=self.unpack_dir_path,
+            download_dir=self.download_dir_path,
         )
 
         # Replaypack was initialized:
@@ -33,60 +72,24 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         # It is possible to retrieve a single file by index:
         self.assertIsInstance(sc2_replaypack_dataset[0], SC2ReplayData)
 
-    # REVIEW: Is this test needed?
-    @unittest.skip("reason for skipping")
-    def test_parsing_replaypack_replays(self):
+    def test_download_unpack_replaypack(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
-            replaypack_name="2020_IEM_Katowice",
-            unpack_dir=os.path.abspath("./test/test_files/unpack"),
+            replaypack_name=TEST_REPLAYPACKS[0][0],
+            unpack_dir=self.unpack_dir_path,
+            download_dir=self.download_dir_path,
+            download=True,
+            url=TEST_REPLAYPACKS[0][1],
         )
 
-        # Iterating over a single replaypacka and verifying
-        # That it is possible to parse the replays into SC2ReplayData:
-        for index in range(len(sc2_replaypack_dataset)):
-            replay_data = sc2_replaypack_dataset[index]
-
-            self.assertIsInstance(replay_data, SC2ReplayData)
-
-    def test_replaypack_integrity_validation(self):
-        files_rejected = 0
-
-        def validator(list_of_replays):
-            nonlocal files_rejected
-            result = validate_integrity_singleprocess(list_of_replays=list_of_replays)
-            files_rejected = len(result)
-
-            # save to disk
-
-            return result
-
-        sc2_replaypack_dataset = SC2ReplaypackDataset(
-            replaypack_name="2021_Dreamhack_SC2_Masters_Fall",
-            unpack_dir=os.path.abspath("./test/test_files/unpack"),
-            validator=validator,
-        )
-
+        # Replaypack was initialized:
         self.assertIsInstance(sc2_replaypack_dataset, SC2ReplaypackDataset)
-        self.assertGreaterEqual(files_rejected, 1)
+        # Supplementary files were loaded properly:
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_processed_info, Dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_dir_mapping, Dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_summary, Dict)
 
-    # def test_replaypack_integrity_validation(self):
-
-    #     # path_to_file = ""
-
-    #     # def save_to_disk_validator(list_of_replays):
-    #     #     nonlocal path_to_file
-    #     #     result = validate_integrity_singleprocess(list_of_replays=list_of_replays)
-    #     #     # TODO: save `result` to disk
-    #     #     return result
-
-    #     # def load_from_disk_validator(list_of_replays):
-    #     #     nonlocal path_to_file
-    #     #     # load set from disk and return
-    #     #     pass
-
-    #     sc2_replaypack_dataset_1 = SC2ReplaypackDataset(
-    #         replaypack_name="2021_Dreamhack_SC2_Masters_Fall",
-    #         unpack_dir=os.path.abspath("./test/test_files/unpack"),
-    #         validator=save_to_disk_validator,
-    #     )
+        # Files were properly indexed:
+        self.assertNotEqual(len(sc2_replaypack_dataset), 0)
+        # It is possible to retrieve a single file by index:
+        self.assertIsInstance(sc2_replaypack_dataset[0], SC2ReplayData)
