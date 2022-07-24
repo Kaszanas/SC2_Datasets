@@ -1,8 +1,9 @@
-from typing import Callable, Optional
+from typing import Callable, List, Optional, Tuple
 
 import pytorch_lightning as pl
 from torch.utils.data import random_split
 from torch.utils.data.dataloader import DataLoader
+from sc2egset_dataset.dataset.available_replaypacks import AVAILABLE_REPLAYPACKS
 
 from sc2egset_dataset.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
 
@@ -51,6 +52,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         num_workers: int = 0,
         unpack_n_workers: int = 16,
         validator: Callable | None = None,
+        replaypacks: List[Tuple[str, str]] = AVAILABLE_REPLAYPACKS,
     ):
         super().__init__()
 
@@ -67,6 +69,8 @@ class SC2EGSetDataModule(pl.LightningDataModule):
         self.unpack_n_workers = unpack_n_workers
         self.validator = validator
 
+        self.replaypacks = replaypacks
+
     def prepare_data(self) -> None:
         # download, split, etc...
         # only called on 1 GPU/TPU in distributed
@@ -76,6 +80,7 @@ class SC2EGSetDataModule(pl.LightningDataModule):
             unpack_dir=self.unpack_dir,
             transform=self.transform,
             unpack_n_workers=self.unpack_n_workers,
+            names_urls=self.replaypacks,
         )
 
     def setup(self, stage: Optional[str] = None) -> None:
@@ -96,17 +101,17 @@ class SC2EGSetDataModule(pl.LightningDataModule):
             [train_length, test_length, val_length],
         )
 
-    def train_dataloader(self):
+    def train_dataloader(self) -> DataLoader:
         return DataLoader(
             self.train_dataset, batch_size=self.batch_size, num_workers=self.num_workers
         )
 
-    def val_dataloader(self):
+    def val_dataloader(self) -> DataLoader:
         return DataLoader(
             self.val_dataset, batch_size=self.batch_size, num_workers=self.num_workers
         )
 
-    def test_dataloader(self):
+    def test_dataloader(self) -> DataLoader:
         return DataLoader(
             self.test_dataset, batch_size=self.batch_size, num_workers=self.num_workers
         )
