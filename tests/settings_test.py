@@ -2,6 +2,6 @@
 TEST_REPLAYPACKS = [
     (
         "2022_TestReplaypack",
-        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/working_on_docs/tests/test_files/2022_TestReplaypack.zip",
+        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/working_on_docs/tests/test_files/2022_TestReplaypack.zip",  # noqa
     )
 ]

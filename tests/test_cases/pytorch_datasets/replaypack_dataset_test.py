@@ -2,7 +2,6 @@ import os
 import shutil
 import unittest
 from pathlib import Path
-from typing import Dict
 
 from sc2egset_dataset.dataset.pytorch_datasets.sc2_replaypack_dataset import (
     SC2ReplaypackDataset,
