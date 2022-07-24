@@ -2,6 +2,8 @@
 import logging
 import os
 import zipfile
+import math
+
 from concurrent.futures import ProcessPoolExecutor
 from typing import List
 
@@ -106,7 +108,7 @@ def unpack_zipfile(
 
         file_list = zip_file.namelist()
 
-    chunksize = round(len(file_list) / n_workers)
+    chunksize = math.ceil(len(file_list) / n_workers)
 
     with ProcessPoolExecutor(n_workers) as exe:
         for index in tqdm(

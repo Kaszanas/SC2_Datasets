@@ -80,7 +80,7 @@ class SC2ReplaypackDataset(Dataset):
 
         # If the dataset is not unpacked, then look for it in the download folder.
         # If it is there then unpack it and resume:
-        if not self.replaypack_unpack_path.exists():
+        if not self.replaypack_unpack_path.exists() and not download:
             if not self.downloaded_zip_path.exists():
                 raise Exception(
                     "Dataset was not unpacked nor downloaded!\
@@ -90,7 +90,7 @@ class SC2ReplaypackDataset(Dataset):
                 unpack_zipfile(
                     destination_dir=self.unpack_dir,
                     subdir=self.replaypack_name,
-                    zip_path=self.replaypack_zip_path.as_posix(),
+                    zip_path=self.downloaded_zip_path.as_posix(),
                     n_workers=self.unpack_n_workers,
                 )
             )

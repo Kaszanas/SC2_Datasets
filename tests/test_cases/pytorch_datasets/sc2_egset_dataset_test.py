@@ -20,10 +20,11 @@ class SC2EGSetDatasetTest(unittest.TestCase):
 
         cls.test_output_path = get_test_output_dir()
         cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
+        cls.download_dir_path = os.path.join(cls.test_output_path, "download")
 
         # Initializing the unpacked where it should be:
         cls.unpacked = Path(cls.unpack_dir_path, cls.test_replaypack_name)
-        cls.download = Path(cls.test_output_path, "download", cls.test_replaypack_name)
+        cls.download = Path(cls.download_dir_path, cls.test_replaypack_name)
 
         # If it doesn't exist, unpack the test .zip archive:
         if not cls.unpacked.exists():
@@ -49,6 +50,7 @@ class SC2EGSetDatasetTest(unittest.TestCase):
 
         sc2egset_dataset = SC2EGSetDataset(
             unpack_dir=self.unpack_dir_path,
+            download_dir=self.download_dir_path,
             download=False,
             names_urls=[(self.test_replaypack_name, "")],
         )
@@ -67,13 +69,13 @@ class SC2EGSetDatasetTest(unittest.TestCase):
 
         # There is only one replay loaded, so two indexing methods should return
         # the same object:
-        self.assertEqual(sc2_replaydata_0, sc2_replaydata_1)
+        self.assertEqual(hash(sc2_replaydata_0), hash(sc2_replaydata_1))
 
     def test_downloading_replaypacks(self):
 
         sc2egset_dataset = SC2EGSetDataset(
             unpack_dir=self.unpack_dir_path,
-            download_dir=self.download.as_posix(),
+            download_dir=self.download_dir_path,
             download=True,
             names_urls=TEST_REPLAYPACKS,
         )

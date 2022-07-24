@@ -13,7 +13,7 @@ def suite():
     start_dir = os.path.join(workspace_dir, "tests/test_cases")
     suite = unittest.TestLoader().discover(
         start_dir=start_dir,
-        pattern="dataset_utils_test.py",  # *_test.py
+        pattern="sc2_egset_dataset_test.py",  # *_test.py
     )
     return suite
 

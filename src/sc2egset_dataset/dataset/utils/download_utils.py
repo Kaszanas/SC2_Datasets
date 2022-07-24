@@ -1,11 +1,11 @@
 import os
-from typing import Dict, Tuple
 
 import requests
 
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 
 
+# REVIEW: This was changed, needs review:
 def download_replaypack(
     destination_dir: str, replaypack_name: str, replaypack_url: str
 ) -> str:
@@ -55,7 +55,9 @@ def download_replaypack(
     """
 
     # Check if there is something in the destination directory:
-    existing_files = os.listdir(destination_dir)
+    existing_files = []
+    if os.path.exists(destination_dir):
+        existing_files = os.listdir(destination_dir)
 
     filename_with_ext = replaypack_name + ".zip"
     download_filepath = os.path.join(destination_dir, filename_with_ext)
