@@ -1,4 +1,3 @@
-import os
 import shutil
 import unittest
 from pathlib import Path
@@ -12,7 +11,7 @@ from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 
 from tests.settings_test import TEST_REPLAYPACKS
-from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
+from tests.test_utils.test_utils import get_setup_paths
 
 # TODO: Rewrite or update these tests to better support validators:
 
@@ -21,18 +20,15 @@ from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 class SC2ReplaypackDatasetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.test_replaypack_name = "2022_TestReplaypack"
-        cls.replaypack_zip_path = get_specific_asset(
-            filename=cls.test_replaypack_name + ".zip"
-        )
 
-        cls.test_output_path = get_test_output_dir()
-        cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
-        cls.download_dir_path = os.path.join(cls.test_output_path, "download")
-
-        # Initializing the unpacked where it should be:
-        cls.unpacked = Path(cls.unpack_dir_path, cls.test_replaypack_name)
-        cls.download = Path(cls.download_dir_path, cls.test_replaypack_name)
+        (
+            cls.test_replaypack_name,
+            cls.replaypack_zip_path,
+            cls.unpack_dir_path,
+            cls.download_dir_path,
+            cls.unpacked,
+            cls.download,
+        ) = get_setup_paths()
 
         # If it doesn't exist, unpack the test .zip archive:
         if not cls.unpacked.exists():

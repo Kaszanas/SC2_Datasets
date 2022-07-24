@@ -7,7 +7,7 @@ import pytest
 from sc2egset_dataset.dataset.lightning_datamodules.sc2_datamodule import SC2DataModule
 
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
-from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
+from tests.test_utils.test_utils import get_setup_paths
 
 from tests.settings_test import TEST_REPLAYPACKS
 
@@ -16,18 +16,14 @@ from tests.settings_test import TEST_REPLAYPACKS
 class SC2EGSetDataModuleTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.test_replaypack_name = "2022_TestReplaypack"
-        cls.replaypack_zip_path = get_specific_asset(
-            filename=cls.test_replaypack_name + ".zip"
-        )
-
-        cls.test_output_path = get_test_output_dir()
-        cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
-        cls.download_dir_path = os.path.join(cls.test_output_path, "download")
-
-        # Initializing the unpacked where it should be:
-        cls.unpacked = Path(cls.unpack_dir_path, cls.test_replaypack_name)
-        cls.download = Path(cls.download_dir_path, cls.test_replaypack_name)
+        (
+            cls.test_replaypack_name,
+            cls.replaypack_zip_path,
+            cls.unpack_dir_path,
+            cls.download_dir_path,
+            cls.unpacked,
+            cls.download,
+        ) = get_setup_paths()
 
         # If it doesn't exist, unpack the test .zip archive:
         if not cls.unpacked.exists():

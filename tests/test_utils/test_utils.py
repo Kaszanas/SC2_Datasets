@@ -1,5 +1,7 @@
 import logging
 import os
+from pathlib import Path
+from typing import Tuple
 
 
 def get_workspace_dir() -> str:
@@ -80,3 +82,33 @@ def get_specific_asset(filename: str) -> str:
         return os.path.join(asset_dir, filename)
     else:
         raise AssetError("This asset doesn't exist.")
+
+
+def get_setup_paths(test_replaypack_name: str = "2022_TestReplaypack") -> Tuple:
+    """
+    Helper function providing basic setup utilities for tests.
+
+    :param test_replaypack_name: Specifies a test replaypack name which will be\
+    used to find the .zip archive, defaults to "2022_TestReplaypack"
+    :type test_replaypack_name: str, optional
+    :return: Returns a tuple containing all of the required variables.
+    :rtype: Tuple
+    """
+    replaypack_zip_path = get_specific_asset(filename=test_replaypack_name + ".zip")
+
+    test_output_path = get_test_output_dir()
+    unpack_dir_path = os.path.join(test_output_path, "unpack")
+    download_dir_path = os.path.join(test_output_path, "download")
+
+    # Initializing the unpacked where it should be:
+    unpacked = Path(unpack_dir_path, test_replaypack_name)
+    download = Path(download_dir_path, test_replaypack_name)
+
+    return (
+        test_replaypack_name,
+        replaypack_zip_path,
+        unpack_dir_path,
+        download_dir_path,
+        unpacked,
+        download,
+    )
