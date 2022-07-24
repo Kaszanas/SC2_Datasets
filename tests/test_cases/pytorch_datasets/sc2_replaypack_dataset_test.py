@@ -10,7 +10,7 @@ from sc2egset_dataset.dataset.pytorch_datasets.sc2_replaypack_dataset import (
 from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 
-from tests.settings_test import TEST_REPLAYPACKS
+from tests.settings_test import TEST_REAL_REPLAYPACKS, TEST_SYNTHETIC_REPLAYPACKS
 from tests.test_utils.test_utils import get_setup_paths
 
 # TODO: Rewrite or update these tests to better support validators:
@@ -50,7 +50,8 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         if self.unpacked.exists():
             shutil.rmtree(path=self.unpacked.as_posix())
 
-    def test_unpack_replaypack(self):
+    @pytest.mark.minor
+    def test_unpack_replaypack_synthetic(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
             replaypack_name=self.test_replaypack_name,
@@ -70,14 +71,15 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         # It is possible to retrieve a single file by index:
         self.assertIsInstance(sc2_replaypack_dataset[0], SC2ReplayData)
 
-    def test_download_unpack_replaypack(self):
+    @pytest.mark.minor
+    def test_download_unpack_replaypack_synthetic(self):
 
         sc2_replaypack_dataset = SC2ReplaypackDataset(
-            replaypack_name=TEST_REPLAYPACKS[0][0],
+            replaypack_name=TEST_SYNTHETIC_REPLAYPACKS[0][0],
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=True,
-            url=TEST_REPLAYPACKS[0][1],
+            url=TEST_SYNTHETIC_REPLAYPACKS[0][1],
         )
 
         # Replaypack was initialized:
@@ -91,3 +93,32 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         self.assertNotEqual(len(sc2_replaypack_dataset), 0)
         # It is possible to retrieve a single file by index:
         self.assertIsInstance(sc2_replaypack_dataset[0], SC2ReplayData)
+
+    @pytest.mark.major
+    def test_download_unpack_replaypack_real(self):
+
+        for rp_name, rp_url in TEST_REAL_REPLAYPACKS:
+            with self.subTest(rp_name):
+                sc2_replaypack_dataset = SC2ReplaypackDataset(
+                    replaypack_name=rp_name,
+                    unpack_dir=self.unpack_dir_path,
+                    download_dir=self.download_dir_path,
+                    download=True,
+                    url=rp_url,
+                )
+
+                # Replaypack was initialized:
+                self.assertIsInstance(sc2_replaypack_dataset, SC2ReplaypackDataset)
+                # Supplementary files were loaded properly:
+                self.assertIsInstance(
+                    sc2_replaypack_dataset.replaypack_processed_failed, dict
+                )
+                self.assertIsInstance(
+                    sc2_replaypack_dataset.replaypack_dir_mapping, dict
+                )
+                self.assertIsInstance(sc2_replaypack_dataset.replaypack_summary, dict)
+
+                # Files were properly indexed:
+                self.assertNotEqual(len(sc2_replaypack_dataset), 0)
+                # It is possible to retrieve a single file by index:
+                self.assertIsInstance(sc2_replaypack_dataset[0], SC2ReplayData)

@@ -4,7 +4,10 @@ import unittest
 
 import pytest
 
-from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import SC2EGSetDataset
+from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import (
+    SC2Dataset,
+    SC2EGSetDataset,
+)
 from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 from tests.test_utils.test_utils import get_setup_paths
@@ -46,14 +49,15 @@ class SC2DatasetTest(unittest.TestCase):
 
     def test_parsing_test_files(self):
 
-        sc2egset_dataset = SC2EGSetDataset(
+        # REVIEW: Will this work correctly?
+        sc2egset_dataset = SC2Dataset(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=False,
             names_urls=[(self.test_replaypack_name, "")],
         )
 
-        self.assertIsInstance(sc2egset_dataset, SC2EGSetDataset)
+        self.assertIsInstance(sc2egset_dataset, SC2Dataset)
         # Files were properly indexed:
         self.assertNotEqual(len(sc2egset_dataset), 0)
 
@@ -71,7 +75,7 @@ class SC2DatasetTest(unittest.TestCase):
 
     def test_downloading_replaypacks(self):
 
-        sc2egset_dataset = SC2EGSetDataset(
+        sc2egset_dataset = SC2Dataset(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=True,
@@ -79,7 +83,7 @@ class SC2DatasetTest(unittest.TestCase):
         )
 
         # Dataset was initialized:
-        self.assertIsInstance(sc2egset_dataset, SC2EGSetDataset)
+        self.assertIsInstance(sc2egset_dataset, SC2Dataset)
         # Files were properly indexed:
         self.assertNotEqual(len(sc2egset_dataset), 0)
         # It is possible to retrieve a single file by index:

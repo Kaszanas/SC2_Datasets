@@ -8,11 +8,10 @@ from sc2egset_dataset.dataset.lightning_datamodules.sc2_datamodule import SC2Dat
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 from tests.test_utils.test_utils import get_setup_paths
 
-from tests.settings_test import TEST_REPLAYPACKS
+from tests.settings_test import TEST_SYNTHETIC_REPLAYPACKS, TEST_REAL_REPLAYPACKS
 
 
-@pytest.mark.minor
-class SC2EGSetDataModuleTest(unittest.TestCase):
+class SC2DataModuleTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         (
@@ -44,22 +43,35 @@ class SC2EGSetDataModuleTest(unittest.TestCase):
         if self.unpacked.exists():
             shutil.rmtree(path=self.unpacked.as_posix())
 
+    @pytest.mark.minor
     def test_unpack_datamodule(self):
         sc2_egset_datamodule = SC2DataModule(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=False,
-            replaypacks=TEST_REPLAYPACKS,
+            replaypacks=TEST_SYNTHETIC_REPLAYPACKS,
         )
 
         self.assertIsInstance(sc2_egset_datamodule, SC2DataModule)
 
-    def test_download_unpack_datamodule(self):
+    @pytest.mark.minor
+    def test_download_unpack_datamodule_synthetic(self):
         sc2_egset_datamodule = SC2DataModule(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=True,
-            replaypacks=TEST_REPLAYPACKS,
+            replaypacks=TEST_SYNTHETIC_REPLAYPACKS,
+        )
+
+        self.assertIsInstance(sc2_egset_datamodule, SC2DataModule)
+
+    @pytest.mark.major
+    def test_download_unpack_datamodule_real(self):
+        sc2_egset_datamodule = SC2DataModule(
+            unpack_dir=self.unpack_dir_path,
+            download_dir=self.download_dir_path,
+            download=True,
+            replaypacks=TEST_REAL_REPLAYPACKS,
         )
 
         self.assertIsInstance(sc2_egset_datamodule, SC2DataModule)

@@ -8,11 +8,13 @@ import pytest
 from sc2egset_dataset.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
 
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
-from tests.settings_test import TEST_REPLAYPACKS
+from tests.settings_test import (
+    TEST_REAL_REPLAYPACKS,
+    TEST_SYNTHETIC_REPLAYPACKS,
+)
 from tests.test_utils.test_utils import get_setup_paths
 
 
-@pytest.mark.minor
 class SC2EGSetDatasetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -45,21 +47,35 @@ class SC2EGSetDatasetTest(unittest.TestCase):
         if self.unpacked.exists():
             shutil.rmtree(path=self.unpacked.as_posix())
 
+    @pytest.mark.minor
     def test_unpack_dataset(self):
         sc2_egset_dataset = SC2EGSetDataset(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=False,
+            names_urls=[(self.test_replaypack_name, "")],
         )
 
         self.assertIsInstance(sc2_egset_dataset, SC2EGSetDataset)
 
+    @pytest.mark.minor
     def test_download_unpack_dataset(self):
         sc2_egset_dataset = SC2EGSetDataset(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=True,
-            names_urls=TEST_REPLAYPACKS,
+            names_urls=TEST_SYNTHETIC_REPLAYPACKS,
+        )
+
+        self.assertIsInstance(sc2_egset_dataset, SC2EGSetDataset)
+
+    @pytest.mark.major
+    def test_download_unpack_dataset(self):
+        sc2_egset_dataset = SC2EGSetDataset(
+            unpack_dir=self.unpack_dir_path,
+            download_dir=self.download_dir_path,
+            download=True,
+            names_urls=TEST_REAL_REPLAYPACKS,
         )
 
         self.assertIsInstance(sc2_egset_dataset, SC2EGSetDataset)
