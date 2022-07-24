@@ -5,6 +5,8 @@ import zipfile
 
 from pathlib import Path
 
+import pytest
+
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_chunk, unpack_zipfile
 
 from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
@@ -39,6 +41,7 @@ from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 """
 
 
+@pytest.mark.minor
 class ZipUtilsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

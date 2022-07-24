@@ -1,6 +1,8 @@
 import json
 import tempfile
 import unittest
+
+import pytest
 from sc2egset_dataset.dataset.validators.multiprocess_validator import (
     validate_integrity_mp,
     validate_integrity_persist_mp,
@@ -15,6 +17,7 @@ import tests.test_utils.test_utils as test_utils
 from pathlib import Path
 
 
+@pytest.mark.minor
 class IntegrityValidatorTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

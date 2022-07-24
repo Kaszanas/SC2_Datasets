@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 import shutil
 import unittest
+
+import pytest
 from sc2egset_dataset.dataset.lightning_datamodules.sc2_datamodule import SC2DataModule
 
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
@@ -10,7 +12,7 @@ from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 from tests.settings_test import TEST_REPLAYPACKS
 
 
-# REVIEW: Verify these tests
+@pytest.mark.minor
 class SC2EGSetDataModuleTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

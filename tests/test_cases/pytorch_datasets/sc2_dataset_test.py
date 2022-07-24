@@ -3,6 +3,8 @@ from pathlib import Path
 import shutil
 import unittest
 
+import pytest
+
 from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import SC2EGSetDataset
 from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
@@ -10,6 +12,7 @@ from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 from tests.settings_test import TEST_REPLAYPACKS
 
 
+@pytest.mark.minor
 class SC2DatasetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

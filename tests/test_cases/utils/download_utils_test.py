@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 import shutil
 import unittest
+
+import pytest
 from sc2egset_dataset.dataset.utils.download_utils import (
     download_and_unpack_replaypack,
     download_replaypack,
@@ -30,6 +32,7 @@ from tests.settings_test import TEST_REPLAYPACKS
 """
 
 
+@pytest.mark.minor
 class DownloadUtilsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

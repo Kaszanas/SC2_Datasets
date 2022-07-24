@@ -1,5 +1,7 @@
 import json
 import unittest
+
+import pytest
 from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_event import (
     MessageEvent,
 )
@@ -9,6 +11,7 @@ from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_e
 import tests.test_utils.test_utils as test_utils
 
 
+@pytest.mark.minor
 class MessageEventsParserTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

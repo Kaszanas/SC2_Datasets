@@ -21,6 +21,11 @@ myst-nb = "^0.16.0"
 sphinx-autoapi = "^1.8.4"
 furo = "^2022.6.21"
 
+[tool.pytest.ini_options]
+markers = [
+    "minor: marks tests as minor (deselect with '-m \"not minor\"')",
+    "major",
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

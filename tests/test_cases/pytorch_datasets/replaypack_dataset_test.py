@@ -3,6 +3,8 @@ import shutil
 import unittest
 from pathlib import Path
 
+import pytest
+
 from sc2egset_dataset.dataset.pytorch_datasets.sc2_replaypack_dataset import (
     SC2ReplaypackDataset,
 )
@@ -15,6 +17,7 @@ from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 # TODO: Rewrite or update these tests to better support validators:
 
 
+@pytest.mark.minor
 class SC2ReplaypackDatasetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
