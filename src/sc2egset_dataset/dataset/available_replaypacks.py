@@ -2,7 +2,7 @@
     Module docstring
 """
 
-AVAILABLE_REPLAYPACKS = [
+SC2EGSET_DATASET_REPLAYPACKS = [
     (
         "2016_IEM_10_Taipei",
         "https://zenodo.org/record/6629349/files/2016_IEM_10_Taipei.zip?download=1",

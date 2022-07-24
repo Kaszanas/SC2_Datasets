@@ -63,9 +63,9 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         # Replaypack was initialized:
         self.assertIsInstance(sc2_replaypack_dataset, SC2ReplaypackDataset)
         # Supplementary files were loaded properly:
-        self.assertIsInstance(sc2_replaypack_dataset.replaypack_processed_info, Dict)
-        self.assertIsInstance(sc2_replaypack_dataset.replaypack_dir_mapping, Dict)
-        self.assertIsInstance(sc2_replaypack_dataset.replaypack_summary, Dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_processed_failed, dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_dir_mapping, dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_summary, dict)
 
         # Files were properly indexed:
         self.assertNotEqual(len(sc2_replaypack_dataset), 0)
@@ -85,9 +85,9 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
         # Replaypack was initialized:
         self.assertIsInstance(sc2_replaypack_dataset, SC2ReplaypackDataset)
         # Supplementary files were loaded properly:
-        self.assertIsInstance(sc2_replaypack_dataset.replaypack_processed_info, Dict)
-        self.assertIsInstance(sc2_replaypack_dataset.replaypack_dir_mapping, Dict)
-        self.assertIsInstance(sc2_replaypack_dataset.replaypack_summary, Dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_processed_failed, dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_dir_mapping, dict)
+        self.assertIsInstance(sc2_replaypack_dataset.replaypack_summary, dict)
 
         # Files were properly indexed:
         self.assertNotEqual(len(sc2_replaypack_dataset), 0)

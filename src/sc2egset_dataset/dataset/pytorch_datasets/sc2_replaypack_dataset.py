@@ -154,5 +154,5 @@ class SC2ReplaypackDataset(Dataset):
         return self._replaypack_dir_mapping
 
     @property
-    def replaypack_processed_info(self) -> Dict[str, List[str]]:
-        return self._replaypack_processed_info
+    def replaypack_processed_failed(self) -> Dict[str, List[str]]:
+        return self._replaypack_processed_failed
