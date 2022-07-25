@@ -37,7 +37,7 @@ class SC2EGSetDataset(SC2Dataset):
         validator: Callable | None = None,
     ):
 
-        super.__init__(
+        super().__init__(
             unpack_dir=unpack_dir,
             download_dir=download_dir,
             names_urls=names_urls,

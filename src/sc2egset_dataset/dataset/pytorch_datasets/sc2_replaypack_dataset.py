@@ -110,6 +110,8 @@ class SC2ReplaypackDataset(Dataset):
 
         # Getting the paths to the files that consist of the dataset,
         # These will be used for validation at later step:
+
+        # TODO: This produces an ERROR!
         all_files = [Path(data_path, file).as_posix() for file in os.listdir(data_path)]
 
         # Validating files:

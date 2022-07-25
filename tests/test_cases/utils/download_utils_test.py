@@ -11,7 +11,7 @@ from sc2egset_dataset.dataset.utils.download_utils import (
 
 from tests.test_utils.test_utils import get_test_output_dir
 
-from tests.settings_test import TEST_REPLAYPACKS
+from tests.settings_test import TEST_SYNTHETIC_REPLAYPACKS
 
 """
     **Incorrect Usage Examples:**
@@ -58,8 +58,8 @@ class DownloadUtilsTest(unittest.TestCase):
 
         self.downloaded = download_replaypack(
             destination_dir=self.download_dir_path,
-            replaypack_name=TEST_REPLAYPACKS[0][0],
-            replaypack_url=TEST_REPLAYPACKS[0][1],
+            replaypack_name=TEST_SYNTHETIC_REPLAYPACKS[0][0],
+            replaypack_url=TEST_SYNTHETIC_REPLAYPACKS[0][1],
         )
 
     def test_download_and_unpack_replaypack(self):
@@ -67,6 +67,6 @@ class DownloadUtilsTest(unittest.TestCase):
         self.unpacked = download_and_unpack_replaypack(
             replaypack_download_dir=self.download_dir_path,
             replaypack_unpack_dir=self.unpack_dir_path,
-            replaypack_name=TEST_REPLAYPACKS[0][0],
-            url=TEST_REPLAYPACKS[0][1],
+            replaypack_name=TEST_SYNTHETIC_REPLAYPACKS[0][0],
+            url=TEST_SYNTHETIC_REPLAYPACKS[0][1],
         )

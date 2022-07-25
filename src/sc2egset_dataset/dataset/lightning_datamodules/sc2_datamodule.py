@@ -3,8 +3,7 @@ from typing import Callable, List, Optional, Tuple
 import pytorch_lightning as pl
 from torch.utils.data import random_split
 from torch.utils.data.dataloader import DataLoader
-
-from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import SC2EGSetDataset
+from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import SC2Dataset
 
 
 class SC2DataModule(pl.LightningDataModule):
@@ -72,13 +71,13 @@ class SC2DataModule(pl.LightningDataModule):
     def prepare_data(self) -> None:
         # download, split, etc...
         # only called on 1 GPU/TPU in distributed
-        self.dataset = SC2EGSetDataset(
+        self.dataset = SC2Dataset(
+            names_urls=self.replaypacks,
             download=self.download,
             download_dir=self.download_dir,
             unpack_dir=self.unpack_dir,
             transform=self.transform,
             unpack_n_workers=self.unpack_n_workers,
-            names_urls=self.replaypacks,
         )
 
     def setup(self, stage: Optional[str] = None) -> None:

@@ -16,7 +16,6 @@ from tests.test_utils.test_utils import get_setup_paths
 # TODO: Rewrite or update these tests to better support validators:
 
 
-@pytest.mark.minor
 class SC2ReplaypackDatasetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

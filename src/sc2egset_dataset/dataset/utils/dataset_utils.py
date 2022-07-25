@@ -53,7 +53,7 @@ def load_replaypack_information(
 
     replaypack_files = os.listdir(replaypack_path)
     # Initializing variables that should be returned:
-    replaypack_data_path = ""
+    replaypack_data_path = os.path.join(replaypack_path, replaypack_name + "_data")
     replaypack_main_log_obj_list = []
     replaypack_processed_failed = {}
     replaypack_summary = {}
@@ -63,9 +63,8 @@ def load_replaypack_information(
     # and loading replaypack information files:
     for file in replaypack_files:
         if file.endswith("_data.zip"):
-            data_path = os.path.join(replaypack_path, replaypack_name + "_data")
             # Unpack the .zip archive only if it is not unpacked already:
-            if not os.path.isdir(data_path):
+            if not os.path.isdir(replaypack_data_path):
                 replaypack_data_path = unpack_zipfile(
                     destination_dir=replaypack_path,
                     subdir=replaypack_name + "_data",

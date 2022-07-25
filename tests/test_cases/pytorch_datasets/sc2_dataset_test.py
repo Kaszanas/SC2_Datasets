@@ -6,12 +6,11 @@ import pytest
 
 from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import (
     SC2Dataset,
-    SC2EGSetDataset,
 )
 from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
 from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
 from tests.test_utils.test_utils import get_setup_paths
-from tests.settings_test import TEST_REPLAYPACKS
+from tests.settings_test import TEST_SYNTHETIC_REPLAYPACKS
 
 
 @pytest.mark.minor
@@ -79,7 +78,7 @@ class SC2DatasetTest(unittest.TestCase):
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=True,
-            names_urls=TEST_REPLAYPACKS,
+            names_urls=TEST_SYNTHETIC_REPLAYPACKS,
         )
 
         # Dataset was initialized:
