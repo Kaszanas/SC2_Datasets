@@ -79,4 +79,4 @@ class SC2EGSetDataModuleTest(unittest.TestCase):
             replaypacks=TEST_REAL_REPLAYPACKS,
         )
 
-        self.assertIsInstance(sc2_egset_datamodule, SC2DataModule)
+        self.assertIsInstance(sc2_egset_datamodule, SC2EGSetDataModule)
