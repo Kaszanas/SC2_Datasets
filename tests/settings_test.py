@@ -9,10 +9,10 @@ TEST_SYNTHETIC_REPLAYPACKS = [
 TEST_REAL_REPLAYPACKS = [
     (
         "2016_IEM_10_Taipei",
-        "https://zenodo.org/record/6629349/files/2016_IEM_10_Taipei.zip?download=1",
+        "https://zenodo.org/record/6903505/files/2016_IEM_10_Taipei.zip?download=1",
     ),
     (
         "2016_IEM_11_Shanghai",
-        "https://zenodo.org/record/6629349/files/2016_IEM_11_Shanghai.zip?download=1",
+        "https://zenodo.org/record/6903505/files/2016_IEM_11_Shanghai.zip?download=1",
     ),
 ]
