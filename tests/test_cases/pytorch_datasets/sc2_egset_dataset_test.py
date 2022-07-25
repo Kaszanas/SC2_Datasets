@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 import shutil
 import unittest
@@ -48,7 +47,7 @@ class SC2EGSetDatasetTest(unittest.TestCase):
             shutil.rmtree(path=self.unpacked.as_posix())
 
     @pytest.mark.minor
-    def test_unpack_dataset(self):
+    def test_unpack_dataset_synthetic(self):
         sc2_egset_dataset = SC2EGSetDataset(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
@@ -59,7 +58,7 @@ class SC2EGSetDatasetTest(unittest.TestCase):
         self.assertIsInstance(sc2_egset_dataset, SC2EGSetDataset)
 
     @pytest.mark.minor
-    def test_download_unpack_dataset(self):
+    def test_download_unpack_dataset_synthetic(self):
         sc2_egset_dataset = SC2EGSetDataset(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
@@ -70,7 +69,7 @@ class SC2EGSetDatasetTest(unittest.TestCase):
         self.assertIsInstance(sc2_egset_dataset, SC2EGSetDataset)
 
     @pytest.mark.major
-    def test_download_unpack_dataset(self):
+    def test_download_unpack_dataset_real(self):
         sc2_egset_dataset = SC2EGSetDataset(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
