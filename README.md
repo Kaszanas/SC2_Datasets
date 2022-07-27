@@ -9,16 +9,48 @@ Contents of this library provide PyTorch and PyTorch Lightning API for pre-proce
 2. Perform the following command:
 
 ```bash
-$ pip install sc2egset_dataset
+$ pip install sc2_datasets
 ```
 
 ## Usage
 
-- TODO
+Basic example usage can be seen below. For advanced interactions with the datasets
+please refer to the documentation.
+
+Use with PyTorch:
+```python
+from sc2_datasets.torch.sc2egset_dataset import SC2EGSetDataset
+from sc2_datasets.available_replaypacks import EXAMPLE_SYNTHETIC_REPLAYPACKS
+
+# Initialize the dataset:
+sc2_egset_dataset = SC2EGSetDataset(
+    unpack_dir="./unpack_dir_path",
+    download_dir="./download_dir_path",
+    download=True,
+    names_urls=EXAMPLE_SYNTHETIC_REPLAYPACKS,
+)
+
+# Iterate over instances:
+for i in range(len(sc2_egset_dataset)):
+    sc2_egset_dataset[i]
+```
+
+Use with PyTorch Lightning:
+```python
+from sc2_datasets.lightning.sc2egset_datamodule import SC2EGSetDataModule
+from sc2_datasets.available_replaypacks import EXAMPLE_SYNTHETIC_REPLAYPACKS
+
+sc2_egset_datamodule = SC2EGSetDataModule(
+            unpack_dir=self.unpack_dir_path,
+            download_dir=self.download_dir_path,
+            download=False,
+            replaypacks=EXAMPLE_SYNTHETIC_REPLAYPACKS,
+        )
+```
 
 ## Contributing
 
-Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
+Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Contributor License Agreement (CLA) and a Code of Conduct. By contributing to this project, you agree to abide by its terms.
 
 ## License
 

@@ -2,6 +2,24 @@
     Module docstring
 """
 
+EXAMPLE_SYNTHETIC_REPLAYPACKS = [
+    (
+        "2022_TestReplaypack",
+        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/working_on_docs/tests/test_files/2022_TestReplaypack.zip",  # noqa
+    )
+]
+
+EXAMPLE_REAL_REPLAYPACKS = [
+    (
+        "2016_IEM_10_Taipei",
+        "https://zenodo.org/record/6903505/files/2016_IEM_10_Taipei.zip?download=1",
+    ),
+    (
+        "2016_IEM_11_Shanghai",
+        "https://zenodo.org/record/6903505/files/2016_IEM_11_Shanghai.zip?download=1",
+    ),
+]
+
 SC2EGSET_DATASET_REPLAYPACKS = [
     (
         "2016_IEM_10_Taipei",

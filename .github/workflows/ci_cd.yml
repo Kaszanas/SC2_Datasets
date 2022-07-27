@@ -48,9 +48,6 @@ jobs:
   #   # Only run this job if the "ci" job passes
   #   needs: ci
 
-  #   # Only run if the push or pull request was uploaded to main branch.
-  #   if: github.ref == 'refs/heads/main'
-
   #   # Only run this job if new work is pushed to "main"
   #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -59,10 +56,10 @@ jobs:
 
   #   # Define job steps
   #   steps:
-  #   - name: Set up Python 3.9
+  #   - name: Set up Python 3.10.2
   #     uses: actions/setup-python@v2
   #     with:
-  #       python-version: 3.9
+  #       python-version: 3.10.2
 
   #   - name: Check-out repository
   #     uses: actions/checkout@v2
