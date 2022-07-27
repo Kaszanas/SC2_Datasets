@@ -1,8 +1,8 @@
 from pathlib import Path
 from typing import List, Set, Tuple
 
-from sc2egset_dataset.dataset.validators.validate_chunk import validate_chunk
-from sc2egset_dataset.dataset.validators.validator_utils import (
+from sc2_datasets.validators.validate_chunk import validate_chunk
+from sc2_datasets.validators.validator_utils import (
     read_validation_file,
     save_validation_file,
 )

@@ -1,9 +1,6 @@
 from typing import Dict
 
-
-from sc2egset_dataset.dataset.replay_data.replay_parser.message_events.message_event import (
-    MessageEvent,
-)
+from sc2_datasets.replay_parser.message_events.message_event import MessageEvent
 
 
 class Chat(MessageEvent):
