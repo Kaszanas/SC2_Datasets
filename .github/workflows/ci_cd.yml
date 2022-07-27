@@ -48,6 +48,9 @@ jobs:
   #   # Only run this job if the "ci" job passes
   #   needs: ci
 
+  #   # Only run if the push or pull request was uploaded to main branch.
+  #   if: github.ref == 'refs/heads/main'
+
   #   # Only run this job if new work is pushed to "main"
   #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -93,7 +96,7 @@ jobs:
   #         pip install \
   #         --index-url https://test.pypi.org/simple/ \
   #         --extra-index-url https://pypi.org/simple \
-  #         test_pkg
+  #         sc2_datasets
 
   #   - name: Publish to PyPI
   #     uses: pypa/gh-action-pypi-publish@release/v1
