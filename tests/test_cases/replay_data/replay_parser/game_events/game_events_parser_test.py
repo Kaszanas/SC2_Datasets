@@ -2,12 +2,9 @@ import json
 import unittest
 
 import pytest
-from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event import (
-    GameEvent,
-)
-from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_events_parser import (
-    GameEventsParser,
-)
+
+from sc2_datasets.replay_parser.game_events.game_events_parser import GameEventsParser
+from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 import tests.test_utils.test_utils as test_utils
 

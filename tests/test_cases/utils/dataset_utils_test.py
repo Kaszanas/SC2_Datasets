@@ -4,8 +4,9 @@ import shutil
 import unittest
 
 import pytest
-from sc2egset_dataset.dataset.utils.dataset_utils import load_replaypack_information
-from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+
+from sc2_datasets.utils.dataset_utils import load_replaypack_information
+from sc2_datasets.utils.zip_utils import unpack_zipfile
 
 from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 

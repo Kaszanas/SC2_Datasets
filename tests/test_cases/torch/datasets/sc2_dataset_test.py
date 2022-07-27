@@ -4,11 +4,10 @@ import unittest
 
 import pytest
 
-from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import (
-    SC2Dataset,
-)
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.utils.zip_utils import unpack_zipfile
+
 from tests.test_utils.test_utils import get_setup_paths
 from tests.settings_test import TEST_SYNTHETIC_REPLAYPACKS
 

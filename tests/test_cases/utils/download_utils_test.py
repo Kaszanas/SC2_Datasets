@@ -4,10 +4,12 @@ import shutil
 import unittest
 
 import pytest
-from sc2egset_dataset.dataset.utils.download_utils import (
+
+from sc2_datasets.utils.download_utils import (
     download_and_unpack_replaypack,
     download_replaypack,
 )
+
 
 from tests.test_utils.test_utils import get_test_output_dir
 

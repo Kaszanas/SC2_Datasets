@@ -3,8 +3,8 @@ import unittest
 import pandas as pd
 import pytest
 
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from sc2egset_dataset.dataset.transforms.pandas.player_stats_to_dict import (
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.transforms.pandas.player_stats_to_dict import (
     average_playerstats_dataframe,
     playerstats_average_to_dict,
     playerstats_to_dict,

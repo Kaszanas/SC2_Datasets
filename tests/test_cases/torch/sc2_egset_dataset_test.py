@@ -4,9 +4,9 @@ import unittest
 
 import pytest
 
-from sc2egset_dataset.dataset.pytorch_datasets.sc2_egset_dataset import SC2EGSetDataset
+from sc2_datasets.torch.sc2_egset_dataset import SC2EGSetDataset
 
-from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+from sc2_datasets.utils.zip_utils import unpack_zipfile
 from tests.settings_test import (
     TEST_REAL_REPLAYPACKS,
     TEST_SYNTHETIC_REPLAYPACKS,

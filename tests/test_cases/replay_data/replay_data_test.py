@@ -2,7 +2,7 @@ import unittest
 
 import pytest
 
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 import tests.test_utils.test_utils as test_utils
 
 """

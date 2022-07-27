@@ -3,11 +3,12 @@ import tempfile
 import unittest
 
 import pytest
-from sc2egset_dataset.dataset.validators.multiprocess_validator import (
+
+from sc2_datasets.validators.multiprocess_validator import (
     validate_integrity_mp,
     validate_integrity_persist_mp,
 )
-from sc2egset_dataset.dataset.validators.singleprocess_validator import (
+from sc2_datasets.validators.singleprocess_validator import (
     validate_integrity_persist_sp,
     validate_integrity_sp,
 )

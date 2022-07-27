@@ -4,11 +4,11 @@ import unittest
 
 import pytest
 
-from sc2egset_dataset.dataset.lightning_datamodules.sc2_replaypack_datamodule import (
+from sc2_datasets.lightning.datamodules.sc2_replaypack_datamodule import (
     SC2ReplaypackDataModule,
 )
 
-from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+from sc2_datasets.utils.zip_utils import unpack_zipfile
 from tests.test_utils.test_utils import get_setup_paths
 
 from tests.settings_test import (
