@@ -1,10 +1,11 @@
 # SC2_Datasets
 
 Library used to interface with datasets that were pre-processed with our pipeline
-as described in [SC2DatasetPreparator](https://github.com/Kaszanas/SC2DatasetPreparator)
+as described in:
+- [SC2DatasetPreparator](https://github.com/Kaszanas/SC2DatasetPreparator)
 
 Currently we have exposed PyTorch and PyTorch Lightning API. Our goal is to provide
-infrastructure used for StarCraft II analytics.
+infrastructure used for StarCraft&nbsp;II analytics.
 
 ## Supported Datasets
 
