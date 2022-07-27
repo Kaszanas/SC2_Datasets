@@ -3,7 +3,8 @@ from typing import Callable, List, Optional, Tuple
 import pytorch_lightning as pl
 from torch.utils.data import random_split
 from torch.utils.data.dataloader import DataLoader
-from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import SC2Dataset
+
+from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 
 
 class SC2DataModule(pl.LightningDataModule):

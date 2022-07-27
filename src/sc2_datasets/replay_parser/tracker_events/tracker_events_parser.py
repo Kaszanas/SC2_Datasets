@@ -1,38 +1,26 @@
 from typing import Dict
 
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.player_setup import (
-    PlayerSetup,
-)
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.player_stats.player_stats import (  # noqa
+
+from sc2_datasets.replay_parser.tracker_events.events.player_setup import PlayerSetup
+from sc2_datasets.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.unit_born import (
-    UnitBorn,
-)
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.unit_died import (
-    UnitDied,
-)
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.unit_done import (
-    UnitDone,
-)
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.unit_init import (
-    UnitInit,
-)
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.unit_owner_change import (  # noqa
+from sc2_datasets.replay_parser.tracker_events.events.unit_born import UnitBorn
+from sc2_datasets.replay_parser.tracker_events.events.unit_died import UnitDied
+from sc2_datasets.replay_parser.tracker_events.events.unit_done import UnitDone
+from sc2_datasets.replay_parser.tracker_events.events.unit_init import UnitInit
+from sc2_datasets.replay_parser.tracker_events.events.unit_owner_change import (
     UnitOwnerChange,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.unit_positions import (  # noqa
+from sc2_datasets.replay_parser.tracker_events.events.unit_positions import (
     UnitPositions,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.unit_type_change import (  # noqa
+from sc2_datasets.replay_parser.tracker_events.events.unit_type_change import (
     UnitTypeChange,
 )
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.events.upgrade import (
-    Upgrade,
-)
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
-    TrackerEvent,
-)
+from sc2_datasets.replay_parser.tracker_events.events.upgrade import Upgrade
+from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
+
 
 
 class TrackerEventsParser:

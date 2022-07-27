@@ -1,8 +1,6 @@
 from typing import Dict
 
-from sc2egset_dataset.dataset.replay_data.replay_parser.tracker_events.tracker_event import (
-    TrackerEvent,
-)
+from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
 class Stats(TrackerEvent):

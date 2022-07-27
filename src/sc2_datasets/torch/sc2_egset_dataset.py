@@ -1,7 +1,8 @@
 from typing import Callable, List, Tuple
-from sc2egset_dataset.dataset.available_replaypacks import SC2EGSET_DATASET_REPLAYPACKS
 
-from sc2egset_dataset.dataset.pytorch_datasets.sc2_dataset import SC2Dataset
+from sc2_datasets.available_replaypacks import SC2EGSET_DATASET_REPLAYPACKS
+
+from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 
 
 class SC2EGSetDataset(SC2Dataset):

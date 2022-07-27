@@ -4,9 +4,7 @@ import pytorch_lightning as pl
 from torch.utils.data import random_split
 from torch.utils.data.dataloader import DataLoader
 
-from sc2egset_dataset.dataset.pytorch_datasets.sc2_replaypack_dataset import (
-    SC2ReplaypackDataset,
-)
+from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
 
 
 class SC2ReplaypackDataModule(pl.LightningDataModule):

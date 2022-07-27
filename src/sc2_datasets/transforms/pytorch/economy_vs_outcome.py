@@ -2,8 +2,8 @@ from typing import Tuple
 
 import torch
 
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from sc2egset_dataset.dataset.transforms.utils import average_player_stats
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.transforms.utils import average_player_stats
 
 
 def economy_average_vs_outcome(

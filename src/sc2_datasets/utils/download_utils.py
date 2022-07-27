@@ -2,7 +2,7 @@ import os
 
 import requests
 
-from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+from sc2_datasets.utils.zip_utils import unpack_zipfile
 
 
 # REVIEW: This was changed, needs review:

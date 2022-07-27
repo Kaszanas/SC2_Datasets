@@ -4,10 +4,11 @@ from typing import Any, Callable, Dict, List
 
 from torch.utils.data import Dataset
 
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from sc2egset_dataset.dataset.utils.dataset_utils import load_replaypack_information
-from sc2egset_dataset.dataset.utils.download_utils import download_and_unpack_replaypack
-from sc2egset_dataset.dataset.utils.zip_utils import unpack_zipfile
+
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.utils.dataset_utils import load_replaypack_information
+from sc2_datasets.utils.download_utils import download_and_unpack_replaypack
+from sc2_datasets.utils.zip_utils import unpack_zipfile
 
 
 class SC2ReplaypackDataset(Dataset):

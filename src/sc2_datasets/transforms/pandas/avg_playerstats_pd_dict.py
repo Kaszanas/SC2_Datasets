@@ -2,15 +2,12 @@ from typing import Dict
 
 import pandas as pd
 
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from sc2egset_dataset.dataset.transforms.pandas.player_stats_to_dict import (
-    average_playerstats_to_dict,
-)
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 
-from sc2egset_dataset.dataset.transforms.utils import (
-    select_apm_1v1,
-    select_outcome,
+from sc2_datasets.transforms.pandas.player_stats_to_dict import (
+    playerstats_average_to_dict,
 )
+from sc2_datasets.transforms.utils import select_apm_1v1, select_outcome_1v1
 
 
 # REVIEW: Verify this:
@@ -51,13 +48,11 @@ def avg_playerstats_pd_dict_transform(
     """
 
     # Select average PlayerStats
-    player_stats_dict = average_playerstats_to_dict(
-        tracker_events=sc2_replay.trackerEvents
-    )
+    player_stats_dict = playerstats_average_to_dict(sc2_replay=sc2_replay)
     dataframe = pd.DataFrame(player_stats_dict)
 
     # Select outcome and add to dataframe column:
-    game_outcome = select_outcome(sc2_replay=sc2_replay)
+    game_outcome = select_outcome_1v1(sc2_replay=sc2_replay)
     for player_id, outcome in game_outcome.items():
         dataframe[f"outcome_{player_id}"] = outcome
 

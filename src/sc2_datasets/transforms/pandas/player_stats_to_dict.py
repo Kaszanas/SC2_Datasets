@@ -2,8 +2,9 @@ from typing import Any, List, Dict
 
 import pandas as pd
 
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
-from sc2egset_dataset.dataset.transforms.utils import filter_player_stats
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+
+from sc2_datasets.transforms.utils import filter_player_stats
 
 
 # TODO: Document this:

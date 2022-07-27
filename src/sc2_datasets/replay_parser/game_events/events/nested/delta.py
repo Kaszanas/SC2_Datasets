@@ -1,10 +1,7 @@
 from types import NoneType
 from typing import Dict, List
 
-
-from sc2egset_dataset.dataset.replay_data.replay_parser.game_events.game_event import (
-    GameEvent,
-)
+from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
 class AddSubgroups(GameEvent):

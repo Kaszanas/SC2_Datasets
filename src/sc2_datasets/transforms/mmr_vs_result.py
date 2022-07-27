@@ -1,7 +1,7 @@
 from typing import Tuple
 import torch
 
-from sc2egset_dataset.dataset.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 
 
 def mmr_vs_result(sc2_replay: SC2ReplayData) -> Tuple[torch.Tensor, torch.Tensor]:

@@ -1,8 +1,8 @@
 from typing import Callable, List, Tuple
-from sc2egset_dataset.dataset.available_replaypacks import (
-    SC2EGSET_DATASET_REPLAYPACKS,
-)
-from sc2egset_dataset.dataset.lightning_datamodules.sc2_datamodule import SC2DataModule
+
+from sc2_datasets.available_replaypacks import SC2EGSET_DATASET_REPLAYPACKS
+
+from sc2_datasets.lightning.datamodules.sc2_datamodule import SC2DataModule
 
 
 class SC2EGSetDataModule(SC2DataModule):

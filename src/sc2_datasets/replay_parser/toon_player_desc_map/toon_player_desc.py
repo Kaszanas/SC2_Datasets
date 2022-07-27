@@ -1,7 +1,8 @@
+import imp
 from typing import Any, Dict
 
 # pylama:ignore=E501
-from sc2egset_dataset.dataset.replay_data.replay_parser.toon_player_desc_map.toon_player_info import (
+from sc2_datasets.replay_parser.toon_player_desc_map.toon_player_info import (
     ToonPlayerInfo,
 )
 
