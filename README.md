@@ -1,4 +1,14 @@
-# SC2EGSet: StarCraft II Esport Game State Dataset
+# SC2_Datasets
+
+Library used to interface with datasets that were pre-processed with our pipeline
+as described in [SC2DatasetPreparator](https://github.com/Kaszanas/SC2DatasetPreparator)
+
+Currently we have exposed PyTorch and PyTorch Lightning API. Our goal is to provide
+infrastructure used for StarCraft II analytics.
+
+## Supported Datasets
+
+### SC2EGSet: StarCraft II Esport Game State Dataset
 
 This project contains official API implementation for the [SC2EGSet: StarCraft II Esport Game State Dataset](https://doi.org/10.5281/zenodo.5503997), which is built based on [SC2ReSet: StarCraft II Esport Replaypack Set](https://doi.org/10.5281/zenodo.5575796).
 Contents of this library provide PyTorch and PyTorch Lightning API for pre-processed StarCraft II dataset.
