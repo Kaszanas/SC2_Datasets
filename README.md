@@ -75,7 +75,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 If you wish to cite the official API for the SC2EGSet: StarCraft II Esport Game State Dataset.
 
-```
+```bibtex
 @software{bialecki_andrzej_2022_6629006,
   author       = {Białecki, Andrzej and
                   Białecki, Piotr and
@@ -96,7 +96,7 @@ If you wish to cite the official API for the SC2EGSet: StarCraft II Esport Game 
 
 To cite the article that introduces [SC2ReSet](https://doi.org/10.5281/zenodo.5575796) and [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) use this:
 
-```
+```bibtex
 @misc{https://doi.org/10.48550/arxiv.2207.03428,
   doi       = {10.48550/ARXIV.2207.03428},
   url       = {https://arxiv.org/abs/2207.03428},
@@ -114,7 +114,7 @@ To cite the article that introduces [SC2ReSet](https://doi.org/10.5281/zenodo.55
 
 To cite the replay collection that was used to generate the dataset use this:
 
-```
+```bibtex
 @dataset{bialecki_andrzej_2022_5575797,
   author       = {Białecki, Andrzej},
   title        = {SC2ReSet: StarCraft II Esport Replaypack Set},
@@ -131,7 +131,7 @@ To cite the replay collection that was used to generate the dataset use this:
 
 To cite the data itself use this:
 
-```
+```bibtex
 @dataset{bialecki_andrzej_2022_6629349,
   author       = {Białecki, Andrzej and
                   Jakubowska, Natalia and
