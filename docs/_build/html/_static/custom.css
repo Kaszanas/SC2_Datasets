@@ -3,7 +3,6 @@ body {
     width: 100%;
     height: 100%;
     margin: auto;
-
 }
 
 .main {
@@ -17,13 +16,13 @@ body {
 
 /* left-side sidebar */
 .sidebar-drawer {
-    width: 20%;
+    /* width: 30%; */
     display: block;
 }
 
 .sidebar-sticky {
     width: 100%;
-    /* width: fit-content; */
+    width: fit-content;
 }
 
 .sidebar-container {
@@ -32,18 +31,17 @@ body {
 }
 
 /* right-side sidebar: */
-.toc-drawer {
-    /* align-items: flex-end; */
+/* .toc-drawer {
+    align-items: flex-end;
     font-size: large;
     width: 30%;
-}
+} */
 
 /* center of the site */
-.content {
-    width: fit-content;
+/* .content {
+    width: 60%;
     overflow-wrap: anywhere;
-
-}
+} */
 
 /* footer, author, copyright and @  */
 .left-details {
