@@ -4,6 +4,7 @@
 
 ## v1.0.0 (TBD)
 
+- Changed repository name to ```sc2_datasets```
 - Inroduced poetry to the project.
 - Added GitHub Actions for continuous integration (CI):
     - Linter execution

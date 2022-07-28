@@ -40,10 +40,10 @@ If you are proposing a feature:
 
 ## Get Started!
 
-Ready to contribute? Here's how to set up `sc2egset_dataset` for local development.
+Ready to contribute? Here's how to set up `sc2_datasets` for local development.
 
-1. Download a copy of `sc2egset_dataset` locally.
-2. Install `sc2egset_dataset` using `poetry`:
+1. Download a copy of `sc2_datasets` locally.
+2. Install `sc2_datasets` using `poetry`:
 
     ```console
     $ poetry install
@@ -69,5 +69,6 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Code of Conduct
 
-Please note that the `sc2egset_dataset` project is released with a
+Please note that the `sc2_datasets` project is released
+with a Contributor License Agreement (CLA)
 Code of Conduct. By contributing to this project you agree to abide by its terms.
