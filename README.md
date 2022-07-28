@@ -30,20 +30,21 @@ please refer to the documentation.
 
 Use [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) with PyTorch:
 ```python
-from sc2_datasets.torch.sc2egset_dataset import SC2EGSetDataset
+from sc2_datasets.torch.sc2_egset_dataset import SC2EGSetDataset
 from sc2_datasets.available_replaypacks import EXAMPLE_SYNTHETIC_REPLAYPACKS
 
-# Initialize the dataset:
-sc2_egset_dataset = SC2EGSetDataset(
-    unpack_dir="./unpack_dir_path",
-    download_dir="./download_dir_path",
-    download=True,
-    names_urls=EXAMPLE_SYNTHETIC_REPLAYPACKS,
-)
+if _name_ == "_main_":
+    # Initialize the dataset:
+    sc2_egset_dataset = SC2EGSetDataset(
+        unpack_dir="./unpack_dir_path",           # Specify existing directory path, where the data will be unpacked.
+        download_dir="./download_dir_path",       # Specify existing directory path, where the data will be downloaded.
+        download=True,
+        names_urls=EXAMPLE_SYNTHETIC_REPLAYPACKS, # Use a synthetic replaypack containing 1 replay.
+    )
 
-# Iterate over instances:
-for i in range(len(sc2_egset_dataset)):
-    sc2_egset_dataset[i]
+    # Iterate over instances:
+    for i in range(len(sc2_egset_dataset)):
+        sc2_egset_dataset[i]
 ```
 
 Use [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) with PyTorch Lightning:
@@ -51,12 +52,13 @@ Use [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) with PyTorch Lightning:
 from sc2_datasets.lightning.sc2egset_datamodule import SC2EGSetDataModule
 from sc2_datasets.available_replaypacks import EXAMPLE_SYNTHETIC_REPLAYPACKS
 
-sc2_egset_datamodule = SC2EGSetDataModule(
-            unpack_dir=self.unpack_dir_path,
-            download_dir=self.download_dir_path,
-            download=False,
-            replaypacks=EXAMPLE_SYNTHETIC_REPLAYPACKS,
-        )
+if _name_ == "_main_":
+    sc2_egset_datamodule = SC2EGSetDataModule(
+                unpack_dir="./unpack_dir_path",            # Specify existing directory path, where the data will be unpacked.
+                download_dir="./download_dir_path",        # Specify existing directory path, where the data will be downloaded.
+                download=False,
+                replaypacks=EXAMPLE_SYNTHETIC_REPLAYPACKS, # Use a synthetic replaypack containing 1 replay.
+            )
 ```
 
 ## Contributing
