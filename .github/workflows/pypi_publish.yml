@@ -38,12 +38,11 @@ jobs:
       env:
         test_pypi_token: ${{ secrets.TEST_PYPI_API_TOKEN }}
       run: poetry config repositories.testpypi https://test.pypi.org/legacy/
-           poetry config pypi-token.pypi $test_pypi_token
+      run: poetry config pypi-token.pypi $test_pypi_token
 
     - name: Build and publish to TestPyPI
-      run: |
-          poetry build \
-          poetry publish -r testpypi
+      run: poetry build \
+      run: poetry publish -r testpypi
 
     - name: Test install from TestPyPI
       run: pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple sc2_datasets
