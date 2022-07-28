@@ -4,7 +4,7 @@ on: [pull_request]
 
 # To successfully find the files that are required for testing:
 env:
-  TEST_WORKSPACE: $GITHUB_WORKSPACE
+  TEST_WORKSPACE: ${{ github.workspace }}
 
 jobs:
   ci:
