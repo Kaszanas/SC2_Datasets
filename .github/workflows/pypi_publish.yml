@@ -42,7 +42,7 @@ jobs:
         poetry config pypi-token.pypi $test_pypi_token
 
     - name: Build with poetry
-      run: poetry build -r
+      run: poetry build
 
     - name: Publish with poetry to TestPyPI
       run: poetry publish -r testpypi
