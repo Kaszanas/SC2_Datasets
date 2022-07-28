@@ -1,0 +1,11 @@
+# Configuring coverage: https://coverage.readthedocs.io/en/latest/config.html
+[report]
+
+# Skipping files such as __init__:
+skip_empty = True
+
+# Skipping fully covered files:
+# skip_covered = True
+
+# Not checking the packages
+omit = */.pyenv/*
