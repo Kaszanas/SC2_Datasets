@@ -1,6 +1,6 @@
-# SC2_Datasets
+# StarCraft II Datasets
 
-Library used to interface with datasets that were pre-processed with our pipeline
+Library can be used to interface with datasets that were pre-processed with our pipeline
 as described in:
 - [SC2DatasetPreparator](https://github.com/Kaszanas/SC2DatasetPreparator)
 
