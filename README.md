@@ -28,7 +28,7 @@ $ pip install sc2_datasets
 Basic example usage can be seen below. For advanced interactions with the datasets
 please refer to the documentation.
 
-Use with PyTorch:
+Use [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) with PyTorch:
 ```python
 from sc2_datasets.torch.sc2egset_dataset import SC2EGSetDataset
 from sc2_datasets.available_replaypacks import EXAMPLE_SYNTHETIC_REPLAYPACKS
@@ -46,7 +46,7 @@ for i in range(len(sc2_egset_dataset)):
     sc2_egset_dataset[i]
 ```
 
-Use with PyTorch Lightning:
+Use [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) with PyTorch Lightning:
 ```python
 from sc2_datasets.lightning.sc2egset_datamodule import SC2EGSetDataModule
 from sc2_datasets.available_replaypacks import EXAMPLE_SYNTHETIC_REPLAYPACKS
