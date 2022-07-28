@@ -1,0 +1,66 @@
+name: Publish to PyPI
+
+on:
+  release:
+    types: [ published ]
+    branches: [ main ]
+  workflow_dispatch:
+
+
+jobs:
+  cd:
+    # Only run this job if the "ci" job passes
+    needs: ci
+
+    # Only run this job if new work is pushed to "main"
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    # Set up operating system
+    runs-on: ubuntu-latest
+
+    # Define job steps
+    steps:
+    - name: Set up Python 3.10.2
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.2
+
+    - name: Check-out repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Install poetry
+      uses: snok/install-poetry@v1
+
+    - name: Install package
+      run: poetry install
+
+    # Configuring and attempting to install from TestPyPI
+    - name: Configure poetry for TestPyPI
+      env:
+        test_pypi_token: ${{ secrets.TEST_PYPI_API_TOKEN }}
+      run: |
+          poetry config repositories.testpypi https://test.pypi.org/legacy/ \
+          poetry config pypi-token.pypi $test_pypi_token
+
+    - name: Build and publish to TestPyPI
+      run: |
+          poetry build \
+          poetry publish -r testpypi
+
+    - name: Test install from TestPyPI
+      run: |
+          pip install \
+          --index-url https://test.pypi.org/simple/ \
+          --extra-index-url https://pypi.org/simple \
+          sc2_datasets
+
+    # Upload to PyPI only if everything else is correct:
+    - name: Configure poetry
+      env:
+        pypi_token: ${{ secrets.PYPI_API_TOKEN }}
+      run: poetry config pypi-token.pypi $pypi_token
+
+    - name: Build and publish
+      run: poetry publish --build
