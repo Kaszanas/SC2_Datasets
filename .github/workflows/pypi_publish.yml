@@ -41,19 +41,20 @@ jobs:
         poetry config repositories.testpypi https://test.pypi.org/legacy/
         poetry config pypi-token.pypi $test_pypi_token
 
-    - name: Build and publish to TestPyPI
-      run: |
-        poetry build
-        poetry publish -r testpypi
+    - name: Build with poetry 
+      run: poetry publish --build -r testpypi
+
+    # - name: Publish with poetry to TestPyPI
+    #   run: poetry publish -r testpypi
 
     - name: Test install from TestPyPI
       run: pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple sc2_datasets
 
     # Upload to PyPI only if everything else is correct:
-    - name: Configure poetry
+    - name: Configure poetry with PyPI Token
       env:
         pypi_token: ${{ secrets.PYPI_API_TOKEN }}
       run: poetry config pypi-token.pypi $pypi_token
 
-    - name: Build and publish
+    - name: Build and publish to PyPI
       run: poetry publish --build
