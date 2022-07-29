@@ -11,6 +11,8 @@ as described in:
 Currently we have exposed PyTorch and PyTorch Lightning API. Our goal is to provide
 infrastructure used for StarCraft&nbsp;II analytics.
 
+Please refer to the [**official documentation**](https://sc2-datasets.readthedocs.io/), or contact contributors directly for all of the details.
+
 ## Supported Datasets
 
 ### SC2EGSet: StarCraft II Esport Game State Dataset
