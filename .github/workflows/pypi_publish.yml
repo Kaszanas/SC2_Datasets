@@ -35,31 +35,31 @@ jobs:
       run: poetry run make html --directory docs/
 
     # Building the package:
-    - name: Build documentation
+    - name: Build dist with poetry
       run: poetry build
 
     # Publishing to TestPyPI:
-    - name: Publish to TestPyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        user: __token__
-        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        repository_url: https://test.pypi.org/legacy/
+    # - name: Publish to TestPyPI
+    #   uses: pypa/gh-action-pypi-publish@release/v1
+    #   with:
+    #     user: __token__
+    #     password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+    #     repository_url: https://test.pypi.org/legacy/
 
-    # Configuring and attempting to install from TestPyPI
-    - name: Test install from TestPyPI underscore
-      run: |
-          pip install \
-          --index-url https://test.pypi.org/simple/ \
-          --extra-index-url https://pypi.org/simple \
-          sc2_datasets
+    # # Configuring and attempting to install from TestPyPI
+    # - name: Test install from TestPyPI underscore
+    #   run: |
+    #       pip install \
+    #       --index-url https://test.pypi.org/simple/ \
+    #       --extra-index-url https://pypi.org/simple \
+    #       sc2_datasets
 
-    - name: Test install from TestPyPI dash
-      run: |
-          pip install \
-          --index-url https://test.pypi.org/simple/ \
-          --extra-index-url https://pypi.org/simple \
-          sc2-datasets
+    # - name: Test install from TestPyPI dash
+    #   run: |
+    #       pip install \
+    #       --index-url https://test.pypi.org/simple/ \
+    #       --extra-index-url https://pypi.org/simple \
+    #       sc2-datasets
 
     # Upload to PyPI only if everything else is correct:
     - name: Publish to PyPI
