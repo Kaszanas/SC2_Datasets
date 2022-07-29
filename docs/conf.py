@@ -40,7 +40,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary"
+    "sphinx.ext.autosummary",
 ]
 autoapi_dirs = ["../src"]
 
@@ -56,8 +56,14 @@ exclude_patterns = ["Thumbs.db", ".DS_Store"]
 #
 html_theme = "furo"
 
-html_static_path = []
-html_css_files = ["custom.css"]
+# These folders are copied to the documentation's HTML output
+html_static_path = ["_static"]
+
+# These paths are either relative to html_static_path
+# or fully qualified paths (eg. https://...)
+html_css_files = [
+    "css/custom.css",
+]
 
 html_title = project + " " + release + " Documentation"
 
