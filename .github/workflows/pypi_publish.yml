@@ -27,13 +27,18 @@ jobs:
     - name: Install poetry
       uses: snok/install-poetry@v1
 
-    - name: Install package
+    # Installing dependencies via poetry:
+    - name: Install packages
       run: poetry install
 
     - name: Build documentation
       run: poetry run make html --directory docs/
 
-    # Configuring and attempting to install from TestPyPI
+    # Building the package:
+    - name: Build documentation
+      run: poetry build
+
+    # Publishing to TestPyPI:
     - name: Publish to TestPyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
@@ -41,6 +46,7 @@ jobs:
         password: ${{ secrets.TEST_PYPI_API_TOKEN }}
         repository_url: https://test.pypi.org/legacy/
 
+    # Configuring and attempting to install from TestPyPI
     - name: Test install from TestPyPI underscore
       run: |
           pip install \
