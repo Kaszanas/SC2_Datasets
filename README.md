@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6930224.svg)](https://doi.org/10.5281/zenodo.6930224)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6629005.svg)](https://doi.org/10.5281/zenodo.6629005)
 ![PyPI](https://img.shields.io/pypi/v/sc2-datasets?style=flat-square)
 ![Python](https://img.shields.io/badge/python-3.10%5E-blue)
 
