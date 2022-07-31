@@ -82,17 +82,16 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 If you wish to cite the official API for the SC2EGSet: StarCraft II Esport Game State Dataset.
 
 ```bibtex
-@software{bialecki_andrzej_2022_6629006,
+@software{bialecki_andrzej_2022_6930224,
   author       = {Białecki, Andrzej and
                   Białecki, Piotr and
                   Szczap, Andrzej and
                   Krupiński, Leszek},
-  title        = {{Kaszanas/SC2EGSet\_Dataset: 0.9.0 SC2EGSet\_Dataset 
-                   Release}},
-  month        = jun,
+  title        = {Kaszanas/SC2\_Datasets: 1.0.0 SC2\_Datasets Release},
+  month        = jul,
   year         = 2022,
   publisher    = {Zenodo},
-  version      = {0.9.0},
+  version      = {1.0.0},
   doi          = {10.5281/zenodo.6629005},
   url          = {https://doi.org/10.5281/zenodo.6629005}
 }
