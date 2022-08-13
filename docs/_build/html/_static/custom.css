@@ -3,6 +3,7 @@ body {
     width: 100%;
     height: 100%;
     margin: auto;
+    text-align: left;
 }
 
 .main {
@@ -38,10 +39,12 @@ body {
 } */
 
 /* center of the site */
-/* .content {
-    width: 60%;
+.content {
+    /* width: 60%; */
     overflow-wrap: anywhere;
-} */
+    padding-right: 2em;
+    /* width: fit-content; */
+}
 
 /* footer, author, copyright and @  */
 .left-details {
@@ -51,4 +54,12 @@ body {
 /*  footer, author, copyright  */
 .copyright {
     font-weight: bold;
+}
+
+/*  article, table properties  */
+article .align-center,
+article .align-default {
+    margin-left: unset;
+    margin-right: unset;
+    text-align: left;
 }

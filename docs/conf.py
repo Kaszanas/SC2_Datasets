@@ -6,7 +6,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "sc2egset_dataset"
+project = "sc2_datasets"
 copyright = "2022, Andrzej Białecki"
 author = "Andrzej Białecki"
 
@@ -62,7 +62,7 @@ html_static_path = ["_static"]
 # These paths are either relative to html_static_path
 # or fully qualified paths (eg. https://...)
 html_css_files = [
-    "css/custom.css",
+    "custom.css",
 ]
 
 html_title = project + " " + release + " Documentation"
