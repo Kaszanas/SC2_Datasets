@@ -9,5 +9,7 @@ example.ipynb
 changelog.md
 contributing.md
 conduct.md
+datasets.md
+data_example.md
 autoapi/index
 ```
