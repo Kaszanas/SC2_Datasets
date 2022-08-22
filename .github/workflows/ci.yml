@@ -1,6 +1,6 @@
 name: continuous integration (ci)
 
-on: [pull_request]
+on: [pull_request, workflow_dispatch]
 
 # To successfully find the files that are required for testing:
 env:
