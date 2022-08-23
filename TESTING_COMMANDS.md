@@ -2,7 +2,7 @@
 
 To run pytest with HTML coverage report executing minor tests:
 ```
-poetry run pytest minor --ignore-glob='test_*.py' .\tests\test_cases\ --cov=sc2egset_dataset --cov-report term-missing --cov-report html --cov=xml
+poetry run pytest -m minor --ignore-glob='test_*.py' .\tests\test_cases\ --cov=sc2egset_dataset --cov-report term-missing --cov-report html --cov=xml
 ```
 
 To run pytest with HTML coverage report executing all tests:
