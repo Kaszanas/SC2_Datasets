@@ -32,7 +32,7 @@ class Stats(TrackerEvent):
     :param mineralsKilledEconomy: Specifies how much minerals player killed\
     in his oponents economy.
     :type mineralsKilledEconomy: int
-    :param mineralsKilledTechnology: Specifies how much minerals player killed
+    :param mineralsKilledTechnology: Specifies how much minerals player killed\
     in his oponents technology.
     :type mineralsKilledTechnology: int
     :param mineralsLostArmy: Specifies how much minerals player lost in his army.
