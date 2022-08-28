@@ -55,16 +55,18 @@ if __name__ == "__main__":
 
 Use [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) with PyTorch Lightning:
 ```python
-from sc2_datasets.lightning.sc2egset_datamodule import SC2EGSetDataModule
+from sc2_datasets.lightning.sc2_egset_datamodule import SC2EGSetDataModule
 from sc2_datasets.available_replaypacks import EXAMPLE_SYNTHETIC_REPLAYPACKS
 
 if __name__ == "__main__":
     sc2_egset_datamodule = SC2EGSetDataModule(
                 unpack_dir="./unpack_dir_path",            # Specify existing directory path, where the data will be unpacked.
                 download_dir="./download_dir_path",        # Specify existing directory path, where the data will be downloaded.
-                download=False,
+                download=True,
                 replaypacks=EXAMPLE_SYNTHETIC_REPLAYPACKS, # Use a synthetic replaypack containing 1 replay.
             )
+    sc2_egset_datamodule.prepare_data()
+    sc2_egset_datamodule.setup()
 ```
 
 ## Contributing
