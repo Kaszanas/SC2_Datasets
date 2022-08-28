@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sc2_datasets"
-version = "1.0.0"
+version = "1.0.1"
 description = "Library providing PyTorch and PyTorch Lightning API for pre-processed StarCraft II dataset SC2EGSetDataset and other datasets."
 authors = ["Andrzej Białecki", "Andrzej Szczap"]
 license = "GNU General Public License v3.0"
