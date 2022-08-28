@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.2 (2022/08/28)
+
+- Verified the examples.
+- Implemented a bugfix for EXAMPLE_SYNTHETIC_REPLAYPACKS, the replaypack was set to be downloaded from URL of a branch that no longer exists.
+
 ## v1.0.1 (2022/08/28)
 
 - Implemented a bugfix for EXAMPLE_SYNTHETIC_REPLAYPACKS, the replaypack was set to be downloaded from URL of a branch that no longer exists.
