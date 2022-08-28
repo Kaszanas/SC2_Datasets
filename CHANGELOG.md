@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.1 (2022/08/28)
+
+- Implemented a bugfix for EXAMPLE_SYNTHETIC_REPLAYPACKS, the replaypack was set to be downloaded from URL of a branch that no longer exists.
+
 ## v1.0.0 (2022/07/28)
 
 - Changed repository name to "SC2_Datasets"
