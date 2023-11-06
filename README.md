@@ -99,22 +99,32 @@ If you wish to cite the official API for the SC2EGSet: StarCraft II Esport Game 
 }
 ```
 
-### [Dataset Description Pre-print](https://arxiv.org/abs/2207.03428)
+### [Dataset Description Article](https://www.researchgate.net/publication/373767449_SC2EGSet_StarCraft_II_Esport_Replay_and_Game-state_Dataset)
 
 To cite the article that introduces [SC2ReSet](https://doi.org/10.5281/zenodo.5575796) and [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) use this:
 
 ```bibtex
-@misc{https://doi.org/10.48550/arxiv.2207.03428,
-  doi       = {10.48550/ARXIV.2207.03428},
-  url       = {https://arxiv.org/abs/2207.03428},
-  author    = {Białecki, Andrzej and Jakubowska, Natalia and Dobrowolski, Paweł and Białecki, Piotr and Krupiński, Leszek and Szczap, Andrzej and Białecki, Robert and Gajewski, Jan},
-  keywords  = {Machine Learning (cs.LG), Artificial Intelligence (cs.AI), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  title     = {SC2EGSet: StarCraft II Esport Replay and Game-state Dataset},
-  publisher = {arXiv},
-  year      = {2022},
-  copyright = {Creative Commons Attribution 4.0 International}
+@article{Białecki2023,
+  author   = {Bia{\l}ecki, Andrzej
+              and Jakubowska, Natalia
+              and Dobrowolski, Pawe{\l}
+              and Bia{\l}ecki, Piotr
+              and Krupi{\'{n}}ski, Leszek
+              and Szczap, Andrzej
+              and Bia{\l}ecki, Robert
+              and Gajewski, Jan},
+  title    = {SC2EGSet: StarCraft II Esport Replay and Game-state Dataset},
+  journal  = {Scientific Data},
+  year     = {2023},
+  month    = {Sep},
+  day      = {08},
+  volume   = {10},
+  number   = {1},
+  pages    = {600},
+  issn     = {2052-4463},
+  doi      = {10.1038/s41597-023-02510-7},
+  url      = {https://doi.org/10.1038/s41597-023-02510-7}
 }
-
 ```
 
 ### [SC2ReSet: StarCraft II Esport Replaypack Set](https://doi.org/10.5281/zenodo.5575796)
