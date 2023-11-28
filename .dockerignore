@@ -1,0 +1,11 @@
+.vscode/
+dist/
+
+htmlcov/
+
+.coverage
+coverage.xml
+
+.github/
+
+*_cache
