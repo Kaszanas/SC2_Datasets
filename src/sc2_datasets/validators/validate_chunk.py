@@ -11,14 +11,19 @@ def validate_chunk(
     Attempts to parse a chunk of replays and validates the JSON
     structure using SC2ReplayData parser.
 
-    :param list_of_replays: Specifies the list of replays that will be validated.
-    :type list_of_replays: List[str]
-    :return: Returns a tuple of SC2ReplayFile info and a boolean denoting\
-    if the file should be skipped in final processing.
-    :rtype: List[Tuple[str, bool]]
+    Parameters
+    ----------
+    list_of_replays : List[str]
+        Specifies the list of replays that will be validated.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    List[Tuple[str, bool]]
+        Returns a tuple of SC2ReplayFile info and a boolean denoting\
+        if the file should be skipped in final processing.
 
+    Examples
+    --------
     Validate chunk is defined as a smallest piece of code that is used to build up validators.
     This function is especially relevant when working with multiprocessing.
 
