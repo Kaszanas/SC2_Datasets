@@ -14,24 +14,29 @@ def load_replaypack_information(
     """
     Helper function that loads replaypack information from a standard directory structure.
 
-    :param replaypack_name: Specifies the replaypack name that will be used\
-    as a subdirectory where replaypack .json files will be extracted.
-    :type replaypack_name: str
-    :param replaypack_path: Specifies the path to the extracted replaypack.
-    :type replaypack_path: str
-    :param unpack_n_workers: Specifies the number of workers that will\
-    be used for unpacking the archive.
-    :type unpack_n_workers: int
-    :return: Returns path to the directory that contains .json files\
-    with data extracted from replays, summary information that\
-    was generated when extracting the data from replays,\
-    mapping information that specifies what was the directory\
-    structure pre-extraction, and log file which contaions\
-    how many files were successfully extracted.
-    :rtype: Tuple[str, Dict[str, str], Dict[str, str]]
+    Parameters
+    ----------
+    replaypack_name : str
+        Specifies the replaypack name that will be used\
+        as a subdirectory where replaypack .json files will be extracted.
+    replaypack_path : str
+        Specifies the path to the extracted replaypack.
+    unpack_n_workers : int
+        Specifies the number of workers that will\
+        be used for unpacking the archive.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    Tuple[str, Dict[str, str], Dict[str, str]]
+        Returns path to the directory that contains .json files\
+        with data extracted from replays, summary information that\
+        was generated when extracting the data from replays,\
+        mapping information that specifies what was the directory\
+        structure pre-extraction, and log file which contaions\
+        how many files were successfully extracted.
 
+    Examples
+    --------
     The use of this method is intended to download a .zip replaypack
     of SC2 games and unpack the downloaded files
     to the folder.
