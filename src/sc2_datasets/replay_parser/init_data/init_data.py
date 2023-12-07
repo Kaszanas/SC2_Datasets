@@ -6,25 +6,31 @@ from sc2_datasets.replay_parser.init_data.game_description import GameDescriptio
 class InitData:
 
     """
-    Data type containing some "init data" information about StarCraft II game.
+    Data type representing initialization data for a StarCraft II game.
 
-    :param gameDescription: Specifies the object that contains list
-    of parameters which are describing the game
-    :type gameDescription: GameDescription
+    Parameters
+    ----------
+    gameDescription : GameDescription
+        An object containing a list of parameters describing the game.
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "InitData":
         """
-        Static method returning initialized InitData class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method to create an initialized InitData class from a dictionary.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict[str, Any]
-        :return: Returns an initialized InitData class.
-        :rtype: InitData
+        Parameters
+        ----------
+        d : Dict[str, Any]
+            Dictionary obtained from pre-processing an .SC2Replay file in JSON format.
 
+        Returns
+        -------
+        InitData
+            An initialized InitData class.
+
+        Examples
+        --------
         **Correct Usage Examples:**
 
         Using from_dict factory method provides ease of use when parsing a replay pre-processed with SC2InfoExtractorGo_
