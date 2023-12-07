@@ -10,15 +10,20 @@ def read_validation_file(
     path: Path,
 ) -> Tuple[Set[str], Set[str]]:
     """
-    Attempts to read the validation file from a specified path
+    Attempts to read the validation file from a specified path.
 
-    :param path: Specifies the path that will be used to read the validation file.
-    :type path: Path
-    :return: Returns a list of files that were validated as ones that should be skipped.
-    :rtype: List[str]
+    Parameters
+    ----------
+    path : Path
+        Specifies the path that will be used to read the validation file.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    Tuple[Set[str], Set[str]]
+        Returns a list of files that were validated as ones that should be skipped.
 
+    Examples
+    --------
     This function is a helper that is required to have persistent validators which are
     able to skip the files that were previously processed.
     It is tasked with reading the validation file.
@@ -59,20 +64,22 @@ def save_validation_file(
     path: Path = Path("validator_file.json"),
 ) -> None:
     """
-    Attempts to save the validation file to a specified path
+    Attempts to save the validation file to a specified path.
 
-    :param validated_files: Specifies the list of replays that were verified\
-    as ones that were processed.
-    :type validated_files: Set[str]
-    :param skip_files: Specifies the list of replays that were verified\
-    as ones that should be skipped.
-    :type skip_files: Set[str]
-    :param path: Specifies the path to the file that will be saved,\
-    Defaults to Path("validator_file.json")
-    :type path: Path
+    Parameters
+    ----------
+    validated_files : Set[str]
+        Specifies the list of replays that were verified\
+        as ones that can be used in further processing.
+    skip_files : Set[str]
+        Specifies the list of replays that were verified\
+        as ones that should be skipped in further processing.
+    path : Path, optional
+        Specifies the path to the file that will be saved,\
+        by default Path("validator_file.json")
 
-    **Correct Usage Examples:**
-
+    Examples
+    --------
     This function is a helper that is required to have persistent validators which are
     able to skip the files that were previously processed.
     It is tasked with saving the information that was processed
@@ -95,5 +102,5 @@ def save_validation_file(
         "validated_files": validated_file_list,
         "skip_files": skip_file_list,
     }
-    with open(path, mode="w", encoding="utf-8") as output_file:
+    with path.open(mode="w", encoding="utf-8") as output_file:
         json.dump(file_dict, output_file)
