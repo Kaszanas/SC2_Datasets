@@ -3,26 +3,36 @@ from typing import Any, Dict
 
 class Header:
     """
-    Header represents the replay header parameters representation.
+    Class representing the parameters of a replay header.
 
-    :param elapsedGameLoops: Specifies how much game loops (game-engine ticks) the game lasted.
-    :type elapsedGameLoops: int
-    :param version: Specifies the game version that players have used to play the game.
-    :type version: str
+    Parameters
+    ----------
+    elapsedGameLoops : int
+        The duration of the game in game loops (game-engine ticks).
+
+    version : str
+        The game version used by players during the game.
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Header":
         """
-        Static method returning initialized Header class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method returning an initialized Header class from a provided dictionary.
+        This method assists in parsing the original JSON representation of a .SC2Replay file.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict[str, Any]
-        :return: Returns an initialized Header class.
-        :rtype: Header
+        Parameters
+        ----------
+        d : Dict[str, Any]
+            A dictionary representing the data available in the JSON file, obtained
+            from preprocessing some .SC2Replay file.
 
+        Returns
+        -------
+        Header
+            An initialized instance of the Header class.
+
+        Examples
+        --------
         **Correct Usage Examples:**
 
         Using from_dict factory method provides ease of use when parsing
