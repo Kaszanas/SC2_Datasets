@@ -4,29 +4,35 @@ from typing import Any, Dict
 class Metadata:
     """
     Specifies a class which includes parameters about the game,
-    like version, build, map etc. the game was played
+    like version, build, map, etc., the game was played.
 
-    :param baseBuild: Specifies a build number of the game engine.
-    :type baseBuild: str
-    :param dataBuild: Specifies a number of the build
-    :type dataBuild: str
-    :param gameVersion: Specifies a number of game version when the game was played
-    :type gameVersion: str
-    :param mapName: Specifies a name of the mapa on what the game was played
-    :type mapName: str
+    Parameters
+    ----------
+    baseBuild : str
+        Specifies a build number of the game engine.
+    dataBuild : str
+        Specifies a number of the build.
+    gameVersion : str
+        Specifies a number of the game version when the game was played.
+    mapName : str
+        Specifies a name of the map on which the game was played.
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Metadata":
         """
-        Static method returning initialized Metadata class from a dictionary.
-        This helps with the original JSON parsing.
+        Represents metadata extracted from a .SC2Replay file.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict[str, Any]
-        :return: Returns an initialized Metadata class.
-        :rtype: Metadata
+        Parameters
+        ----------
+        baseBuild : str
+            Specifies a build number of the game engine.
+        dataBuild : str
+            Specifies a number of the build.
+        gameVersion : str
+            Specifies a number of game version when the game was played.
+        mapName : str
+            Specifies a name of the map on what the game was played.
         """
         return Metadata(
             baseBuild=d["baseBuild"],
@@ -42,7 +48,6 @@ class Metadata:
         gameVersion: str,
         mapName: str,
     ) -> None:
-
         self.baseBuild = baseBuild
         self.dataBuild = dataBuild
         self.gameVersion = gameVersion
