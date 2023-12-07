@@ -8,36 +8,45 @@ from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackData
 
 
 class SC2ReplaypackDataModule(pl.LightningDataModule):
+
     """
     Defines a LightningDataModule abstraction for a single StarCraft II replaypack.
 
-    :param replaypack_name: Specifies a replaypack name which will be used as a directory name.
-    :type replaypack_name: str
-    :param unpack_dir: Specifies the path where the replaypack (dataset)\
-    will be unpacked into a custom directory structure, defaults to "./data/unpack"
-    :type unpack_dir: str, optional
-    :param download_dir: Specifies the path where the replaypack (dataset)\
-    will be downloaded, defaults to "./data/unpack"
-    :type download_dir: str, optional
-    :param url: Specifies the url which will be used to download\
-    the replaypack (dataset), defaults to ""
-    :type url: str, optional
-    :param download: Specifies if the dataset should be downloaded.\
-    Otherwise the dataset is loaded from the unpack_dir\
-    and a custom directory structure is assumed, defaults to True
-    :type download: bool, optional
-    :param transform: Specifies the PyTorch transforms to be used on the replaypack (dataset),\
-    Deprecated since version v1.5: Will be removed in v1.7.0, defaults to None
-    :type transform: _type_, optional
-    :param dims: Specifies a tuple describing the shape of your data.\
-    Extra functionality exposed in size,\
-    Deprecated since version v1.5: Will be removed in v1.7.0, defaults to None
-    :type dims: _type_, optional
-    :param unpack_n_workers: Specifies the number of workers\
-    that will be used for unpacking the archive, defaults to 16
-    :type unpack_n_workers: int, optional
-    :param validator: Specifies the validation option for fetched data, defaults to None
-    :type validator: Callable | None, optional
+    Parameters
+    ----------
+    replaypack_name : str
+        Specifies a replaypack name which will be used as a directory name.
+    unpack_dir : str, optional
+        Specifies the path where the replaypack (dataset)\
+        will be unpacked into a custom directory structure, by default "./data/unpack"
+    download_dir : str, optional
+        Specifies the path where the replaypack (dataset)\
+        will be downloaded, by default "./data/download"
+    url : str, optional
+        Specifies the url which will be used to download\
+        the replaypack (dataset), by default ""
+    download : bool, optional
+        Specifies if the dataset should be downloaded.\
+        Otherwise the dataset is loaded from the unpack_dir\
+        and a custom directory structure is assumed, by default True
+    transform : Callable | None, optional
+        Specifies the PyTorch transforms to be used on the replaypack (dataset),\
+        Deprecated since version v1.5: Will be removed in v1.7.0, by default None
+    dims : _type_, optional
+        Specifies a tuple describing the shape of your data.\
+        Extra functionality exposed in size,\
+        Deprecated since version v1.5: Will be removed in v1.7.0, by default None
+    batch_size : int, optional
+        Batch size which will be used for learning tasks, by default 256
+    num_workers : int, optional
+        Number of workers used for dataloaders, by default 0
+    unpack_n_workers : int, optional
+        Specifies the number of workers\
+        that will be used for unpacking the archive, by default 16
+    validator : Callable | None, optional
+        Specifies the validation option for fetched data,\
+        this can also act as a filtering function that will be\
+        applied for the entirety of the dataset, by default None
     """
 
     def __init__(
