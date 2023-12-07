@@ -7,18 +7,18 @@ class UnitDone(TrackerEvent):
 
     """
     UnitDone is containing some "details" information about unit at the moment
-    of it has built in the game
+    of it has built in the game.
 
-    :param id: Specifies the ID of an event which corresponds to its name.
-    :type id: int
-    :param loop: Specifies the game loop number (game-engine tick)\
-    at which the event occurred
-    :type loop: int
-    :param unitTagIndex: Specifies a pointer for a specific unit\
-    which was finishing its build
-    :type unitTagIndex: int
-    :param unitTagRecycle: There is no specific information about this parameter
-    :type unitTagRecycle: int
+    Parameters
+    ----------
+    id : int
+        Specifies the ID of an event which corresponds to its name.
+    loop : int
+        Specifies the game loop number (game-engine tick) at which the event occurred.
+    unitTagIndex : int
+        Specifies a pointer for a specific unit which was finishing its build.
+    unitTagRecycle : int
+        There is no specific information about this parameter.
     """
 
     @staticmethod
@@ -27,11 +27,16 @@ class UnitDone(TrackerEvent):
         Static method returning initialized UnitDone class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized UnitDone class.
-        :rtype: UnitDone
+        Parameters
+        ----------
+        d : Dict
+            Specifies a dictionary as available in the JSON file
+            that is a result of pre-processing some .SC2Replay file.
+
+        Returns
+        -------
+        UnitDone
+            Returns an initialized UnitDone class.
         """
         return UnitDone(
             id=d["id"],
@@ -47,7 +52,6 @@ class UnitDone(TrackerEvent):
         unitTagIndex: int,
         unitTagRecycle: int,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.unitTagIndex = unitTagIndex

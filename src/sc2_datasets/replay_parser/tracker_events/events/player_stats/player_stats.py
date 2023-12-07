@@ -9,14 +9,16 @@ class PlayerStats(TrackerEvent):
     """
     PlayerStats holds information about player economy
 
-    :param id: Specifies the ID of an event which corresponds to its name.
-    :type id: int
-    :param loop: Specifies the time at which the event happened in gameloops.
-    :type loop: int
-    :param playerId: Specifies the id of a player to which this event pertains.
-    :type playerId: int
-    :param stats: Specifies a custom data type holding the statistics.
-    :type stats: Stats
+    Parameters
+    ----------
+    id : int
+        Specifies the ID of an event which corresponds to its name.
+    loop : int
+        Specifies the time at which the event happened in gameloops.
+    playerId : int
+        Specifies the id of a player to which this event pertains.
+    stats : Stats
+        Specifies a custom data type holding the statistics.
     """
 
     @staticmethod
@@ -25,11 +27,16 @@ class PlayerStats(TrackerEvent):
         Static method returning initialized PlayerStats class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that\
-        is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized PlayerStats class.
-        :rtype: PlayerStats
+        Parameters
+        ----------
+        d : Dict
+            Specifies a dictionary as available in the JSON file that
+            is a result of pre-processing some .SC2Replay file.
+
+        Returns
+        -------
+        PlayerStats
+            Returns an initialized PlayerStats class.
         """
         return PlayerStats(
             id=d["id"],

@@ -9,18 +9,20 @@ class PlayerSetup(TrackerEvent):
     Data type that denotes a player setup event which is available in tracker events.
     It contains basic information mapping userId to playerId to slotId.
 
-    :param id: Highly likely this field specifies an id of the PlayerSetup object
-    :type id: int
-    :param loop: Specifies the time (in gameloop units) at which the event happened.
-    :type loop: int
-    :param playerId: Specifies an id of the player in the game, in 1v1 game [1,2]
-    :type playerId: int
-    :param slotId: Specifies an id of the starting location;
-    :type slotId: int
-    :param type: There is no valuable information about this parameter
-    :type type: int
-    :param userId: Specifies the setup user id for the player
-    :type userId: int
+    Parameters
+    ----------
+    id : int
+        Highly likely this field specifies an id of the PlayerSetup object.
+    loop : int
+        Specifies the time (in gameloop units) at which the event happened.
+    playerId : int
+        Specifies an id of the player in the game, in 1v1 game [1,2].
+    slotId : int
+        Specifies an id of the starting location.
+    type : int
+        There is no valuable information about this parameter.
+    userId : int
+        Specifies the setup user id for the player.
     """
 
     @staticmethod
@@ -29,11 +31,16 @@ class PlayerSetup(TrackerEvent):
         Static method returning initialized PlayerSetup class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized PlayerSetup class.
-        :rtype: PlayerSetup
+        Parameters
+        ----------
+        d : Dict
+            Specifies a dictionary as available in the JSON file
+            that is a result of pre-processing some .SC2Replay file.
+
+        Returns
+        -------
+        PlayerSetup
+            Returns an initialized PlayerSetup class.
         """
         return PlayerSetup(
             id=d["id"],
@@ -53,7 +60,6 @@ class PlayerSetup(TrackerEvent):
         type: int,
         userId: int,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.playerId = playerId
