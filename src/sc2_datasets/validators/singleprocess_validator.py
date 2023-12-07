@@ -18,16 +18,21 @@ def validate_integrity_persist_sp(
     Exposes the logic for validating replays using a single process.
     This function uses a validation file that persists the files which were previously checked.
 
-    :param list_of_replays: Specifies the list of replays that are supposed to be validated.
-    :type list_of_replays: List[str]
-    :param validation_file_path: Specifies the path to the validation file\
-    which will be read to obtain the
-    :type validation_file_path: Path
-    :return: Returns a set of files that should be skipped in further processing.
-    :rtype: Set[str]
+    Parameters
+    ----------
+    list_of_replays : List[str]
+        Specifies the list of replays that are supposed to be validated.
+    validation_file_path : Path
+        Specifies the path to the validation file\
+        which will be read to obtain the
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    Set[str]
+        Returns a set of files that should be skipped in further processing.
 
+    Examples
+    --------
     Persistent validators save the validation information to a specified filepath.
     Only the files that ought to be skipped are returned as a set from this function.
 
@@ -73,14 +78,19 @@ def validate_integrity_sp(
     """
     Exposes logic for single process integrity validation of a replay.
 
-    :param list_of_replays: Specifies the SC2ReplayInfo information\
-    of the files that will be validated.
-    :type list_of_replays: List[str]
-    :return: Returns a tuple that contains (validated replays, files to be skipped).
-    :rtype: Tuple[Set[str], Set[str]]
+    Parameters
+    ----------
+    list_of_replays : List[str]
+        Specifies the SC2ReplayInfo information\
+        of the files that will be validated.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    Tuple[Set[str], Set[str]]
+        Returns a tuple that contains (validated replays, files to be skipped).
 
+    Examples
+    --------
     Validators can be used to check if a file is correct before loading it for some modeling task.
     Below you will find a sample execution which
     should contain one correct file and one incorrect file.
@@ -104,9 +114,9 @@ def validate_integrity_sp(
     validated = set()
     skip_files = set()
     for sc2_file_info, is_correct in validated_files:
-        if is_correct:
-            validated.add(sc2_file_info)
-        else:
+        if not is_correct:
             skip_files.add(sc2_file_info)
+
+        validated.add(sc2_file_info)
 
     return (validated, skip_files)
