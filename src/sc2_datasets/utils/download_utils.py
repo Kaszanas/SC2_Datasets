@@ -12,20 +12,24 @@ def download_replaypack(
     """
     Exposes logic for downloading a single StarCraft II replaypack from an url.
 
-    :param destination_dir: Specifies the destination directory where the replaypack will be saved.
-    :type destination_dir: str
-    :param replaypack_name: Specifies the name of a replaypack that will\
-    be used for the downloaded .zip archive.
-    :type replaypack_name: str
-    :param replaypack_url: Specifies the url that is a direct link\
-    to the .zip which will be downloaded.
-    :type replaypack_url: str
-    :raises Exception: If more than one file is downloaded, exception is thrown.
-    :return: Returns the filepath to the downloaded .zip archive.
-    :rtype: str
+    Parameters
+    ----------
+    destination_dir : str
+        Specifies the destination directory where the replaypack will be saved.
+    replaypack_name : str
+        Specifies the name of a replaypack that will\
+        be used for the downloaded .zip archive.
+    replaypack_url : str
+        Specifies the url that is a direct link\
+        to the .zip which will be downloaded.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    str
+        Returns the filepath to the downloaded .zip archive.
 
+    Examples
+    --------
     The use of this method is intended
     to download a .zip replaypack containing StarCraft II games.
 
@@ -85,22 +89,27 @@ def download_and_unpack_replaypack(
     """
     Helper function that downloads a replaypack from a specified url.
     The archive is saved to replaypack_download_dir using a replaypack_name.
-    This function extracts the replaypack to the replaypack_unpack_dir
+    This function extracts the replaypack to the replaypack_unpack_dir.
 
-    :param replaypack_download_dir: Specifies a directory where the .zip archive will be downloaded.
-    :type replaypack_download_dir: str
-    :param replaypack_unpack_dir: Specifies a directory where the .zip file will be extracted
-    under a replaypack_name directory.
-    :type replaypack_unpack_dir: str
-    :param replaypack_name: Specifies a replaypack name which will be used to create paths.
-    :type replaypack_name: str
-    :param url: Specifies the url that will be used to download the replaypack.
-    :type url: str
-    :return: Returns the filepath to the directory where the .zip was extracted.
-    :rtype: str
+    Parameters
+    ----------
+    replaypack_download_dir : str
+        Specifies a directory where the .zip archive will be downloaded.
+    replaypack_unpack_dir : str
+        Specifies a directory where the .zip file will be extracted
+        under a replaypack_name directory.
+    replaypack_name : str
+        Specifies a replaypack name which will be used to create paths.
+    url : str
+        Specifies the url that will be used to download the replaypack.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    str
+        Returns the filepath to the directory where the .zip was extracted.
 
+    Examples
+    --------
     The use of this method is intended to download a .zip replaypack of SC2 games
     and unpack the downloaded files to the folder.
 
