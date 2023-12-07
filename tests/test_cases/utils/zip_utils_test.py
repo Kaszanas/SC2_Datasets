@@ -9,7 +9,7 @@ import pytest
 
 from sc2_datasets.utils.zip_utils import unpack_chunk, unpack_zipfile
 
-from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
+from tests.test_utils.test_utils import get_specific_asset_path, get_test_output_dir
 
 
 """
@@ -45,9 +45,8 @@ from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
 class ZipUtilsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-
         cls.test_replaypack_name = "2022_TestReplaypack"
-        cls.replaypack_zip_path = get_specific_asset(
+        cls.replaypack_zip_path = get_specific_asset_path(
             filename=cls.test_replaypack_name + ".zip"
         )
 
@@ -61,7 +60,6 @@ class ZipUtilsTest(unittest.TestCase):
             shutil.rmtree(path=self.unpacked.as_posix())
 
     def test_unpack_zipfile_correct(self):
-
         path_to_unpacked = unpack_zipfile(
             destination_dir=self.unpack_dir_path,
             subdir=self.test_replaypack_name,
@@ -83,7 +81,6 @@ class ZipUtilsTest(unittest.TestCase):
                     )
 
     def test_unpack_chunk_correct(self):
-
         with zipfile.ZipFile(self.replaypack_zip_path, "r") as zip_file:
             file_list = zip_file.namelist()
 

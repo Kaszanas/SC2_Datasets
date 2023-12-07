@@ -17,11 +17,12 @@ import tests.test_utils.test_utils as test_utils
 class PlayerStatsToDictTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.test_replay = test_utils.get_specific_asset(filename="test_replay.json")
+        cls.test_replay = test_utils.get_specific_asset_path(
+            filename="test_replay.json"
+        )
         cls.sc2_replay_data = SC2ReplayData.from_file(replay_filepath=cls.test_replay)
 
     def test_playerstats_to_dict(self):
-
         res_dict = playerstats_to_dict(sc2_replay=self.sc2_replay_data)
 
         # print(res_dict)
@@ -35,7 +36,6 @@ class PlayerStatsToDictTest(unittest.TestCase):
                 self.assertIsInstance(feature_list, list)
 
     def test_playerstats_to_dict_additional_data(self):
-
         additional_data = {
             "1": {"outcome": 1},
             "2": {"outcome": 2},
@@ -57,7 +57,6 @@ class PlayerStatsToDictTest(unittest.TestCase):
                 self.assertIsInstance(feature_list, list)
 
     def test_playerstats_average_to_dict(self):
-
         res_dict = playerstats_average_to_dict(sc2_replay=self.sc2_replay_data)
 
         # Type assertions for data:
@@ -67,7 +66,6 @@ class PlayerStatsToDictTest(unittest.TestCase):
             self.assertIsInstance(value, dict)
 
     def test_average_playerstats_dataframe(self):
-
         ps_dict = playerstats_to_dict(sc2_replay=self.sc2_replay_data)
         for playerID, df_repr in ps_dict.items():
             # Initializing dataframe from dict:

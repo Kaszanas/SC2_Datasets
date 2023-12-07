@@ -15,10 +15,11 @@ import tests.test_utils.test_utils as test_utils
 class MessageEventsParserTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.test_replay = test_utils.get_specific_asset(filename="test_replay.json")
+        cls.test_replay = test_utils.get_specific_asset_path(
+            filename="test_replay.json"
+        )
 
     def test_message_events_parser(self):
-
         with open(self.test_replay) as f:
             loaded_file = json.load(f)
 

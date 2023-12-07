@@ -23,10 +23,10 @@ class IntegrityValidatorTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.not_working_test_replay = Path(
-            test_utils.get_specific_asset(filename="test_bit_flip_example.json")
+            test_utils.get_specific_asset_path(filename="test_bit_flip_example.json")
         ).as_posix()
         cls.working_test_replay = Path(
-            test_utils.get_specific_asset(filename="test_replay.json")
+            test_utils.get_specific_asset_path(filename="test_replay.json")
         ).as_posix()
         cls.list_of_replays = [
             cls.working_test_replay,

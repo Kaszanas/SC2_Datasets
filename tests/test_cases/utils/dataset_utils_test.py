@@ -8,16 +8,15 @@ import pytest
 from sc2_datasets.utils.dataset_utils import load_replaypack_information
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 
-from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
+from tests.test_utils.test_utils import get_specific_asset_path, get_test_output_dir
 
 
 @pytest.mark.minor
 class DatasetUtilsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-
         cls.test_replaypack_name = "2022_TestReplaypack"
-        cls.replaypack_zip_path = get_specific_asset(
+        cls.replaypack_zip_path = get_specific_asset_path(
             filename=cls.test_replaypack_name + ".zip"
         )
 
@@ -41,13 +40,11 @@ class DatasetUtilsTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-
         # Deletes the replaypack after the testing was finished:
         if cls.unpacked.exists():
             shutil.rmtree(path=cls.unpacked.as_posix())
 
     def test_load_replaypack_information_correct(self):
-
         (
             replaypack_data_path,
             replaypack_main_log_obj_list,
