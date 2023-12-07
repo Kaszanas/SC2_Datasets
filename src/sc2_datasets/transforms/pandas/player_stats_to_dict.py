@@ -7,7 +7,6 @@ from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.transforms.utils import filter_player_stats
 
 
-# TODO: Document this:
 # TODO: Consider renaming:
 # REVIEW: Verify this code!
 def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
