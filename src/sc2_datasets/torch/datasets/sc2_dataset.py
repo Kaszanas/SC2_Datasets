@@ -10,22 +10,20 @@ class SC2Dataset(Dataset):
     """
     Inherits from PyTorch Dataset and ensures that the dataset for SC2EGSet is downloaded.
 
-    :param unpack_dir: Specifies the path of a directory\
-    where the dataset files will be unpacked.
-    :type unpack_dir: str
-    :param download_dir: Specifies the path of a directory where\
-    the dataset files will be downloaded.
-    :type download_dir: str
-    :param names_urls: Specifies the URL of the dataset which\
-    will be used to download the files.
-    :type names_urls: List[Tuple[str, str]]
-    :param unpack_n_workers: Specifies the number of workers\
-    that will be used for unpacking the archive, defaults to 16
-    :type unpack_n_workers: int, optional
-    :param transform: PyTorch transform. function that takes SC2ReplayData and return something
-    :type transform: Func[SC2ReplayData, T]
-    :param validator: Specifies the validation option for fetched data, defaults to None
-    :type validator: Callable | None, optional
+    Parameters
+    ----------
+    unpack_dir : str
+        Specifies the path of a directory where the dataset files will be unpacked.
+    download_dir : str
+        Specifies the path of a directory where the dataset files will be downloaded.
+    names_urls : List[Tuple[str, str]]
+        Specifies the URL of the dataset which will be used to download the files.
+    unpack_n_workers : int, optional
+        Specifies the number of workers that will be used for unpacking the archive, defaults to 16.
+    transform : Func[SC2ReplayData, T]
+        PyTorch transform function that takes SC2ReplayData and returns something.
+    validator : Callable | None, optional
+        Specifies the validation option for fetched data, defaults to None.
     """
 
     def __init__(
@@ -38,7 +36,6 @@ class SC2Dataset(Dataset):
         transform: Callable | None = None,
         validator: Callable | None = None,
     ):
-
         # PyTorch fields:
         self.transform = transform
 
@@ -94,15 +91,24 @@ class SC2Dataset(Dataset):
         """
         Exposes logic of getting a single parsed item by using dataset[index].
 
-        :param index: Specifies the index of an item that should be retrieved.
-        :type index: Any
-        :raises IndexError: To support negative indexing,\
-        if the index is less than zero twice, IndexError is raised.
-        :raises IndexError: If the index is greater than length\
-        of the dataset IndexError is raised.
-        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,\
-        or a result of a transform that was passed to the dataset.
-        :rtype: Tuple[Any, Any] | SC2ReplayData
+        Parameters
+        ----------
+        index : Any
+            Specifies the index of an item that should be retrieved.
+
+        Raises
+        ------
+        IndexError
+            To support negative indexing, if the index is less than zero twice,\
+            IndexError is raised.
+        IndexError
+            If the index is greater than length of the dataset, IndexError is raised.
+
+        Returns
+        -------
+        Tuple[Any, Any] | SC2ReplayData
+            Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,
+            or a result of a transform that was passed to the dataset.
         """
 
         # If the index is negative, treat it as if expressed from the back of the sequence.
