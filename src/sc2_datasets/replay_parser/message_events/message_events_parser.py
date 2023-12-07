@@ -8,14 +8,19 @@ class MessageEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> MessageEvent:
         """
-        Static method returning initialized MessageEvent class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method returning an initialized instance of MessageEvent class
+        based on a dictionary input, aiding in the original JSON parsing.
 
-        :param d: Specifies a dictionary, it holds translations\
-        of a phrase or sentence.
-        :type d: Dict
-        :return: Specifies an implementation of an abstract method from MessageEvent class
-        :rtype: MessageEvent
+        Parameters
+        ----------
+        d : Dict
+            A dictionary holding translations of a phrase or sentence.
+
+        Returns
+        -------
+        MessageEvent
+            An implementation of an abstract method from the MessageEvent class.
+
         """
         type_name = d["evtTypeName"]
         match type_name:
