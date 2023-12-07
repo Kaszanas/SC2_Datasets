@@ -11,16 +11,23 @@ from sc2_datasets.transforms.utils import filter_player_stats
 # TODO: Consider renaming:
 # REVIEW: Verify this code!
 def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
-
     """
-    Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
-    of the data that can be used to initialize a pandas DataFrame.
+    Exposes a logic of converting a single list of TrackerEvents
+    to a dictionary representation of the data
+    that can be used to initialize a pandas DataFrame.
 
-    :param sc2_replay: Specifies a dataframe that will be averaged.
-    :type sc2_replay: SC2ReplayData
-    :return: Returns a dictionary representation of the averaged values.
-    :rtype: Dict[str, float]
+    Parameters
+    ----------
+    sc2_replay : SC2ReplayData
+        Specifies a dataframe that will be averaged.
 
+    Returns
+    -------
+    Dict[str, float]
+        Returns a dictionary representation of the averaged values.
+
+    Examples
+    --------
     **Correct Usage Examples:**
 
     This method may help you to operate with data on the game replay.
@@ -75,6 +82,20 @@ def playerstats_to_dict(
     Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
     of the data that can be used to initialize a pandas DataFrame.
 
+    Parameters
+    ----------
+    sc2_replay : SC2ReplayData
+        Specifies a replay that will be used to obtain
+        the list of TrackerEvents to be converted.
+
+    Returns
+    -------
+    Dict[str, Dict[str, List[Any]]]
+        Returns a dictionary of features with additional information
+        repeated for all occurrences of events.
+
+    Notes
+    -----
     Example additional_data_dict:
     {"1": {
             "outcome": 1
@@ -101,13 +122,9 @@ def playerstats_to_dict(
            "outcome": [0, 0]}
     }
 
-    :param sc2_replay: Specifies a replay that will be used to obtain
-    the list of TrackerEvents to be converted.
-    :type sc2_replay: SC2ReplayData
-    :return: Returns a dictionary of features with additional information
-    repeated for all of the occurences of events.
-    :rtype: Dict[str, Dict[str, List[Any]]]
 
+    Examples
+    --------
     **Correct Usage Examples:**
 
     This method may help you to operate with data on the game replay.
@@ -153,7 +170,6 @@ def playerstats_to_dict(
     TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
-
     """
 
     dataframe_representation = {}
@@ -190,13 +206,20 @@ def playerstats_to_dict(
 # TODO: Consider renaming:
 def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> Dict[str, float]:
     """
-    Averages a game dataframe
+    Averages a game dataframe.
 
-    :param playerstats_df: Specifies a dataframe that will be averaged.
-    :type playerstats_df: pd.DataFrame
-    :return: Returns a dictionary representation of the averaged values.
-    :rtype: Dict[str, float]
+    Parameters
+    ----------
+    playerstats_df : pd.DataFrame
+        Specifies a dataframe that will be averaged.
 
+    Returns
+    -------
+    Dict[str, float]
+        Returns a dictionary representation of the averaged values.
+
+    Examples
+    --------
     **Correct Usage Examples:**
 
     This method may help you to operate with data on the game replay.
@@ -221,7 +244,6 @@ def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> Dict[str, flo
     TypeError: unsupported operand type(s) ...
 
     If you don't set parameters or paste incorect parameters' type.
-
     """
 
     mean_playerstats = playerstats_df.mean().to_dict()
