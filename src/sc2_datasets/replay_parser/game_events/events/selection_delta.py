@@ -6,35 +6,36 @@ from sc2_datasets.replay_parser.game_events.events.nested.delta import Delta
 
 class SelectionDelta(GameEvent):
     """
-    SelectionDelta is containing some "details" information
-    about player's selection during the game
+    SelectionDelta contains details about a player's selection during the game.
 
-    :param controlGroupId: Specifies the event id of the control group,\
-    which has been selected
-    :type controlGroupId: int
-    :param delta: Specifies the game loop number (game-engine tick)\
-    at which the event occurred
-    :type delta: Delta
-    :param id: Specifies the ID of an event which corresponds to its name.
-    :type id: int
-    :param loop: Specifies the game loop number (game-engine tick)\
-    at which the event occurred
-    :type loop: int
-    :param userid: Specifies id number of player who has done selection option in the game
-    :type userid: int
+    Parameters
+    ----------
+    controlGroupId : int
+        Specifies the event ID of the control group that was selected.
+    delta : Delta
+        Specifies the game loop number (game-engine tick) at which the event occurred.
+    id : int
+        Specifies the ID of an event corresponding to its name.
+    loop : int
+        Specifies the game loop number (game-engine tick) at which the event occurred.
+    userid : int
+        Specifies the ID number of the player who executed the selection option in the game.
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "SelectionDelta":
         """
-        Static method returning initialized SelectionDelta class from a dictionary.
-        This helps with the original JSON parsing.
+        Initializes a SelectionDelta class from a dictionary, aiding the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that\
-        is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized SelectionDelta class.
-        :rtype: SelectionDelta
+        Parameters
+        ----------
+        d : Dict
+            A dictionary obtained from pre-processing an .SC2Replay file in JSON format.
+
+        Returns
+        -------
+        SelectionDelta
+            An initialized instance of the SelectionDelta class.
         """
         return SelectionDelta(
             controlGroupId=d["controlGroupId"],

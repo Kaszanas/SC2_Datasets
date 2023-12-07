@@ -4,23 +4,24 @@ from sc2_datasets.replay_parser.game_events.events.nested.target_3d import Targe
 class TargetUnit:
 
     """
-    Specifies which unit was targeted.
-    We were not able to verify precise meaning of this data type.
+    Specifies information about a targeted unit, although the precise meaning of this data type isn't verified.
 
-    :param snapshotControlPlayerId: Most likely specifies which player had control over the unit.
-    :type snapshotControlPlayerId: int
-    :param snapshotPoint: Most likely specifies at which point the unit was targeted.
-    :type snapshotPoint: Target3D
-    :param snapshotUnitLink: This is an unknown parameter.
-    :type snapshotUnitLink: int
-    :param snapshotUpkeepPlayerId: Most likely specifies which of the players' supply was affected.
-    :type snapshotUpkeepPlayerId: int
-    :param tag: Most likely specifies a unit tag.
-    :type tag: int
-    :param targetUnitFlags: This is an unknown parameter.
-    :type targetUnitFlags: int
-    :param timer: This is an unknown parameter.
-    :type timer: int
+    Parameters
+    ----------
+    snapshotControlPlayerId : int
+        Specifies which player had control over the unit.
+    snapshotPoint : Target3D
+        Specifies the point at which the unit was targeted.
+    snapshotUnitLink : int
+        An unknown parameter.
+    snapshotUpkeepPlayerId : int
+        Specifies which player's supply was affected.
+    tag : int
+        Specifies a unit tag.
+    targetUnitFlags : int
+        An unknown parameter.
+    timer : int
+        An unknown parameter.
     """
 
     def __init__(
@@ -33,7 +34,6 @@ class TargetUnit:
         targetUnitFlags: int,
         timer: int,
     ) -> None:
-
         self.snapshotControlPlayerId = snapshotControlPlayerId
         self.snapshotPoint = snapshotPoint
         self.snapshotUnitLink = snapshotUnitLink

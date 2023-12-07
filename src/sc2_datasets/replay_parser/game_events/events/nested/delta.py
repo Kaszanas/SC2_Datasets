@@ -8,16 +8,18 @@ class AddSubgroups(GameEvent):
 
     """
     AddSubgroups is a data type holding information about some subgroup change.
-    We were not able to resolve its specific meaning.
+    The exact meaning or context of its attributes remains unclear.
 
-    :param count: Specifies some unknown count parameter.
-    :type count: int
-    :param intraSubgroupPriority: Specifies some priority within the intra subgroup.
-    :type intraSubgroupPriority: int
-    :param subgroupPriority: Specifies some subgroup priority.
-    :type subgroupPriority: int
-    :param unitLink: Most likely specifies which units were affected.
-    :type unitLink: int
+    Parameters
+    ----------
+    count : int
+        Specifies some unknown count parameter.
+    intraSubgroupPriority : int
+        Specifies some priority within the intra subgroup.
+    subgroupPriority : int
+        Specifies some subgroup priority.
+    unitLink : int
+        Most likely specifies which units were affected.
     """
 
     @staticmethod
@@ -39,7 +41,6 @@ class AddSubgroups(GameEvent):
         subgroupPriority: int,
         unitLink: int,
     ) -> None:
-
         self.count = count
         self.intraSubgroupPriority = intraSubgroupPriority
         self.subgroupPriority = subgroupPriority
@@ -50,17 +51,19 @@ class Delta(GameEvent):
 
     """
     Most likely specifies a change in which units belong to some subgroups.
-    We are unsure of the precise definition of this data type.
+    The exact definition of this data type remains unclear.
 
-    :param addSubgroups: Most likely specifies a class with additional information
-    on which subgroups were added.
-    :type addSubgroups: AddSubgroups
-    :param addUnitTags: Most likely specifies which unit tags were added to a subgroup.
-    :type addUnitTags: List[int]
-    :param removeMask: This is an unknown parameter. We were not able to interpret it.
-    :type removeMask: NoneType
-    :param subgroupIndex: Most likely specifies which subgroup was changed.
-    :type subgroupIndex: int
+    Parameters
+    ----------
+    addSubgroups : AddSubgroups
+        Most likely specifies a class with additional information
+        on which subgroups were added.
+    addUnitTags : List[int]
+        Most likely specifies which unit tags were added to a subgroup.
+    removeMask : NoneType
+        This is an unknown parameter. We were not able to interpret it.
+    subgroupIndex : int
+        Most likely specifies which subgroup was changed.
     """
 
     @staticmethod
@@ -79,7 +82,6 @@ class Delta(GameEvent):
         removeMask: NoneType,
         subgroupIndex: int,
     ) -> None:
-
         self.addSubgroups = addSubgroups
         self.addUnitTags = addUnitTags
         self.removeMask = removeMask

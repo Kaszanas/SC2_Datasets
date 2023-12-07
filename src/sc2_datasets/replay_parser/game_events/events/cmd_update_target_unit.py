@@ -6,30 +6,35 @@ from sc2_datasets.replay_parser.game_events.events.nested.target_unit import Tar
 
 class CmdUpdateTargetUnit(GameEvent):
     """
-    Data type containing information about command update issued to some target unit.
+    Data type containing information about a command update issued to a specific target unit.
 
-    :param id: Specifies the event ID that should directly map\
-    to the event name which is denoted by the class.
-    :type id: int
-    :param loop: Specifies the time in gameloop units when the event happened.
-    :type loop: int
-    :param target: Most likely specifies a target unit which receivedr the command.
-    :type target: TargetUnit
-    :param userid: Most likely specifies the user id that issued the command.
-    :type userid: int
+    Parameters
+    ----------
+    id : int
+        Event ID mapping to the event name represented by the class.
+    loop : int
+        Time in gameloop units when the event occurred.
+    target : TargetUnit
+        Specifies the target unit that received the command.
+    userid : int
+        Specifies the user ID that issued the command.
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "CmdUpdateTargetUnit":
         """
-        Static method returning initialized CmdUpdateTargetUnit class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method returning an initialized CmdUpdateTargetUnit class from a dictionary.
+        This aids in the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized CmdUpdateTargetUnit class.
-        :rtype: CmdUpdateTargetUnit
+        Parameters
+        ----------
+        d : Dict
+            Dictionary available in the JSON file resulting from preprocessing an .SC2Replay file.
+
+        Returns
+        -------
+        CmdUpdateTargetUnit
+            Initialized CmdUpdateTargetUnit class.
         """
         return CmdUpdateTargetUnit(
             id=d["id"],

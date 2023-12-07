@@ -6,37 +6,42 @@ from sc2_datasets.replay_parser.game_events.events.nested.target_2d import Targe
 
 class CameraSave(GameEvent):
     """
-    CameraSave represents the replay information about saved camera in the game.
+    CameraSave represents replay information regarding a saved camera location within the game.
 
-    :param id: Highly likely this field specifies an id of CameraSave object,\
-    many elements have the same id in
-    :type id: int
-    :param loop: Specifies the game loop number (game-engine tick)\
-    at which the event occurred
-    :type loop: int
-    :param target: Specifies the Target class object which includes x and y coordinates,\
-    where the camera location was set in the game
-    :type target: Target
-    :param userid: Specifies the id of the player who saved the camera location
-    :type userid: int
-    :param which: Specifies a hotkey [0-9] to which camera location was set
-    :type which: int
+    Parameters
+    ----------
+    id : int
+        Identifier for the CameraSave object. Multiple elements may share the same ID.
+    loop : int
+        Game loop number (game-engine tick) when the event occurred.
+    target : Target
+        Target class object containing x and y coordinates where the camera location was set in the game.
+    userid : int
+        ID of the player who saved the camera location.
+    which : int
+        Hotkey [0-9] to which the camera location was set.
     """
 
     # REVIEW: Doctests here:
     @staticmethod
     def from_dict(d: Dict) -> "CameraSave":
         """
-        Static method returning initialized CameraSave class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method returning an initialized CameraSave class from a dictionary.
+        Helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized CameraSave class.
-        :rtype: CameraSave
+        Parameters
+        ----------
+        d : Dict
+            Dictionary from the pre-processed .SC2Replay file in JSON format.
+
+        Returns
+        -------
+        CameraSave
+            Initialized CameraSave class object.
 
 
+        Examples
+        --------
         **Correct Usage Examples:**
 
         Using from_dict factory method provides ease of use when parsing
