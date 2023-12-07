@@ -4,7 +4,6 @@ from typing import Any, Callable, Dict, List
 
 from torch.utils.data import Dataset
 
-
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.utils.dataset_utils import load_replaypack_information
 from sc2_datasets.utils.download_utils import download_and_unpack_replaypack
@@ -15,24 +14,26 @@ class SC2ReplaypackDataset(Dataset):
     """
     Represents a Dataset for a single pre-processed replaypack.
 
-    :param replaypack_name: Specifies the name of a replaypack.\
-    This can be a name of the tournament or any other arbitrary name.
-    :type replaypack_name: str
-    :param download_dir: Specifies the directory where the initial archive will be downloaded.
-    :type download_dir: str
-    :param unpack_dir: Specifies the directory where the archive will be extracted.
-    :type unpack_dir: str
-    :param url: Specifies the url which will be used to download\
-    the .zip archive, defaults to ""
-    :type url: str, optional
-    :param download: Specifies if the dataset should be downloaded\
-    or if it is pre-downloaded and extracted, defaults to False
-    :type download: bool, optional
-    :param unpack_n_workers: Specifies the number of workers that will\
-    be used for unpacking the archive, defaults to 16
-    :type unpack_n_workers: int, optional
-    :param validator: Specifies a validator for input data, defaults to None
-    :type validator: Callable | None, optional
+    Parameters
+    ----------
+    replaypack_name : str
+        Specifies the name of a replaypack.\
+        This can be a name of the tournament or any other arbitrary name.
+    download_dir : str
+        Specifies the directory where the initial archive will be downloaded.
+    unpack_dir : str
+        Specifies the directory where the archive will be extracted.
+    url : str, optional
+        Specifies the URL which will be used to download the .zip archive,\
+        defaults to "".
+    download : bool, optional
+        Specifies if the dataset should be downloaded or if it is pre-downloaded\
+        and extracted, defaults to False.
+    unpack_n_workers : int, optional
+        Specifies the number of workers that will be used for unpacking the archive,\
+        defaults to 16.
+    validator : Callable | None, optional
+        Specifies a validator for input data, defaults to None.
     """
 
     def __init__(
@@ -136,10 +137,15 @@ class SC2ReplaypackDataset(Dataset):
         """
         Exposes logic of getting a single parsed item from the replaypack.
 
-        :param index: Specifies the index of a file that will be parsed and loaded into memory,
-        :type index: int
-        :return: Returns a parsed SC2ReplayData.
-        :rtype: SC2ReplayData
+        Parameters
+        ----------
+        index : int
+            Specifies the index of a file that will be parsed and loaded into memory.
+
+        Returns
+        -------
+        SC2ReplayData
+            Returns a parsed SC2ReplayData representation of a StarCraft 2 replay.
         """
         # Returning a replay serialized into Python class to assure the ease of use:
 
