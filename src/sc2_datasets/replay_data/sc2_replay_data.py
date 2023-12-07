@@ -1,5 +1,6 @@
 import json
 import logging
+from pathlib import Path
 from typing import Any, Dict
 
 
@@ -24,12 +25,15 @@ from sc2_datasets.replay_parser.tracker_events.tracker_events_parser import (
 
 
 class SC2ReplayData:
+
     """
     Specifies a data type that holds information parsed from json representation of a replay.
 
-    :param loaded_replay_object: Specifies a parsed Python deserialized json object\
-    loaded into memory
-    :type loaded_replay_object: Any
+    Parameters
+    ----------
+    loaded_replay_object : Any
+        Specifies a parsed Python deserialized json object\
+        loaded into memory
     """
 
     # REVIEW: Doctests, and commented out code:
@@ -39,22 +43,30 @@ class SC2ReplayData:
         Static method returning initialized SC2ReplayData class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param replay_filepath: Specifies a dictionary as available\
-        in the JSON file that is a result of pre-processing some .SC2Replay file.
-        :type replay_filepath: str
-        :return: Returns an initialized SC2ReplayData object
-        :rtype: SC2ReplayData
+        Parameters
+        ----------
+        replay_filepath : str
+            Specifies a filepath to a JSON file containing data\
+            from parsed .SC2Replay file.
 
-        **Correct Usage Examples:**
+        Returns
+        -------
+        SC2ReplayData
+            Returns an initialized SC2ReplayData object.
 
+        Examples
+        -------
         The factory method ``from_file`` assists with initializing a ``SC2ReplayData`` class.
         All that is required is a known path to the file that should be parsed.
 
         >>> replay_data = SC2ReplayData.from_file("test/test_files/single_replay/test_replay.json")
         >>> assert isinstance(replay_data, SC2ReplayData)
         """
-        logging.info(f"\nAttempting to parse: {replay_filepath}")
-        with open(replay_filepath, encoding="utf-8") as replay_file:
+
+        replay_path = Path(replay_filepath).resolve()
+
+        logging.info(f"Attempting to parse: {replay_path.as_posix()}")
+        with replay_path.open(mode="r", encoding="utf-8") as replay_file:
             # try:
             loaded_data = json.load(replay_file)
             # except UnicodeDecodeError as exc:
@@ -70,7 +82,6 @@ class SC2ReplayData:
             return SC2ReplayData(loaded_replay_object=loaded_data)
 
     def __init__(self, loaded_replay_object: Any) -> None:
-
         self._header = Header.from_dict(d=loaded_replay_object["header"])
         self._initData = InitData.from_dict(d=loaded_replay_object["initData"])
         self._details = Details.from_dict(d=loaded_replay_object["details"])
@@ -112,8 +123,10 @@ class SC2ReplayData:
         (game_duration_loops, game_time_utc, game_map, game_version,
         player_toon_map_len, player_tuple_toon,)
 
-        :return: Returns an int (hash) representation of the SC2ReplayData class.
-        :rtype: int
+        Returns
+        -------
+        int
+            Returns an int (hash) representation of the SC2ReplayData class.
         """
 
         game_duration_loops = self.header.elapsedGameLoops
