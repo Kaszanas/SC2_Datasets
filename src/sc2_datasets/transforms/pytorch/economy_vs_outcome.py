@@ -10,13 +10,21 @@ def economy_average_vs_outcome(
     sc2_replay: SC2ReplayData,
 ) -> Tuple[torch.Tensor, int]:
     """
-    Transform that exposes logic for obtaining averaged economy statistics.
+    Transforms the SC2ReplayData representation into averaged economy statistics
+    and maps the winner and loser of the match.
 
-    :param sc2_replay: Specifies the parsed structure of a replay.
-    :type sc2_replay: SC2ReplayData
-    :return: Returns a tensor containing features and a target.
-    :rtype: Tuple[torch.Tensor, torch.Tensor]
+    Parameters
+    ----------
+    sc2_replay : SC2ReplayData
+        Specifies the parsed structure of a replay.
 
+    Returns
+    -------
+    Tuple[torch.Tensor, torch.Tensor]
+        Returns a tensor containing features and a target.
+
+    Examples
+    --------
     **Correct Usage Examples:**
 
     This method may help you to operate with data on the game replay.
