@@ -39,8 +39,8 @@ def validate_integrity_mp(
     AssertionError
         If `n_workers` is not a positive integer.
 
-    Notes
-    -----
+    Examples
+    --------
     Correct Usage Examples:
 
     Validators can be used to check if a file is correct before

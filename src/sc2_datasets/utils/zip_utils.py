@@ -13,18 +13,20 @@ from tqdm import tqdm
 # REVIEW: Check this:
 def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
     """
-    Helper function for unpacking a chunk of files from an archive
+    Helper function for unpacking a chunk of files from an archive.
 
-    :param zip_path: Specifies the path to the archive file that will be extracted.
-    :type zip_path: str
-    :param filenames: specifies a list of the filenames which are within the archive
-    and will be extracted.
-    :type filenames: List[str]
-    :param path_to_extract: Specifies the path to which the files will be extracted to.
-    :type path_to_extract: str
+    Parameters
+    ----------
+    zip_path : str
+        Specifies the path to the archive file that will be extracted.
+    filenames : List[str]
+        Specifies a list of the filenames which are within the archive\
+        and will be extracted.
+    path_to_extract : str
+        Specifies the path to which the files will be extracted to.
 
-    **Correct Usage Examples:**
-
+    Examples
+    --------
     The use of this method is intended to extract a zipfile from the .zip file.
 
     You should set every parameter, zip_path, filenames and path_to_extract.
@@ -61,19 +63,29 @@ def unpack_zipfile(
     """
     Helper function that unpacks the content of .zip archive.
 
-    :param destination_dir: Specifies the path where the .zip file will be extracted.
-    :type destination_dir: str
-    :param subdir: Specifies the subdirectory where the content will be extracted.
-    :type subdir: str
-    :param zip_path: Specifies the path to the zip file that will be extracted.
-    :type zip_path: str
-    :param n_workers: Specifies the number of workers that will be used for unpacking the archive.
-    :type n_workers: int
-    :return: Returns a path to the extracted content.
-    :rtype: str
+    Parameters
+    ----------
+    destination_dir : str
+        Specifies the path where the .zip file will be extracted.
+    subdir : str
+        Specifies the subdirectory where the content will be extracted.
+    zip_path : str
+        Specifies the path to the zip file that will be extracted.
+    n_workers : int
+        Specifies the number of workers that will be used for unpacking the archive.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    str
+        Returns a path to the extracted content.
 
+    Raises
+    ------
+    Exception
+        Raises an exception if the number of workers is less or equal to zero.
+
+    Examples
+    --------
     The use of this method is intended to extract a zipfile.
 
     You should set every parameter, destination, subdir, zip_path and n_workers.
