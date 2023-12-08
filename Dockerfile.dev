@@ -13,4 +13,4 @@ WORKDIR /app
 COPY . .
 
 # Install only "production" dependencies
-RUN poetry install --without dev
+RUN poetry install
