@@ -40,6 +40,22 @@ If you are proposing a feature:
 
 ## Get Started!
 
+### Development with Docker
+
+If you wish to develop using Docker, there is a `Dockerfile.dev` defined. Please use the following commands:
+
+Build the Dockerfile:
+```
+docker build --tag=sc2_datasets:dev -f .\Dockerfile.dev .
+```
+
+Run the Dockerfile:
+```
+docker run --gpus all -it -v .:/app sc2_datasets:dev
+```
+
+### Local Development
+
 Ready to contribute? Here's how to set up `sc2_datasets` for local development.
 
 1. Download a copy of `sc2_datasets` locally.
