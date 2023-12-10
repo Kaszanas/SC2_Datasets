@@ -31,14 +31,22 @@ RUN set -ex \
 
 WORKDIR /app
 
+RUN pip install poetry
+# Install pytorch with CUDA GPU support:
+RUN pip install torch --index-url https://download.pytorch.org/whl/cu121
+
+# Copy only what is required to install the project:
+COPY pyproject.toml poetry.lock /app/
+
+# Install only dependencies without installing current project:
+RUN poetry config virtualenvs.create false && poetry install --no-root
+
 # Copy entire repository contents
 # This is needed because package needs the ability to install itself:
 COPY . .
 
-RUN pip install poetry
-# Install pytorch with CUDA GPU support:
-RUN pip install torch --index-url https://download.pytorch.org/whl/cu121
-RUN pip install numpy
+# Install current project:
+RUN poetry install
 
 # Install only "production" dependencies
 RUN poetry config virtualenvs.create false && poetry install

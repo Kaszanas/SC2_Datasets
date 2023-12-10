@@ -1,7 +1,7 @@
 version: '3'
 services:
 
-  django:
+  sc2_datasets:
     build:
       context: '../'
       dockerfile: './docker/Dockerfile.dev'

@@ -6,13 +6,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Copy entire repository contents
 # This is needed because package needs the ability to install itself:
-COPY . .
-
 RUN pip install poetry
 
-# Install only "production" dependencies
-RUN poetry config virtualenvs.create false && poetry install
+# Copy only what is required to install the project:
+COPY pyproject.toml poetry.lock /app/
+
+# Install only dependencies without installing current project:
+RUN poetry config virtualenvs.create false && poetry install --no-root
+
+# Copy entire repository contents
+COPY . .
+
+# Install current project:
+RUN poetry install
 
 CMD ["bash"]
