@@ -1,6 +1,9 @@
-FROM nvidia/cuda:12.1.0-runtime-ubuntu20.04
+ARG CUDA_VERSION=12.1.0
 
-ENV PYTHON_VERSION 3.11.4
+FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu20.04
+
+ARG PYTHON_VERSION=3.11.4
+ENV PYTHON_VERSION ${PYTHON_VERSION}
 
 # No questions from dependency installation:
 ARG DEBIAN_FRONTEND=noninteractive
@@ -26,13 +29,17 @@ RUN set -ex \
     && pyenv rehash
 
 # Install pytorch with CUDA GPU support:
-RUN pip install torch --index-url https://download.pytorch.org/whl/cu121
 
 WORKDIR /app
 
 # Copy entire repository contents
 # This is needed because package needs the ability to install itself:
 COPY . .
+
+RUN pip install poetry
+# Install pytorch with CUDA GPU support:
+RUN pip install torch --index-url https://download.pytorch.org/whl/cu121
+RUN pip install numpy
 
 # Install only "production" dependencies
 RUN poetry install --without dev
