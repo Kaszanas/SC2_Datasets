@@ -32,9 +32,13 @@ jobs:
       - name: Run pre-commit on all files.
         run: pre-commit run --all-files
 
-        # TODO: This can be done on CPU version
-      - name: Build Development Dockerfile.
-        run: docker build -f .\Dockerfile.dev .
+      - name: Build Docker Image With Compose
+        run: |
+          make action_compose_build
+
+      - name: Run Docker Tests With Compose
+        run: |
+          make action_compose_test
 
         # REVIEW: Should this be replaced with Dockerized tests?
       - name: Test with pytest
