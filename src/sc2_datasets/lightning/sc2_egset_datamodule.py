@@ -30,7 +30,8 @@ class SC2EGSetDataModule(SC2DataModule):
     dims : _type_, optional
         Specifies a tuple describing the shape of your data.\
         Extra functionality exposed in size,\
-        Deprecated since version v1.5: Will be removed in v1.7.0,\, by default None
+        Deprecated since version v1.5: Will be removed in v1.7.0,\
+        by default None
     batch_size : int, optional
         Specifies the size of collating individual\
         fetched data samples, by default 256
