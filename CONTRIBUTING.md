@@ -44,9 +44,14 @@ If you are proposing a feature:
 
 If you wish to develop using Docker, there is a `Dockerfile.dev` defined. Please use the following commands:
 
-Build the Dockerfile:
+Build the Dockerfile (CPU):
 ```
-docker build --tag=sc2_datasets:dev -f .\Dockerfile.dev .
+docker build --tag=sc2_datasets:dev -f .\docker\Dockerfile.dev .
+```
+
+Build the Dockerfile (GPU):
+```
+docker build --tag=sc2_datasets:dev -f .\docker\Dockerfile.dev.gpu .
 ```
 
 Run the Dockerfile:

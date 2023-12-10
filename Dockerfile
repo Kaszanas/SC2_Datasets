@@ -42,4 +42,4 @@ RUN pip install torch --index-url https://download.pytorch.org/whl/cu121
 RUN pip install numpy
 
 # Install only "production" dependencies
-RUN poetry install --without dev
+RUN poetry config virtualenvs.create false && poetry install --without dev
