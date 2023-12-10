@@ -15,7 +15,7 @@ class GameEvent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def from_dict(d: Dict) -> "GameEvent":
         """
-        Abstract method that returns a GameEvent object. 
+        Abstract method that returns a GameEvent object.
         This method aids in implementation,
         specifically in the context of parsing original JSON data.
 

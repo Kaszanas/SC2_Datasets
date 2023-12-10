@@ -102,7 +102,7 @@ def get_specific_asset_path(filename: str) -> Path:
 
     asset_dir = get_assets_dir()
     list_image_dir = os.listdir(asset_dir)
-    if not filename in list_image_dir:
+    if filename not in list_image_dir:
         raise AssetError("This asset doesn't exist.")
 
     return Path(asset_dir, filename)

@@ -39,7 +39,6 @@ class SC2EGSetDatasetTest(unittest.TestCase):
             )
 
     def setUp(self) -> None:
-
         if self.download.exists():
             shutil.rmtree(path=self.downloaded.as_posix())
 

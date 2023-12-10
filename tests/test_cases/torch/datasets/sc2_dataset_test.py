@@ -38,7 +38,6 @@ class SC2DatasetTest(unittest.TestCase):
             )
 
     def setUp(self) -> None:
-
         if self.download.exists():
             shutil.rmtree(path=self.downloaded.as_posix())
 
@@ -46,7 +45,6 @@ class SC2DatasetTest(unittest.TestCase):
             shutil.rmtree(path=self.unpacked.as_posix())
 
     def test_parsing_test_files(self):
-
         # REVIEW: Will this work correctly?
         sc2egset_dataset = SC2Dataset(
             unpack_dir=self.unpack_dir_path,
@@ -72,7 +70,6 @@ class SC2DatasetTest(unittest.TestCase):
         self.assertEqual(hash(sc2_replaydata_0), hash(sc2_replaydata_1))
 
     def test_downloading_replaypacks(self):
-
         sc2egset_dataset = SC2Dataset(
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,

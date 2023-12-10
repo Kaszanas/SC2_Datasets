@@ -42,7 +42,6 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
             )
 
     def setUp(self) -> None:
-
         if self.download.exists():
             shutil.rmtree(path=self.downloaded.as_posix())
 
@@ -51,7 +50,6 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
 
     @pytest.mark.minor
     def test_unpack_datamodule_synthetic(self):
-
         sc2_replaypack_datamodule = SC2ReplaypackDataModule(
             replaypack_name=self.test_replaypack_name,
             unpack_dir=self.unpack_dir_path,
@@ -63,10 +61,8 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
 
     @pytest.mark.minor
     def test_download_unpack_datamodule_synthetic(self):
-
         for rp_name, rp_url in TEST_SYNTHETIC_REPLAYPACKS:
             with self.subTest(rp_name):
-
                 sc2_replaypack_datamodule = SC2ReplaypackDataModule(
                     replaypack_name=rp_name,
                     unpack_dir=self.unpack_dir_path,
@@ -83,7 +79,6 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
     def test_download_unpack_datamodule_real(self):
         for rp_name, rp_url in TEST_REAL_REPLAYPACKS:
             with self.subTest(rp_name):
-
                 sc2_replaypack_datamodule = SC2ReplaypackDataModule(
                     replaypack_name=rp_name,
                     unpack_dir=self.unpack_dir_path,

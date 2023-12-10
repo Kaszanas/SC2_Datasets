@@ -48,7 +48,7 @@ def validate_chunk(
             # Trying to parse the SC2 replay:
             _ = SC2ReplayData.from_file(replay_filepath=file_path)
             result.append((file_path, True))
-        except:
+        except:  # noqa
             # If the file cannot be parsed it is added to files that should be skipped:
             # skip_files.add(file_path)
             result.append((file_path, False))

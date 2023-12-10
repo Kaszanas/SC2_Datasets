@@ -17,7 +17,6 @@ from tests.test_utils.test_utils import get_setup_paths
 class SC2ReplaypackDatasetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-
         (
             cls.test_replaypack_name,
             cls.replaypack_zip_path,
@@ -40,7 +39,6 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
             )
 
     def setUp(self) -> None:
-
         if self.download.exists():
             shutil.rmtree(path=self.downloaded.as_posix())
 
@@ -49,7 +47,6 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
     @pytest.mark.minor
     def test_unpack_replaypack_synthetic(self):
-
         sc2_replaypack_dataset = SC2ReplaypackDataset(
             replaypack_name=self.test_replaypack_name,
             unpack_dir=self.unpack_dir_path,
@@ -70,7 +67,6 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
     @pytest.mark.minor
     def test_download_unpack_replaypack_synthetic(self):
-
         sc2_replaypack_dataset = SC2ReplaypackDataset(
             replaypack_name=TEST_SYNTHETIC_REPLAYPACKS[0][0],
             unpack_dir=self.unpack_dir_path,
@@ -93,7 +89,6 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
     @pytest.mark.major
     def test_download_unpack_replaypack_real(self):
-
         for rp_name, rp_url in TEST_REAL_REPLAYPACKS:
             with self.subTest(rp_name):
                 sc2_replaypack_dataset = SC2ReplaypackDataset(
