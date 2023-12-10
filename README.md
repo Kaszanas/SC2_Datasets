@@ -75,7 +75,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`sc2egset_dataset` was created by Andrzej Białecki. It is licensed under the terms of the GNU General Public License v3.0 license.
+`sc2_datasets` project was created by Andrzej Białecki. It is licensed under the terms of the GNU General Public License v3.0 license.
 
 ## Citations
 

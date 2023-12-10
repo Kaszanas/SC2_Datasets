@@ -42,7 +42,7 @@ jobs:
 
         # REVIEW: Should this be replaced with Dockerized tests?
       - name: Test with pytest
-        run: poetry run pytest -m minor --ignore-glob='test_*.py' tests/test_cases/ --cov=sc2egset_dataset --cov-report term-missing --cov=xml
+        run: poetry run pytest -m minor --ignore-glob='test_*.py' tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov=xml
 
       # See if the documentation builds correctly:
       - name: Build documentation

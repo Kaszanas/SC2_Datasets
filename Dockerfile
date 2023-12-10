@@ -1,13 +1,12 @@
 ARG CUDA_VERSION=12.1.0
+ARG PYTHON_VERSION=3.11.4
 
 FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu20.04
 
-ARG PYTHON_VERSION=3.11.4
 ENV PYTHON_VERSION ${PYTHON_VERSION}
 
 # No questions from dependency installation:
-ARG DEBIAN_FRONTEND=noninteractive
-
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     make build-essential \
     libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
@@ -29,7 +28,6 @@ RUN set -ex \
     && pyenv rehash
 
 # Install pytorch with CUDA GPU support:
-
 WORKDIR /app
 
 # Copy entire repository contents
