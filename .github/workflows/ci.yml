@@ -36,10 +36,5 @@ jobs:
       - name: Test with pytest
         run: poetry run pytest -m minor --ignore-glob='test_*.py' tests/test_cases/ --cov=sc2egset_dataset --cov-report term-missing --cov=xml
 
-      # - name: Use Codecov to track coverage
-      #   uses: codecov/codecov-action@v2
-      #   with:
-      #     files: ./coverage.xml # coverage report
-
       - name: Build documentation
         run: poetry run make html --directory docs/
