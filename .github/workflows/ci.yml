@@ -24,17 +24,22 @@ jobs:
       - name: Install poetry
         uses: snok/install-poetry@v1
 
-      - name: Install package
+      - name: Install the current project package
         run: poetry install
 
-      - name: Run pylama to check src directory
-        run: poetry run pylama --async src/
+      - name: Install pre-commit.
+        run: pre-commit install
+      - name: Run pre-commit on all files.
+        run: pre-commit run --all-files
 
-      - name: Run pylama on the tests directory
-        run: poetry run pylama --async tests/
+        # TODO: This can be done on CPU version
+      - name: Build Development Dockerfile.
+        run: docker build -f .\Dockerfile.dev .
 
+        # REVIEW: Should this be replaced with Dockerized tests?
       - name: Test with pytest
         run: poetry run pytest -m minor --ignore-glob='test_*.py' tests/test_cases/ --cov=sc2egset_dataset --cov-report term-missing --cov=xml
 
+      # See if the documentation builds correctly:
       - name: Build documentation
         run: poetry run make html --directory docs/
