@@ -12,6 +12,9 @@ from sc2_datasets.transforms.pandas.player_stats_to_dict import (
 
 import tests.test_utils.test_utils as test_utils
 
+# REVIEW: These tests are only verifying the types of the data structures.
+# Should these also verify their contents? How deep should these tests go?
+
 
 @pytest.mark.minor
 class PlayerStatsToDictTest(unittest.TestCase):

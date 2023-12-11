@@ -24,6 +24,7 @@ jobs:
       - name: Install poetry
         uses: snok/install-poetry@v1
 
+        # TODO: No need to install all dependencies, only pre-commit
       - name: Install the current project package
         run: poetry install
 
@@ -44,6 +45,7 @@ jobs:
       - name: Test with pytest
         run: poetry run pytest -m minor --ignore-glob='test_*.py' tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov=xml
 
+      # TODO: This may be ran in docker:
       # See if the documentation builds correctly:
       - name: Build documentation
         run: poetry run make html --directory docs/
