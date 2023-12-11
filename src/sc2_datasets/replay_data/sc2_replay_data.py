@@ -67,21 +67,14 @@ class SC2ReplayData:
 
         logging.info(f"Attempting to parse: {replay_path.as_posix()}")
         with replay_path.open(mode="r", encoding="utf-8") as replay_file:
-            # try:
             loaded_data = json.load(replay_file)
-            # except UnicodeDecodeError as exc:
-            #     logging.error(
-            #         f"UnicodeDecodeError was raised for file {replay_filepath}",
-            #         exc_info=True,
-            #     )
-            # except json.decoder.JSONDecodeError as exc:
-            #     logging.error(
-            #         f"JSONDecodeError was raised for file {replay_filepath}",
-            #         exc_info=True,
-            #     )
             return SC2ReplayData(loaded_replay_object=loaded_data)
 
-    def __init__(self, loaded_replay_object: Any) -> None:
+    def __init__(self, filepath: Path, loaded_replay_object: Any) -> None:
+        # Replay data must contain the path to the json it comes from
+        # to allow for debugging:
+        self._filepath = filepath
+
         self._header = Header.from_dict(d=loaded_replay_object["header"])
         self._initData = InitData.from_dict(d=loaded_replay_object["initData"])
         self._details = Details.from_dict(d=loaded_replay_object["details"])
@@ -105,6 +98,7 @@ class SC2ReplayData:
         toon_player_desc_dict: Dict[str, Dict[str, Any]] = loaded_replay_object[
             "ToonPlayerDescMap"
         ]
+
         self._toonPlayerDescMap = [
             ToonPlayerDesc.from_dict(toon=toon, d=player_dict)
             for toon, player_dict in toon_player_desc_dict.items()
@@ -148,6 +142,10 @@ class SC2ReplayData:
         )
 
     # REVIEW: Should the properties be documented?
+    @property
+    def filepath(self):
+        return self._filepath
+
     @property
     def initData(self):
         return self._initData
