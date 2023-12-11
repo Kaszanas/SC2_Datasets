@@ -36,7 +36,6 @@ class SC2ReplayData:
         loaded into memory
     """
 
-    # REVIEW: Doctests, and commented out code:
     @staticmethod
     def from_file(replay_filepath: str) -> "SC2ReplayData":
         """
@@ -68,7 +67,7 @@ class SC2ReplayData:
         logging.info(f"Attempting to parse: {replay_path.as_posix()}")
         with replay_path.open(mode="r", encoding="utf-8") as replay_file:
             loaded_data = json.load(replay_file)
-            return SC2ReplayData(loaded_replay_object=loaded_data)
+            return SC2ReplayData(filepath=replay_path, loaded_replay_object=loaded_data)
 
     def __init__(self, filepath: Path, loaded_replay_object: Any) -> None:
         # Replay data must contain the path to the json it comes from
