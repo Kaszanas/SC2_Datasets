@@ -52,7 +52,7 @@ def economy_average_vs_outcome(
     """
 
     average_player_features = average_player_stats(
-        player_tracker_events=sc2_replay.trackerEvents
+        sc2_replay
     )
     feature_list = [
         player_features for player_features in average_player_features.values()
@@ -61,7 +61,7 @@ def economy_average_vs_outcome(
     # Creating feature tensor:
     feature_tensor = torch.tensor(feature_list, dtype=torch.float32)
 
-    result_dict = {"Loss": 0, "Win": 1}
+    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0}
     target = result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result]
 
     return feature_tensor, target
