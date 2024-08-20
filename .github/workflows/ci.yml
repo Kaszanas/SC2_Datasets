@@ -13,16 +13,16 @@ jobs:
 
     # Define job steps
     steps:
-      - name: Set up Python 3.10.2
-        uses: actions/setup-python@v2
+      - name: Set up Python 3.11.4
+        uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f
         with:
-          python-version: 3.10.2
+          python-version: "3.11.4"
 
       - name: Check-out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
 
       - name: Install poetry
-        uses: snok/install-poetry@v1
+        uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a
 
         # TODO: No need to install all dependencies, only pre-commit
       - name: Install the current project package
