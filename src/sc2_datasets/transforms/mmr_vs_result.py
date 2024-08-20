@@ -28,7 +28,7 @@ def mmr_vs_result(sc2_replay: SC2ReplayData) -> Tuple[torch.Tensor, torch.Tensor
         dtype=torch.float,
     )
 
-    result_dict = {"Loss": 0, "Win": 1}
+    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0}
     label_tensor = torch.tensor(
         result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result],
         dtype=torch.int8,
