@@ -20,15 +20,21 @@ import tests.test_utils.test_utils as test_utils
 class PlayerStatsToDictTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.test_replay = test_utils.get_specific_asset_path(
-            filename="test_replay.json"
-        )
-        cls.sc2_replay_data = SC2ReplayData.from_file(replay_filepath=cls.test_replay)
+        list_of_test_filenames = ["test_replay.json", "test_replay_victory_defeat.json"]
+
+        cls.test_replays = []
+        for filename in list_of_test_filenames:
+            cls.test_replays.append(
+                test_utils.get_specific_asset_path(filename=filename)
+            )
+
+        cls.sc2_replays_data = []
+        for replay in cls.test_replays:
+            sc2_replay = SC2ReplayData.from_file(replay_filepath=replay)
+            cls.sc2_replays_data.append(sc2_replay)
 
     def test_playerstats_to_dict(self):
         res_dict = playerstats_to_dict(sc2_replay=self.sc2_replay_data)
-
-        # print(res_dict)
 
         # Type assertions for data:
         for playerID, feature_dict in res_dict.items():
