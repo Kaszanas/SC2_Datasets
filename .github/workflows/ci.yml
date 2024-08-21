@@ -35,9 +35,9 @@ jobs:
         run: poetry install --with dev
 
       - name: Initialize pre-commit
-        run: pre-commit install
+        run: poetry run pre-commit install
       - name: Run pre-commit on all files.
-        run: pre-commit run --all-files
+        run: poetry run pre-commit run --all-files
 
       - name: Build Docker Image With Compose
         run: |
