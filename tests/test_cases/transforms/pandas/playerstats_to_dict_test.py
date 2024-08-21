@@ -1,3 +1,5 @@
+from pathlib import Path
+from typing import List
 import unittest
 
 import pandas as pd
@@ -22,21 +24,20 @@ class PlayerStatsToDictTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         list_of_test_filenames = ["test_replay.json", "test_replay_victory_defeat.json"]
 
-        cls.test_replays = []
+        cls.test_replays: List[Path] = []
         for filename in list_of_test_filenames:
             cls.test_replays.append(
                 test_utils.get_specific_asset_path(filename=filename)
             )
 
-        cls.sc2_replays_data = []
+        cls.sc2_replays_data: List[SC2ReplayData] = []
         for replay in cls.test_replays:
             sc2_replay = SC2ReplayData.from_file(replay_filepath=replay)
             cls.sc2_replays_data.append(sc2_replay)
 
     def test_playerstats_to_dict(self):
-        res_dict = playerstats_to_dict(sc2_replay=self.sc2_replays_data)
         for sc2_replay in self.sc2_replays_data:
-            with self.subTest(sc2_replay=sc2_replay):
+            with self.subTest(str(sc2_replay.filepath)):
                 res_dict = playerstats_to_dict(sc2_replay=sc2_replay)
 
                 # Type assertions for data:
@@ -53,9 +54,9 @@ class PlayerStatsToDictTest(unittest.TestCase):
             "2": {"outcome": 2},
         }
         for sc2_replay in self.sc2_replays_data:
-            with self.subTest(sc2_replay=sc2_replay):
+            with self.subTest(str(sc2_replay.filepath)):
                 res_dict = playerstats_to_dict(
-                    sc2_replay=self.sc2_replays_data,
+                    sc2_replay=sc2_replay,
                     additional_data_dict=additional_data,
                 )
 
@@ -71,8 +72,8 @@ class PlayerStatsToDictTest(unittest.TestCase):
 
     def test_playerstats_average_to_dict(self):
         for sc2_replay in self.sc2_replays_data:
-            with self.subTest(sc2_replay=sc2_replay):
-                res_dict = playerstats_average_to_dict(sc2_replay=self.sc2_replays_data)
+            with self.subTest(str(sc2_replay.filepath)):
+                res_dict = playerstats_average_to_dict(sc2_replay=sc2_replay)
 
                 # Type assertions for data:
                 self.assertIsInstance(res_dict, dict)
@@ -82,12 +83,14 @@ class PlayerStatsToDictTest(unittest.TestCase):
 
     def test_average_playerstats_dataframe(self):
         for sc2_replay in self.sc2_replays_data:
-            with self.subTest(sc2_replay=sc2_replay):
-                ps_dict = playerstats_to_dict(sc2_replay=self.sc2_replays_data)
+            with self.subTest(str(sc2_replay.filepath)):
+                ps_dict = playerstats_to_dict(sc2_replay=sc2_replay)
                 for playerID, df_repr in ps_dict.items():
                     # Initializing dataframe from dict:
                     dataframe = pd.DataFrame.from_dict(df_repr)
-                    dict_average_repr = average_playerstats_dataframe(playerstats_df=dataframe)
+                    dict_average_repr = average_playerstats_dataframe(
+                        playerstats_df=dataframe
+                    )
 
                     # Type assertions for the data:
                     self.assertIsInstance(playerID, str)
