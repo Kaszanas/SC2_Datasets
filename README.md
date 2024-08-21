@@ -77,81 +77,32 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 `sc2_datasets` project was created by Andrzej Białecki. It is licensed under the terms of the GNU General Public License v3.0 license.
 
-## Citations
+## Cite
 
-### This Repository
-
-If you wish to cite the official API for the SC2EGSet: StarCraft II Esport Game State Dataset.
-
-```bibtex
-@software{bialecki_andrzej_2022_6930224,
-  author       = {Białecki, Andrzej and
-                  Białecki, Piotr and
-                  Szczap, Andrzej and
-                  Krupiński, Leszek},
-  title        = {Kaszanas/SC2\_Datasets: 1.0.0 SC2\_Datasets Release},
-  month        = jul,
-  year         = 2022,
-  publisher    = {Zenodo},
-  version      = {1.0.0},
-  doi          = {10.5281/zenodo.6629005},
-  url          = {https://doi.org/10.5281/zenodo.6629005}
-}
-```
-
-### [Dataset Description Pre-print](https://arxiv.org/abs/2207.03428)
+### [Dataset Description Article](https://www.researchgate.net/publication/373767449_SC2EGSet_StarCraft_II_Esport_Replay_and_Game-state_Dataset)
 
 To cite the article that introduces [SC2ReSet](https://doi.org/10.5281/zenodo.5575796) and [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) use this:
 
 ```bibtex
-@misc{https://doi.org/10.48550/arxiv.2207.03428,
-  doi       = {10.48550/ARXIV.2207.03428},
-  url       = {https://arxiv.org/abs/2207.03428},
-  author    = {Białecki, Andrzej and Jakubowska, Natalia and Dobrowolski, Paweł and Białecki, Piotr and Krupiński, Leszek and Szczap, Andrzej and Białecki, Robert and Gajewski, Jan},
-  keywords  = {Machine Learning (cs.LG), Artificial Intelligence (cs.AI), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  title     = {SC2EGSet: StarCraft II Esport Replay and Game-state Dataset},
-  publisher = {arXiv},
-  year      = {2022},
-  copyright = {Creative Commons Attribution 4.0 International}
-}
-
-```
-
-### [SC2ReSet: StarCraft II Esport Replaypack Set](https://doi.org/10.5281/zenodo.5575796)
-
-To cite the replay collection that was used to generate the dataset use this:
-
-```bibtex
-@dataset{bialecki_andrzej_2022_5575797,
-  author       = {Białecki, Andrzej},
-  title        = {SC2ReSet: StarCraft II Esport Replaypack Set},
-  month        = jun,
-  year         = 2022,
-  publisher    = {Zenodo},
-  version      = {1.0.0},
-  doi          = {10.5281/zenodo.5575797},
-  url          = {https://doi.org/10.5281/zenodo.5575797}
-}
-```
-
-### [SC2EGSet: StarCraft II Esport Game State Dataset](https://doi.org/10.5281/zenodo.5503997)
-
-To cite the data itself use this:
-
-```bibtex
-@dataset{bialecki_andrzej_2022_6629349,
-  author       = {Białecki, Andrzej and
-                  Jakubowska, Natalia and
-                  Dobrowolski, Paweł and
-                  Szczap, Andrzej and
-                  Białecki, Robert and
-                  Gajewski, Jan},
-  title        = {SC2EGSet: StarCraft II Esport Game State Dataset},
-  month        = jun,
-  year         = 2022,
-  publisher    = {Zenodo},
-  version      = {1.0.0},
-  doi          = {10.5281/zenodo.6629349},
-  url          = {https://doi.org/10.5281/zenodo.6629349}
+@article{Białecki2023,
+  author   = {Bia{\l}ecki, Andrzej
+              and Jakubowska, Natalia
+              and Dobrowolski, Pawe{\l}
+              and Bia{\l}ecki, Piotr
+              and Krupi{\'{n}}ski, Leszek
+              and Szczap, Andrzej
+              and Bia{\l}ecki, Robert
+              and Gajewski, Jan},
+  title    = {SC2EGSet: StarCraft II Esport Replay and Game-state Dataset},
+  journal  = {Scientific Data},
+  year     = {2023},
+  month    = {Sep},
+  day      = {08},
+  volume   = {10},
+  number   = {1},
+  pages    = {600},
+  issn     = {2052-4463},
+  doi      = {10.1038/s41597-023-02510-7},
+  url      = {https://doi.org/10.1038/s41597-023-02510-7}
 }
 ```
