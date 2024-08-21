@@ -13,7 +13,7 @@ env:
 
 jobs:
   ci:
-    if: github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.comment.body == 'recheck ci' && github.event.comment.user.login == 'Kaszanas')
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'issue_comment' || github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.comment.body == 'recheck ci' && github.event.comment.user.login == 'Kaszanas')
     # Set up operating system
     runs-on: ubuntu-latest
 
