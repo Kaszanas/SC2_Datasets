@@ -78,7 +78,9 @@ Ready to contribute? Here's how to set up `sc2_datasets` for local development.
 
 4. When you're done making changes, check that your changes conform to any code formatting requirements and pass any tests.
 
-5. Commit your changes and open a pull request.
+5. Before running tests make sure to setup environment variable name: `TEST_WORKSPACE` value: `YOUR_PATH_TO_APP`
+
+6. Commit your changes and open a pull request.
 
 ## Pull Request Guidelines
 

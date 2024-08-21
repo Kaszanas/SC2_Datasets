@@ -234,7 +234,7 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     player_outcome = {"1": 0, "2": 0}
 
-    result_dict = {"Loss": 0, "Win": 1}
+    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0}
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
         result = result_dict[toon_desc_map.toon_player_info.result]
         player_outcome[toon_desc_map.toon_player_info.playerID] = result
