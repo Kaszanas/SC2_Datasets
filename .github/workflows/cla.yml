@@ -6,20 +6,20 @@ on:
     types: [opened,closed,synchronize]
 
 jobs:
-  CLAssistant:
+  CLAAssistant:
     runs-on: ubuntu-latest
     steps:
       - name: "CLA Assistant"
         if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
-        # Beta Release
-        uses: cla-assistant/github-action@v2.1.3-beta
+        uses: contributor-assistant/github-action@dbc1c64d82d3aad5072007a41fff2828ae6d23ec
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # the below token should have repo scope and must be manually added by you in the repository's secret
-          PERSONAL_ACCESS_TOKEN : ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          # This token is required only if you have configured to store the signatures in a remote repository/organization
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
           path-to-signatures: 'signatures/version1/cla.json'
-          path-to-document: 'https://github.com/Kaszanas/SC2EGSet_Dataset/blob/main/CLA.md' # e.g. a CLA or a DCO document
+          path-to-document: 'https://github.com/Kaszanas/SC2_Datasets/blob/main/CLA.md' # e.g. a CLA or a DCO document
           # branch should not be protected
           branch: 'main'
           allowlist: Kaszanas,bot*
