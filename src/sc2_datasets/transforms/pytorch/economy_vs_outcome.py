@@ -51,9 +51,7 @@ def economy_average_vs_outcome(
     If you don't set parameters or paste incorect parameters' type.
     """
 
-    average_player_features = average_player_stats(
-        sc2_replay
-    )
+    average_player_features = average_player_stats(sc2_replay)
     feature_list = [
         player_features for player_features in average_player_features.values()
     ]
