@@ -34,55 +34,63 @@ class PlayerStatsToDictTest(unittest.TestCase):
             cls.sc2_replays_data.append(sc2_replay)
 
     def test_playerstats_to_dict(self):
-        res_dict = playerstats_to_dict(sc2_replay=self.sc2_replay_data)
+        res_dict = playerstats_to_dict(sc2_replay=self.sc2_replays_data)
+        for sc2_replay in self.sc2_replays_data:
+            with self.subTest(sc2_replay=sc2_replay):
+                res_dict = playerstats_to_dict(sc2_replay=sc2_replay)
 
-        # Type assertions for data:
-        for playerID, feature_dict in res_dict.items():
-            self.assertIsInstance(playerID, str)
-            self.assertIsInstance(feature_dict, dict)
-            for key, feature_list in feature_dict.items():
-                self.assertIsInstance(key, str)
-                self.assertIsInstance(feature_list, list)
+                # Type assertions for data:
+                for playerID, feature_dict in res_dict.items():
+                    self.assertIsInstance(playerID, str)
+                    self.assertIsInstance(feature_dict, dict)
+                    for key, feature_list in feature_dict.items():
+                        self.assertIsInstance(key, str)
+                        self.assertIsInstance(feature_list, list)
 
     def test_playerstats_to_dict_additional_data(self):
         additional_data = {
             "1": {"outcome": 1},
             "2": {"outcome": 2},
         }
+        for sc2_replay in self.sc2_replays_data:
+            with self.subTest(sc2_replay=sc2_replay):
+                res_dict = playerstats_to_dict(
+                    sc2_replay=self.sc2_replays_data,
+                    additional_data_dict=additional_data,
+                )
 
-        res_dict = playerstats_to_dict(
-            sc2_replay=self.sc2_replay_data,
-            additional_data_dict=additional_data,
-        )
-
-        # Type assertions for data:
-        for playerID, feature_dict in res_dict.items():
-            self.assertIsInstance(playerID, str)
-            self.assertIsInstance(feature_dict, dict)
-            # Assertions for additional data:
-            self.assertTrue("outcome" in feature_dict)
-            for key, feature_list in feature_dict.items():
-                self.assertIsInstance(key, str)
-                self.assertIsInstance(feature_list, list)
+            # Type assertions for data:
+            for playerID, feature_dict in res_dict.items():
+                self.assertIsInstance(playerID, str)
+                self.assertIsInstance(feature_dict, dict)
+                # Assertions for additional data:
+                self.assertTrue("outcome" in feature_dict)
+                for key, feature_list in feature_dict.items():
+                    self.assertIsInstance(key, str)
+                    self.assertIsInstance(feature_list, list)
 
     def test_playerstats_average_to_dict(self):
-        res_dict = playerstats_average_to_dict(sc2_replay=self.sc2_replay_data)
+        for sc2_replay in self.sc2_replays_data:
+            with self.subTest(sc2_replay=sc2_replay):
+                res_dict = playerstats_average_to_dict(sc2_replay=self.sc2_replays_data)
 
-        # Type assertions for data:
-        self.assertIsInstance(res_dict, dict)
-        for key, value in res_dict.items():
-            self.assertIsInstance(key, str)
-            self.assertIsInstance(value, dict)
+                # Type assertions for data:
+                self.assertIsInstance(res_dict, dict)
+                for key, value in res_dict.items():
+                    self.assertIsInstance(key, str)
+                    self.assertIsInstance(value, dict)
 
     def test_average_playerstats_dataframe(self):
-        ps_dict = playerstats_to_dict(sc2_replay=self.sc2_replay_data)
-        for playerID, df_repr in ps_dict.items():
-            # Initializing dataframe from dict:
-            dataframe = pd.DataFrame.from_dict(df_repr)
-            dict_average_repr = average_playerstats_dataframe(playerstats_df=dataframe)
+        for sc2_replay in self.sc2_replays_data:
+            with self.subTest(sc2_replay=sc2_replay):
+                ps_dict = playerstats_to_dict(sc2_replay=self.sc2_replays_data)
+                for playerID, df_repr in ps_dict.items():
+                    # Initializing dataframe from dict:
+                    dataframe = pd.DataFrame.from_dict(df_repr)
+                    dict_average_repr = average_playerstats_dataframe(playerstats_df=dataframe)
 
-            # Type assertions for the data:
-            self.assertIsInstance(playerID, str)
-            for key, value in dict_average_repr.items():
-                self.assertIsInstance(key, str)
-                self.assertIsInstance(value, float)
+                    # Type assertions for the data:
+                    self.assertIsInstance(playerID, str)
+                    for key, value in dict_average_repr.items():
+                        self.assertIsInstance(key, str)
+                        self.assertIsInstance(value, float)
