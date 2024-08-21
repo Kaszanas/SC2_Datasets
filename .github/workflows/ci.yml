@@ -1,4 +1,4 @@
-name: continuous integration (ci)
+name: Continuous Integration (CI)
 
 on:
   pull_request:
