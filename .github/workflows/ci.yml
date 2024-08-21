@@ -39,6 +39,8 @@ jobs:
       - name: Run pre-commit on all files.
         run: poetry run pre-commit run --all-files
 
+      - name: Install all dependencies
+        run: poetry install
       - name: Run tests
         run: poetry run pytest --ignore-glob='test_*.py' ./tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov-report html --cov=xml 2>&1
 
