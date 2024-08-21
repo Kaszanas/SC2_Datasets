@@ -1,6 +1,7 @@
 import unittest
 
 import pytest
+from pathlib import Path
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 import tests.test_utils.test_utils as test_utils
@@ -33,4 +34,4 @@ class SC2ReplayDataTest(unittest.TestCase):
     def test_empty_json(self):
         # Empty json should raise a KeyError:
         with self.assertRaises(KeyError):
-            _ = SC2ReplayData(loaded_replay_object={})
+            _ = SC2ReplayData(filepath=Path(""), loaded_replay_object={})
