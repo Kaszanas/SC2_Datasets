@@ -24,11 +24,11 @@ jobs:
       - name: Install poetry
         uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a
 
-        # TODO: No need to install all dependencies, only pre-commit
-      - name: Install the current project package
-        run: poetry install
+        # Installing only development dependencies (for pre-commit)
+      - name: Install development dependencies
+        run: poetry install --with dev
 
-      - name: Install pre-commit.
+      - name: Initialize pre-commit
         run: pre-commit install
       - name: Run pre-commit on all files.
         run: pre-commit run --all-files
@@ -40,10 +40,6 @@ jobs:
       - name: Run Docker Tests With Compose
         run: |
           make action_compose_test
-
-        # REVIEW: Should this be replaced with Dockerized tests?
-      - name: Test with pytest
-        run: poetry run pytest -m minor --ignore-glob='test_*.py' tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov=xml
 
       # TODO: This may be ran in docker:
       # See if the documentation builds correctly:
