@@ -11,5 +11,6 @@ coverage.xml
 *_cache
 
 venv*
+.venv
 
 test_output/*
