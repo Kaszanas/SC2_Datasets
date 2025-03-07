@@ -20,12 +20,12 @@ jobs:
     # Define job steps
     steps:
       - name: Set up Python 3.11.4
-        uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
         with:
           python-version: "3.11.4"
 
       - name: Check-out repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Install poetry
         uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a
