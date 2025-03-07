@@ -1,8 +1,7 @@
 ARG CUDA_VERSION=12.1.0
-ARG PYTHON_VERSION=3.11.4
+FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu22.04
 
-FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu20.04
-
+ARG PYTHON_VERSION=3.11.10
 ENV PYTHON_VERSION ${PYTHON_VERSION}
 
 # No questions from dependency installation:
