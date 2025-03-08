@@ -50,3 +50,5 @@ RUN poetry install
 
 # Install only "production" dependencies
 RUN poetry config virtualenvs.create false && poetry install
+
+CMD ["bash"]
