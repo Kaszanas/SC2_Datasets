@@ -20,6 +20,7 @@ sphinx-autoapi = "^3.0.0"
 furo = "^2024.8.6"
 pre-commit = "^4.1.0"
 ruff = "^0.9.10"
+commitizen = "^4.4.1"
 
 [tool.ruff]
 target-version = "py311"
