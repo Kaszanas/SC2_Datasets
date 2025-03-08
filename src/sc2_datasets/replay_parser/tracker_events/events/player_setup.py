@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
 class PlayerSetup(TrackerEvent):
-
     """
     Data type that denotes a player setup event which is available in tracker events.
     It contains basic information mapping userId to playerId to slotId.

@@ -1,5 +1,5 @@
 """
-    Module with global variables specifying collections of available replaypacks.
+Module with global variables specifying collections of available replaypacks.
 """
 
 EXAMPLE_SYNTHETIC_REPLAYPACKS = [

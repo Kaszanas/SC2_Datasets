@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.message_events.message_event import MessageEvent
 
 
 class Chat(MessageEvent):
-
     """
     Chat holds information about messages exchanged between players during the game.
 

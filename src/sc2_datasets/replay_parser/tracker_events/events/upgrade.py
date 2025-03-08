@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
 class Upgrade(TrackerEvent):
-
     """
     Upgrade type containing some "details" information
     on which player is doing an upgrade, game loop, upgrade in game name etc.

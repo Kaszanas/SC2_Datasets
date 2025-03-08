@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
 class UnitDone(TrackerEvent):
-
     """
     UnitDone is containing some "details" information about unit at the moment
     of it has built in the game.

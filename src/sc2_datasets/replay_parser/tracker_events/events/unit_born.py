@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
 class UnitBorn(TrackerEvent):
-
     """
     UnitBorn contains some "details" information about unit
     at the moment of it has appeared in the game.

@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.toon_player_desc_map.color import Color
 
 
 class ToonPlayerInfo:
-
     """
     Specifies ToonPlayerInfo class representation.
 

@@ -1,5 +1,4 @@
 class Target3D:
-
     """
     Data type holding information about a 3D target point in space.
 

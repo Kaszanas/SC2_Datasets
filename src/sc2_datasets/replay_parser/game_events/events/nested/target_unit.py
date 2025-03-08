@@ -2,7 +2,6 @@ from sc2_datasets.replay_parser.game_events.events.nested.target_3d import Targe
 
 
 class TargetUnit:
-
     """
     Specifies information about a targeted unit, although the precise meaning of this data type isn't verified.
 

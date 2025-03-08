@@ -8,7 +8,6 @@ from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackData
 
 
 class SC2ReplaypackDataModule(pl.LightningDataModule):
-
     """
     Defines a LightningDataModule abstraction for a single StarCraft II replaypack.
 

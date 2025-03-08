@@ -5,7 +5,6 @@ from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
 class AddSubgroups(GameEvent):
-
     """
     AddSubgroups is a data type holding information about some subgroup change.
     The exact meaning or context of its attributes remains unclear.
@@ -48,7 +47,6 @@ class AddSubgroups(GameEvent):
 
 
 class Delta(GameEvent):
-
     """
     Most likely specifies a change in which units belong to some subgroups.
     The exact definition of this data type remains unclear.

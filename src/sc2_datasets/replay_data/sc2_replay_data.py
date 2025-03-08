@@ -25,7 +25,6 @@ from sc2_datasets.replay_parser.tracker_events.tracker_events_parser import (
 
 
 class SC2ReplayData:
-
     """
     Specifies a data type that holds information parsed from json representation of a replay.
 

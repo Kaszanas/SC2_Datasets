@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
 class UnitTypeChange(TrackerEvent):
-
     """
     UnitTypeChange holds the information about how things were changing during the game.
 

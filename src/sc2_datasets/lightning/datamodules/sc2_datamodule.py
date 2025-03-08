@@ -8,7 +8,6 @@ from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 
 
 class SC2DataModule(pl.LightningDataModule):
-
     """
     Defines a LightningDataModule abstraction for some StarCraft II DataModule.
 

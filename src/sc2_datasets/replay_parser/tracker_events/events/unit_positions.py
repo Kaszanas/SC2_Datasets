@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
 class UnitPositions(TrackerEvent):
-
     """
     UnitPositions holds some detail information about how
     the unit position was changing during the game.

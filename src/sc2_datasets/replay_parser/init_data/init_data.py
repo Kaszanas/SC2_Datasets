@@ -4,7 +4,6 @@ from sc2_datasets.replay_parser.init_data.game_description import GameDescriptio
 
 
 class InitData:
-
     """
     Data type representing initialization data for a StarCraft II game.
 
