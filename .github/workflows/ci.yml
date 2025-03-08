@@ -2,10 +2,11 @@ name: Continuous Integration (CI)
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
+  push:
+    branches:
+      - main
+      - dev
   workflow_dispatch:
-  issue_comment:
-    types: [created]
 
 # To successfully find the files that are required for testing:
 env:
@@ -13,16 +14,16 @@ env:
 
 jobs:
   ci:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'issue_comment' || github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.comment.body == 'recheck ci' && github.event.comment.user.login == 'Kaszanas')
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.comment.body == 'recheck ci' && github.event.comment.user.login == 'Kaszanas')
     # Set up operating system
     runs-on: ubuntu-latest
 
     # Define job steps
     steps:
-      - name: Set up Python 3.11.4
+      - name: Set up Python 3.11.10
         uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
         with:
-          python-version: "3.11.4"
+          python-version: "3.11.10"
 
       - name: Check-out repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -34,11 +35,13 @@ jobs:
       - name: Install development dependencies
         run: poetry install --only dev
 
+        # Code quality checks:
       - name: Initialize pre-commit
         run: poetry run pre-commit install
       - name: Run pre-commit on all files.
         run: poetry run pre-commit run --all-files
 
+        # Run tests:
       - name: Install all dependencies
         run: poetry install
       - name: Run tests
