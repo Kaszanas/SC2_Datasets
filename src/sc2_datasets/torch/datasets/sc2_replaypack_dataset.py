@@ -69,9 +69,12 @@ class SC2ReplaypackDataset(Dataset):
 
         self.replaypack_name = replaypack_name
         self.url = url
-        self.replaypack_unpack_path = Path(self.unpack_dir, self.replaypack_name)
+        self.replaypack_unpack_path = Path(
+            self.unpack_dir, self.replaypack_name
+        ).resolve()
         self.downloaded_zip_path = Path(
-            self.download_dir, self.replaypack_name + ".zip"
+            self.download_dir,
+            self.replaypack_name + ".zip",
         )
 
         # Downloading the dataset:
@@ -122,7 +125,9 @@ class SC2ReplaypackDataset(Dataset):
         # These will be used for validation at later step:
 
         # TODO: This produces an ERROR!
-        all_files = [Path(data_path, file).as_posix() for file in os.listdir(data_path)]
+        all_files = []
+        for file in os.listdir(data_path):
+            all_files.append(str(Path(data_path, file)))
 
         # Validating files:
         self.skip_files = set()
@@ -131,11 +136,12 @@ class SC2ReplaypackDataset(Dataset):
 
         # Loading all of the files using,
         # Skipping the ones that were returned from validator:
-        self.list_of_files = [
-            sc2_replay_file_info
-            for sc2_replay_file_info in all_files
-            if sc2_replay_file_info not in self.skip_files
-        ]
+        self.list_of_files = []
+        for sc2_replay_file_info in all_files:
+            if sc2_replay_file_info in self.skip_files:
+                continue
+            self.list_of_files.append(sc2_replay_file_info)
+
         self.len = len(self.list_of_files)
 
     def __len__(self) -> int:
@@ -157,7 +163,9 @@ class SC2ReplaypackDataset(Dataset):
         """
         # Returning a replay serialized into Python class to assure the ease of use:
 
-        replay_data = SC2ReplayData.from_file(replay_filepath=self.list_of_files[index])
+        replay_data = SC2ReplayData.from_file(
+            replay_filepath=self.list_of_files[index],
+        )
         if self.transform:
             return self.transform(replay_data)
         return replay_data

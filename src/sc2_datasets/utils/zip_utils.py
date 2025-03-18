@@ -1,17 +1,20 @@
 # Unpacks zip file at zip_path to a destination directory, into a subdirectory.
 import logging
-import os
-import zipfile
 import math
-
+import zipfile
 from concurrent.futures import ProcessPoolExecutor
+from pathlib import Path
 from typing import List
 
 from tqdm import tqdm
 
 
 # REVIEW: Check this:
-def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
+def unpack_chunk(
+    zip_path: Path,
+    filenames: List[str],
+    path_to_extract: Path,
+) -> None:
     """
     Helper function for unpacking a chunk of files from an archive.
 
@@ -58,18 +61,21 @@ def unpack_chunk(zip_path: str, filenames: List[str], path_to_extract: str):
 
 # REVIEW: Check this:
 def unpack_zipfile(
-    destination_dir: str, subdir: str, zip_path: str, n_workers: int
-) -> str:
+    destination_dir: Path,
+    subdir: str,
+    zip_path: Path,
+    n_workers: int,
+) -> Path:
     """
     Helper function that unpacks the content of .zip archive.
 
     Parameters
     ----------
-    destination_dir : str
+    destination_dir : Path
         Specifies the path where the .zip file will be extracted.
     subdir : str
         Specifies the subdirectory where the content will be extracted.
-    zip_path : str
+    zip_path : Path
         Specifies the path to the zip file that will be extracted.
     n_workers : int
         Specifies the number of workers that will be used for unpacking the archive.
@@ -94,15 +100,16 @@ def unpack_zipfile(
 
     The parameters should be set as in the example below.
 
+    >>> from pathlib import Path
     >>> unpack_zipfile_object = unpack_zipfile(
-    ... destination_dir="./directory/destination_dir",
+    ... destination_dir=Path("./directory/destination_dir").resolve(),
     ... subdir="./directory/subdir",
-    ... zip_path="./directory/zip_path",
+    ... zip_path=Path("./directory/zip_path").resolve,
     ... n_workers=1)
 
-    >>> assert isinstance(destination_dir, str)
+    >>> assert isinstance(destination_dir, Path)
     >>> assert isinstance(subdir, str)
-    >>> assert isinstance(zip_path, str)
+    >>> assert isinstance(zip_path, Path)
     >>> assert isinstance(n_workers, int)
     >>> assert n_workers >= 1
     """
@@ -111,12 +118,12 @@ def unpack_zipfile(
         raise Exception("Number of workers cannot be equal or less than zero!")
 
     file_list: List[str] = []
-    path_to_extract = os.path.join(destination_dir, subdir)
+    path_to_extract = Path(destination_dir, subdir).resolve()
     with zipfile.ZipFile(zip_path, "r") as zip_file:
         # Checking the existence of the extraction output directory
         # If it doesn't exist it will be created:
-        if not os.path.exists(path_to_extract):
-            os.makedirs(path_to_extract)
+        if not path_to_extract.exists():
+            path_to_extract.mkdir(parents=True)
 
         file_list = zip_file.namelist()
 
@@ -125,7 +132,7 @@ def unpack_zipfile(
     with ProcessPoolExecutor(n_workers) as exe:
         for index in tqdm(
             range(0, len(file_list), chunksize),
-            desc=f"Extracting {os.path.basename(destination_dir)}: ",
+            desc=f"Extracting {destination_dir.stem}: ",
         ):
             filenames = file_list[index : (index + chunksize)]
             _ = exe.submit(unpack_chunk, zip_path, filenames, path_to_extract)

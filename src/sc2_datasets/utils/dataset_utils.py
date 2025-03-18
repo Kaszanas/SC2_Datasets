@@ -1,17 +1,16 @@
 import json
 import os
 from pathlib import Path
+from typing import Dict, List, Tuple
 
 from sc2_datasets.utils.zip_utils import unpack_zipfile
-
-from typing import Dict, Tuple
 
 
 def load_replaypack_information(
     replaypack_name: str,
     replaypack_path: Path,
     unpack_n_workers: int,
-) -> Tuple[str, Dict[str, str], Dict[str, str]]:
+) -> Tuple[Path, List[Dict], Dict, Dict, Dict]:
     """
     Helper function that loads replaypack information from a standard directory structure.
 
@@ -28,9 +27,9 @@ def load_replaypack_information(
 
     Returns
     -------
-    Tuple[str, Dict[str, str], Dict[str, str]]
-        Returns path to the directory that contains .json files\
-        with data extracted from replays, summary information that\
+    Tuple[Path, List[Dict], Dict, Dict, Dict]
+        Returns path to the directory that contains the extracted\
+        replay .json files, loaded summary information that\
         was generated when extracting the data from replays,\
         mapping information that specifies what was the directory\
         structure pre-extraction, and log file which contaions\
@@ -46,13 +45,14 @@ def load_replaypack_information(
 
     The parameters should be set as in the example below.
 
+    >>> from pathlib import Path
     >>> load_replaypack_information_object = load_replaypack_information(
     ...        replaypack_name="replaypack_name",
-    ...        replaypack_path="replaypack_path",
+    ...        replaypack_path=Path("replaypack_path"),
     ...        unpack_n_workers=1)
 
     >>> assert isinstance(replaypack_name, str)
-    >>> assert isinstance(replaypack_path, str)
+    >>> assert isinstance(replaypack_path, Path)
     >>> assert isinstance(unpack_n_workers, int)
     >>> assert unpack_n_workers >= 1
     """
@@ -62,8 +62,8 @@ def load_replaypack_information(
     replaypack_data_path = Path(replaypack_path, replaypack_name + "_data").resolve()
     replaypack_main_log_obj_list = []
     replaypack_processed_failed = {}
-    replaypack_summary = {}
     replaypack_dir_mapping = {}
+    replaypack_summary = {}
 
     # Extracting the nested .zip files,
     # and loading replaypack information files:

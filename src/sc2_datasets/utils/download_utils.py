@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import requests
 
@@ -7,14 +8,16 @@ from sc2_datasets.utils.zip_utils import unpack_zipfile
 
 # REVIEW: This was changed, needs review:
 def download_replaypack(
-    destination_dir: str, replaypack_name: str, replaypack_url: str
-) -> str:
+    destination_dir: Path,
+    replaypack_name: str,
+    replaypack_url: str,
+) -> Path:
     """
     Exposes logic for downloading a single StarCraft II replaypack from an url.
 
     Parameters
     ----------
-    destination_dir : str
+    destination_dir : Path
         Specifies the destination directory where the replaypack will be saved.
     replaypack_name : str
         Specifies the name of a replaypack that will\
@@ -25,7 +28,7 @@ def download_replaypack(
 
     Returns
     -------
-    str
+    Path
         Returns the filepath to the downloaded .zip archive.
 
     Examples
@@ -43,7 +46,8 @@ def download_replaypack(
 
     The parameters should be set as in the example below.
 
-    >>> replaypack_download_dir = "datasets/download_directory"
+    >>> from pathlib import Path
+    >>> replaypack_download_dir = Path("datasets/download_directory").resolve()
     >>> replaypack_name = "TournamentName"
     >>> replaypack_url = "some_url"
     >>> download_replaypack_object = download_replaypack(
@@ -51,7 +55,7 @@ def download_replaypack(
     ...    replaypack_name=replaypack_name,
     ...    replaypack_url=replaypack_url)
 
-    >>> assert isinstance(replaypack_download_dir, str)
+    >>> assert isinstance(replaypack_download_dir, Path)
     >>> assert isinstance(replaypack_name, str)
     >>> assert isinstance(replaypack_url, str)
     >>> assert len(os.listdir(replaypack_download_dir)) == 0
@@ -60,11 +64,11 @@ def download_replaypack(
 
     # Check if there is something in the destination directory:
     existing_files = []
-    if os.path.exists(destination_dir):
-        existing_files = os.listdir(destination_dir)
+    if destination_dir.exists():
+        existing_files = list(destination_dir.iterdir())
 
     filename_with_ext = replaypack_name + ".zip"
-    download_filepath = os.path.join(destination_dir, filename_with_ext)
+    download_filepath = Path(destination_dir, filename_with_ext).resolve()
 
     # The file was previously downloaded so return it immediately:
     if existing_files:
@@ -74,18 +78,19 @@ def download_replaypack(
     # Send a request and save the response content into a .zip file.
     # The .zip file should be a replaypack:
     response = requests.get(url=replaypack_url)
-    with open(download_filepath, "wb") as output_zip_file:
+
+    with download_filepath.open("wb") as output_zip_file:
         output_zip_file.write(response.content)
 
     return download_filepath
 
 
 def download_and_unpack_replaypack(
-    replaypack_download_dir: str,
-    replaypack_unpack_dir: str,
+    replaypack_download_dir: Path,
+    replaypack_unpack_dir: Path,
     replaypack_name: str,
     url: str,
-) -> str:
+) -> Path:
     """
     Helper function that downloads a replaypack from a specified url.
     The archive is saved to replaypack_download_dir using a replaypack_name.
@@ -93,9 +98,9 @@ def download_and_unpack_replaypack(
 
     Parameters
     ----------
-    replaypack_download_dir : str
+    replaypack_download_dir : Path
         Specifies a directory where the .zip archive will be downloaded.
-    replaypack_unpack_dir : str
+    replaypack_unpack_dir : Path
         Specifies a directory where the .zip file will be extracted
         under a replaypack_name directory.
     replaypack_name : str
@@ -105,7 +110,7 @@ def download_and_unpack_replaypack(
 
     Returns
     -------
-    str
+    Path
         Returns the filepath to the directory where the .zip was extracted.
 
     Examples
@@ -118,14 +123,15 @@ def download_and_unpack_replaypack(
 
     The parameters should be set as in the example below.
 
+    >>> from pathlib import Path
     >>> download_and_unpack_replaypack_object = download_and_unpack_replaypack(
-    ...            replaypack_download_dir="/directory/replaypack_download_dir",
-    ...            replaypack_unpack_dir="/directory/replaypack_unpack_dir",
+    ...            replaypack_download_dir=Path("./directory/replaypack_download_dir"),
+    ...            replaypack_unpack_dir=Path("./directory/replaypack_unpack_dir"),
     ...            replaypack_name="replaypack_name",
     ...            url="url")
 
-    >>> assert isinstance(replaypack_download_dir, str)
-    >>> assert isinstance(replaypack_unpack_dir, str)
+    >>> assert isinstance(replaypack_download_dir, Path)
+    >>> assert isinstance(replaypack_unpack_dir, Path)
     >>> assert isinstance(replaypack_name, str)
     >>> assert isinstance(url, str)
     """
@@ -145,4 +151,6 @@ def download_and_unpack_replaypack(
         n_workers=1,
     )
 
-    return os.path.join(replaypack_unpack_dir, replaypack_name)
+    return_path = Path(replaypack_unpack_dir, replaypack_name).resolve()
+
+    return return_path
