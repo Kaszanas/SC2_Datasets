@@ -15,7 +15,6 @@ from sc2_datasets.replay_parser.game_events.events.command_manager_state import 
 from sc2_datasets.replay_parser.game_events.events.control_group_update import (
     ControlGroupUpdate,
 )
-
 from sc2_datasets.replay_parser.game_events.events.game_user_leave import GameUserLeave
 from sc2_datasets.replay_parser.game_events.events.selection_delta import SelectionDelta
 from sc2_datasets.replay_parser.game_events.events.user_options import UserOptions

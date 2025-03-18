@@ -1,6 +1,5 @@
 from typing import Dict
 
-
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 

@@ -3,13 +3,11 @@ import unittest
 
 import pytest
 
+import tests.test_utils.test_utils as test_utils
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
-
 from sc2_datasets.replay_parser.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
-
-import tests.test_utils.test_utils as test_utils
 
 
 @pytest.mark.minor

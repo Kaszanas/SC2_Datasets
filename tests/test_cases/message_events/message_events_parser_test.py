@@ -3,12 +3,11 @@ import unittest
 
 import pytest
 
+import tests.test_utils.test_utils as test_utils
 from sc2_datasets.replay_parser.message_events.message_event import MessageEvent
 from sc2_datasets.replay_parser.message_events.message_events_parser import (
     MessageEventsParser,
 )
-
-import tests.test_utils.test_utils as test_utils
 
 
 @pytest.mark.minor

@@ -1,7 +1,7 @@
 from typing import Dict
 
-from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 from sc2_datasets.replay_parser.game_events.events.nested.target_2d import Target2D
+from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
 class CameraSave(GameEvent):

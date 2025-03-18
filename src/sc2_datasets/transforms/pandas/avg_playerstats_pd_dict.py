@@ -3,7 +3,6 @@ from typing import Dict
 import pandas as pd
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
-
 from sc2_datasets.transforms.pandas.player_stats_to_dict import (
     playerstats_average_to_dict,
 )

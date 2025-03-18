@@ -1,8 +1,9 @@
 from typing import Dict
 
+from sc2_datasets.replay_parser.tracker_events.events.player_stats.stats import Stats
+
 # pylama:ignore=E501
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
-from sc2_datasets.replay_parser.tracker_events.events.player_stats.stats import Stats
 
 
 class PlayerStats(TrackerEvent):

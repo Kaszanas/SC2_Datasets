@@ -1,9 +1,11 @@
 import json
 import tempfile
 import unittest
+from pathlib import Path
 
 import pytest
 
+import tests.test_utils.test_utils as test_utils
 from sc2_datasets.validators.multiprocess_validator import (
     validate_integrity_mp,
     validate_integrity_persist_mp,
@@ -12,10 +14,6 @@ from sc2_datasets.validators.singleprocess_validator import (
     validate_integrity_persist_sp,
     validate_integrity_sp,
 )
-
-import tests.test_utils.test_utils as test_utils
-
-from pathlib import Path
 
 
 @pytest.mark.minor

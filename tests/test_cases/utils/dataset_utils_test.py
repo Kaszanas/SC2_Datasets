@@ -1,13 +1,12 @@
 import os
-from pathlib import Path
 import shutil
 import unittest
+from pathlib import Path
 
 import pytest
 
 from sc2_datasets.utils.dataset_utils import load_replaypack_information
 from sc2_datasets.utils.zip_utils import unpack_zipfile
-
 from tests.test_utils.test_utils import get_specific_asset_path, get_test_output_dir
 
 

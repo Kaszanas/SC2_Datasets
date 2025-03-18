@@ -1,10 +1,10 @@
 import unittest
-
-import pytest
 from pathlib import Path
 
-from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+import pytest
+
 import tests.test_utils.test_utils as test_utils
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 
 """
     **Incorrect Usage Examples:**

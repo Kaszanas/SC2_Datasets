@@ -1,4 +1,5 @@
 from typing import Tuple
+
 import torch
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData

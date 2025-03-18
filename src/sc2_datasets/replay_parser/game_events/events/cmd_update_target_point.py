@@ -1,7 +1,7 @@
 from typing import Dict
 
-from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 from sc2_datasets.replay_parser.game_events.events.nested.target_3d import Target3D
+from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
 class CmdUpdateTargetPoint(GameEvent):

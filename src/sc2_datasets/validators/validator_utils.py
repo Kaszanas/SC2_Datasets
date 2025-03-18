@@ -1,8 +1,7 @@
+import json
 import logging
 from pathlib import Path
 from typing import Set, Tuple
-
-import json
 
 
 # TODO: consider splitting file creation out from this method

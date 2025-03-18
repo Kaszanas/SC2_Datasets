@@ -3,7 +3,6 @@ from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
-
 # TODO: Can the sequence be an int here?
 # Should this be encoded somehow if there is a NoneType detected?
 

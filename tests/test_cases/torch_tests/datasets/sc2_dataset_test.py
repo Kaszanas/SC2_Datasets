@@ -1,15 +1,14 @@
-from pathlib import Path
 import shutil
 import unittest
+from pathlib import Path
 
 import pytest
 
-from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 from sc2_datasets.utils.zip_utils import unpack_zipfile
-
-from tests.test_utils.test_utils import get_setup_paths
 from tests.settings_test import TEST_SYNTHETIC_REPLAYPACKS
+from tests.test_utils.test_utils import get_setup_paths
 
 
 @pytest.mark.minor

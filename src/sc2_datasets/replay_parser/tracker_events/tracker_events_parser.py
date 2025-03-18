@@ -1,6 +1,5 @@
 from typing import Dict
 
-
 from sc2_datasets.replay_parser.tracker_events.events.player_setup import PlayerSetup
 from sc2_datasets.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,

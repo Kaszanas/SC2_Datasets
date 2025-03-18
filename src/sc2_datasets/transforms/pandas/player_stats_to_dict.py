@@ -1,9 +1,8 @@
-from typing import Any, List, Dict
+from typing import Any, Dict, List
 
 import pandas as pd
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
-
 from sc2_datasets.transforms.utils import filter_player_stats
 
 

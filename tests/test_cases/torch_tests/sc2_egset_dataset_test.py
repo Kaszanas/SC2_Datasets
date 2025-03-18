@@ -1,11 +1,10 @@
-from pathlib import Path
 import shutil
 import unittest
+from pathlib import Path
 
 import pytest
 
 from sc2_datasets.torch.sc2_egset_dataset import SC2EGSetDataset
-
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 from tests.settings_test import (
     TEST_REAL_REPLAYPACKS,

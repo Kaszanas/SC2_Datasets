@@ -3,10 +3,9 @@ import unittest
 
 import pytest
 
-from sc2_datasets.replay_parser.game_events.game_events_parser import GameEventsParser
-from sc2_datasets.replay_parser.game_events.game_event import GameEvent
-
 import tests.test_utils.test_utils as test_utils
+from sc2_datasets.replay_parser.game_events.game_event import GameEvent
+from sc2_datasets.replay_parser.game_events.game_events_parser import GameEventsParser
 
 
 @pytest.mark.minor

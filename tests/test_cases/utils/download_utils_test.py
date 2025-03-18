@@ -1,7 +1,7 @@
 import os
-from pathlib import Path
 import shutil
 import unittest
+from pathlib import Path
 
 import pytest
 
@@ -9,11 +9,8 @@ from sc2_datasets.utils.download_utils import (
     download_and_unpack_replaypack,
     download_replaypack,
 )
-
-
-from tests.test_utils.test_utils import get_test_output_dir
-
 from tests.settings_test import TEST_SYNTHETIC_REPLAYPACKS
+from tests.test_utils.test_utils import get_test_output_dir
 
 """
     **Incorrect Usage Examples:**

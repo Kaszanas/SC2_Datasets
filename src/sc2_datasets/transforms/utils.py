@@ -2,11 +2,12 @@ from typing import Dict, List
 
 import numpy as np
 
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+
 # pylama:ignore=E501
 from sc2_datasets.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
 )
-from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 
 
 def filter_player_stats(
