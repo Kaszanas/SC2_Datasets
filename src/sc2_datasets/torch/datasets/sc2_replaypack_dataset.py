@@ -54,9 +54,6 @@ class SC2ReplaypackDataset(Dataset):
         self.unpack_n_workers = unpack_n_workers
         self.download_dir = Path(download_dir).resolve()
 
-        if not self.download_dir.is_dir():
-            raise Exception("Download directory must be a directory!")
-
         # Replaypack download directory must exist, we create it if it does not exist:
         if not self.download_dir.exists():
             self.download_dir.mkdir(parents=True, exist_ok=True)
@@ -64,9 +61,6 @@ class SC2ReplaypackDataset(Dataset):
         self.unpack_dir = Path(unpack_dir).resolve()
         # Replaypack unpack directory must exist, we create it if it does not exist:
         # This is because otherwise we will not be able to load any data:
-        if not self.unpack_dir.is_dir():
-            raise Exception("Replaypack unpack directory must be a directory!")
-
         if not self.unpack_dir.exists():
             self.unpack_dir.mkdir(parents=True, exist_ok=True)
 
@@ -120,7 +114,7 @@ class SC2ReplaypackDataset(Dataset):
             self._replaypack_summary,
         ) = load_replaypack_information(
             replaypack_name=self.replaypack_name,
-            replaypack_path=self.replaypack_unpack_path.as_posix(),
+            replaypack_path=self.replaypack_unpack_path,
             unpack_n_workers=self.unpack_n_workers,
         )
 

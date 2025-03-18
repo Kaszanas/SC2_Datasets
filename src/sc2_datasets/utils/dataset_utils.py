@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 
@@ -8,7 +9,7 @@ from typing import Dict, Tuple
 
 def load_replaypack_information(
     replaypack_name: str,
-    replaypack_path: str,
+    replaypack_path: Path,
     unpack_n_workers: int,
 ) -> Tuple[str, Dict[str, str], Dict[str, str]]:
     """
@@ -56,9 +57,9 @@ def load_replaypack_information(
     >>> assert unpack_n_workers >= 1
     """
 
-    replaypack_files = os.listdir(replaypack_path)
+    replaypack_files = list(replaypack_path.iterdir())
     # Initializing variables that should be returned:
-    replaypack_data_path = os.path.join(replaypack_path, replaypack_name + "_data")
+    replaypack_data_path = Path(replaypack_path, replaypack_name + "_data").resolve()
     replaypack_main_log_obj_list = []
     replaypack_processed_failed = {}
     replaypack_summary = {}
@@ -67,29 +68,34 @@ def load_replaypack_information(
     # Extracting the nested .zip files,
     # and loading replaypack information files:
     for file in replaypack_files:
-        if file.endswith("_data.zip"):
+        filename = file.name
+        if filename.endswith("_data.zip"):
             # Unpack the .zip archive only if it is not unpacked already:
-            if not os.path.isdir(replaypack_data_path):
+            if not replaypack_data_path.is_dir():
                 replaypack_data_path = unpack_zipfile(
                     destination_dir=replaypack_path,
                     subdir=replaypack_name + "_data",
                     zip_path=os.path.join(replaypack_path, file),
                     n_workers=unpack_n_workers,
                 )
-        if file.endswith("_main_log.log"):
-            with open(os.path.join(replaypack_path, file)) as main_log_file:
+        if filename.endswith("_main_log.log"):
+            main_log_filepath = Path(replaypack_path, file).resolve()
+            with main_log_filepath.open(encoding="utf-8") as main_log_file:
                 # Reading the lines of the log file and parsing them:
                 for line in main_log_file.readlines():
                     log_object = json.loads(line)
                     replaypack_main_log_obj_list.append(log_object)
-        if file.endswith("_processed_failed.log"):
-            with open(os.path.join(replaypack_path, file)) as processed_files:
+        if filename.endswith("_processed_failed.log"):
+            processed_files_filepath = Path(replaypack_path, file).resolve()
+            with processed_files_filepath.open(encoding="utf-8") as processed_files:
                 replaypack_processed_failed = json.load(processed_files)
-        if file.endswith("_processed_mapping.json"):
-            with open(os.path.join(replaypack_path, file)) as mapping_file:
+        if filename.endswith("_processed_mapping.json"):
+            mapping_file_filepath = Path(replaypack_path, file).resolve()
+            with mapping_file_filepath.open(encoding="utf-8") as mapping_file:
                 replaypack_dir_mapping = json.load(mapping_file)
-        if file.endswith("_summary.json"):
-            with open(os.path.join(replaypack_path, file)) as summary_file:
+        if filename.endswith("_summary.json"):
+            summary_file_filepath = Path(replaypack_path, file).resolve()
+            with summary_file_filepath.open(encoding="utf-8") as summary_file:
                 replaypack_summary = json.load(summary_file)
 
     return (
