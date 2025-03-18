@@ -11,6 +11,7 @@ python = "^3.11"
 pytorch-lightning = "^2.5.0"
 pandas = "^2.1.4"
 tqdm = "^4.66.1"
+requests = "^2.32.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
