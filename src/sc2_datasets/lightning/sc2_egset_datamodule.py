@@ -48,8 +48,8 @@ class SC2EGSetDataModule(SC2DataModule):
     def __init__(
         self,
         replaypacks: List[Tuple[str, str]] = SC2EGSET_DATASET_REPLAYPACKS,
-        download_dir: str = "./data/download",
-        unpack_dir: str = "./data/unpack",
+        download_dir: str = "./data/download/sc2egset_dataset",
+        unpack_dir: str = "./data/unpack/sc2egset_dataset",
         download: bool = True,
         transform: Callable = None,
         dims=None,
