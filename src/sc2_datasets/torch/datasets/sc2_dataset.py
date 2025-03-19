@@ -1,9 +1,12 @@
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Callable, Dict, List, Set, Tuple
 
 from torch.utils.data import Dataset
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
+
+from tqdm import tqdm
 
 
 class SC2Dataset(Dataset):
@@ -61,24 +64,36 @@ class SC2Dataset(Dataset):
 
         self.replaypacks: List[SC2ReplaypackDataset] = []
 
-        # Iterating over the provided URLs:
+        list_of_arguments = []
         for replaypack_name, url in self.names_urls:
-            # Initializing SC2ReplaypackDataset cumulatively calculating its length:
-            replaypack = SC2ReplaypackDataset(
-                replaypack_name=replaypack_name,
-                download_dir=self.download_dir,
-                unpack_dir=self.unpack_dir,
-                url=url,
-                download=self.download,
-                unpack_n_workers=self.unpack_n_workers,
-                validator=self.validator,
+            list_of_arguments.append(
+                {
+                    "replaypack_name": replaypack_name,
+                    "unpack_dir": self.unpack_dir,
+                    "download_dir": self.download_dir,
+                    "url": url,
+                    "download": self.download,
+                    "unpack_n_workers": self.unpack_n_workers,
+                    "validator": self.validator,
+                }
             )
 
-            # Retrieving files that were skipped when initializing a dataset,
-            # This is based on validator:
-            # TODO: This will be used later:
-            # self.skip_files[replaypack_name] = replaypack.skip_files
-            self.replaypacks.append(replaypack)
+        # NOTE: The parameter of max_workers may be customizable,
+        # Be wary that this operation is downloading the dataset,
+        # don't DDOS people with this:
+        with ThreadPoolExecutor(
+            max_workers=3,
+            initializer=tqdm.set_lock,
+            initargs=(tqdm.get_lock(),),
+        ) as executor:
+            self.replaypacks = list(
+                executor.map(
+                    SC2ReplaypackDataset.from_args,
+                    list_of_arguments,
+                )
+            )
+
+        for replaypack in self.replaypacks:
             self.len += len(replaypack)
 
     def __len__(self) -> int:
