@@ -3,6 +3,7 @@ from pathlib import Path
 import requests
 
 from sc2_datasets.utils.zip_utils import unpack_zipfile
+from tqdm import tqdm
 
 
 # REVIEW: This was changed, needs review:
@@ -76,10 +77,22 @@ def download_replaypack(
 
     # Send a request and save the response content into a .zip file.
     # The .zip file should be a replaypack:
-    response = requests.get(url=replaypack_url)
+    with requests.get(url=replaypack_url, stream=True) as response:
+        total_size = int(response.headers.get("content-length", 0))
+        chunk_size = 1 * 10**6  # 1 MB
 
-    with download_filepath.open("wb") as output_zip_file:
-        output_zip_file.write(response.content)
+        with (
+            download_filepath.open("wb") as output_zip_file,
+            tqdm(
+                total=total_size,
+                unit="B",
+                unit_scale=True,
+                desc=f"Downloading: {replaypack_name}",
+            ) as progress_bar,
+        ):
+            for data_chunk in response.iter_content(chunk_size=chunk_size):
+                size = output_zip_file.write(data_chunk)
+                progress_bar.update(size)
 
     return download_filepath
 
