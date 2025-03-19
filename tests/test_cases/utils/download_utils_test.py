@@ -18,19 +18,19 @@ class DownloadUtilsTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         # Defining basic paths used by the tests:
         cls.test_output_path = get_test_output_dir()
-        cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
-        cls.download_dir_path = os.path.join(cls.test_output_path, "download")
+        cls.unpack_dir_path = Path(cls.test_output_path, "unpack").resolve()
+        cls.download_dir_path = Path(cls.test_output_path, "download").resolve()
 
         # Initializing variables that have to be existing because of the setUp method:
-        cls.unpacked = Path("not_existing_path")
-        cls.downloaded = Path("not_existing_path")
+        cls.unpacked = Path("not_existing_path").resolve()
+        cls.downloaded = Path("not_existing_path").resolve()
 
     def setUp(self) -> None:
         if self.downloaded.exists():
-            shutil.rmtree(path=self.downloaded.as_posix())
+            shutil.rmtree(path=str(self.downloaded))
 
         if self.unpacked.exists():
-            shutil.rmtree(path=self.unpacked.as_posix())
+            shutil.rmtree(path=str(self.unpacked))
 
     def test_download_replaypack(self):
         self.downloaded = download_replaypack(

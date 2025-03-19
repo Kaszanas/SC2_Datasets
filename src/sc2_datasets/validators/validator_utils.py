@@ -93,8 +93,8 @@ def save_validation_file(
     """
 
     # Gettings paths as posix to be able to serialize them:
-    validated_file_list = [Path(file).as_posix() for file in validated_files]
-    skip_file_list = [Path(file).as_posix() for file in skip_files]
+    validated_file_list = [str(Path(file)) for file in validated_files]
+    skip_file_list = [str(Path(file)) for file in skip_files]
 
     # Initializing the dict that will be serialized to a file:
     file_dict = {

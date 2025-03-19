@@ -22,7 +22,7 @@ def get_workspace_dir() -> Path:
 
     workspace_dir = Path(os.environ.get("TEST_WORKSPACE")).resolve()
     logging.info(
-        f"Successfully set workspace_dir = {workspace_dir.as_posix()}, \
+        f"Successfully set workspace_dir = {str(workspace_dir)}, \
         Attempting to return workspace_dir."
     )
     return workspace_dir
@@ -45,9 +45,7 @@ def get_assets_dir() -> Path:
     logging.info(f"Successfully set workspace_dir = {workspace_dir}")
 
     input_dir = Path(workspace_dir, "tests/test_files").resolve()
-    logging.info(
-        f"Successfully set input_dir = {input_dir.as_posix()}, returning input_dir"
-    )
+    logging.info(f"Successfully set input_dir = {str(input_dir)}, returning input_dir")
 
     return input_dir
 
@@ -66,11 +64,11 @@ def get_test_output_dir() -> Path:
         "Entered get_assets_dir(), calling workspace_dir = get_workspace_dir()"
     )
     workspace_dir = get_workspace_dir()
-    logging.info(f"Successfully set workspace_dir = {workspace_dir.as_posix()}")
+    logging.info(f"Successfully set workspace_dir = {str(workspace_dir)}")
 
     test_output_dir = Path(workspace_dir, "tests/test_output").resolve()
     logging.info(
-        f"Successfully set input_dir = {test_output_dir.as_posix()}, returning input_dir"
+        f"Successfully set input_dir = {str(test_output_dir)}, returning input_dir"
     )
 
     return test_output_dir
