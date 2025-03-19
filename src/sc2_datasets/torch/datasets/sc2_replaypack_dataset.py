@@ -147,9 +147,7 @@ class SC2ReplaypackDataset(Dataset):
             self._replaypack_dir_mapping,
             self._replaypack_summary,
         ) = load_replaypack_information(
-            replaypack_name=self.replaypack_name,
             replaypack_path=self.replaypack_unpack_path,
-            unpack_n_workers=self.unpack_n_workers,
         )
 
         # Getting the paths to the files that consist of the dataset,
