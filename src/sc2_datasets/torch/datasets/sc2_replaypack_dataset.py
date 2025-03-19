@@ -170,6 +170,23 @@ class SC2ReplaypackDataset(Dataset):
             return self.transform(replay_data)
         return replay_data
 
+    @staticmethod
+    def from_args(args: Dict[str, Any]) -> "SC2ReplaypackDataset":
+        """
+        Creates a SC2ReplaypackDataset object from a dictionary of arguments.
+
+        Parameters
+        ----------
+        args : Dict[str, Any]
+            Specifies the dictionary of arguments that will be used to initialize the dataset.
+
+        Returns
+        -------
+        SC2ReplaypackDataset
+            Returns a SC2ReplaypackDataset object initialized with the provided arguments.
+        """
+        return SC2ReplaypackDataset(**args)
+
     @property
     def replaypack_summary(self) -> Dict[str, Any]:
         return self._replaypack_summary
