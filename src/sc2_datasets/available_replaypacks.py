@@ -83,7 +83,7 @@ SC2EGSET_DATASET_REPLAYPACKS = [
     ),
     (
         "2018_HomeStory_Cup_XVIII",
-        "https://zenodo.org/record/14963484/files/2018_HomeStory_Cup_XVII.zip?download=1",
+        "https://zenodo.org/record/14963484/files/2018_HomeStory_Cup_XVIII.zip?download=1",
     ),
     (
         "2018_IEM_Katowice",
@@ -171,7 +171,7 @@ SC2EGSET_DATASET_REPLAYPACKS = [
     ),
     (
         "2020_Dreamhack_SC2_Masters_Winter",
-        "https://zenodo.org/record/14963484/files/2020_Dreamhack_SC2_Masters_Summer.zip?download=1",
+        "https://zenodo.org/record/14963484/files/2020_Dreamhack_SC2_Masters_Winter.zip?download=1",
     ),
     (
         "2020_IEM_Katowice",
