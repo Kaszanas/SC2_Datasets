@@ -1,8 +1,6 @@
 from pathlib import Path
 
 import requests
-
-from sc2_datasets.utils.zip_utils import unpack_zipfile
 from tqdm import tqdm
 
 
@@ -95,74 +93,3 @@ def download_replaypack(
                 progress_bar.update(size)
 
     return download_filepath
-
-
-def download_and_unpack_replaypack(
-    replaypack_download_dir: Path,
-    replaypack_unpack_dir: Path,
-    replaypack_name: str,
-    url: str,
-) -> Path:
-    """
-    Helper function that downloads a replaypack from a specified url.
-    The archive is saved to replaypack_download_dir using a replaypack_name.
-    This function extracts the replaypack to the replaypack_unpack_dir.
-
-    Parameters
-    ----------
-    replaypack_download_dir : Path
-        Specifies a directory where the .zip archive will be downloaded.
-    replaypack_unpack_dir : Path
-        Specifies a directory where the .zip file will be extracted
-        under a replaypack_name directory.
-    replaypack_name : str
-        Specifies a replaypack name which will be used to create paths.
-    url : str
-        Specifies the url that will be used to download the replaypack.
-
-    Returns
-    -------
-    Path
-        Returns the filepath to the directory where the .zip was extracted.
-
-    Examples
-    --------
-    The use of this method is intended to download a .zip replaypack of SC2 games
-    and unpack the downloaded files to the folder.
-
-    You should set every parameter:
-    replaypack_download_dir, replaypack_unpack_dir, replaypack_name and url.
-
-    The parameters should be set as in the example below.
-
-    >>> from pathlib import Path
-    >>> download_and_unpack_replaypack_object = download_and_unpack_replaypack(
-    ...            replaypack_download_dir=Path("./directory/replaypack_download_dir"),
-    ...            replaypack_unpack_dir=Path("./directory/replaypack_unpack_dir"),
-    ...            replaypack_name="replaypack_name",
-    ...            url="url")
-
-    >>> assert isinstance(replaypack_download_dir, Path)
-    >>> assert isinstance(replaypack_unpack_dir, Path)
-    >>> assert isinstance(replaypack_name, str)
-    >>> assert isinstance(url, str)
-    """
-
-    # Downloading the replaypack:
-    download_path = download_replaypack(
-        destination_dir=replaypack_download_dir,
-        replaypack_name=replaypack_name,
-        replaypack_url=url,
-    )
-
-    # Unpacking the replaypack:
-    _ = unpack_zipfile(
-        destination_dir=replaypack_unpack_dir,
-        subdir=replaypack_name,
-        zip_path=download_path,
-        n_workers=1,
-    )
-
-    return_path = Path(replaypack_unpack_dir, replaypack_name).resolve()
-
-    return return_path

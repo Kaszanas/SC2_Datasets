@@ -2,11 +2,10 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Callable, Dict, List, Set, Tuple
 
 from torch.utils.data import Dataset
+from tqdm import tqdm
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
-
-from tqdm import tqdm
 
 
 class SC2Dataset(Dataset):
