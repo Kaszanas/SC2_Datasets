@@ -6,7 +6,9 @@ from torch.utils.data import Dataset
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.utils.dataset_utils import load_replaypack_information
-from sc2_datasets.utils.download_utils import download_and_unpack_replaypack
+from sc2_datasets.utils.download_utils import (
+    download_replaypack,
+)
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 
 
@@ -54,6 +56,16 @@ class SC2ReplaypackDataset(Dataset):
         self.unpack_n_workers = unpack_n_workers
         self.download_dir = Path(download_dir).resolve()
 
+        # The path to the downloaded zip file, this will be either downloaded
+        # and set to the path of the downloaded file, or detected if the file
+        # was already downloaded and set to the path of the file:
+        self.maybe_downloaded_zip_path = Path(
+            download_dir, replaypack_name + ".zip"
+        ).resolve()
+        self.was_downloaded = False
+        if self.maybe_downloaded_zip_path.exists():
+            self.was_downloaded = True
+
         # Replaypack download directory must exist, we create it if it does not exist:
         if not self.download_dir.exists():
             self.download_dir.mkdir(parents=True, exist_ok=True)
@@ -72,29 +84,33 @@ class SC2ReplaypackDataset(Dataset):
         self.replaypack_unpack_path = Path(
             self.unpack_dir, self.replaypack_name
         ).resolve()
-        self.downloaded_zip_path = Path(
+        self.maybe_downloaded_zip_path = Path(
             self.download_dir,
             self.replaypack_name + ".zip",
         )
 
-        # Downloading the dataset:
-        if download:
+        # Downloading the replaypack dataset only if it was not downloaded yet:
+        if download and not self.was_downloaded:
             # Cannot download the replaypacks if the url is empty
             # or if the download directory does not exist:
             if not url:
                 raise Exception("Detected empty URL! Cannot download a replaypack!")
 
-            download_and_unpack_replaypack(
-                replaypack_download_dir=self.download_dir,
-                replaypack_unpack_dir=self.unpack_dir,
+            self.maybe_downloaded_zip_path = download_replaypack(
+                destination_dir=self.download_dir,
                 replaypack_name=self.replaypack_name,
-                url=self.url,
+                replaypack_url=self.url,
             )
 
         # If the dataset is not unpacked, then look for it in the download folder.
         # If it is there then unpack it and resume:
-        if not self.replaypack_unpack_path.exists() and not download:
-            if not self.downloaded_zip_path.exists():
+        replaypack_unpack_path_exists = self.replaypack_unpack_path.exists()
+        downloaded_zip_path_exists = self.maybe_downloaded_zip_path.exists()
+
+        # Unpack the top level zip file, it contains nested .zip file with the actual data,
+        # the nested data is downloaded in the next step:
+        if not replaypack_unpack_path_exists:
+            if not downloaded_zip_path_exists:
                 raise Exception(
                     "Dataset was not unpacked nor downloaded!\
                                 Please make sure that the replaypack exists!"
@@ -103,14 +119,29 @@ class SC2ReplaypackDataset(Dataset):
                 unpack_zipfile(
                     destination_dir=self.unpack_dir,
                     subdir=self.replaypack_name,
-                    zip_path=self.downloaded_zip_path.as_posix(),
+                    zip_path=self.maybe_downloaded_zip_path,
                     n_workers=self.unpack_n_workers,
                 )
             )
 
-        # Loading the dataset information, additional replaypack information is kept:
+        # Unpack the nested .zip file with the actual .json filesm, replaypack data:
+        data_zipfile = Path(
+            self.replaypack_unpack_path,
+            self.replaypack_name + "_data.zip",
+        ).resolve()
+        if not data_zipfile.exists():
+            raise Exception(
+                f"Data zipfile {str(data_zipfile)} does not exist! Please verify if the replaypack was downloaded and unpacked correctly!"
+            )
+        data_path = unpack_zipfile(
+            destination_dir=self.replaypack_unpack_path,
+            subdir=self.replaypack_name + "_data",
+            zip_path=data_zipfile,
+            n_workers=self.unpack_n_workers,
+        )
+
+        # Loading the dataset information, additional replaypack metadata is kept:
         (
-            data_path,
             self._replaypack_main_log_obj_list,
             self._replaypack_processed_failed,
             self._replaypack_dir_mapping,
