@@ -15,15 +15,22 @@ class MessageEvent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def from_dict(d: Dict) -> "MessageEvent":
         """
-        Abstract method returning some MessageEvent.
-        This method helps with implementation, with the original JSON parsing.
+        Abstract method returning a MessageEvent.
+        This method assists in the implementation for original JSON parsing.
 
-        :param d: Specifies a dictionary, it holds translations\
-        of a phrase or sentence.
-        :type d: Dict
-        :raises NotImplementedError: Raises an error if not implemented,\
-        this is only an abstract method
-        :return: Returns a method sheet which must be implemented
-        :rtype: MessageEvent
+        Parameters
+        ----------
+        d : Dict
+            Specifies a dictionary holding translations of a phrase or sentence.
+
+        Raises
+        ------
+        NotImplementedError
+            If not implemented, this abstract method raises an error.
+
+        Returns
+        -------
+        MessageEvent
+            A method sheet that must be implemented.
         """
         raise NotImplementedError

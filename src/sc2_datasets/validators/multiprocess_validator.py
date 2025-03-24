@@ -1,12 +1,11 @@
+import math
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 from typing import List, Set, Tuple
-from concurrent.futures import ProcessPoolExecutor
+
 from tqdm import tqdm
 
-import math
-
 from sc2_datasets.validators.validate_chunk import validate_chunk
-
 from sc2_datasets.validators.validator_utils import (
     read_validation_file,
     save_validation_file,
@@ -21,15 +20,27 @@ def validate_integrity_mp(
     Exposes logic for multiprocess validation of the replays.
     Validates if the replay can be parsed by using SC2ReplayData by spawning multiple processes.
 
-    :param list_of_replays: Specifies a list of replays that should be checked by the validator.
-    :type list_of_replays: List[str]
-    :param n_workers: Specifies the number of workers (processes)\
-    that will be used for validating replays. Must be a positive int.
-    :type n_workers: int
-    :return: Returns a tuple that contains (all validated replays, files to be skipped).
-    :rtype: Tuple[Set[str], Set[str]]
+    Parameters
+    ----------
+    list_of_replays : List[str]
+        Specifies a list of replays that should be checked by the validator.
+    n_workers : int
+        Specifies the number of workers (processes) that will be used\
+        for validating replays. Must be a positive int.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    Tuple[Set[str], Set[str]]
+        Returns a tuple that contains (all validated replays, files to be skipped).
+
+    Raises
+    ------
+    AssertionError
+        If `n_workers` is not a positive integer.
+
+    Examples
+    --------
+    Correct Usage Examples:
 
     Validators can be used to check if a file is correct before
     loading it for some modeling task. Below you will find a sample
@@ -38,6 +49,8 @@ def validate_integrity_mp(
     The first tuple denotes correctly validated files,
     whereas the second tuple denotes the files that should
     be skipped in modeling tasks.
+
+    Example using more workers than replays:
 
     >>> validated_replays = validate_integrity_mp(
     ...                         list_of_replays=[
@@ -109,18 +122,24 @@ def validate_integrity_persist_mp(
     Exposes the logic for validating replays using multiple processes.
     This function uses a validation file that persists the files which were previously checked.
 
-    :param list_of_replays: Specifies the list of replays that are supposed to be validated.
-    :type list_of_replays: List[str]
-    :param n_workers: Specifies the number of workers that will be used to validate the files.
-    :type n_workers: int
-    :param validation_file_path: Specifies the path to the validation\
-    file which will be read to obtain the
-    :type validation_file_path: Path
-    :return: Returns a set of files that should be skipped in further processing.
-    :rtype: Set[str]
+    Parameters
+    ----------
+    list_of_replays : List[str]
+        Specifies the list of replays that are supposed to be validated.
+    n_workers : int
+        Specifies the number of workers that will be used to validate the files.
+    validation_file_path : Path, optional
+        Specifies the path to the validation\
+        file which will be read to obtain the files that should be included and\
+        files that should be skipped, by default Path("validator_file.json")
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    Set[str]
+        Returns a set of files that should be skipped in further processing.
 
+    Examples
+    --------
     Persistent validators save the validation information to a specified filepath.
     Only the files that ought to be skipped are returned as a set from this function.
 

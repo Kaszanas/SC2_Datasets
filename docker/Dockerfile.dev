@@ -1,0 +1,24 @@
+ARG PYTHON_VERSION=3.11.10
+FROM python:${PYTHON_VERSION}
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    make build-essential libssl-dev wget ca-certificates curl llvm git
+
+WORKDIR /app
+
+# This is needed because package needs the ability to install itself:
+RUN pip install poetry
+
+# Copy only what is required to install the project:
+COPY pyproject.toml poetry.lock /app/
+
+# Install only dependencies without installing current project:
+RUN poetry config virtualenvs.create false && poetry install --no-root
+
+# Copy entire repository contents
+COPY . .
+
+# Install current project:
+RUN poetry install
+
+CMD ["bash"]

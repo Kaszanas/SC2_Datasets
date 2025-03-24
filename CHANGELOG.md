@@ -27,4 +27,4 @@
 
 ## v0.9.0 (2022/06/09)
 
-- First release of `sc2egset_dataset`!
+- First release of `sc2_datasets`!

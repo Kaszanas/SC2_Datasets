@@ -3,52 +3,60 @@ from typing import Any, Dict
 
 class GameOptions:
     """
-    GameOptions represents the replay game options
+    Represents game options within the replay.
 
-    :param advancedSharedControl: Specifies if advanced shared control is enabled
-    :type advancedSharedControl: bool
-    :param amm: Specifies if AMM (AutoMM - Automated Match Making) is enabled
-    :type amm: bool
-    :param battleNet: Specifies if game has been played on Battle.net
-    :type battleNet: bool
-    :param clientDebugFlags: Specifies the client debug flag
-    :type clientDebugFlags: int
-    :param competitive: It means either ranked or unranked,
-    :type competitive: bool
-    :param cooperative: Specifies if game was cooperative
-    :type cooperative: bool
-    :param fog: Specifies the value of fog in the game
-    :type fog: int
-    :param heroDuplicatesAllowed: Specifies if hero can be duplicated
-    :type heroDuplicatesAllowed: bool
-    :param lockTeams: Specifies if teams are locked
-    :type lockTeams: bool
-    :param noVictoryOrDefeat: There is no information about this parameter
-    :type noVictoryOrDefeat: bool
-    :param observers: Specifies count of observers watching the game
-    :type observers: int
-    :param practice: There is no information about this parameter
-    :type practice: bool
-    :param randomRaces: Specifies if random races are in the game
-    :type randomRaces: bool
-    :param teamsTogether: Specifies if teams of players are in the game
-    :type teamsTogether: bool
-    :param userDifficulty: There is no information about this parameter
-    :type userDifficulty: bool
+    Parameters
+    ----------
+    advancedSharedControl : bool
+        Indicates if advanced shared control is enabled.
+    amm : bool
+        Indicates if AutoMM (Automated Match Making) is enabled.
+    battleNet : bool
+        Indicates if the game was played on Battle.net.
+    clientDebugFlags : int
+        Specifies the client debug flag.
+    competitive : bool
+        Indicates whether the game was ranked or unranked.
+    cooperative : bool
+        Indicates if the game was cooperative.
+    fog : int
+        Specifies the fog value in the game.
+    heroDuplicatesAllowed : bool
+        Indicates if heroes can be duplicated.
+    lockTeams : bool
+        Indicates if teams are locked.
+    noVictoryOrDefeat : bool
+        Indicates if there is no victory or defeat.
+    observers : int
+        Specifies the count of observers watching the game.
+    practice : bool
+        Indicates if the game was a practice match.
+    randomRaces : bool
+        Indicates if random races are allowed in the game.
+    teamsTogether : bool
+        Indicates if teams of players are together in the game.
+    userDifficulty : bool
+        Indicates the user's difficulty level in the game.
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameOptions":
         """
-        Static method returning initialized GameOptions class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method that initializes a GameOptions class from a provided dictionary.
 
-        :param d: Describes a dictionary, it holds translations of a phrase or sentence
-        :type d: Dict[str, Any]
-        :return: Specifies a list of parameters about the game like\
-        a number of observers, fog of the game, if the game was competitive etc.
-        :rtype: GameOptions
+        Parameters
+        ----------
+        d : Dict[str, Any]
+            A dictionary containing information about the game, such as observer count, fog status,
+            competitive mode, etc. It holds translations of phrases or sentences.
 
+        Returns
+        -------
+        GameOptions
+            An initialized instance of the GameOptions class based on the provided dictionary.
+
+        Examples
+        --------
         **Correct Usage Examples:**
 
         Using from_dict factory method provides ease of use when parsing

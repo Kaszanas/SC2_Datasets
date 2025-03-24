@@ -3,22 +3,22 @@ import unittest
 
 import pytest
 
+import tests.test_utils.test_utils as test_utils
 from sc2_datasets.replay_parser.message_events.message_event import MessageEvent
 from sc2_datasets.replay_parser.message_events.message_events_parser import (
     MessageEventsParser,
 )
-
-import tests.test_utils.test_utils as test_utils
 
 
 @pytest.mark.minor
 class MessageEventsParserTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.test_replay = test_utils.get_specific_asset(filename="test_replay.json")
+        cls.test_replay = test_utils.get_specific_asset_path(
+            filename="test_replay.json"
+        )
 
     def test_message_events_parser(self):
-
         with open(self.test_replay) as f:
             loaded_file = json.load(f)
 

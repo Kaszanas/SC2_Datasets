@@ -1,6 +1,12 @@
-name: continuous integration (ci)
+name: Continuous Integration (CI)
 
-on: [pull_request, workflow_dispatch]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
 
 # To successfully find the files that are required for testing:
 env:
@@ -8,42 +14,39 @@ env:
 
 jobs:
   ci:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.comment.body == 'recheck ci' && github.event.comment.user.login == 'Kaszanas')
     # Set up operating system
     runs-on: ubuntu-latest
 
     # Define job steps
     steps:
-      - name: Set up Python 3.11.4
-        uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f
+      - name: Set up Python 3.11.10
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
         with:
-          python-version: "3.11.4"
+          python-version: "3.11.10"
 
       - name: Check-out repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
 
       - name: Install poetry
         uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a
 
-        # TODO: No need to install all dependencies, only pre-commit
-      - name: Install the current project package
-        run: poetry install
+        # Installing only development dependencies (for pre-commit)
+      - name: Install development dependencies
+        run: poetry install --only dev
 
-      - name: Install pre-commit.
-        run: pre-commit install
+        # Code quality checks:
+      - name: Initialize pre-commit
+        run: poetry run pre-commit install
       - name: Run pre-commit on all files.
-        run: pre-commit run --all-files
+        run: poetry run pre-commit run --all-files
 
-      - name: Build Docker Image With Compose
-        run: |
-          make action_compose_build
-
-      - name: Run Docker Tests With Compose
-        run: |
-          make action_compose_test
-
-        # REVIEW: Should this be replaced with Dockerized tests?
-      - name: Test with pytest
-        run: poetry run pytest -m minor --ignore-glob='test_*.py' tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov=xml
+        # Run tests:
+      - name: Install all dependencies
+        run: poetry install
+      - name: Run tests
+        run: poetry run pytest --ignore-glob='test_*.py' ./tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov-report html --cov=xml 2>&1
 
       # TODO: This may be ran in docker:
       # See if the documentation builds correctly:

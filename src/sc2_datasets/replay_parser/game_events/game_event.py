@@ -15,14 +15,24 @@ class GameEvent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def from_dict(d: Dict) -> "GameEvent":
         """
-        Abstract method returning some GameEvent. This method helps with implementation,
-        with the original JSON parsing.
+        Abstract method that returns a GameEvent object.
+        This method aids in implementation,
+        specifically in the context of parsing original JSON data.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :raises NotImplementedError: Raises an error if method is not implemented
-        :return: Returns a method sheet which must be implemented
-        :rtype: GameEvent
+        Parameters
+        ----------
+        d : Dict
+            A dictionary obtained from pre-processing an .SC2Replay file,\
+            available in the JSON format.
+
+        Raises
+        ------
+        NotImplementedError
+            If the method remains unimplemented, this error is raised.
+
+        Returns
+        -------
+        GameEvent
+            A method sheet that must be implemented.
         """
         raise NotImplementedError

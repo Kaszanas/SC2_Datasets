@@ -5,25 +5,20 @@ from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 class CommandManagerState(GameEvent):
     """
-    CommandManagerState type contains information about some states during
-    the game e.g., time, player, etc.
+    CommandManagerState type contains information about some states during the game, like time, player, etc.
 
-    :param id: Specifies the ID of an event which corresponds to its name.
-    :type id: int
-    :param loop: Specifies the game loop number (game-engine tick)\
-    at which the event occurred
-    :type loop: int
-    :param sequence: Highly likely this parameter specifies\
-    an id parameter which sequence the player has made,\
-    there is no specific information about this parameter
-    :type sequence: int
-    :param state: Highly likely this parameter specifies\
-    an id parameter which state the player has made,\
-    there is no specific information about this parameter
-    :type state: int
-    :param userid: Specifies id number of player who has managed the state,\
-    example: in 1v1 game: [0,1]
-    :type userid: int
+    Parameters
+    ----------
+    id : int
+        Specifies the ID of an event corresponding to its name.
+    loop : int
+        Specifies the game loop number (game-engine tick) at which the event occurred.
+    sequence : int
+        Highly likely specifies an ID parameter indicating the sequence made by the player.
+    state : int
+        Highly likely specifies an ID parameter indicating the state made by the player.
+    userid : int
+        Specifies the ID number of the player who managed the state. For example, in a 1v1 game: [0,1].
     """
 
     @staticmethod
@@ -32,11 +27,17 @@ class CommandManagerState(GameEvent):
         Static method returning initialized CommandManagerState class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized CommandManagerState class.
-        :rtype: CommandManagerState
+        Parameters
+        ----------
+        d : Dict
+            Specifies a dictionary as available in the JSON file that\
+            is a result of pre-processing some .SC2Replay file.
+
+        Returns
+        -------
+        CommandManagerState
+            An initialized CommandManagerState class.
+
         """
         return CommandManagerState(
             id=d["id"],

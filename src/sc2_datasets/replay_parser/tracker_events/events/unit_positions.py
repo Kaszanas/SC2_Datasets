@@ -4,20 +4,21 @@ from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
 class UnitPositions(TrackerEvent):
-
     """
     UnitPositions holds some detail information about how
     the unit position was changing during the game.
 
-    :param firstUnitIndex: Specifies a pointer for a specific unit which was doing some changes
-    :type firstUnitIndex: int
-    :param id: Specifies the ID of an event which corresponds to its name.
-    :type id: int
-    :param items: Specifies a list of int values, there is no specific information what\
-    the numbers mean
-    :type items: List[int]
-    :param loop: Specifies the game loop number (game-engine tick) when at which the event occurred
-    :type loop: int
+    Parameters
+    ----------
+    firstUnitIndex : int
+        Specifies a pointer for a specific unit which was doing some changes.
+    id : int
+        Specifies the ID of an event which corresponds to its name.
+    items : List[int]
+        Specifies a list of int values, there is no specific information what
+        the numbers mean.
+    loop : int
+        Specifies the game loop number (game-engine tick) when at which the event occurred.
     """
 
     def from_dict(d: Dict) -> "UnitPositions":
@@ -25,11 +26,16 @@ class UnitPositions(TrackerEvent):
         Static method returning initialized UnitPositions class from a dictionary.
         This helps with the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file that\
-        is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized Header class.
-        :rtype: UnitPositions
+        Parameters
+        ----------
+        d : Dict
+            Specifies a dictionary as available in the JSON file that
+            is a result of pre-processing some .SC2Replay file.
+
+        Returns
+        -------
+        UnitPositions
+            Returns an initialized UnitPositions class.
         """
         return UnitPositions(
             firstUnitIndex=d["firstUnitIndex"],
@@ -45,7 +51,6 @@ class UnitPositions(TrackerEvent):
         items: List[int],
         loop: int,
     ) -> None:
-
         self.firstUnitIndex = firstUnitIndex
         self.id = id
         self.items = items

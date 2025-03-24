@@ -1,9 +1,11 @@
 import json
 import tempfile
 import unittest
+from pathlib import Path
 
 import pytest
 
+import tests.test_utils.test_utils as test_utils
 from sc2_datasets.validators.multiprocess_validator import (
     validate_integrity_mp,
     validate_integrity_persist_mp,
@@ -13,21 +15,21 @@ from sc2_datasets.validators.singleprocess_validator import (
     validate_integrity_sp,
 )
 
-import tests.test_utils.test_utils as test_utils
-
-from pathlib import Path
-
 
 @pytest.mark.minor
 class IntegrityValidatorTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.not_working_test_replay = Path(
-            test_utils.get_specific_asset(filename="test_bit_flip_example.json")
-        ).as_posix()
-        cls.working_test_replay = Path(
-            test_utils.get_specific_asset(filename="test_replay.json")
-        ).as_posix()
+        cls.not_working_test_replay = str(
+            Path(
+                test_utils.get_specific_asset_path(
+                    filename="test_bit_flip_example.json"
+                )
+            )
+        )
+        cls.working_test_replay = str(
+            Path(test_utils.get_specific_asset_path(filename="test_replay.json"))
+        )
         cls.list_of_replays = [
             cls.working_test_replay,
             cls.not_working_test_replay,
@@ -38,7 +40,7 @@ class IntegrityValidatorTest(unittest.TestCase):
             list_of_replays=self.list_of_replays
         )
         self.assertIsInstance(next(iter(skip_files)), str)
-        self.assertEqual(len(validated), 1)
+        self.assertEqual(len(validated), 2)
         self.assertEqual(len(skip_files), 1)
 
     def test_multiprocessing_integrity_validator(self):
@@ -86,7 +88,7 @@ class IntegrityValidatorTest(unittest.TestCase):
                 deserialized = json.load(tf)
                 validated = deserialized["validated_files"]
                 skipped = deserialized["skip_files"]
-                self.assertEqual(len(validated), 1)
+                self.assertEqual(len(validated), 2)
                 self.assertEqual(len(skipped), 1)
 
         self.assertIsInstance(next(iter(skip_files)), str)

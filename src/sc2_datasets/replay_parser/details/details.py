@@ -3,33 +3,41 @@ from typing import Any, Dict
 
 class Details:
     """
-    Data type containing some "details" information about an StarCraft II game.
+    Data type containing details about a StarCraft II game.
 
-    :param gameSpeed: Game speed setting as set in the game options.\
-    Can be one of "slower", "slow", "normal", "fast", or "faster".\
-    Typically competitive or ranked games are played on "faster" setting.\
-    Additional information is available at: https://liquipedia.net/starcraft2/Game_Speed
-    :type gameSpeed: str
-    :param isBlizzardMap: Specifies if the map that was used\
-    in the replay was approved and published by Blizzard (game publisher)
-    :type isBlizzardMap: bool
-    :param timeUTC: Denotes the time at which the game was started.
-    :type timeUTC: str
+    Parameters
+    ----------
+    gameSpeed : str
+        Game speed setting as configured in the game options.
+        Can be "slower", "slow", "normal", "fast", or "faster".
+        Typically, competitive or ranked games are played on "faster".
+        Additional information: https://liquipedia.net/starcraft2/Game_Speed
+    isBlizzardMap : bool
+        Specifies if the map used in the replay was approved and published by Blizzard (the game publisher).
+    timeUTC : str
+        Denotes the time at which the game was started in Coordinated Universal Time.
     """
 
     # REVIEW: Doctests for this:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Details":
         """
-        Static method returning initialized Details class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method returning an initialized Details class from a dictionary.
+        This aids in the original JSON parsing.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict[str, Any]
-        :return: Returns an initialized Details class.
-        :rtype: Details
+        Parameters
+        ----------
+        d : Dict[str, Any]
+            Dictionary obtained from pre-processing an .SC2Replay file in JSON format.
 
+        Returns
+        -------
+        Details
+            Initialized Details class instance.
+
+
+        Examples
+        --------
         **Correct Usage Examples:**
 
         Using from_dict factory method provides ease of use when parsing

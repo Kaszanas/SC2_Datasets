@@ -4,33 +4,41 @@ from sc2_datasets.replay_parser.message_events.message_event import MessageEvent
 
 
 class Chat(MessageEvent):
-
     """
-    Chat holds information about messages between players during the game
+    Chat holds information about messages exchanged between players during the game.
 
-    :param id: Specifies id of the chat event
-    :type id: int
-    :param loop: Specifies game loop number when the event occurred
-    :type loop: int
-    :param recipient: Specifies the message recipient of the event
-    :type recipient: int
-    :param string: Specifies the message in the chat event
-    :type string: str
-    :param userid: Specifies user id causing the event
-    :type userid: int
+    Parameters
+    ----------
+    id : int
+        Specifies the ID of the chat event.
+    loop : int
+        Specifies the game loop number when the event occurred.
+    recipient : int
+        Specifies the recipient of the message in the event.
+    string : str
+        Specifies the message content in the chat event.
+    userid : int
+        Specifies the user ID causing the event.
     """
 
     @staticmethod
     def from_dict(d: Dict) -> "Chat":
         """
-        Static method returning initialized Chat class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method that returns an initialized Chat class based on a supplied dictionary.
+        This method aids in parsing the original JSON data.
 
-        :param d: Specifies a dictionary, it holds translations of a phrase or sentence.
-        :type d: Dict
-        :return: Specifies a list of chat parameters like a user id, recipient etc.
-        :rtype: Chat
+        Parameters
+        ----------
+        d : Dict
+            A dictionary holding translations of a phrase or sentence.
 
+        Returns
+        -------
+        Chat
+            A list of chat parameters including user ID, recipient, etc.
+
+        Examples
+        --------
         **Correct Usage Examples:**
 
         Using from_dict factory method provides ease of use when parsing
@@ -115,7 +123,6 @@ class Chat(MessageEvent):
         string: str,
         userid: int,
     ) -> None:
-
         self.id = id
         self.loop = loop
         self.recipient = recipient

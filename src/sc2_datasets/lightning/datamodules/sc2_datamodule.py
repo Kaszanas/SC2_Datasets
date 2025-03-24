@@ -11,32 +11,39 @@ class SC2DataModule(pl.LightningDataModule):
     """
     Defines a LightningDataModule abstraction for some StarCraft II DataModule.
 
-    :param download_dir: Specifies the path where the dataset will be downloaded
-    :type download_dir: str, optional
-    :param unpack_dir: Specifies the path where the dataset will be unpacked\
-    into a custom directory structure, defaults to "./data/unpack"
-    :type unpack_dir: str, optional
-    :param transform: Specifies the PyTorch transforms to be used\
-    on the replaypack (dataset),
-    Deprecated since version v1.5: Will be removed in v1.7.0,\
-    defaults to None
-    :type transform: _type_, optional
-    :param dims: Specifies a tuple describing the shape of your data.\
-    Extra functionality exposed in size,
-    Deprecated since version v1.5: Will be removed in v1.7.0,\
-    defaults to None
-    :type dims: _type_, optional
-    :param batch_size: Specifies the size of collating individual\
-    fetched data samples, defaults to 256
-    :type batch_size: int, optional
-    :param num_workers: Specifies the data loader instance how many sub-processes\
-    to use for data loading, defaults to 0
-    :type num_workers: int, optional
-    :param unpack_n_workers: Specifies the number of workers\
-    that will be used for unpacking the archive, defaults to 16
-    :type unpack_n_workers: int, optional
-    :param validator: Specifies the validation option for fetched data, defaults to None
-    :type validator: Callable | None, optional
+    Parameters
+    ----------
+    replaypacks : List[Tuple[str, str]]
+        _description_
+    download_dir : str, optional
+        Specifies the path where the dataset will be downloaded,\
+        by default "./data/download"
+    unpack_dir : str, optional
+        Specifies the path where the dataset will be unpacked\
+        into a custom directory structure, by default "./data/unpack"
+    download : bool, optional
+        _description_, by default True
+    transform : Callable, optional
+        Specifies the PyTorch transforms to be used\
+        on the replaypack (dataset),
+        Deprecated since version v1.5: Will be removed in v1.7.0, by default None
+    dims : _type_, optional
+        Specifies a tuple describing the shape of your data.\
+        Extra functionality exposed in size,
+        Deprecated since version v1.5: Will be removed in v1.7.0, by default None
+    batch_size : int, optional
+        Specifies the size of collating individual\
+        fetched data samples, by default 256
+    num_workers : int, optional
+        Specifies the data loader instance how many sub-processes\
+        to use for data loading, by default 0
+    unpack_n_workers : int, optional
+        Specifies the number of workers\
+        that will be used for unpacking the archive, by default 16
+    validator : Callable | None, optional
+        Specifies the validation option for fetched data,\
+        this can also act as a filtering function that will be\
+        applied for the entirety of the dataset, by default None
     """
 
     def __init__(
@@ -45,7 +52,7 @@ class SC2DataModule(pl.LightningDataModule):
         download_dir: str = "./data/download",
         unpack_dir: str = "./data/unpack",
         download: bool = True,
-        transform=None,
+        transform: Callable = None,
         dims=None,
         batch_size: int = 256,
         num_workers: int = 0,

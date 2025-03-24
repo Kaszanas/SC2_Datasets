@@ -7,19 +7,28 @@ license = "GNU General Public License v3.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-pytorch-lightning = "^1.6.5"
-pandas = "^1.4.3"
-tqdm = "^4.64.0"
+python = "^3.11"
+pytorch-lightning = "^2.5.0"
+pandas = "^2.1.4"
+tqdm = "^4.66.1"
+requests = "^2.32.3"
 
-[tool.poetry.dev-dependencies]
-pytest = "^7.1.2"
-pytest-cov = "^3.0.0"
-black = "^22.6.0"
-pylama = {extras = ["all"], version = "^8.3.8"}
-myst-nb = "^0.16.0"
-sphinx-autoapi = "^1.8.4"
-furo = "^2022.6.21"
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.0.0"
+myst-nb = "^1.0.0"
+sphinx-autoapi = "^3.0.0"
+furo = "^2024.8.6"
+pre-commit = "^4.1.0"
+ruff = "^0.9.10"
+commitizen = "^4.4.1"
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["I"]
+
 
 [tool.pytest.ini_options]
 markers = [

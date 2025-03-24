@@ -1,31 +1,36 @@
-import os
+from pathlib import Path
 
 import requests
-
-from sc2_datasets.utils.zip_utils import unpack_zipfile
+from tqdm import tqdm
 
 
 # REVIEW: This was changed, needs review:
 def download_replaypack(
-    destination_dir: str, replaypack_name: str, replaypack_url: str
-) -> str:
+    destination_dir: Path,
+    replaypack_name: str,
+    replaypack_url: str,
+) -> Path:
     """
     Exposes logic for downloading a single StarCraft II replaypack from an url.
 
-    :param destination_dir: Specifies the destination directory where the replaypack will be saved.
-    :type destination_dir: str
-    :param replaypack_name: Specifies the name of a replaypack that will\
-    be used for the downloaded .zip archive.
-    :type replaypack_name: str
-    :param replaypack_url: Specifies the url that is a direct link\
-    to the .zip which will be downloaded.
-    :type replaypack_url: str
-    :raises Exception: If more than one file is downloaded, exception is thrown.
-    :return: Returns the filepath to the downloaded .zip archive.
-    :rtype: str
+    Parameters
+    ----------
+    destination_dir : Path
+        Specifies the destination directory where the replaypack will be saved.
+    replaypack_name : str
+        Specifies the name of a replaypack that will\
+        be used for the downloaded .zip archive.
+    replaypack_url : str
+        Specifies the url that is a direct link\
+        to the .zip which will be downloaded.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    Path
+        Returns the filepath to the downloaded .zip archive.
 
+    Examples
+    --------
     The use of this method is intended
     to download a .zip replaypack containing StarCraft II games.
 
@@ -39,7 +44,8 @@ def download_replaypack(
 
     The parameters should be set as in the example below.
 
-    >>> replaypack_download_dir = "datasets/download_directory"
+    >>> from pathlib import Path
+    >>> replaypack_download_dir = Path("datasets/download_directory").resolve()
     >>> replaypack_name = "TournamentName"
     >>> replaypack_url = "some_url"
     >>> download_replaypack_object = download_replaypack(
@@ -47,7 +53,7 @@ def download_replaypack(
     ...    replaypack_name=replaypack_name,
     ...    replaypack_url=replaypack_url)
 
-    >>> assert isinstance(replaypack_download_dir, str)
+    >>> assert isinstance(replaypack_download_dir, Path)
     >>> assert isinstance(replaypack_name, str)
     >>> assert isinstance(replaypack_url, str)
     >>> assert len(os.listdir(replaypack_download_dir)) == 0
@@ -56,11 +62,11 @@ def download_replaypack(
 
     # Check if there is something in the destination directory:
     existing_files = []
-    if os.path.exists(destination_dir):
-        existing_files = os.listdir(destination_dir)
+    if destination_dir.exists():
+        existing_files = list(destination_dir.iterdir())
 
     filename_with_ext = replaypack_name + ".zip"
-    download_filepath = os.path.join(destination_dir, filename_with_ext)
+    download_filepath = Path(destination_dir, filename_with_ext).resolve()
 
     # The file was previously downloaded so return it immediately:
     if existing_files:
@@ -69,71 +75,21 @@ def download_replaypack(
 
     # Send a request and save the response content into a .zip file.
     # The .zip file should be a replaypack:
-    response = requests.get(url=replaypack_url)
-    with open(download_filepath, "wb") as output_zip_file:
-        output_zip_file.write(response.content)
+    with requests.get(url=replaypack_url, stream=True) as response:
+        total_size = int(response.headers.get("content-length", 0))
+        chunk_size = 1 * 10**6  # 1 MB
+
+        with (
+            download_filepath.open("wb") as output_zip_file,
+            tqdm(
+                total=total_size,
+                unit="B",
+                unit_scale=True,
+                desc=f"Downloading: {replaypack_name}",
+            ) as progress_bar,
+        ):
+            for data_chunk in response.iter_content(chunk_size=chunk_size):
+                size = output_zip_file.write(data_chunk)
+                progress_bar.update(size)
 
     return download_filepath
-
-
-def download_and_unpack_replaypack(
-    replaypack_download_dir: str,
-    replaypack_unpack_dir: str,
-    replaypack_name: str,
-    url: str,
-) -> str:
-    """
-    Helper function that downloads a replaypack from a specified url.
-    The archive is saved to replaypack_download_dir using a replaypack_name.
-    This function extracts the replaypack to the replaypack_unpack_dir
-
-    :param replaypack_download_dir: Specifies a directory where the .zip archive will be downloaded.
-    :type replaypack_download_dir: str
-    :param replaypack_unpack_dir: Specifies a directory where the .zip file will be extracted
-    under a replaypack_name directory.
-    :type replaypack_unpack_dir: str
-    :param replaypack_name: Specifies a replaypack name which will be used to create paths.
-    :type replaypack_name: str
-    :param url: Specifies the url that will be used to download the replaypack.
-    :type url: str
-    :return: Returns the filepath to the directory where the .zip was extracted.
-    :rtype: str
-
-    **Correct Usage Examples:**
-
-    The use of this method is intended to download a .zip replaypack of SC2 games
-    and unpack the downloaded files to the folder.
-
-    You should set every parameter:
-    replaypack_download_dir, replaypack_unpack_dir, replaypack_name and url.
-
-    The parameters should be set as in the example below.
-
-    >>> download_and_unpack_replaypack_object = download_and_unpack_replaypack(
-    ...            replaypack_download_dir="/directory/replaypack_download_dir",
-    ...            replaypack_unpack_dir="/directory/replaypack_unpack_dir",
-    ...            replaypack_name="replaypack_name",
-    ...            url="url")
-
-    >>> assert isinstance(replaypack_download_dir, str)
-    >>> assert isinstance(replaypack_unpack_dir, str)
-    >>> assert isinstance(replaypack_name, str)
-    >>> assert isinstance(url, str)
-    """
-
-    # Downloading the replaypack:
-    download_path = download_replaypack(
-        destination_dir=replaypack_download_dir,
-        replaypack_name=replaypack_name,
-        replaypack_url=url,
-    )
-
-    # Unpacking the replaypack:
-    _ = unpack_zipfile(
-        destination_dir=replaypack_unpack_dir,
-        subdir=replaypack_name,
-        zip_path=download_path,
-        n_workers=1,
-    )
-
-    return os.path.join(replaypack_unpack_dir, replaypack_name)

@@ -1,0 +1,11 @@
+services:
+  sc2_datasets:
+    build:
+      context: "../"
+      dockerfile: "./docker/Dockerfile.dev"
+    container_name: test_sc2_datasets
+    environment:
+      - TEST_WORKSPACE=/app
+
+volumes:
+  logs:

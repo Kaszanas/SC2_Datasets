@@ -1,20 +1,18 @@
-from pathlib import Path
 import shutil
 import unittest
+from pathlib import Path
 
 import pytest
 
 from sc2_datasets.lightning.datamodules.sc2_replaypack_datamodule import (
     SC2ReplaypackDataModule,
 )
-
 from sc2_datasets.utils.zip_utils import unpack_zipfile
-from tests.test_utils.test_utils import get_setup_paths
-
 from tests.settings_test import (
     TEST_REAL_REPLAYPACKS,
     TEST_SYNTHETIC_REPLAYPACKS,
 )
+from tests.test_utils.test_utils import get_setup_paths
 
 
 class SC2ReplaypackDataModuleTest(unittest.TestCase):
@@ -42,16 +40,14 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
             )
 
     def setUp(self) -> None:
-
         if self.download.exists():
-            shutil.rmtree(path=self.downloaded.as_posix())
+            shutil.rmtree(path=str(self.downloaded))
 
         if self.unpacked.exists():
-            shutil.rmtree(path=self.unpacked.as_posix())
+            shutil.rmtree(path=str(self.unpacked))
 
     @pytest.mark.minor
     def test_unpack_datamodule_synthetic(self):
-
         sc2_replaypack_datamodule = SC2ReplaypackDataModule(
             replaypack_name=self.test_replaypack_name,
             unpack_dir=self.unpack_dir_path,
@@ -63,10 +59,8 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
 
     @pytest.mark.minor
     def test_download_unpack_datamodule_synthetic(self):
-
         for rp_name, rp_url in TEST_SYNTHETIC_REPLAYPACKS:
             with self.subTest(rp_name):
-
                 sc2_replaypack_datamodule = SC2ReplaypackDataModule(
                     replaypack_name=rp_name,
                     unpack_dir=self.unpack_dir_path,
@@ -83,7 +77,6 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
     def test_download_unpack_datamodule_real(self):
         for rp_name, rp_url in TEST_REAL_REPLAYPACKS:
             with self.subTest(rp_name):
-
                 sc2_replaypack_datamodule = SC2ReplaypackDataModule(
                     replaypack_name=rp_name,
                     unpack_dir=self.unpack_dir_path,

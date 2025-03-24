@@ -15,7 +15,6 @@ from sc2_datasets.replay_parser.game_events.events.command_manager_state import 
 from sc2_datasets.replay_parser.game_events.events.control_group_update import (
     ControlGroupUpdate,
 )
-
 from sc2_datasets.replay_parser.game_events.events.game_user_leave import GameUserLeave
 from sc2_datasets.replay_parser.game_events.events.selection_delta import SelectionDelta
 from sc2_datasets.replay_parser.game_events.events.user_options import UserOptions
@@ -26,14 +25,19 @@ class GameEventsParser:
     @staticmethod
     def from_dict(d: Dict) -> GameEvent:
         """
-        Static method returning initialized GameEvent class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method returning an initialized GameEvent class obtained from a dictionary.
+        This method assists in parsing the original JSON data derived from pre-processing an .SC2Replay file.
 
-        :param d: Specifies a dictionary as available in the JSON file\
-        that is a result of pre-processing some .SC2Replay file.
-        :type d: Dict
-        :return: Returns an initialized GameEvent class.
-        :rtype: GameEvent
+        Parameters
+        ----------
+        d : Dict
+            A dictionary representing the data available in the JSON file, derived
+            from preprocessing some .SC2Replay file.
+
+        Returns
+        -------
+        GameEvent
+            An initialized instance of the GameEvent class.
         """
         type_name = d["evtTypeName"]
 

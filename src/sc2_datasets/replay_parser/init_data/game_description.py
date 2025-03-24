@@ -5,41 +5,48 @@ from sc2_datasets.replay_parser.init_data.game_options import GameOptions
 
 class GameDescription:
     """
-    GameDescription specifies an information about some basic parameters
-    of a StarCraft II replay.
+    Specifies essential parameters for a StarCraft II replay in the GameDescription.
 
-    :param gameOptions: Specifies options in the game,\
-    for example you can set: fog, random races, competitive, etc.
-    :type gameOptions: GameOptions
-    :param gameSpeed: Specifies the speed at which your game runs.\
-    Enum: [Slower, Slow, Normal, Fast, Faster]. Default is Faster
-    :type gameSpeed: str
-    :param isBlizzardMap: Specifies if map have been created by Blizzard
-    :type isBlizzardMap: bool
-    :param mapAuthorName: Nickname or fullname of the map's author
-    :type mapAuthorName: str
-    :param mapFileSyncChecksum: Specifies the map file sync checksum
-    :type mapFileSyncChecksum: int
-    :param mapSizeX: X coordinate size of map in pixels.
-    :type mapSizeX: int
-    :param mapSizeY: Y coordinate size of map in pixels.
-    :type mapSizeY: int
-    :param maxPlayers: Specifies how many players can play on this map at once.
-    :type maxPlayers: int
+    Parameters
+    ----------
+    gameOptions : GameOptions
+        Options within the game, including settings like fog, random races, competitive mode, etc.
+    gameSpeed : str
+        The speed at which the game runs.\
+        Enumeration: [Slower, Slow, Normal, Fast, Faster]. Default is Faster.
+    isBlizzardMap : bool
+        Indicates if the map was created by Blizzard.
+    mapAuthorName : str
+        Nickname or full name of the map's author.
+    mapFileSyncChecksum : int
+        The checksum for map file synchronization.
+    mapSizeX : int
+        The size of the map in pixels on the X-axis.
+    mapSizeY : int
+        The size of the map in pixels on the Y-axis.
+    maxPlayers : int
+        The maximum number of players allowed on this map simultaneously.
     """
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameDescription":
         """
-        Static method returning initialized GameDescription class from a dictionary.
-        This helps with the original JSON parsing.
+        Static method that initializes a GameDescription class from a dictionary.
+        This aids in parsing the original JSON content from an .SC2Replay file.
 
-        :param d: Specifies a dictionary as available in the JSON file that is\
-        a result of pre-processing some .SC2Replay file.
-        :type d: Dict[str, Any]
-        :return: Returns an initialized GameDescription class.
-        :rtype: GameDescription
+        Parameters
+        ----------
+        d : Dict[str, Any]
+            Dictionary obtained from preprocessing an .SC2Replay file in JSON format.
 
+        Returns
+        -------
+        GameDescription
+            An initialized instance of the GameDescription class.
+
+
+        Examples
+        --------
         **Correct Usage Examples:**
 
         Using from_dict factory method provides ease of use when parsing

@@ -2,24 +2,33 @@ from typing import Dict, List
 
 import numpy as np
 
+from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+
 # pylama:ignore=E501
 from sc2_datasets.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
 )
-from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 
 
 def filter_player_stats(
     sc2_replay: SC2ReplayData,
 ) -> Dict[str, List[PlayerStats]]:
     """
-    Filters PlayerStats events and places them in lists based on the playerId
+    Filters PlayerStats events and places them in lists based on the playerId.
 
-    :param sc2_replay: Specifies the replay that the outcome will be selected from.
-    :type sc2_replay: SC2ReplayData
-    :return: Returns a dictionary containing a mapping from playerId to the respective player stats.
-    :rtype: Dict[str, List[PlayerStats]]
+    Parameters
+    ----------
+    sc2_replay : SC2ReplayData
+        Specifies the replay that the outcome will be selected from.
 
+    Returns
+    -------
+    Dict[str, List[PlayerStats]]
+        Returns a dictionary containing a mapping from playerId\
+        to the respective player stats.
+
+    Examples
+    --------
     **Correct Usage Examples:**
 
     The use of this method is intended to filter player's events from the game based on playerId
@@ -69,10 +78,18 @@ def average_player_stats(
     """
     Exposes the logic of selecting and averaging PlayerStats events from within TrackerEvents list.
 
-    :param sc2_replay: Specifies the replay that the outcome will be selected from.
-    :type sc2_replay: SC2ReplayData
-    :return: Returns a dictionary containing averaged features.
-    :rtype: Dict[str, List[float]]
+    Parameters
+    ----------
+    sc2_replay : SC2ReplayData
+        Specifies the replay that the outcome will be selected from.
+
+    Returns
+    -------
+    Dict[str, List[float]]
+        Returns a dictionary containing averaged features.
+
+    Examples
+    --------
 
     **Correct Usage Examples:**
 
@@ -129,13 +146,19 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     """
     Exposes logic for selecting APM from replay data.
 
-    :param sc2_replay: Specifies the replay that the outcome will be selected from.
-    :type sc2_replay: SC2ReplayData
-    :return: Returns player id to APM mapping.
-    :rtype: Dict[str, int]
+    Parameters
+    ----------
+    sc2_replay : SC2ReplayData
+        Specifies the replay that the outcome will be selected from.
 
+    Returns
+    -------
+    Dict[str, int]
+        Returns player id to APM mapping.
+
+    Examples
+    --------
     **Correct Usage Examples:**
-
     The use of this method is intended to check the value
     of the correct APM from the selected replay.
 
@@ -172,15 +195,21 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
 def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     """
-    Exposes logic for selecting game outcome of a 1v1 game. Maps loss to 0, and win to 1
+    Exposes logic for selecting game outcome of a 1v1 game.
+    Maps loss to 0, and win to 1.
 
-    :param sc2_replay: Specifies the replay that the outcome will be selected from.
-    :type sc2_replay: SC2ReplayData
-    :return: Returns a dictionary mapping loss to 0, and win to 1 for playerIDs
-    :rtype: Dict[str, int]
+    Parameters
+    ----------
+    sc2_replay : SC2ReplayData
+        Specifies the replay that the outcome will be selected from.
 
-    **Correct Usage Examples:**
+    Returns
+    -------
+    Dict[str, int]
+        Returns a dictionary mapping loss to 0, and win to 1 for playerIDs.
 
+    Examples
+    --------
     The use of this method is intended to check logic value of the selected 1v1 game, lose or win
 
     You should set sc2_replay parameter.
@@ -206,7 +235,7 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     player_outcome = {"1": 0, "2": 0}
 
-    result_dict = {"Loss": 0, "Win": 1}
+    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0}
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
         result = result_dict[toon_desc_map.toon_player_info.result]
         player_outcome[toon_desc_map.toon_player_info.playerID] = result

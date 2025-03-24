@@ -40,6 +40,27 @@ If you are proposing a feature:
 
 ## Get Started!
 
+### Development with Docker
+
+If you wish to develop using Docker, there is a `Dockerfile.dev` defined. Please use the following commands:
+
+Build the Dockerfile (CPU):
+```
+docker build --tag=sc2_datasets:dev -f .\docker\Dockerfile.dev .
+```
+
+Build the Dockerfile (GPU):
+```
+docker build --tag=sc2_datasets:dev -f .\docker\Dockerfile.dev.gpu .
+```
+
+Run the Dockerfile:
+```
+docker run --gpus all -it -v .:/app sc2_datasets:dev
+```
+
+### Local Development
+
 Ready to contribute? Here's how to set up `sc2_datasets` for local development.
 
 1. Download a copy of `sc2_datasets` locally.
@@ -57,7 +78,9 @@ Ready to contribute? Here's how to set up `sc2_datasets` for local development.
 
 4. When you're done making changes, check that your changes conform to any code formatting requirements and pass any tests.
 
-5. Commit your changes and open a pull request.
+5. Before running tests make sure to setup environment variable name: `TEST_WORKSPACE` value: `YOUR_PATH_TO_APP`
+
+6. Commit your changes and open a pull request.
 
 ## Pull Request Guidelines
 

@@ -1,31 +1,29 @@
 import os
-from pathlib import Path
 import shutil
 import unittest
+from pathlib import Path
 
 import pytest
 
 from sc2_datasets.utils.dataset_utils import load_replaypack_information
 from sc2_datasets.utils.zip_utils import unpack_zipfile
-
-from tests.test_utils.test_utils import get_specific_asset, get_test_output_dir
+from tests.test_utils.test_utils import get_specific_asset_path, get_test_output_dir
 
 
 @pytest.mark.minor
 class DatasetUtilsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-
         cls.test_replaypack_name = "2022_TestReplaypack"
-        cls.replaypack_zip_path = get_specific_asset(
+        cls.replaypack_zip_path = get_specific_asset_path(
             filename=cls.test_replaypack_name + ".zip"
         )
 
         cls.test_output_path = get_test_output_dir()
-        cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
+        cls.unpack_dir_path = Path(cls.test_output_path, "unpack").resolve()
 
         # Initializing the unpacked where it should be:
-        cls.unpacked = Path(cls.unpack_dir_path, cls.test_replaypack_name)
+        cls.unpacked = Path(cls.unpack_dir_path, cls.test_replaypack_name).resolve()
 
         # If it doesn't exist, unpack the test .zip archive:
         if not cls.unpacked.exists():
@@ -41,26 +39,19 @@ class DatasetUtilsTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-
         # Deletes the replaypack after the testing was finished:
         if cls.unpacked.exists():
-            shutil.rmtree(path=cls.unpacked.as_posix())
+            shutil.rmtree(path=str(cls.unpacked))
 
     def test_load_replaypack_information_correct(self):
-
         (
-            replaypack_data_path,
             replaypack_main_log_obj_list,
             replaypack_processed_failed,
             replaypack_dir_mapping,
             replaypack_summary,
         ) = load_replaypack_information(
-            replaypack_name=self.test_replaypack_name,
             replaypack_path=self.unpacked,
-            unpack_n_workers=1,
         )
-
-        self.assertIsInstance(replaypack_data_path, str)
 
         # Assertions for main_log:
         self.assertIsInstance(replaypack_main_log_obj_list, list)

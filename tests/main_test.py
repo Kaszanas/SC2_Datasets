@@ -19,7 +19,6 @@ def suite():
 
 
 if __name__ == "__main__":
-
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
     print(test_utils.get_workspace_dir())

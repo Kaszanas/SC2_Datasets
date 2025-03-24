@@ -1,7 +1,6 @@
 from typing import Callable, List, Tuple
 
 from sc2_datasets.available_replaypacks import SC2EGSET_DATASET_REPLAYPACKS
-
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 
 
@@ -9,22 +8,24 @@ class SC2EGSetDataset(SC2Dataset):
     """
     Inherits from SC2Dataset and ensures that the dataset for SC2EGSet is downloaded.
 
-    :param unpack_dir: Specifies the path of a directory\
-    where the dataset files will be unpacked.
-    :type unpack_dir: str
-    :param download_dir: Specifies the path of a directory where\
-    the dataset files will be downloaded.
-    :type download_dir: str
-    :param names_urls: Specifies the URL of the dataset which\
-    will be used to download the files.
-    :type names_urls: List[Tuple[str, str]]
-    :param unpack_n_workers: Specifies the number of workers\
-    that will be used for unpacking the archive, defaults to 16
-    :type unpack_n_workers: int, optional
-    :param transform: PyTorch transform. function that takes SC2ReplayData and return something
-    :type transform: Func[SC2ReplayData, T]
-    :param validator: Specifies the validation option for fetched data, defaults to None
-    :type validator: Callable | None, optional
+    Parameters
+    ----------
+    unpack_dir : str
+        Specifies the path of a directory where the dataset files will be unpacked,\
+        by default "./data/unpack/sc2egset_dataset".
+    download_dir : str
+        Specifies the path of a directory where the dataset files will be downloaded,\
+        by default "./data/download/sc2egset_dataset".
+    names_urls : List[Tuple[str, str]]
+        Specifies the URL of the dataset which will be used to download the files,\
+        by default SC2EGSET_DATASET_REPLAYPACKS.
+    unpack_n_workers : int, optional
+        Specifies the number of workers that will be used for unpacking the archive,\
+        defaults to 16.
+    transform : Func[SC2ReplayData, T]
+        PyTorch transform function that takes SC2ReplayData and returns something.
+    validator : Callable | None, optional
+        Specifies the validation option for fetched data, defaults to None.
     """
 
     def __init__(
@@ -37,7 +38,6 @@ class SC2EGSetDataset(SC2Dataset):
         transform: Callable | None = None,
         validator: Callable | None = None,
     ):
-
         super().__init__(
             unpack_dir=unpack_dir,
             download_dir=download_dir,

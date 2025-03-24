@@ -6,7 +6,7 @@
 
 Library can be used to interface with datasets that were pre-processed with our pipeline
 as described in:
-- [SC2DatasetPreparator](https://github.com/Kaszanas/SC2DatasetPreparator)
+- [DatasetPreparator](https://github.com/Kaszanas/DatasetPreparator)
 
 Currently we have exposed PyTorch and PyTorch Lightning API. Our goal is to provide
 infrastructure used for StarCraft&nbsp;II analytics.
@@ -17,7 +17,7 @@ Please refer to the [**official documentation**](https://sc2-datasets.readthedoc
 
 ### SC2EGSet: StarCraft II Esport Game State Dataset
 
-This project contains official API implementation for the [SC2EGSet: StarCraft II Esport Game State Dataset](https://doi.org/10.5281/zenodo.5503997), which is built based on [SC2ReSet: StarCraft II Esport Replaypack Set](https://doi.org/10.5281/zenodo.5575796).
+This project contains official API implementation for the works introduced in the following article: [SC2EGSet: StarCraft II Esport Replay and Game-state Dataset](https://doi.org/10.1038/s41597-023-02510-7), namely; [Zenodo, SC2EGSet: StarCraft II Esport Game State Dataset](https://doi.org/10.5281/zenodo.5503997), built based on [Zenodo, SC2ReSet: StarCraft II Esport Replaypack Set](https://doi.org/10.5281/zenodo.5575796).
 Contents of this library provide PyTorch and PyTorch Lightning API for pre-processed StarCraft II dataset.
 
 ## Installation
@@ -75,7 +75,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`sc2egset_dataset` was created by Andrzej Białecki. It is licensed under the terms of the GNU General Public License v3.0 license.
+`sc2_datasets` project was created by Andrzej Białecki. It is licensed under the terms of the GNU General Public License v3.0 license.
 
 ## Cite
 
@@ -84,7 +84,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 To cite the article that introduces [SC2ReSet](https://doi.org/10.5281/zenodo.5575796) and [SC2EGSet](https://doi.org/10.5281/zenodo.5503997) use this:
 
 ```bibtex
-@article{Białecki2023,
+@article{Bialecki2023,
   author   = {Bia{\l}ecki, Andrzej
               and Jakubowska, Natalia
               and Dobrowolski, Pawe{\l}

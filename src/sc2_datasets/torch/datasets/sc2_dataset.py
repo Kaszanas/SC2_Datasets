@@ -1,31 +1,31 @@
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Callable, Dict, List, Set, Tuple
 
 from torch.utils.data import Dataset
+from tqdm import tqdm
 
-from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
 
 
 class SC2Dataset(Dataset):
     """
     Inherits from PyTorch Dataset and ensures that the dataset for SC2EGSet is downloaded.
 
-    :param unpack_dir: Specifies the path of a directory\
-    where the dataset files will be unpacked.
-    :type unpack_dir: str
-    :param download_dir: Specifies the path of a directory where\
-    the dataset files will be downloaded.
-    :type download_dir: str
-    :param names_urls: Specifies the URL of the dataset which\
-    will be used to download the files.
-    :type names_urls: List[Tuple[str, str]]
-    :param unpack_n_workers: Specifies the number of workers\
-    that will be used for unpacking the archive, defaults to 16
-    :type unpack_n_workers: int, optional
-    :param transform: PyTorch transform. function that takes SC2ReplayData and return something
-    :type transform: Func[SC2ReplayData, T]
-    :param validator: Specifies the validation option for fetched data, defaults to None
-    :type validator: Callable | None, optional
+    Parameters
+    ----------
+    unpack_dir : str
+        Specifies the path of a directory where the dataset files will be unpacked.
+    download_dir : str
+        Specifies the path of a directory where the dataset files will be downloaded.
+    names_urls : List[Tuple[str, str]]
+        Specifies the URL of the dataset which will be used to download the files.
+    unpack_n_workers : int, optional
+        Specifies the number of workers that will be used for unpacking the archive, defaults to 16.
+    transform : Func[SC2ReplayData, T]
+        PyTorch transform function that takes SC2ReplayData and returns something.
+    validator : Callable | None, optional
+        Specifies the validation option for fetched data, defaults to None.
     """
 
     def __init__(
@@ -38,7 +38,6 @@ class SC2Dataset(Dataset):
         transform: Callable | None = None,
         validator: Callable | None = None,
     ):
-
         # PyTorch fields:
         self.transform = transform
 
@@ -64,24 +63,36 @@ class SC2Dataset(Dataset):
 
         self.replaypacks: List[SC2ReplaypackDataset] = []
 
-        # Iterating over the provided URLs:
+        list_of_arguments = []
         for replaypack_name, url in self.names_urls:
-            # Initializing SC2ReplaypackDataset cumulatively calculating its length:
-            replaypack = SC2ReplaypackDataset(
-                replaypack_name=replaypack_name,
-                download_dir=self.download_dir,
-                unpack_dir=self.unpack_dir,
-                url=url,
-                download=self.download,
-                unpack_n_workers=self.unpack_n_workers,
-                validator=self.validator,
+            list_of_arguments.append(
+                {
+                    "replaypack_name": replaypack_name,
+                    "unpack_dir": self.unpack_dir,
+                    "download_dir": self.download_dir,
+                    "url": url,
+                    "download": self.download,
+                    "unpack_n_workers": self.unpack_n_workers,
+                    "validator": self.validator,
+                }
             )
 
-            # Retrieving files that were skipped when initializing a dataset,
-            # This is based on validator:
-            # TODO: This will be used later:
-            # self.skip_files[replaypack_name] = replaypack.skip_files
-            self.replaypacks.append(replaypack)
+        # NOTE: The parameter of max_workers may be customizable,
+        # Be wary that this operation is downloading the dataset,
+        # don't DDOS people with this:
+        with ThreadPoolExecutor(
+            max_workers=3,
+            initializer=tqdm.set_lock,
+            initargs=(tqdm.get_lock(),),
+        ) as executor:
+            self.replaypacks = list(
+                executor.map(
+                    SC2ReplaypackDataset.from_args,
+                    list_of_arguments,
+                )
+            )
+
+        for replaypack in self.replaypacks:
             self.len += len(replaypack)
 
     def __len__(self) -> int:
@@ -94,15 +105,24 @@ class SC2Dataset(Dataset):
         """
         Exposes logic of getting a single parsed item by using dataset[index].
 
-        :param index: Specifies the index of an item that should be retrieved.
-        :type index: Any
-        :raises IndexError: To support negative indexing,\
-        if the index is less than zero twice, IndexError is raised.
-        :raises IndexError: If the index is greater than length\
-        of the dataset IndexError is raised.
-        :return: Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,\
-        or a result of a transform that was passed to the dataset.
-        :rtype: Tuple[Any, Any] | SC2ReplayData
+        Parameters
+        ----------
+        index : Any
+            Specifies the index of an item that should be retrieved.
+
+        Raises
+        ------
+        IndexError
+            To support negative indexing, if the index is less than zero twice,\
+            IndexError is raised.
+        IndexError
+            If the index is greater than length of the dataset, IndexError is raised.
+
+        Returns
+        -------
+        Tuple[Any, Any] | SC2ReplayData
+            Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,
+            or a result of a transform that was passed to the dataset.
         """
 
         # If the index is negative, treat it as if expressed from the back of the sequence.
