@@ -60,6 +60,7 @@ docs: ## Generates the documentation.
 		make html \
 		--directory docs/
 
+
 .PHONY: help
 help: ## Show available make targets
 	@awk '/^[^\t ]*:.*?##/{sub(/:.*?##/, ""); printf "\033[36m%-30s\033[0m %s\n", $$1, substr($$0, index($$0,$$2))}' $(MAKEFILE_LIST)

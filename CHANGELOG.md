@@ -1,6 +1,29 @@
 # Changelog
 
-<!--next-version-placeholder-->
+
+
+## 1.1.0 (2025-03-24)
+
+### Feat
+
+- multithreading zip unpacking with progressbars
+- separated download\unpack responsibility
+- multithreading initialization of replaypacks
+- staticmethod for multithread initialization
+
+### Fix
+
+- dataset 2.1.3 hotfix in available_replaypacks
+- **camera_update**: camera update can have null target
+- matching names and urls
+
+### Refactor
+
+- organizing imports
+- removed unused arguments
+- **download_utils**: Drafting download progress
+- **ruff**: sorting imports with ruff
+- **pre-commit**: ran ruff pre-commit on entire repository
 
 ## v1.0.2 (2022/08/28)
 
