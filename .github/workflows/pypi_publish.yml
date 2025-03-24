@@ -10,6 +10,9 @@ jobs:
     # Set up operating system
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+
     # Define job steps
     steps:
       - name: Set up Python 3.11.10
