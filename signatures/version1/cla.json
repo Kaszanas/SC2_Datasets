@@ -1,3 +1,13 @@
 {
-   "signedContributors": []
+
+  "signedContributors": [
+    {
+      "name": "scmisa",
+      "id": 63045065,
+      "comment_id": 2299540664,
+      "created_at": "2024-08-20T18:53:19Z",
+      "repoId": 465739912,
+      "pullRequestNo": 46
+    }
+  ]
 }

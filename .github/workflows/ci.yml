@@ -28,6 +28,7 @@ jobs:
       - name: Check-out repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
+
       - name: Install poetry
         uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a
 
@@ -47,5 +48,7 @@ jobs:
       - name: Run tests
         run: poetry run pytest --ignore-glob='test_*.py' ./tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov-report html --cov=xml 2>&1
 
+      # TODO: This may be ran in docker:
+      # See if the documentation builds correctly:
       - name: Build documentation
         run: poetry run make html --directory docs/
