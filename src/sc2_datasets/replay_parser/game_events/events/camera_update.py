@@ -86,6 +86,16 @@ class CameraUpdate(GameEvent):
         >>> assert camera_update_object.userid == 1
         >>> assert camera_update_object.yaw == None
         """
+
+        # Target can be None sometimes:
+        target_2d = None
+        target = d["target"]
+        if target:
+            x = target["x"]
+            y = target["y"]
+
+            target_2d = Target2D(x=x, y=y)
+
         return CameraUpdate(
             distance=d["distance"],
             follow=d["follow"],
@@ -93,7 +103,7 @@ class CameraUpdate(GameEvent):
             loop=d["loop"],
             pitch=d["pitch"],
             reason=d["reason"],
-            target=Target2D(x=d["target"]["x"], y=d["target"]["y"]),
+            target=target_2d,
             userid=d["userid"]["userId"],
             yaw=d["yaw"],
         )
@@ -106,7 +116,7 @@ class CameraUpdate(GameEvent):
         loop: int,
         pitch: NoneType | float | int,
         reason: NoneType | str,
-        target: Target2D,
+        target: Target2D | None,
         userid: int,
         yaw: NoneType | float | int,
     ) -> None:
