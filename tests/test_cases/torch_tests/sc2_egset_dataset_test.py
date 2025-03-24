@@ -39,10 +39,10 @@ class SC2EGSetDatasetTest(unittest.TestCase):
 
     def setUp(self) -> None:
         if self.download.exists():
-            shutil.rmtree(path=self.downloaded.as_posix())
+            shutil.rmtree(path=str(self.downloaded))
 
         if self.unpacked.exists():
-            shutil.rmtree(path=self.unpacked.as_posix())
+            shutil.rmtree(path=str(self.unpacked))
 
     @pytest.mark.minor
     def test_unpack_dataset_synthetic(self):

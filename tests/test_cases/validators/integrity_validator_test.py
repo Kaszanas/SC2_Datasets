@@ -20,12 +20,16 @@ from sc2_datasets.validators.singleprocess_validator import (
 class IntegrityValidatorTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.not_working_test_replay = Path(
-            test_utils.get_specific_asset_path(filename="test_bit_flip_example.json")
-        ).as_posix()
-        cls.working_test_replay = Path(
-            test_utils.get_specific_asset_path(filename="test_replay.json")
-        ).as_posix()
+        cls.not_working_test_replay = str(
+            Path(
+                test_utils.get_specific_asset_path(
+                    filename="test_bit_flip_example.json"
+                )
+            )
+        )
+        cls.working_test_replay = str(
+            Path(test_utils.get_specific_asset_path(filename="test_replay.json"))
+        )
         cls.list_of_replays = [
             cls.working_test_replay,
             cls.not_working_test_replay,

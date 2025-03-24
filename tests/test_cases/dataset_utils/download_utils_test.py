@@ -5,7 +5,8 @@
 >>> download_replaypack_object = download_replaypack(
 ...    destination_dir=wrong_type_object,
 ...    replaypack_name=replaypack_name,
-...    replaypack_url=url)
+...    replaypack_url=url,
+...    )
 Traceback (most recent call last):
 ...
 TypeError: unsupported operand type(s) ...

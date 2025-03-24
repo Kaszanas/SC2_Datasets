@@ -20,10 +20,10 @@ class DatasetUtilsTest(unittest.TestCase):
         )
 
         cls.test_output_path = get_test_output_dir()
-        cls.unpack_dir_path = os.path.join(cls.test_output_path, "unpack")
+        cls.unpack_dir_path = Path(cls.test_output_path, "unpack").resolve()
 
         # Initializing the unpacked where it should be:
-        cls.unpacked = Path(cls.unpack_dir_path, cls.test_replaypack_name)
+        cls.unpacked = Path(cls.unpack_dir_path, cls.test_replaypack_name).resolve()
 
         # If it doesn't exist, unpack the test .zip archive:
         if not cls.unpacked.exists():
@@ -41,22 +41,17 @@ class DatasetUtilsTest(unittest.TestCase):
     def tearDownClass(cls) -> None:
         # Deletes the replaypack after the testing was finished:
         if cls.unpacked.exists():
-            shutil.rmtree(path=cls.unpacked.as_posix())
+            shutil.rmtree(path=str(cls.unpacked))
 
     def test_load_replaypack_information_correct(self):
         (
-            replaypack_data_path,
             replaypack_main_log_obj_list,
             replaypack_processed_failed,
             replaypack_dir_mapping,
             replaypack_summary,
         ) = load_replaypack_information(
-            replaypack_name=self.test_replaypack_name,
             replaypack_path=self.unpacked,
-            unpack_n_workers=1,
         )
-
-        self.assertIsInstance(replaypack_data_path, str)
 
         # Assertions for main_log:
         self.assertIsInstance(replaypack_main_log_obj_list, list)

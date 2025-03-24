@@ -38,10 +38,10 @@ class SC2DatasetTest(unittest.TestCase):
 
     def setUp(self) -> None:
         if self.download.exists():
-            shutil.rmtree(path=self.downloaded.as_posix())
+            shutil.rmtree(path=str(self.downloaded))
 
         if self.unpacked.exists():
-            shutil.rmtree(path=self.unpacked.as_posix())
+            shutil.rmtree(path=str(self.unpacked))
 
     def test_parsing_test_files(self):
         # REVIEW: Will this work correctly?
