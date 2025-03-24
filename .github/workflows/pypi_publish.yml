@@ -41,8 +41,8 @@ jobs:
         uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc
         with:
           user: __token__
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository-url: https://test.pypi.org/legacy/
+          verbose: true
 
       # Configuring and attempting to install from TestPyPI
       - name: Test install from TestPyPI underscore
@@ -64,4 +64,3 @@ jobs:
         uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc
         with:
           user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
