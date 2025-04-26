@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class Target3D:
     """
     Data type holding information about a 3D target point in space.
@@ -12,7 +16,6 @@ class Target3D:
         Specifies the z value of the target.
     """
 
-    def __init__(self, x: float, y: float, z: float) -> None:
-        self.x = x
-        self.y = y
-        self.z = z
+    x: float
+    y: float
+    z: float
