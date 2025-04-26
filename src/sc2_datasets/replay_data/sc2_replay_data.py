@@ -2,7 +2,6 @@ import json
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict
 
 from sc2_datasets.replay_parser.details.details import Details
 from sc2_datasets.replay_parser.game_events.game_events_parser import GameEventsParser
