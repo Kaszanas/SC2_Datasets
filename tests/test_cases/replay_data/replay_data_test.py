@@ -1,5 +1,5 @@
 import unittest
-from pathlib import Path
+from json import JSONDecodeError
 
 import pytest
 
@@ -26,8 +26,9 @@ class SC2ReplayDataTest(unittest.TestCase):
         cls.test_replay = test_utils.get_specific_asset_path(
             filename="test_replay.json"
         )
-        cls.empty_replay = test_utils.get_specific_asset_path(
-            filename="empty_replay.json"
+        cls.empty_json = test_utils.get_specific_asset_path(filename="empty_json.json")
+        cls.empty_json_object = test_utils.get_specific_asset_path(
+            filename="empty_json_object.json"
         )
 
     def test_loading_json(self):
@@ -35,5 +36,9 @@ class SC2ReplayDataTest(unittest.TestCase):
         self.assertIsInstance(sc2_replay_data, SC2ReplayData)
 
     def test_empty_json(self):
+        with self.assertRaises(JSONDecodeError):
+            _ = SC2ReplayData.from_file(replay_filepath=self.empty_json)
+
+    def test_empty_object(self):
         with self.assertRaises(KeyError):
-            _ = SC2ReplayData.from_file(replay_filepath=self.empty_replay)
+            _ = SC2ReplayData.from_file(replay_filepath=self.empty_json_object)
