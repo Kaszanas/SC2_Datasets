@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from types import NoneType
 from typing import Dict
 
@@ -5,6 +6,7 @@ from sc2_datasets.replay_parser.game_events.events.nested.target_2d import Targe
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class CameraUpdate(GameEvent):
     """
     CameraUpdate represents replay data regarding updated camera locations in the game.
@@ -23,7 +25,7 @@ class CameraUpdate(GameEvent):
         Angle in the vertical plane, representing the vertical elevation of the camera.
     reason : None, str
         No valuable information about this parameter.
-    target : Target
+    target : Target2D | None
         Target class object containing x and y coordinates where the camera location was set.
     userid : int
         ID of the player who saved the camera location.
@@ -31,9 +33,18 @@ class CameraUpdate(GameEvent):
         Angle in the horizontal plane of the camera.
     """
 
-    # REVIEW: Doctests here:
+    distance: NoneType | float | int
+    follow: bool
+    id: int
+    loop: int
+    pitch: NoneType | float | int
+    reason: NoneType | str
+    target: Target2D | None
+    userid: int
+    yaw: NoneType | float | int
+
     @staticmethod
-    def from_dict(d: Dict):
+    def from_dict(d: Dict) -> "CameraUpdate":
         """
         Static method returning initialized CameraUpdate class from a dictionary.
         This aids in parsing the original JSON file extracted from a processed .SC2Replay file.
@@ -107,25 +118,3 @@ class CameraUpdate(GameEvent):
             userid=d["userid"]["userId"],
             yaw=d["yaw"],
         )
-
-    def __init__(
-        self,
-        distance: NoneType | float | int,
-        follow: bool,
-        id: int,
-        loop: int,
-        pitch: NoneType | float | int,
-        reason: NoneType | str,
-        target: Target2D | None,
-        userid: int,
-        yaw: NoneType | float | int,
-    ) -> None:
-        self.distance = distance
-        self.follow = follow
-        self.id = id
-        self.loop = loop
-        self.pitch = pitch
-        self.reason = reason
-        self.target = target
-        self.userid = userid
-        self.yaw = yaw

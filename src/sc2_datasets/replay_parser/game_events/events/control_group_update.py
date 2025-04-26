@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class ControlGroupUpdate(GameEvent):
     """
     ControlGroupUpdate is containing some "details" information about
@@ -23,6 +25,12 @@ class ControlGroupUpdate(GameEvent):
     userid : int
         Specifies id number of player who has updated the group control the game.
     """
+
+    controlGroupIndex: int
+    controlGroupUpdate: int
+    id: int
+    loop: int
+    userid: int
 
     @staticmethod
     def from_dict(d: Dict) -> "ControlGroupUpdate":
@@ -48,17 +56,3 @@ class ControlGroupUpdate(GameEvent):
             loop=d["loop"],
             userid=d["userid"]["userId"],
         )
-
-    def __init__(
-        self,
-        controlGroupIndex: int,
-        controlGroupUpdate: int,
-        id: int,
-        loop: int,
-        userid: int,
-    ) -> None:
-        self.controlGroupIndex = controlGroupIndex
-        self.controlGroupUpdate = controlGroupUpdate
-        self.id = id
-        self.loop = loop
-        self.userid = userid

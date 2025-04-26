@@ -1,5 +1,6 @@
 import json
 import logging
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict
 
@@ -19,16 +20,20 @@ from sc2_datasets.replay_parser.tracker_events.tracker_events_parser import (
 )
 
 
+@dataclass
 class SC2ReplayData:
-    """
-    Specifies a data type that holds information parsed from json representation of a replay.
-
-    Parameters
-    ----------
-    loaded_replay_object : Any
-        Specifies a parsed Python deserialized json object\
-        loaded into memory
-    """
+    filepath: Path
+    header: Header
+    initData: InitData
+    details: Details
+    metadata: Metadata
+    messageEvents: list = field(default_factory=list)
+    gameEvents: list = field(default_factory=list)
+    trackerEvents: list = field(default_factory=list)
+    toonPlayerDescMap: list = field(default_factory=list)
+    gameEventsErr: bool = False
+    messageEventsErr: bool = False
+    trackerEventsErr: bool = False
 
     @staticmethod
     def from_file(replay_filepath: str) -> "SC2ReplayData":
@@ -61,47 +66,35 @@ class SC2ReplayData:
         logging.info(f"Attempting to parse: {str(replay_path)}")
         with replay_path.open(mode="r", encoding="utf-8") as replay_file:
             loaded_data = json.load(replay_file)
-            return SC2ReplayData(filepath=replay_path, loaded_replay_object=loaded_data)
+            return SC2ReplayData(
+                filepath=replay_path,
+                header=Header.from_dict(d=loaded_data["header"]),
+                initData=InitData.from_dict(d=loaded_data["initData"]),
+                details=Details.from_dict(d=loaded_data["details"]),
+                metadata=Metadata.from_dict(d=loaded_data["metadata"]),
+                messageEvents=[
+                    MessageEventsParser.from_dict(d=event_dict)
+                    for event_dict in loaded_data.get("messageEvents", [])
+                ],
+                gameEvents=[
+                    GameEventsParser.from_dict(d=event_dict)
+                    for event_dict in loaded_data.get("gameEvents", [])
+                ],
+                trackerEvents=[
+                    TrackerEventsParser.from_dict(d=event_dict)
+                    for event_dict in loaded_data.get("trackerEvents", [])
+                ],
+                toonPlayerDescMap=[
+                    ToonPlayerDesc.from_dict(toon=toon, d=player_dict)
+                    for toon, player_dict in loaded_data.get(
+                        "ToonPlayerDescMap", {}
+                    ).items()
+                ],
+                gameEventsErr=loaded_data.get("gameEventsErr", False),
+                messageEventsErr=loaded_data.get("messageEventsErr", False),
+                trackerEventsErr=loaded_data.get("trackerEvtsErr", False),
+            )
 
-    def __init__(self, filepath: Path, loaded_replay_object: Any) -> None:
-        # Replay data must contain the path to the json it comes from
-        # to allow for debugging:
-        self._filepath = filepath
-
-        self._header = Header.from_dict(d=loaded_replay_object["header"])
-        self._initData = InitData.from_dict(d=loaded_replay_object["initData"])
-        self._details = Details.from_dict(d=loaded_replay_object["details"])
-        self._metadata = Metadata.from_dict(d=loaded_replay_object["metadata"])
-        # TODO: We might want this to be a IterableDataset using PyTorch class:
-        self._messageEvents = []
-        if loaded_replay_object["messageEvents"]:
-            for event_dict in loaded_replay_object["messageEvents"]:
-                self._messageEvents.append(MessageEventsParser.from_dict(d=event_dict))
-        # TODO: We might want this to be a IterableDataset using PyTorch class:
-        self._gameEvents = []
-        if loaded_replay_object["gameEvents"]:
-            for event_dict in loaded_replay_object["gameEvents"]:
-                self._gameEvents.append(GameEventsParser.from_dict(d=event_dict))
-        # TODO: We might want this to be a IterableDataset using PyTorch class:
-        self._trackerEvents = []
-        if loaded_replay_object["trackerEvents"]:
-            for event_dict in loaded_replay_object["trackerEvents"]:
-                self._trackerEvents.append(TrackerEventsParser.from_dict(d=event_dict))
-        # TODO: We might want this to be a IterableDataset using PyTorch class:
-        toon_player_desc_dict: Dict[str, Dict[str, Any]] = loaded_replay_object[
-            "ToonPlayerDescMap"
-        ]
-
-        self._toonPlayerDescMap = [
-            ToonPlayerDesc.from_dict(toon=toon, d=player_dict)
-            for toon, player_dict in toon_player_desc_dict.items()
-        ]
-
-        self._gameEventsErr: bool = loaded_replay_object["gameEventsErr"]
-        self._messageEventsErr: bool = loaded_replay_object["messageEventsErr"]
-        self._trackerEventsErr: bool = loaded_replay_object["trackerEvtsErr"]
-
-    # REVIEW: Should the __hash__ be tested?
     def __hash__(self) -> int:
         """
         Custom hashing function based on the fields that were read from replay.
@@ -133,40 +126,3 @@ class SC2ReplayData:
                 player_tuple_toon,
             )
         )
-
-    # REVIEW: Should the properties be documented?
-    @property
-    def filepath(self):
-        return self._filepath
-
-    @property
-    def initData(self):
-        return self._initData
-
-    @property
-    def header(self):
-        return self._header
-
-    @property
-    def details(self):
-        return self._details
-
-    @property
-    def metadata(self):
-        return self._metadata
-
-    @property
-    def messageEvents(self):
-        return self._messageEvents
-
-    @property
-    def gameEvents(self):
-        return self._gameEvents
-
-    @property
-    def trackerEvents(self):
-        return self._trackerEvents
-
-    @property
-    def toonPlayerDescMap(self):
-        return self._toonPlayerDescMap

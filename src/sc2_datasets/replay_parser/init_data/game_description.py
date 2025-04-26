@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Any, Dict
 
 from sc2_datasets.replay_parser.init_data.game_options import GameOptions
 
 
+@dataclass
 class GameDescription:
     """
     Specifies essential parameters for a StarCraft II replay in the GameDescription.
@@ -12,8 +14,7 @@ class GameDescription:
     gameOptions : GameOptions
         Options within the game, including settings like fog, random races, competitive mode, etc.
     gameSpeed : str
-        The speed at which the game runs.\
-        Enumeration: [Slower, Slow, Normal, Fast, Faster]. Default is Faster.
+        The speed at which the game runs. Enumeration: [Slower, Slow, Normal, Fast, Faster]. Default is Faster.
     isBlizzardMap : bool
         Indicates if the map was created by Blizzard.
     mapAuthorName : str
@@ -27,6 +28,15 @@ class GameDescription:
     maxPlayers : int
         The maximum number of players allowed on this map simultaneously.
     """
+
+    gameOptions: GameOptions
+    gameSpeed: str
+    isBlizzardMap: bool
+    mapAuthorName: str
+    mapFileSyncChecksum: int
+    mapSizeX: int
+    mapSizeY: int
+    maxPlayers: int
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "GameDescription":
@@ -139,7 +149,6 @@ class GameDescription:
         ...
         TypeError: unsupported operand type(s) ...
         """
-
         return GameDescription(
             gameOptions=GameOptions.from_dict(d=d["gameOptions"]),
             gameSpeed=d["gameSpeed"],
@@ -150,23 +159,3 @@ class GameDescription:
             mapSizeY=d["mapSizeY"],
             maxPlayers=d["maxPlayers"],
         )
-
-    def __init__(
-        self,
-        gameOptions: GameOptions,
-        gameSpeed: str,
-        isBlizzardMap: bool,
-        mapAuthorName: str,
-        mapFileSyncChecksum: int,
-        mapSizeX: int,
-        mapSizeY: int,
-        maxPlayers: int,
-    ) -> None:
-        self.gameOptions = gameOptions
-        self.gameSpeed = gameSpeed
-        self.isBlizzardMap = isBlizzardMap
-        self.mapAuthorName = mapAuthorName
-        self.mapFileSyncChecksum = mapFileSyncChecksum
-        self.mapSizeX = mapSizeX
-        self.mapSizeY = mapSizeY
-        self.maxPlayers = maxPlayers

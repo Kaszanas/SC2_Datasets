@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class CommandManagerState(GameEvent):
     """
     CommandManagerState type contains information about some states during the game, like time, player, etc.
@@ -20,6 +22,12 @@ class CommandManagerState(GameEvent):
     userid : int
         Specifies the ID number of the player who managed the state. For example, in a 1v1 game: [0,1].
     """
+
+    id: int
+    loop: int
+    sequence: int
+    state: int
+    userid: int
 
     @staticmethod
     def from_dict(d: Dict) -> "CommandManagerState":
@@ -46,17 +54,3 @@ class CommandManagerState(GameEvent):
             state=d["state"],
             userid=d["userid"]["userId"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        sequence: int,
-        state: int,
-        userid: int,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.sequence = sequence
-        self.state = state
-        self.userid = userid

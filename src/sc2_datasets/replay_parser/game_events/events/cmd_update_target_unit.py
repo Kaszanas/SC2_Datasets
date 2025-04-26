@@ -1,9 +1,11 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.events.nested.target_unit import TargetUnit
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class CmdUpdateTargetUnit(GameEvent):
     """
     Data type containing information about a command update issued to a specific target unit.
@@ -19,6 +21,11 @@ class CmdUpdateTargetUnit(GameEvent):
     userid : int
         Specifies the user ID that issued the command.
     """
+
+    id: int
+    loop: int
+    target: TargetUnit
+    userid: int
 
     @staticmethod
     def from_dict(d: Dict) -> "CmdUpdateTargetUnit":
@@ -42,15 +49,3 @@ class CmdUpdateTargetUnit(GameEvent):
             target=d["target"],
             userid=d["userid"]["userId"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        target: TargetUnit,
-        userid: int,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.target = target
-        self.userid = userid

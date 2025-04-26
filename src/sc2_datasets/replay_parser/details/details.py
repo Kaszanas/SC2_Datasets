@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from typing import Any, Dict
 
 
+@dataclass
 class Details:
     """
     Data type containing details about a StarCraft II game.
@@ -18,7 +20,10 @@ class Details:
         Denotes the time at which the game was started in Coordinated Universal Time.
     """
 
-    # REVIEW: Doctests for this:
+    gameSpeed: str
+    isBlizzardMap: bool
+    timeUTC: str
+
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Details":
         """
@@ -62,13 +67,3 @@ class Details:
             isBlizzardMap=d["isBlizzardMap"],
             timeUTC=d["timeUTC"],
         )
-
-    def __init__(
-        self,
-        gameSpeed: str,
-        isBlizzardMap: bool,
-        timeUTC: str,
-    ) -> None:
-        self.gameSpeed = gameSpeed
-        self.isBlizzardMap = isBlizzardMap
-        self.timeUTC = timeUTC

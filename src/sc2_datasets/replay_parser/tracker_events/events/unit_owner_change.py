@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class UnitOwnerChange(TrackerEvent):
     """
     UnitOwnerChange holds some detail information about how the unit position
@@ -24,6 +26,14 @@ class UnitOwnerChange(TrackerEvent):
         Specifies an id number of player who was having the control of the unit in the game.
     """
 
+    controlPlayerId: int
+    id: int
+    loop: int
+    unitTagIndex: int
+    unitTagRecycle: int
+    upkeepPlayerId: int
+
+    @staticmethod
     def from_dict(d: Dict[str, int]) -> "UnitOwnerChange":
         """
         Static method returning initialized UnitOwnerChange class from a dictionary.
@@ -48,19 +58,3 @@ class UnitOwnerChange(TrackerEvent):
             unitTagRecycle=d["unitTagRecycle"],
             upkeepPlayerId=d["upkeepPlayerId"],
         )
-
-    def __init__(
-        self,
-        controlPlayerId: int,
-        id: int,
-        loop: int,
-        unitTagIndex: int,
-        unitTagRecycle: int,
-        upkeepPlayerId: int,
-    ) -> None:
-        self.controlPlayerId = controlPlayerId
-        self.id = id
-        self.loop = loop
-        self.unitTagIndex = unitTagIndex
-        self.unitTagRecycle = unitTagRecycle
-        self.upkeepPlayerId = upkeepPlayerId
