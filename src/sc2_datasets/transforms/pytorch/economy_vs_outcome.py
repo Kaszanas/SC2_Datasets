@@ -61,8 +61,11 @@ def economy_average_vs_outcome(
 
     result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0, "Undecided": -1}
 
-    # Check if result is "Undecided" and return None to skip this replay
-    if sc2_replay.toonPlayerDescMap[0].toon_player_info.result == "Undecided":
+    # Check if any player's result is "Undecided" and return None to skip this replay
+    if any(
+        player_desc.toon_player_info.result == "Undecided"
+        for player_desc in sc2_replay.toonPlayerDescMap.values()
+    ):
         return None, None
         
     target = result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result]
