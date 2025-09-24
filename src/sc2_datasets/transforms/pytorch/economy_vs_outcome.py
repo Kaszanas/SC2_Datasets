@@ -73,7 +73,7 @@ def economy_average_vs_outcome(
     skip_results = ["Undecided", "Draw", "Tie"]
     if any(
         player_desc.toon_player_info.result in skip_results
-        for player_desc in sc2_replay.toonPlayerDescMap.values()
+        for player_desc in sc2_replay.toonPlayerDescMap
     ):
         return None, None
 
