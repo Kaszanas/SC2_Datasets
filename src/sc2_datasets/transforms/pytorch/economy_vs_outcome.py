@@ -59,7 +59,15 @@ def economy_average_vs_outcome(
     # Creating feature tensor:
     feature_tensor = torch.tensor(feature_list, dtype=torch.float32)
 
-    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0, "Undecided": -1, "Draw": -1, "Tie": -1}
+    result_dict = {
+        "Loss": 0,
+        "Win": 1,
+        "Victory": 1,
+        "Defeat": 0,
+        "Undecided": -1,
+        "Draw": -1,
+        "Tie": -1,
+    }
 
     # Check if any player's result is "Undecided", "Draw", or "Tie" and return None to skip this replay
     skip_results = ["Undecided", "Draw", "Tie"]
