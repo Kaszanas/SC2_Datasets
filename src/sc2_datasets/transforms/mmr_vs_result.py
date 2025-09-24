@@ -35,7 +35,7 @@ def mmr_vs_result(sc2_replay: SC2ReplayData) -> Tuple[torch.Tensor, torch.Tensor
     skip_results = ["Undecided", "Draw", "Tie"]
     if sc2_replay.toonPlayerDescMap[0].toon_player_info.result in skip_results:
         return None, None
-        
+
     # Map result to label tensor
     label_tensor = torch.tensor(
         result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result],

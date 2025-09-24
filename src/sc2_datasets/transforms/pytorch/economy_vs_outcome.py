@@ -68,7 +68,7 @@ def economy_average_vs_outcome(
         for player_desc in sc2_replay.toonPlayerDescMap.values()
     ):
         return None, None
-        
+
     target = result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result]
 
     return feature_tensor, target

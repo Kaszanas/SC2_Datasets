@@ -242,7 +242,7 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
         if toon_desc_map.toon_player_info.result in skip_results:
             return None
-            
+
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
         result = result_dict[toon_desc_map.toon_player_info.result]
         player_outcome[toon_desc_map.toon_player_info.playerID] = result
