@@ -59,11 +59,12 @@ def economy_average_vs_outcome(
     # Creating feature tensor:
     feature_tensor = torch.tensor(feature_list, dtype=torch.float32)
 
-    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0, "Undecided": -1}
+    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0, "Undecided": -1, "Draw": -1, "Tie": -1}
 
-    # Check if any player's result is "Undecided" and return None to skip this replay
+    # Check if any player's result is "Undecided", "Draw", or "Tie" and return None to skip this replay
+    skip_results = ["Undecided", "Draw", "Tie"]
     if any(
-        player_desc.toon_player_info.result == "Undecided"
+        player_desc.toon_player_info.result in skip_results
         for player_desc in sc2_replay.toonPlayerDescMap.values()
     ):
         return None, None

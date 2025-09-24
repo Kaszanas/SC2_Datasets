@@ -235,11 +235,12 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     player_outcome = {"1": 0, "2": 0}
 
-    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0, "Undecided": -1}
+    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0, "Undecided": -1, "Draw": -1, "Tie": -1}
 
-    # Check if any player has an "Undecided" result and return None to indicate skipping
+    # Check if any player has an "Undecided", "Draw", or "Tie" result and return None to indicate skipping
+    skip_results = ["Undecided", "Draw", "Tie"]
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
-        if toon_desc_map.toon_player_info.result == "Undecided":
+        if toon_desc_map.toon_player_info.result in skip_results:
             return None
             
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
