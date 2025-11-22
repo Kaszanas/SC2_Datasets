@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from typing import Any, Dict
 
 
+@dataclass
 class Header:
     """
     Class representing the parameters of a replay header.
@@ -13,6 +15,9 @@ class Header:
     version : str
         The game version used by players during the game.
     """
+
+    elapsedGameLoops: int
+    version: str
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Header":
@@ -69,16 +74,7 @@ class Header:
         TypeError: unsupported operand type(s) ...
 
         """
-
         return Header(
             elapsedGameLoops=d["elapsedGameLoops"],
             version=d["version"],
         )
-
-    def __init__(
-        self,
-        elapsedGameLoops: int,
-        version: str,
-    ) -> None:
-        self.elapsedGameLoops = elapsedGameLoops
-        self.version = version

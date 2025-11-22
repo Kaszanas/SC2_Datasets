@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class UnitBorn(TrackerEvent):
     """
     UnitBorn contains some "details" information about unit
@@ -30,6 +32,17 @@ class UnitBorn(TrackerEvent):
         Specifies y coordinate of map in pixels where the object was created.
     """
 
+    controlPlayerId: int
+    id: int
+    loop: int
+    unitTagIndex: int
+    unitTagRecycle: int
+    unitTypeName: str
+    upkeepPlayerId: int
+    x: int
+    y: int
+
+    @staticmethod
     def from_dict(d: Dict) -> "UnitBorn":
         """
         Static method returning initialized UnitBorn class from a dictionary.
@@ -57,25 +70,3 @@ class UnitBorn(TrackerEvent):
             x=d["x"],
             y=d["y"],
         )
-
-    def __init__(
-        self,
-        controlPlayerId: int,
-        id: int,
-        loop: int,
-        unitTagIndex: int,
-        unitTagRecycle: int,
-        unitTypeName: str,
-        upkeepPlayerId: int,
-        x: int,
-        y: int,
-    ) -> None:
-        self.controlPlayerId = controlPlayerId
-        self.id = id
-        self.loop = loop
-        self.unitTagIndex = unitTagIndex
-        self.unitTagRecycle = unitTagRecycle
-        self.unitTypeName = unitTypeName
-        self.upkeepPlayerId = upkeepPlayerId
-        self.x = x
-        self.y = y

@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class UnitDone(TrackerEvent):
     """
     UnitDone is containing some "details" information about unit at the moment
@@ -19,6 +21,11 @@ class UnitDone(TrackerEvent):
     unitTagRecycle : int
         There is no specific information about this parameter.
     """
+
+    id: int
+    loop: int
+    unitTagIndex: int
+    unitTagRecycle: int
 
     @staticmethod
     def from_dict(d: Dict) -> "UnitDone":
@@ -43,15 +50,3 @@ class UnitDone(TrackerEvent):
             unitTagIndex=d["unitTagIndex"],
             unitTagRecycle=d["unitTagRecycle"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        unitTagIndex: int,
-        unitTagRecycle: int,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.unitTagIndex = unitTagIndex
-        self.unitTagRecycle = unitTagRecycle

@@ -14,3 +14,5 @@ venv*
 .venv
 
 test_output/*
+
+.ruff_cache/

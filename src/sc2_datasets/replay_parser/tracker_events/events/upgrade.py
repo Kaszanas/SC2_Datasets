@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class Upgrade(TrackerEvent):
     """
     Upgrade type containing some "details" information
@@ -22,6 +24,12 @@ class Upgrade(TrackerEvent):
     upgradeTypeName : str
         Specifies a name that upgrade has in the game.
     """
+
+    count: int
+    id: int
+    loop: int
+    playerId: int
+    upgradeTypeName: str
 
     @staticmethod
     def from_dict(d: Dict) -> "Upgrade":
@@ -47,17 +55,3 @@ class Upgrade(TrackerEvent):
             playerId=d["playerId"],
             upgradeTypeName=d["upgradeTypeName"],
         )
-
-    def __init__(
-        self,
-        count: int,
-        id: int,
-        loop: int,
-        playerId: int,
-        upgradeTypeName: str,
-    ) -> None:
-        self.count = count
-        self.id = id
-        self.loop = loop
-        self.playerId = playerId
-        self.upgradeTypeName = upgradeTypeName

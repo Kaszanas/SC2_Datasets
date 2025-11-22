@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.message_events.message_event import MessageEvent
 
 
+@dataclass
 class Chat(MessageEvent):
     """
     Chat holds information about messages exchanged between players during the game.
@@ -20,6 +22,12 @@ class Chat(MessageEvent):
     userid : int
         Specifies the user ID causing the event.
     """
+
+    id: int
+    loop: int
+    recipient: int
+    string: str
+    userid: int
 
     @staticmethod
     def from_dict(d: Dict) -> "Chat":
@@ -82,7 +90,7 @@ class Chat(MessageEvent):
         >>> assert chat_object.recipient >= 0
         >>> assert chat_object.userid >= 0
 
-        **Incorrect Usage Examples:**
+                **Incorrect Usage Examples:**
 
         >>> gameOptions_value_wrong = "False"
         >>> gameSpeed_value_wrong = True
@@ -106,7 +114,6 @@ class Chat(MessageEvent):
         ...
         TypeError: unsupported operand type(s) ...
         """
-
         return Chat(
             id=d["id"],
             loop=d["loop"],
@@ -114,17 +121,3 @@ class Chat(MessageEvent):
             string=d["string"],
             userid=d["userid"]["userId"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        recipient: int,
-        string: str,
-        userid: int,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.recipient = recipient
-        self.string = string
-        self.userid = userid

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.events.player_stats.stats import Stats
@@ -6,6 +7,7 @@ from sc2_datasets.replay_parser.tracker_events.events.player_stats.stats import 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class PlayerStats(TrackerEvent):
     """
     PlayerStats holds information about player economy
@@ -21,6 +23,11 @@ class PlayerStats(TrackerEvent):
     stats : Stats
         Specifies a custom data type holding the statistics.
     """
+
+    id: int
+    loop: int
+    playerId: int
+    stats: Stats
 
     @staticmethod
     def from_dict(d: Dict) -> "PlayerStats":
@@ -45,15 +52,3 @@ class PlayerStats(TrackerEvent):
             playerId=d["playerId"],
             stats=Stats.from_dict(d=d["stats"]),
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        playerId: int,
-        stats: Stats,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.playerId = playerId
-        self.stats = stats

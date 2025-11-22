@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Any, Dict
 
 # pylama:ignore=E501
@@ -6,6 +7,7 @@ from sc2_datasets.replay_parser.toon_player_desc_map.toon_player_info import (
 )
 
 
+@dataclass
 class ToonPlayerDesc:
     """
     Specifies ToonPlayerDesc class representation.
@@ -17,6 +19,9 @@ class ToonPlayerDesc:
     toon_player_info : ToonPlayerInfo
         Specific a ToonPlayerInfo class object, which includes a list of parameters.
     """
+
+    toon: str
+    toon_player_info: ToonPlayerInfo
 
     @staticmethod
     def from_dict(toon: str, d: Dict[str, Any]) -> "ToonPlayerDesc":
@@ -34,11 +39,3 @@ class ToonPlayerDesc:
             toon=toon,
             toon_player_info=ToonPlayerInfo.from_dict(d=d),
         )
-
-    def __init__(
-        self,
-        toon: str,
-        toon_player_info: ToonPlayerInfo,
-    ) -> None:
-        self.toon = toon
-        self.toon_player_info = toon_player_info

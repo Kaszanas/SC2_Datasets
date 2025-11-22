@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Any, Dict
 
 from sc2_datasets.replay_parser.init_data.game_description import GameDescription
 
 
+@dataclass
 class InitData:
     """
     Data type representing initialization data for a StarCraft II game.
@@ -12,6 +14,8 @@ class InitData:
     gameDescription : GameDescription
         An object containing a list of parameters describing the game.
     """
+
+    gameDescription: GameDescription
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "InitData":
@@ -149,6 +153,3 @@ class InitData:
         return InitData(
             gameDescription=GameDescription.from_dict(d=d["gameDescription"])
         )
-
-    def __init__(self, gameDescription: GameDescription) -> None:
-        self.gameDescription = gameDescription

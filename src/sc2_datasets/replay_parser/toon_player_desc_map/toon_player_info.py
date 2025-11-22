@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Any, Dict
 
 from sc2_datasets.replay_parser.toon_player_desc_map.color import Color
 
 
+@dataclass
 class ToonPlayerInfo:
     """
     Specifies ToonPlayerInfo class representation.
@@ -53,6 +55,27 @@ class ToonPlayerInfo:
         Specifies the color RGBA palette of the player.
     """
 
+    nickname: str
+    playerID: int
+    userID: int
+    SQ: int
+    supplyCappedPercent: int
+    startDir: int
+    startLocX: int
+    startLocY: int
+    race: str
+    selectedRace: str
+    APM: int
+    MMR: int
+    result: str
+    region: str
+    realm: str
+    highestLeague: str
+    isInClan: bool
+    clanTag: str
+    handicap: int
+    color: Color
+
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "ToonPlayerInfo":
         """
@@ -92,47 +115,3 @@ class ToonPlayerInfo:
             handicap=d["handicap"],
             color=Color.from_dict(d=d["color"]),
         )
-
-    def __init__(
-        self,
-        nickname: str,
-        playerID: int,
-        userID: int,
-        SQ: int,
-        supplyCappedPercent: int,
-        startDir: int,
-        startLocX: int,
-        startLocY: int,
-        race: str,
-        selectedRace: str,
-        APM: int,
-        MMR: int,
-        result: str,
-        region: str,
-        realm: str,
-        highestLeague: str,
-        isInClan: bool,
-        clanTag: str,
-        handicap: int,
-        color: Color,
-    ) -> None:
-        self.nickname = nickname
-        self.playerID = playerID
-        self.userID = userID
-        self.SQ = SQ
-        self.supplyCappedPercent = supplyCappedPercent
-        self.startDir = startDir
-        self.startLocX = startLocX
-        self.startLocY = startLocY
-        self.race = race
-        self.selectedRace = selectedRace
-        self.APM = APM
-        self.MMR = MMR
-        self.result = result
-        self.region = region
-        self.realm = realm
-        self.highestLeague = highestLeague
-        self.isInClan = isInClan
-        self.clanTag = clanTag
-        self.handicap = handicap
-        self.color = color

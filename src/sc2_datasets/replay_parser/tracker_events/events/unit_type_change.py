@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class UnitTypeChange(TrackerEvent):
     """
     UnitTypeChange holds the information about how things were changing during the game.
@@ -20,6 +22,12 @@ class UnitTypeChange(TrackerEvent):
     unitTypeName : str
         Specifies an in-game object name, who was doing some changes.
     """
+
+    id: int
+    loop: int
+    unitTagIndex: int
+    unitTagRecycle: int
+    unitTypeName: str
 
     @staticmethod
     def from_dict(d: Dict) -> "UnitTypeChange":
@@ -45,17 +53,3 @@ class UnitTypeChange(TrackerEvent):
             unitTagRecycle=d["unitTagRecycle"],
             unitTypeName=d["unitTypeName"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        unitTagIndex: int,
-        unitTagRecycle: int,
-        unitTypeName: str,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.unitTagIndex = unitTagIndex
-        self.unitTagRecycle = unitTagRecycle
-        self.unitTypeName = unitTypeName

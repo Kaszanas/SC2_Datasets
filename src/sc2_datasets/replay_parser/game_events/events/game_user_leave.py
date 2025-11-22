@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class GameUserLeave(GameEvent):
     """
     Represents information about a player leaving the game.
@@ -18,6 +20,11 @@ class GameUserLeave(GameEvent):
     userid : int
         The ID number of the player who left the game.
     """
+
+    id: int
+    leaveReason: int
+    loop: int
+    userid: int
 
     @staticmethod
     def from_dict(d: Dict) -> "GameUserLeave":
@@ -41,15 +48,3 @@ class GameUserLeave(GameEvent):
             loop=d["loop"],
             userid=d["userid"]["userId"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        leaveReason: int,
-        loop: int,
-        userid: int,
-    ) -> None:
-        self.id = id
-        self.leaveReason = leaveReason
-        self.loop = loop
-        self.userid = userid

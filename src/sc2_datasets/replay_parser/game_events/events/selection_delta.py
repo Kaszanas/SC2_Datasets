@@ -1,9 +1,11 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.events.nested.delta import Delta
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class SelectionDelta(GameEvent):
     """
     SelectionDelta contains details about a player's selection during the game.
@@ -21,6 +23,12 @@ class SelectionDelta(GameEvent):
     userid : int
         Specifies the ID number of the player who executed the selection option in the game.
     """
+
+    controlGroupId: int
+    delta: Delta
+    id: int
+    loop: int
+    userid: int
 
     @staticmethod
     def from_dict(d: Dict) -> "SelectionDelta":
@@ -44,17 +52,3 @@ class SelectionDelta(GameEvent):
             loop=d["loop"],
             userid=d["userid"]["userId"],
         )
-
-    def __init__(
-        self,
-        controlGroupId: int,
-        delta: Delta,
-        id: int,
-        loop: int,
-        userid: int,
-    ) -> None:
-        self.controlGroupId = controlGroupId
-        self.delta = delta
-        self.id = id
-        self.loop = loop
-        self.userid = userid

@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class UnitDied(TrackerEvent):
     """
     UnitDied contains some "details" information about unit
@@ -30,6 +32,17 @@ class UnitDied(TrackerEvent):
         Specifies y coordinate of map in pixels where the object was destroyed.
     """
 
+    id: int
+    killerPlayerId: int
+    killerUnitTagIndex: int
+    killerUnitTagRecycle: int
+    loop: int
+    unitTagIndex: int
+    unitTagRecycle: int
+    x: int
+    y: int
+
+    @staticmethod
     def from_dict(d: Dict) -> "UnitDied":
         """
         Static method returning initialized UnitDied class from a dictionary.
@@ -53,29 +66,7 @@ class UnitDied(TrackerEvent):
             killerUnitTagRecycle=d["killerUnitTagRecycle"],
             loop=d["loop"],
             unitTagIndex=d["unitTagIndex"],
-            unitTagRecycle=["unitTagRecycle"],
+            unitTagRecycle=d["unitTagRecycle"],
             x=d["x"],
             y=d["y"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        killerPlayerId: int,
-        killerUnitTagIndex: int,
-        killerUnitTagRecycle: int,
-        loop: int,
-        unitTagIndex: int,
-        unitTagRecycle: int,
-        x: int,
-        y: int,
-    ) -> None:
-        self.id = id
-        self.killerPlayerId = killerPlayerId
-        self.killerUnitTagIndex = killerUnitTagIndex
-        self.killerUnitTagRecycle = killerUnitTagRecycle
-        self.loop = loop
-        self.unitTagIndex = unitTagIndex
-        self.unitTagRecycle = unitTagRecycle
-        self.x = x
-        self.y = y
