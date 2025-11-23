@@ -69,14 +69,7 @@ def economy_average_vs_outcome(
         "Tie": -1,
     }
 
-    # Check if any player's result is "Undecided", "Draw", or "Tie" and return None to skip this replay
-    skip_results = ["Undecided", "Draw", "Tie"]
-    if any(
-        player_desc.toon_player_info.result in skip_results
-        for player_desc in sc2_replay.toonPlayerDescMap
-    ):
-        return None, None
-
-    target = result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result]
+    player_result = sc2_replay.toonPlayerDescMap[0].toon_player_info.result
+    target = result_dict.get(player_result, -1)
 
     return feature_tensor, target
