@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import Dict, List
 
 import numpy as np
@@ -233,7 +234,7 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     If you don't set parameters or paste incorect parameters' type.
     """
 
-    player_outcome = {"1": 0, "2": 0}
+    player_outcome = defaultdict(int)
 
     result_dict = {
         "Loss": 0,
@@ -245,14 +246,9 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
         "Tie": -1,
     }
 
-    # Check if any player has an "Undecided", "Draw", or "Tie" result and return None to indicate skipping
-    skip_results = ["Undecided", "Draw", "Tie"]
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
-        if toon_desc_map.toon_player_info.result in skip_results:
-            return None
-
-    for toon_desc_map in sc2_replay.toonPlayerDescMap:
-        result = result_dict[toon_desc_map.toon_player_info.result]
-        player_outcome[toon_desc_map.toon_player_info.playerID] = result
+        result = result_dict.get(toon_desc_map.toon_player_info.result, -1)
+        string_player_id = str(toon_desc_map.toon_player_info.playerID)
+        player_outcome[string_player_id] = result
 
     return player_outcome
