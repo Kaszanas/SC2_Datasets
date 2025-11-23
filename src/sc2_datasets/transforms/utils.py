@@ -10,6 +10,16 @@ from sc2_datasets.replay_parser.tracker_events.events.player_stats.player_stats 
     PlayerStats,
 )
 
+RESULT_DICT = {
+    "Loss": 0,
+    "Win": 1,
+    "Victory": 1,
+    "Defeat": 0,
+    "Undecided": -1,
+    "Draw": -1,
+    "Tie": -1,
+}
+
 
 def filter_player_stats(
     sc2_replay: SC2ReplayData,
@@ -236,18 +246,8 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     player_outcome = defaultdict(int)
 
-    result_dict = {
-        "Loss": 0,
-        "Win": 1,
-        "Victory": 1,
-        "Defeat": 0,
-        "Undecided": -1,
-        "Draw": -1,
-        "Tie": -1,
-    }
-
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
-        result = result_dict.get(toon_desc_map.toon_player_info.result, -1)
+        result = RESULT_DICT.get(toon_desc_map.toon_player_info.result, -1)
         string_player_id = str(toon_desc_map.toon_player_info.playerID)
         player_outcome[string_player_id] = result
 
