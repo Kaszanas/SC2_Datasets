@@ -1,4 +1,3 @@
-# TODO: This will have to change after Pull Request to the main branch:
 TEST_SYNTHETIC_REPLAYPACKS = [
     (
         "2022_TestReplaypack",

@@ -14,7 +14,7 @@ def download_replaypack(
     destination_dir: Path,
     replaypack_name: str,
     replaypack_url: str,
-) -> Path:
+) -> Path | None:
     """
     Exposes logic for downloading a single StarCraft II replaypack from an url.
 
@@ -31,8 +31,9 @@ def download_replaypack(
 
     Returns
     -------
-    Path
-        Returns the filepath to the downloaded .zip archive.
+    Path | None
+        Returns the filepath to the downloaded .zip archive. If the download
+        failed, None is returned.
 
     Examples
     --------
@@ -86,7 +87,7 @@ def download_replaypack(
     connect_timeout = 5
     read_timeout = 10
 
-    while not downloaded and n_retries > 0:
+    while not downloaded or n_retries > 0:
         try:
             with requests.get(
                 url=replaypack_url,
@@ -119,6 +120,8 @@ def download_replaypack(
                     for data_chunk in response.iter_content(chunk_size=chunk_size):
                         size = output_zip_file.write(data_chunk)
                         progress_bar.update(size)
+
+                return download_filepath
         except requests.RequestException as e:
             n_retries -= 1
             if n_retries <= 0:
@@ -126,7 +129,7 @@ def download_replaypack(
                     f"Download failed for {replaypack_name} from {replaypack_url} with error: {e}. "
                     f"No retries left."
                 )
-                break
+                return None
             logging.warning(
                 f"Download failed for {replaypack_name} from {replaypack_url} with error: {e}. "
                 f"Retries left: {n_retries}"
@@ -136,4 +139,4 @@ def download_replaypack(
             time.sleep(initial_delay)
             initial_delay *= 2
 
-    return download_filepath
+    return None
