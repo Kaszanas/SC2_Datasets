@@ -3,7 +3,7 @@ from typing import Tuple
 import torch
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
-from sc2_datasets.transforms.utils import average_player_stats
+from sc2_datasets.transforms.utils import RESULT_DICT, average_player_stats
 
 
 def economy_average_vs_outcome(
@@ -59,7 +59,7 @@ def economy_average_vs_outcome(
     # Creating feature tensor:
     feature_tensor = torch.tensor(feature_list, dtype=torch.float32)
 
-    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0}
-    target = result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result]
+    player_result = sc2_replay.toonPlayerDescMap[0].toon_player_info.result
+    target = RESULT_DICT.get(player_result, -1)
 
     return feature_tensor, target

@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import Dict, List
 
 import numpy as np
@@ -8,6 +9,16 @@ from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.replay_parser.tracker_events.events.player_stats.player_stats import (
     PlayerStats,
 )
+
+RESULT_DICT = {
+    "Loss": 0,
+    "Win": 1,
+    "Victory": 1,
+    "Defeat": 0,
+    "Undecided": -1,
+    "Draw": -1,
+    "Tie": -1,
+}
 
 
 def filter_player_stats(
@@ -233,11 +244,11 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     If you don't set parameters or paste incorect parameters' type.
     """
 
-    player_outcome = {"1": 0, "2": 0}
+    player_outcome = defaultdict(int)
 
-    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0}
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
-        result = result_dict[toon_desc_map.toon_player_info.result]
-        player_outcome[toon_desc_map.toon_player_info.playerID] = result
+        result = RESULT_DICT.get(toon_desc_map.toon_player_info.result, -1)
+        string_player_id = str(toon_desc_map.toon_player_info.playerID)
+        player_outcome[string_player_id] = result
 
     return player_outcome
