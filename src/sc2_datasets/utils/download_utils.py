@@ -1,15 +1,20 @@
+import logging
+import time
 from pathlib import Path
 
 import requests
 from tqdm import tqdm
 
 
-# REVIEW: This was changed, needs review:
+# TODO: There are two servers hosting the dataset files,
+# TODO: this function could have a failover mechanism implemented where
+# TODO: if the first server is not responsive or causes errors,
+# TODO: the function would switch to the second server URL automatically.
 def download_replaypack(
     destination_dir: Path,
     replaypack_name: str,
     replaypack_url: str,
-) -> Path:
+) -> Path | None:
     """
     Exposes logic for downloading a single StarCraft II replaypack from an url.
 
@@ -26,8 +31,9 @@ def download_replaypack(
 
     Returns
     -------
-    Path
-        Returns the filepath to the downloaded .zip archive.
+    Path | None
+        Returns the filepath to the downloaded .zip archive. If the download
+        failed, None is returned.
 
     Examples
     --------
@@ -75,21 +81,62 @@ def download_replaypack(
 
     # Send a request and save the response content into a .zip file.
     # The .zip file should be a replaypack:
-    with requests.get(url=replaypack_url, stream=True) as response:
-        total_size = int(response.headers.get("content-length", 0))
-        chunk_size = 1 * 10**6  # 1 MB
+    downloaded = False
+    n_retries = 5
+    initial_delay = 2
+    connect_timeout = 5
+    read_timeout = 10
 
-        with (
-            download_filepath.open("wb") as output_zip_file,
-            tqdm(
-                total=total_size,
-                unit="B",
-                unit_scale=True,
-                desc=f"Downloading: {replaypack_name}",
-            ) as progress_bar,
-        ):
-            for data_chunk in response.iter_content(chunk_size=chunk_size):
-                size = output_zip_file.write(data_chunk)
-                progress_bar.update(size)
+    while not downloaded or n_retries > 0:
+        try:
+            with requests.get(
+                url=replaypack_url,
+                stream=True,
+                timeout=(connect_timeout, read_timeout),
+            ) as response:
+                total_size = int(response.headers.get("content-length", 0))
+                chunk_size = 1 * 10**6  # 1 MB
 
-    return download_filepath
+                # Read the response content. To ensure that the request was successful,
+                # we need 200 OK response code, any other code triggers an exception
+                # and results in an exponential backoff retry.
+                response_code = response.status_code
+                reason = response.reason
+                if response_code != requests.codes.ok:
+                    raise requests.RequestException(
+                        f"Response code: {response_code}, Reason: {reason}"
+                    )
+
+                # Saving the content into a .zip file:
+                with (
+                    download_filepath.open("wb") as output_zip_file,
+                    tqdm(
+                        total=total_size,
+                        unit="B",
+                        unit_scale=True,
+                        desc=f"Downloading: {replaypack_name}",
+                    ) as progress_bar,
+                ):
+                    for data_chunk in response.iter_content(chunk_size=chunk_size):
+                        size = output_zip_file.write(data_chunk)
+                        progress_bar.update(size)
+
+                return download_filepath
+        except requests.RequestException as e:
+            n_retries -= 1
+            if n_retries <= 0:
+                logging.error(
+                    f"Download failed for {replaypack_name} from {replaypack_url} with error: {e}. "
+                    f"No retries left."
+                )
+                return None
+            logging.warning(
+                f"Download failed for {replaypack_name} from {replaypack_url} with error: {e}. "
+                f"Retries left: {n_retries}"
+            )
+
+            # Exponential backoff before retrying:
+            time.sleep(initial_delay)
+            initial_delay *= 2
+
+    return None

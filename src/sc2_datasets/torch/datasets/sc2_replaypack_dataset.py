@@ -101,6 +101,8 @@ class SC2ReplaypackDataset(Dataset):
                 replaypack_name=self.replaypack_name,
                 replaypack_url=self.url,
             )
+            if not self.maybe_downloaded_zip_path:
+                raise Exception("Replaypack download failed!")
 
         # If the dataset is not unpacked, then look for it in the download folder.
         # If it is there then unpack it and resume:
