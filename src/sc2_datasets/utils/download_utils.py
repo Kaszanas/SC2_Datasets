@@ -83,9 +83,16 @@ def download_replaypack(
     downloaded = False
     n_retries = 5
     initial_delay = 2
+    connect_timeout = 5
+    read_timeout = 10
+
     while not downloaded and n_retries > 0:
         try:
-            with requests.get(url=replaypack_url, stream=True) as response:
+            with requests.get(
+                url=replaypack_url,
+                stream=True,
+                timeout=(connect_timeout, read_timeout),
+            ) as response:
                 total_size = int(response.headers.get("content-length", 0))
                 chunk_size = 1 * 10**6  # 1 MB
 
