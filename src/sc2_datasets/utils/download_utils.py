@@ -119,7 +119,7 @@ def download_replaypack(
                     f"Download failed for {replaypack_name} from {replaypack_url} with error: {e}. "
                     f"No retries left."
                 )
-                raise e
+                break
             logging.warning(
                 f"Download failed for {replaypack_name} from {replaypack_url} with error: {e}. "
                 f"Retries left: {n_retries}"
