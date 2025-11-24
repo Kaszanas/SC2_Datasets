@@ -65,6 +65,9 @@ class SC2ReplayData:
         logging.info(f"Attempting to parse: {str(replay_path)}")
         with replay_path.open(mode="r", encoding="utf-8") as replay_file:
             loaded_data = json.load(replay_file)
+
+            SC2ReplayData.sanitize_events(loaded_data=loaded_data)
+
             return SC2ReplayData(
                 filepath=replay_path,
                 header=Header.from_dict(d=loaded_data["header"]),
@@ -93,6 +96,20 @@ class SC2ReplayData:
                 messageEventsErr=loaded_data.get("messageEventsErr", False),
                 trackerEventsErr=loaded_data.get("trackerEvtsErr", False),
             )
+
+    @staticmethod
+    def sanitize_events(loaded_data: dict):
+        message_events = loaded_data.get("messageEvents", [])
+        if message_events is None:
+            loaded_data["messageEvents"] = []
+
+        game_events = loaded_data.get("gameEvents", [])
+        if game_events is None:
+            loaded_data["gameEvents"] = []
+
+        tracker_events = loaded_data.get("trackerEvents", [])
+        if tracker_events is None:
+            loaded_data["trackerEvents"] = []
 
     def __hash__(self) -> int:
         """
