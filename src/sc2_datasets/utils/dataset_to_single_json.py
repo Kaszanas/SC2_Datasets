@@ -10,6 +10,7 @@ from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 def dataset_to_single_json(
     dataset: SC2Dataset,
     output_filepath: Path,
+    sort_keys: bool = False,
 ) -> Path:
     """
     Iterates over an input SC2Dataset and writes all replays into a single JSon file.
@@ -20,6 +21,8 @@ def dataset_to_single_json(
         Specifies the input dataset that will be processed.
     output_filepath : Path
         Specifies the output filepath where the single JSON file will be written.
+    sort_keys : bool, optional
+        Whether to sort the keys in the output JSON file, by default False.
 
     Returns
     -------
@@ -77,7 +80,7 @@ def dataset_to_single_json(
                             output_file,
                             separators=(",", ":"),
                             ensure_ascii=False,
-                            sort_keys=True,
+                            sort_keys=sort_keys,
                         )
                         first_entry = False
 
