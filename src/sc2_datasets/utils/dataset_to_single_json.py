@@ -36,6 +36,9 @@ def dataset_to_single_json(
         return output_filepath
 
     with output_filepath.open("w", encoding="utf-8") as output_file:
+        output_file.write("[\n")
+        first_entry = True
+
         for replaypack in replaypacks:
             len_replaypack = len(replaypack)
 
@@ -66,7 +69,18 @@ def dataset_to_single_json(
                             if old_file_path is not None
                             else None,
                         }
-                        json.dump(json_data, output_file)
+                        if not first_entry:
+                            output_file.write(",\n")
+
+                        json.dump(
+                            json_data,
+                            output_file,
+                            separators=(",", ":"),
+                            ensure_ascii=False,
+                            sort_keys=True,
+                        )
+                        first_entry = False
+
                 except Exception as e:
                     logging.warning(
                         f"Failed to load JSON replay file: {str(json_replay_path)} from replaypack: {replaypack_name} with error: {str(e)}"
