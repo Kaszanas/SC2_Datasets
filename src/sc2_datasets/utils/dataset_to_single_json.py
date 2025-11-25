@@ -85,5 +85,6 @@ def dataset_to_single_json(
                     logging.warning(
                         f"Failed to load JSON replay file: {str(json_replay_path)} from replaypack: {replaypack_name} with error: {str(e)}"
                     )
+        output_file.write("]")
 
     return output_filepath

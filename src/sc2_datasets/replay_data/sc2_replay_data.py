@@ -35,14 +35,14 @@ class SC2ReplayData:
     trackerEventsErr: bool = False
 
     @staticmethod
-    def from_file(replay_filepath: Path) -> "SC2ReplayData":
+    def from_file(replay_filepath: Path | str) -> "SC2ReplayData":
         """
         Static method returning initialized SC2ReplayData class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        replay_filepath : Path
+        replay_filepath : Path | str
             Specifies a filepath to a JSON file containing data\
             from parsed .SC2Replay file.
 
@@ -59,6 +59,12 @@ class SC2ReplayData:
         >>> replay_data = SC2ReplayData.from_file("test/test_files/single_replay/test_replay.json")
         >>> assert isinstance(replay_data, SC2ReplayData)
         """
+
+        replay_path = (
+            replay_filepath
+            if isinstance(replay_filepath, Path)
+            else Path(replay_filepath).resolve()
+        )
 
         logging.info(f"Attempting to parse: {str(replay_filepath)}")
         with replay_path.open(mode="r", encoding="utf-8") as replay_file:
