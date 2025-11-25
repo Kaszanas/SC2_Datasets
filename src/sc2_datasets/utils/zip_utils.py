@@ -46,32 +46,8 @@ def unpack_chunk(
 
     Parameters
     ----------
-    zip_path : str
-        Specifies the path to the archive file that will be extracted.
-    filenames : List[str]
-        Specifies a list of the filenames which are within the archive\
-        and will be extracted.
-    path_to_extract : str
-        Specifies the path to which the files will be extracted to.
-
-    Examples
-    --------
-    The use of this method is intended to extract a zipfile from the .zip file.
-
-    You should set every parameter, zip_path, filenames and path_to_extract.
-
-    May help you to work with dataset.
-
-    The parameters should be set as in the example below.
-
-    >>> unpack_chunk_object = unpack_chunk(
-    ... zip_path="./directory/zip_path",
-    ... filenames="./directory/filenames",
-    ... path_to_extract="./directory/path_to_extract")
-
-    >>> assert isinstance(zip_path, str)
-    >>> assert all(isinstance(filename, str) for filename in filenames)
-    >>> assert isinstance(path_to_extract, str)
+    unpack_arguments : UnpackZipFileArguments
+        Specifies the arguments required for unpacking a chunk of files.
     """
 
     with zipfile.ZipFile(unpack_arguments.zip_path, "r") as zip_file:
@@ -88,7 +64,10 @@ def unpack_chunk(
                 continue
 
             try:
-                zip_file.extract(member=filename, path=unpack_arguments.path_to_extract)
+                zip_file.extract(
+                    member=filename,
+                    path=unpack_arguments.path_to_extract,
+                )
             except zipfile.error as e:
                 logging.error(
                     f"zipfile error was raised: {e}",
