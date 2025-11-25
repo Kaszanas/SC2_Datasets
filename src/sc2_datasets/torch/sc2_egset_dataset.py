@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Callable, List, Tuple
 
 from sc2_datasets.available_replaypacks import SC2EGSET_DATASET_REPLAYPACKS
@@ -10,10 +11,10 @@ class SC2EGSetDataset(SC2Dataset):
 
     Parameters
     ----------
-    unpack_dir : str
+    unpack_dir : Path | str
         Specifies the path of a directory where the dataset files will be unpacked,\
         by default "./data/unpack/sc2egset_dataset".
-    download_dir : str
+    download_dir : Path | str
         Specifies the path of a directory where the dataset files will be downloaded,\
         by default "./data/download/sc2egset_dataset".
     names_urls : List[Tuple[str, str]]
@@ -30,8 +31,8 @@ class SC2EGSetDataset(SC2Dataset):
 
     def __init__(
         self,
-        unpack_dir: str = "./data/unpack/sc2egset_dataset",
-        download_dir: str = "./data/download/sc2egset_dataset",
+        unpack_dir: Path | str = Path("./data/unpack/sc2egset_dataset"),
+        download_dir: Path | str = Path("./data/download/sc2egset_dataset"),
         names_urls: List[Tuple[str, str]] = SC2EGSET_DATASET_REPLAYPACKS,
         download: bool = True,
         unpack_n_workers: int = 16,

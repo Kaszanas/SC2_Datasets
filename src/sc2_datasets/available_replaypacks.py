@@ -5,7 +5,7 @@ Module with global variables specifying collections of available replaypacks.
 EXAMPLE_SYNTHETIC_REPLAYPACKS = [
     (
         "2022_TestReplaypack",
-        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/main/tests/test_files/2022_TestReplaypack.zip",  # noqa
+        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/dev/tests/test_files/2022_TestReplaypack.zip",  # noqa
     )
 ]
 
