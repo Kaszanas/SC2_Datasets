@@ -61,7 +61,7 @@ class SC2ReplayData:
         """
 
         logging.info(f"Attempting to parse: {str(replay_filepath)}")
-        with replay_path.open(mode="r", encoding="utf-8") as replay_file:
+        with replay_filepath.open(mode="r", encoding="utf-8") as replay_file:
             loaded_data = json.load(replay_file)
 
             SC2ReplayData.sanitize_events(loaded_data=loaded_data)
