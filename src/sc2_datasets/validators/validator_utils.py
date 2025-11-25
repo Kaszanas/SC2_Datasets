@@ -49,8 +49,12 @@ def read_validation_file(
             # Try reading the data from JSON:
             json_data = json.load(input_file)
             # Immediately converting the lists of strings denoting paths to sets:
-            validated_file_set = set(json_data["validated_files"])
-            skip_file_set = set(json_data["skip_files"])
+            validated_file_set = set(
+                Path(filepath).resolve() for filepath in json_data["validated_files"]
+            )
+            skip_file_set = set(
+                Path(filepath).resolve() for filepath in json_data["skip_files"]
+            )
         except Exception as e:
             logging.error("Error while parsing json!", exc_info=e)
 
@@ -94,8 +98,8 @@ def save_validation_file(
     """
 
     # Gettings paths as posix to be able to serialize them:
-    validated_file_list = [Path(file) for file in validated_files]
-    skip_file_list = [Path(file) for file in skip_files]
+    validated_file_list = [str(Path(file).resolve()) for file in validated_files]
+    skip_file_list = [str(Path(file).resolve()) for file in skip_files]
 
     # Initializing the dict that will be serialized to a file:
     file_dict = {
