@@ -54,14 +54,13 @@ class SC2Dataset(Dataset):
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
         self.len = 0
+        self.replaypacks: List[SC2ReplaypackDataset] = []
         self.ensure_downloaded()
 
     def ensure_downloaded(self):
         """
         Ensures that the dataset was downloaded before accessing the __len__ or __getitem__ methods.
         """
-
-        self.replaypacks: List[SC2ReplaypackDataset] = []
 
         list_of_arguments = []
         for replaypack_name, url in self.names_urls:
