@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import List, Tuple
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
@@ -5,21 +6,21 @@ from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 
 # TODO: Verify if it is possible to return two sets:
 def validate_chunk(
-    list_of_replays: List[str],
-) -> List[Tuple[str, bool]]:
+    list_of_replays: List[Path],
+) -> List[Tuple[Path, bool]]:
     """
     Attempts to parse a chunk of replays and validates the JSON
     structure using SC2ReplayData parser.
 
     Parameters
     ----------
-    list_of_replays : List[str]
+    list_of_replays : List[Path]
         Specifies the list of replays that will be validated.
 
     Returns
     -------
-    List[Tuple[str, bool]]
-        Returns a tuple of SC2ReplayFile info and a boolean denoting\
+    List[Tuple[Path, bool]]
+        Returns a tuple of a filepath and a boolean denoting\
         if the file should be skipped in final processing.
 
     Examples
@@ -27,10 +28,13 @@ def validate_chunk(
     Validate chunk is defined as a smallest piece of code that is used to build up validators.
     This function is especially relevant when working with multiprocessing.
 
+    >>> from pathlib import Path
     >>> validated_chunk = validate_chunk(
     ...                         list_of_replays=[
-    ...                               "./test/test_files/single_replay/test_replay.json",
-    ...                               "./test/test_files/single_replay/test_bit_flip_example.json"])
+    ...                               Path("./test/test_files/single_replay/test_replay.json"),
+    ...                               Path("./test/test_files/single_replay/test_bit_flip_example.json"),
+    ...                               ],
+    ...                     )
     >>> assert len(validated_chunk) == 2
     >>> assert validated_chunk[0][1] is True
     >>> assert validated_chunk[1][1] is False

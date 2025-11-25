@@ -14,9 +14,6 @@ def load_replaypack_information(
 
     Parameters
     ----------
-    replaypack_name : str
-        Specifies the replaypack name that will be used\
-        as a subdirectory where replaypack .json files will be extracted.
     replaypack_path : str
         Specifies the path to the extracted replaypack.
 

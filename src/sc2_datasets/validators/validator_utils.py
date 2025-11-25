@@ -7,7 +7,7 @@ from typing import Set, Tuple
 # TODO: consider splitting file creation out from this method
 def read_validation_file(
     path: Path,
-) -> Tuple[Set[str], Set[str]]:
+) -> Tuple[Set[Path], Set[Path]]:
     """
     Attempts to read the validation file from a specified path.
 
@@ -18,8 +18,8 @@ def read_validation_file(
 
     Returns
     -------
-    Tuple[Set[str], Set[str]]
-        Returns a list of files that were validated as ones that should be skipped.
+    Tuple[Set[Path], Set[Path]]
+        Returns a tuple of sets containing files that were validated.
 
     Examples
     --------
@@ -58,8 +58,8 @@ def read_validation_file(
 
 
 def save_validation_file(
-    validated_files: Set[str],
-    skip_files: Set[str],
+    validated_files: Set[Path],
+    skip_files: Set[Path],
     path: Path = Path("validator_file.json"),
 ) -> None:
     """
@@ -67,11 +67,11 @@ def save_validation_file(
 
     Parameters
     ----------
-    validated_files : Set[str]
-        Specifies the list of replays that were verified\
+    validated_files : Set[Path]
+        Specifies the list of paths to replays that were verified\
         as ones that can be used in further processing.
-    skip_files : Set[str]
-        Specifies the list of replays that were verified\
+    skip_files : Set[Path]
+        Specifies the list of paths to replays that were verified\
         as ones that should be skipped in further processing.
     path : Path, optional
         Specifies the path to the file that will be saved,\
@@ -85,16 +85,17 @@ def save_validation_file(
     by the validators so that future runs of the program can use this information.
 
     >>> from pathlib import Path
-    >>> validated_files = {"validated_file_0.json", "validated_file_1.json"}
-    >>> skip_files = {"validated_file_0.json"}
+    >>> validated_files = {Path("validated_file_0.json"), Path("validated_file_1.json")}
+    >>> skip_files = {Path("validated_file_0.json")}
     >>> validator_file_content = save_validation_file(
     ...                                         validated_files=validated_files,
-    ...                                         skip_files=skip_files)
+    ...                                         skip_files=skip_files,
+    ...                                         )
     """
 
     # Gettings paths as posix to be able to serialize them:
-    validated_file_list = [str(Path(file)) for file in validated_files]
-    skip_file_list = [str(Path(file)) for file in skip_files]
+    validated_file_list = [Path(file) for file in validated_files]
+    skip_file_list = [Path(file) for file in skip_files]
 
     # Initializing the dict that will be serialized to a file:
     file_dict = {

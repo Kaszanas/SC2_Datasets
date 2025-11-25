@@ -1,4 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 from typing import Any, Callable, Dict, List, Set, Tuple
 
 from torch.utils.data import Dataset
@@ -14,12 +15,12 @@ class SC2Dataset(Dataset):
 
     Parameters
     ----------
-    unpack_dir : str
-        Specifies the path of a directory where the dataset files will be unpacked.
-    download_dir : str
-        Specifies the path of a directory where the dataset files will be downloaded.
     names_urls : List[Tuple[str, str]]
         Specifies the URL of the dataset which will be used to download the files.
+    unpack_dir : Path | str
+        Specifies the path of a directory where the dataset files will be unpacked.
+    download_dir : Path | str
+        Specifies the path of a directory where the dataset files will be downloaded.
     unpack_n_workers : int, optional
         Specifies the number of workers that will be used for unpacking the archive, defaults to 16.
     transform : Func[SC2ReplayData, T]
@@ -31,8 +32,8 @@ class SC2Dataset(Dataset):
     def __init__(
         self,
         names_urls: List[Tuple[str, str]],
-        unpack_dir: str = "./data/unpack",
-        download_dir: str = "./data/download",
+        unpack_dir: Path | str = Path("./data/unpack").resolve(),
+        download_dir: Path | str = Path("./data/download").resolve(),
         download: bool = True,
         unpack_n_workers: int = 16,
         transform: Callable | None = None,
@@ -42,8 +43,14 @@ class SC2Dataset(Dataset):
         self.transform = transform
 
         # Custom fields:
-        self.download_dir = download_dir
-        self.unpack_dir = unpack_dir
+        self.download_dir = (
+            download_dir
+            if isinstance(download_dir, Path)
+            else Path(download_dir).resolve()
+        )
+        self.unpack_dir = (
+            unpack_dir if isinstance(unpack_dir, Path) else Path(unpack_dir).resolve()
+        )
         self.names_urls = names_urls
         self.download = download
         self.unpack_n_workers = unpack_n_workers

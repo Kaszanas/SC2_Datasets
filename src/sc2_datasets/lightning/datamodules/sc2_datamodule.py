@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Callable, List, Optional, Tuple
 
 import pytorch_lightning as pl
@@ -15,10 +16,10 @@ class SC2DataModule(pl.LightningDataModule):
     ----------
     replaypacks : List[Tuple[str, str]]
         _description_
-    download_dir : str, optional
+    download_dir : Path | str, optional
         Specifies the path where the dataset will be downloaded,\
         by default "./data/download"
-    unpack_dir : str, optional
+    unpack_dir : Path | str, optional
         Specifies the path where the dataset will be unpacked\
         into a custom directory structure, by default "./data/unpack"
     download : bool, optional
@@ -49,8 +50,8 @@ class SC2DataModule(pl.LightningDataModule):
     def __init__(
         self,
         replaypacks: List[Tuple[str, str]],
-        download_dir: str = "./data/download",
-        unpack_dir: str = "./data/unpack",
+        download_dir: Path | str = Path("./data/download").resolve(),
+        unpack_dir: Path | str = Path("./data/unpack").resolve(),
         download: bool = True,
         transform: Callable = None,
         dims=None,
@@ -68,8 +69,14 @@ class SC2DataModule(pl.LightningDataModule):
         self.num_workers = num_workers
 
         # Custom fields:
-        self.download_dir = download_dir
-        self.unpack_dir = unpack_dir
+        self.download_dir = (
+            download_dir
+            if isinstance(download_dir, Path)
+            else Path(download_dir).resolve()
+        )
+        self.unpack_dir = (
+            unpack_dir if isinstance(unpack_dir, Path) else Path(unpack_dir).resolve()
+        )
         self.download = download
         self.unpack_n_workers = unpack_n_workers
         self.validator = validator
