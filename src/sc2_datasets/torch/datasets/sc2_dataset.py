@@ -127,7 +127,7 @@ class SC2DatasetSingleJSON(Dataset):
         ).resolve()
 
         json_offsets_filepath = Path(
-            self.unpack_path, self.dataset_name + "offsets.json"
+            self.unpack_path, self.dataset_name + "_offsets.json"
         ).resolve()
 
         self.json_offsets = get_json_offsets(
