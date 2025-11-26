@@ -181,3 +181,4 @@ src.rst
 validator_file.json
 
 tests/test_files/2022_TestReplaypack
+benchmarks/

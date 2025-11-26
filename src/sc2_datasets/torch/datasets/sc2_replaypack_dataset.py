@@ -12,6 +12,10 @@ from sc2_datasets.utils.download_utils import (
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 
 
+class SC2ReplaypackDatasetSingleJSON(Dataset):
+    pass
+
+
 class SC2ReplaypackDataset(Dataset):
     """
     Represents a Dataset for a single pre-processed replaypack.
@@ -82,8 +86,8 @@ class SC2ReplaypackDataset(Dataset):
         if not self.unpack_dir.exists():
             self.unpack_dir.mkdir(parents=True, exist_ok=True)
 
-        if not os.path.isdir(self.unpack_dir):
-            raise Exception("Replaypack unpack directory does not exist!")
+        if not self.unpack_dir.is_dir():
+            raise Exception("Replaypack unpack directory is not a directory!")
 
         self.replaypack_name = replaypack_name
         self.url = url
@@ -133,7 +137,7 @@ class SC2ReplaypackDataset(Dataset):
                 )
             )
 
-        # Unpack the nested .zip file with the actual .json filesm, replaypack data:
+        # Unpack the nested .zip file with the actual .json files, replaypack data:
         data_zipfile = Path(
             self.replaypack_unpack_path,
             self.replaypack_name + "_data.zip",
@@ -161,8 +165,8 @@ class SC2ReplaypackDataset(Dataset):
 
         # Getting the paths to the files that consist of the dataset,
         # These will be used for validation at later step:
-        all_files = []
-        for file in os.listdir(data_path):
+        all_files: List[Path] = []
+        for file in data_path.iterdir():
             all_files.append(Path(data_path, file))
 
         # Validating files:
