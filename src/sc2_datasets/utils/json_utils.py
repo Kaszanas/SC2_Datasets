@@ -1,5 +1,6 @@
 import json
 import logging
+from io import BufferedReader
 from pathlib import Path
 
 from tqdm import tqdm
@@ -91,7 +92,11 @@ def index_json_objects(json_filepath: Path) -> list[int]:
     return offsets
 
 
-def get_object_at_index(json_filepath: Path, offsets: list[int], index: int) -> dict:
+def get_object_at_index(
+    file_handle: BufferedReader,
+    offsets: list[int],
+    index: int,
+) -> dict:
     """
     Retrieves the complete JSON object at the specified index by seeking
     to the pre-calculated line offset, reading one line, and stripping the trailing comma.
@@ -99,7 +104,7 @@ def get_object_at_index(json_filepath: Path, offsets: list[int], index: int) -> 
 
     Parameters
     ----------
-    json_filepath : Path
+    file_handle
 
     offsets : list[int]
         List of byte offsets for each JSON object.
@@ -122,24 +127,23 @@ def get_object_at_index(json_filepath: Path, offsets: list[int], index: int) -> 
 
     start_offset = offsets[index]
 
-    with json_filepath.open("rb") as f:
-        f.seek(start_offset)
-        line = f.readline()
+    file_handle.seek(start_offset)
+    line = file_handle.readline()
 
-        if not line:
-            raise Exception("Failed to read line at specified offset!")
+    if not line:
+        raise Exception("Failed to read line at specified offset!")
 
-        # Decode bytes to string
-        line_str = line.decode("utf-8")
+    # Decode bytes to string
+    line_str = line.decode("utf-8")
 
-        # Clean trailing comma/whitespace
-        # We strip whitespace, remove trailing comma if present, then strip again
-        json_str = line_str.strip().rstrip(",").strip()
+    # Clean trailing comma/whitespace
+    # We strip whitespace, remove trailing comma if present, then strip again
+    json_str = line_str.strip().rstrip(",").strip()
 
-        # Parse with standard library C-optimized parser
-        python_obj = json.loads(json_str)
+    # Parse with standard library C-optimized parser
+    python_obj = json.loads(json_str)
 
-        return python_obj
+    return python_obj
 
 
 # from io import BufferedReader
