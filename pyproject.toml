@@ -19,13 +19,13 @@ requests = "^2.32.3"
 ijson = "^3.4.0.post0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.5"
-pytest-cov = "^6.1.1"
+pytest = "^9.0.1"
+pytest-cov = "^7.0.0"
 myst-nb = "^1.2.0"
 sphinx-autoapi = "^3.6.0"
-furo = "^2024.8.6"
+furo = "^2025.9.25"
 pre-commit = "^4.2.0"
-ruff = "^0.11.7"
+ruff = "^0.14.7"
 commitizen = "^4.6.0"
 
 [tool.ruff]
