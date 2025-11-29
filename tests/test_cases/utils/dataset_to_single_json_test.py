@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
-from sc2_datasets.utils.dataset_to_single_json import dataset_to_single_json
+from sc2_datasets.utils.json_utils import dataset_to_single_json
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 from tests.test_utils.test_utils import get_setup_paths, get_test_output_dir
 
