@@ -1,8 +1,15 @@
 TEST_SYNTHETIC_REPLAYPACKS = [
     (
         "2022_TestReplaypack",
-        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/main/tests/test_files/2022_TestReplaypack.zip",  # noqa
+        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/dev/tests/test_files/2022_TestReplaypack.zip",  # noqa
     )
+]
+
+TEST_SINGLE_JSON_REPLAYPACKS = [
+    (
+        "sc2egset_synthetic_merged",
+        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/dev/tests/test_files/sc2egset_synthetic_merged.zip",
+    ),
 ]
 
 TEST_REAL_REPLAYPACKS = [
