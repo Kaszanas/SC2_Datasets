@@ -183,6 +183,7 @@ def merge_json_files(input_dir: Path, output_filepath: Path) -> Path:
                 first_entry=first_entry,
             )
 
+        output_file.write("\n")
         output_file.write("]")
 
     return output_filepath
