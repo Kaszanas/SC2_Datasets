@@ -8,7 +8,7 @@ from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.torch.datasets.sc2_dataset_single_json import SC2DatasetSingleJSON
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 from tests.settings_test import TEST_SINGLE_JSON_REPLAYPACKS
-from tests.test_utils.test_utils import get_setup_paths
+from tests.test_utils.test_utils import get_assets_dir, get_setup_paths
 
 
 @pytest.mark.minor
@@ -24,7 +24,7 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
             cls.download_dir_path,
             cls.unpacked,
             cls.download,
-        ) = get_setup_paths(test_replaypack_name="synthetic_sc2egset_single_json")
+        ) = get_setup_paths(test_replaypack_name="sc2egset_synthetic_merged")
 
         # If it doesn't exist, unpack the test .zip archive:
         if not cls.unpacked.exists():
@@ -46,15 +46,17 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
             shutil.rmtree(path=str(self.unpacked))
 
     def test_parsing_dataset(self):
+        download_dir = get_assets_dir()
+
         dataset = SC2DatasetSingleJSON(
             dataset_name=self.dataset_name,
-            unpack_dir=self.dataset_url,
-            download_dir=self.download_dir_path,
+            unpack_dir=self.unpack_dir_path,
             download=False,
+            download_dir=download_dir,
         )
 
-        # Dataset was not downloaded, as specified by the flag:
-        self.assertFalse(dataset.was_downloaded)
+        # Dataset was downloaded previously, so this will be tue afte initialization:
+        self.assertTrue(dataset.was_downloaded)
         self.assertIsInstance(dataset, SC2DatasetSingleJSON)
 
         self.assertNotEqual(len(dataset), 0)
@@ -80,7 +82,8 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
             download=True,
         )
 
-        # Dataset was downloaded, as specified by the flag:
+        # Dataset is downloaded as a part of this test  so this should be tue afte
+        # initialization:
         self.assertTrue(dataset.was_downloaded)
         self.assertIsInstance(dataset, SC2DatasetSingleJSON)
 
