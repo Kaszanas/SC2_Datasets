@@ -85,7 +85,7 @@ class DatasetUtilsTest(unittest.TestCase):
             offsets_filepath=None,
         )
 
-        with output_path.open("r", encoding="utf-8") as f:
+        with output_path.open("rb") as f:
             for offset_index in range(len(json_offsets)):
                 read_json = get_object_at_index(
                     file_handle=f,
