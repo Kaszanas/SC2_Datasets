@@ -39,21 +39,20 @@ class SC2DatasetSingleJSON(Dataset):
         self.transform = transform
 
         # Custom fields:
-        self.download = download
-        self.download_dir = None
-        self.maybe_downloaded_zip_path = None
-        if self.download:
-            self.download_dir = (
-                download_dir
-                if isinstance(download_dir, Path)
-                else Path(download_dir).resolve()
-            )
-            if not self.download_dir.exists():
-                self.download_dir.mkdir(parents=True, exist_ok=True)
+        self.dataset_name = dataset_name
 
-            self.maybe_downloaded_zip_path = Path(
-                self.download_dir, self.dataset_name + ".zip"
-            ).resolve()
+        self.download = download
+        self.download_dir = (
+            download_dir
+            if isinstance(download_dir, Path)
+            else Path(download_dir).resolve()
+        )
+        if not self.download_dir.exists():
+            self.download_dir.mkdir(parents=True, exist_ok=True)
+
+        self.maybe_downloaded_zip_path = Path(
+            self.download_dir, self.dataset_name + ".zip"
+        ).resolve()
 
         self.unpack_dir = (
             unpack_dir if isinstance(unpack_dir, Path) else Path(unpack_dir).resolve()
@@ -65,19 +64,10 @@ class SC2DatasetSingleJSON(Dataset):
         if not self.unpack_dir.is_dir():
             raise Exception("Replaypack unpack directory is not a directory!")
 
-        self.dataset_name = dataset_name
         self.dataset_url = dataset_url
-
-        self.validator = validator
-
-        # TODO: This might need to change based on the specific
-        # dataset differences, it might not be a skip_files, but skip indices?
-        self.skip_files: dict[str, set[str]] = {}
 
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
-        self.len = 0
-
         # Download the dataset if needed:
         self.was_downloaded = False
         self.unpack_path = Path(self.unpack_dir, self.dataset_name).resolve()
@@ -109,7 +99,7 @@ class SC2DatasetSingleJSON(Dataset):
             # The zip should contain a single JSON file. No need for more workers:
             self.unpack_path = unpack_zipfile(
                 destination_dir=self.unpack_dir,
-                subdir=self.dataset_name,
+                subdir="",
                 zip_path=self.maybe_downloaded_zip_path,
                 n_workers=1,
             )
@@ -119,9 +109,10 @@ class SC2DatasetSingleJSON(Dataset):
 
         # Parsing the dataset to counte the number of entries:
         self.dataset_path = Path(
-            self.unpack_path, self.dataset_name + ".json"
+            self.unpack_path, self.dataset_name, self.dataset_name + ".json"
         ).resolve()
 
+        # Indexing logic for faster file lookup:
         json_offsets_filepath = Path(
             self.unpack_path, self.dataset_name + "_offsets.json"
         ).resolve()
@@ -130,6 +121,13 @@ class SC2DatasetSingleJSON(Dataset):
             json_filepath=self.dataset_path,
             offsets_filepath=json_offsets_filepath,
         )
+
+        # Begin validation logic:
+        self.validator = validator
+
+        # TODO: This might need to change based on the specific
+        # dataset differences, it might not be a skip_files, but skip indices?
+        self.skip_files: dict[str, set[str]] = {}
 
         if self.validator:
             logging.warning(
