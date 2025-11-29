@@ -131,14 +131,14 @@ def get_setup_paths(test_replaypack_name: str = "2022_TestReplaypack") -> Tuple:
     download_dir_path = Path(test_output_path, "download").resolve()
 
     # Initializing the unpacked where it should be:
-    unpacked = Path(unpack_dir_path, test_replaypack_name)
-    download = Path(download_dir_path, test_replaypack_name)
+    unpacked_dataset_path = Path(unpack_dir_path, test_replaypack_name)
+    download_dataset_path = Path(download_dir_path, test_replaypack_name)
 
     return (
         test_replaypack_name,
         replaypack_zip_path,
         unpack_dir_path,
         download_dir_path,
-        unpacked,
-        download,
+        unpacked_dataset_path,
+        download_dataset_path,
     )
