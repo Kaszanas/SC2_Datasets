@@ -10,7 +10,7 @@ from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 # NOTE: For now this implementation assumes that each JSON object is on its own line.
 
 
-def get_json_offsets(json_filepath: Path, offsets_filepath: Path) -> list[int]:
+def get_json_offsets(json_filepath: Path, offsets_filepath: Path | None) -> list[int]:
     """
     Retrieves or creates the list of byte offsets for each JSON object
     in a large JSON file.
@@ -19,24 +19,30 @@ def get_json_offsets(json_filepath: Path, offsets_filepath: Path) -> list[int]:
     ----------
     json_filepath : Path
         Specifies the path to the JSON file.
-    offsets_filepath : Path
+    offsets_filepath : Path | None
         Specifies the path to the offsets file.
+        If None, offsets are not loaded/saved to disk.
 
     Returns
     -------
     list[int]
         Returns the list of byte offsets for each JSON object.
     """
-    if offsets_filepath.exists():
-        logging.info(f"Loading pre-computed JSON offsets from: {str(offsets_filepath)}")
-        with offsets_filepath.open("r", encoding="utf-8") as f:
-            offsets = json.load(f)
-        return offsets
+    if offsets_filepath:
+        if offsets_filepath.exists():
+            logging.info(
+                f"Loading pre-computed JSON offsets from: {str(offsets_filepath)}"
+            )
+            with offsets_filepath.open("r", encoding="utf-8") as f:
+                offsets = json.load(f)
+            return offsets
 
     offsets = index_json_objects(json_filepath=json_filepath)
     logging.info(f"Saving computed JSON offsets to: {str(offsets_filepath)}")
-    with offsets_filepath.open("w", encoding="utf-8") as f:
-        json.dump(offsets, f)
+
+    if offsets_filepath:
+        with offsets_filepath.open("w", encoding="utf-8") as f:
+            json.dump(offsets, f)
 
     return offsets
 
@@ -313,7 +319,7 @@ def dataset_to_single_json(
                     sort_keys=sort_keys,
                 )
 
-        output_file.write("]")
+        output_file.write("\n]")
 
     return output_filepath
 
