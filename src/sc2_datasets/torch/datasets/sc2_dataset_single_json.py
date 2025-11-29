@@ -79,7 +79,7 @@ class SC2DatasetSingleJSON(Dataset):
             self.maybe_downloaded_zip_path = download_replaypack(
                 destination_dir=self.download_dir,
                 replaypack_name=self.dataset_name,
-                url=self.dataset_url,
+                replaypack_url=self.dataset_url,
             )
             if not self.maybe_downloaded_zip_path.exists():
                 raise Exception("Dataset download failed!")
