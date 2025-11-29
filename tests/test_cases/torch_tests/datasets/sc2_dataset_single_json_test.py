@@ -15,6 +15,8 @@ from tests.test_utils.test_utils import get_setup_paths
 class SC2DatasetSingleJSONTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        cls.dataset_name, cls.dataset_url = TEST_SINGLE_JSON_REPLAYPACKS[0]
+
         (
             cls.test_replaypack_name,
             cls.replaypack_zip_path,
@@ -45,8 +47,8 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
 
     def test_parsing_dataset(self):
         dataset = SC2DatasetSingleJSON(
-            dataset_name=self.test_replaypack_name,
-            unpack_dir=self.unpack_dir_path,
+            dataset_name=self.dataset_name,
+            unpack_dir=self.dataset_url,
             download_dir=self.download_dir_path,
             download=False,
         )
@@ -71,8 +73,8 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
 
     def test_downloading_single_json_dataset(self):
         dataset = SC2DatasetSingleJSON(
-            dataset_name=self.test_replaypack_name,
-            dataset_url=TEST_SINGLE_JSON_REPLAYPACKS,
+            dataset_name=self.dataset_name,
+            dataset_url=self.dataset_url,
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=True,
