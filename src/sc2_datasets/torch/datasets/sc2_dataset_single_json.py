@@ -40,7 +40,7 @@ class SC2DatasetSingleJSON(Dataset):
         self.download_dir: Path | None = None
         self.maybe_downloaded_zip_path: Path | None = None
 
-        self.was_downloaded: bool | None = None
+        self.was_downloaded: bool = False
 
         self.unpack_dir: Path | None = None
         self.unpack_path: Path | None = None
@@ -150,8 +150,9 @@ class SC2DatasetSingleJSON(Dataset):
         # Custom fields:
         self.dataset_name = dataset_name
 
-        self.maybe_downloaded_zip_path = Path(
-            self.download_dir, self.dataset_name + ".zip"
+        maybe_downloaded_zip_path = Path(
+            download_dir,
+            dataset_name + ".zip",
         ).resolve()
 
         if download:
@@ -164,17 +165,17 @@ class SC2DatasetSingleJSON(Dataset):
                 self.download_dir.mkdir(parents=True, exist_ok=True)
 
             maybe_downloaded_zip_path = download_replaypack(
-                destination_dir=self.download_dir,
-                replaypack_name=self.dataset_name,
-                replaypack_url=self.dataset_url,
+                destination_dir=download_dir,
+                replaypack_name=dataset_name,
+                replaypack_url=dataset_url,
             )
-            if not self.maybe_downloaded_zip_path.exists():
+            if not maybe_downloaded_zip_path.exists():
                 raise Exception("Dataset download failed!")
 
             # If we reached this point, the dataset was downloaded for sure:
             self.was_downloaded = True
 
-        if not self.maybe_downloaded_zip_path and not download:
+        if not maybe_downloaded_zip_path.exists() and not download:
             raise Exception(
                 f"Dataset zip file {self.maybe_downloaded_zip_path} does not exist!"
             )
@@ -286,7 +287,7 @@ class SC2DatasetSingleJSON(Dataset):
             URL from which the dataset will be downloaded.
         """
 
-        self.__download(
+        self.maybe_downloaded_zip_path = self.__download(
             dataset_name=dataset_name,
             download=download,
             download_dir=download_dir,

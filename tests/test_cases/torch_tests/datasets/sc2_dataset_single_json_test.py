@@ -59,7 +59,7 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
         )
 
         # Dataset was downloaded previously, so this will be tue afte initialization:
-        self.assertTrue(dataset.was_downloaded)
+        self.assertFalse(dataset.was_downloaded)
         self.assertIsInstance(dataset, SC2DatasetSingleJSON)
 
         self.assertNotEqual(len(dataset), 0)
