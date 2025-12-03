@@ -49,8 +49,8 @@ class SC2ReplaypackDataset(Dataset):
         url: str = "",
         download: bool = False,
         unpack_n_workers: int = 16,
-        transform: None | Callable = dict,
-        validator: None | Callable = dict,
+        transform: None | Callable = None,
+        validator: None | Callable = None,
     ):
         # PyTorch fields:
         self.transform = transform
