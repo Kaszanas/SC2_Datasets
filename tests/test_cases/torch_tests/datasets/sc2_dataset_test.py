@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from sc2_datasets.available_replaypacks import DatasetProperties
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 from sc2_datasets.utils.zip_utils import unpack_zipfile
@@ -49,7 +50,7 @@ class SC2DatasetTest(unittest.TestCase):
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=False,
-            names_urls=[(self.test_replaypack_name, "")],
+            names_urls=[DatasetProperties(name=self.test_replaypack_name, url="")],
         )
 
         self.assertIsInstance(sc2egset_dataset, SC2Dataset)

@@ -30,11 +30,6 @@ class SC2EGSetDataModule(SC2DataModule):
         Specifies the PyTorch transforms to be used\
         on the replaypack (dataset), \
         Deprecated since version v1.5: Will be removed in v1.7.0, by default None
-    dims : _type_, optional
-        Specifies a tuple describing the shape of your data.\
-        Extra functionality exposed in size,\
-        Deprecated since version v1.5: Will be removed in v1.7.0,\
-        by default None
     batch_size : int, optional
         Specifies the size of collating individual\
         fetched data samples, by default 256
@@ -55,7 +50,6 @@ class SC2EGSetDataModule(SC2DataModule):
         unpack_dir: Path | str = Path("./data/unpack/sc2egset_dataset"),
         download: bool = True,
         transform: Callable = None,
-        dims=None,
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
@@ -67,7 +61,6 @@ class SC2EGSetDataModule(SC2DataModule):
             unpack_dir=unpack_dir,
             download=download,
             transform=transform,
-            dims=dims,
             batch_size=batch_size,
             num_workers=num_workers,
             unpack_n_workers=unpack_n_workers,
