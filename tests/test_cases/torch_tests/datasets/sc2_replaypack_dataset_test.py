@@ -66,12 +66,16 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
     @pytest.mark.minor
     def test_download_unpack_replaypack_synthetic(self):
+        replaypack = TEST_SYNTHETIC_REPLAYPACKS[0]
+        replaypack_name = replaypack.name
+        replaypack_url = replaypack.url
+
         sc2_replaypack_dataset = SC2ReplaypackDataset(
-            replaypack_name=TEST_SYNTHETIC_REPLAYPACKS[0][0],
+            replaypack_name=replaypack_name,
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=True,
-            url=TEST_SYNTHETIC_REPLAYPACKS[0][1],
+            url=replaypack_url,
         )
 
         # Replaypack was initialized:
@@ -88,7 +92,10 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
     @pytest.mark.major
     def test_download_unpack_replaypack_real(self):
-        for rp_name, rp_url in TEST_REAL_REPLAYPACKS:
+        for rp_property in TEST_REAL_REPLAYPACKS:
+            rp_name = rp_property.name
+            rp_url = rp_property.url
+
             with self.subTest(rp_name):
                 sc2_replaypack_dataset = SC2ReplaypackDataset(
                     replaypack_name=rp_name,

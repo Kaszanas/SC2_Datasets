@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from sc2_datasets.available_replaypacks import DatasetProperties
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 from sc2_datasets.utils.json_utils import (
     dataset_to_single_json,
@@ -50,7 +51,7 @@ class DatasetUtilsTest(unittest.TestCase):
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=False,
-            names_urls=[(self.test_replaypack_name, "")],
+            names_urls=[DatasetProperties(name=self.test_replaypack_name, url="")],
         )
 
         output_path = dataset_to_single_json(

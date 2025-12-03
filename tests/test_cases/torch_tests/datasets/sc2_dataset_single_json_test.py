@@ -15,7 +15,10 @@ from tests.test_utils.test_utils import get_assets_dir, get_setup_paths
 class SC2DatasetSingleJSONTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.dataset_name, cls.dataset_url = TEST_SINGLE_JSON_REPLAYPACKS[0]
+        properties = TEST_SINGLE_JSON_REPLAYPACKS[0]
+
+        cls.dataset_name = properties.name
+        cls.dataset_url = properties.url
 
         (
             cls.test_replaypack_name,

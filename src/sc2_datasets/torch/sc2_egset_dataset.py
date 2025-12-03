@@ -1,12 +1,34 @@
 from pathlib import Path
-from typing import Callable, List, Tuple
+from typing import Callable
 
-from sc2_datasets.available_replaypacks import SC2EGSET_DATASET_REPLAYPACKS
+from sc2_datasets.available_replaypacks import (
+    SC2EGSET_DATASET_REPLAYPACKS,
+    DatasetProperties,
+)
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
+from sc2_datasets.torch.datasets.sc2_dataset_single_json import SC2DatasetSingleJSON
 
 
-class SC2EGSetDatasetSingleJSON:
-    pass
+class SC2EGSetDatasetSingleJSON(SC2DatasetSingleJSON):
+    def __init__(
+        self,
+        dataset_name,
+        unpack_dir,
+        download_dir,
+        dataset_url,
+        transform,
+        validator,
+    ):
+        super().__init__(
+            dataset_name=dataset_name,
+            unpack_dir=unpack_dir,
+            download_dir=download_dir,
+            dataset_url=dataset_url,
+            transform=transform,
+            validator=validator,
+        )
+
+        pass
 
 
 class SC2EGSetDataset(SC2Dataset):
@@ -21,7 +43,7 @@ class SC2EGSetDataset(SC2Dataset):
     download_dir : Path | str
         Specifies the path of a directory where the dataset files will be downloaded,\
         by default "./data/download/sc2egset_dataset".
-    names_urls : List[Tuple[str, str]]
+    names_urls : list[DatasetProperties]
         Specifies the URL of the dataset which will be used to download the files,\
         by default SC2EGSET_DATASET_REPLAYPACKS.
     unpack_n_workers : int, optional
@@ -37,7 +59,7 @@ class SC2EGSetDataset(SC2Dataset):
         self,
         unpack_dir: Path | str = Path("./data/unpack/sc2egset_dataset"),
         download_dir: Path | str = Path("./data/download/sc2egset_dataset"),
-        names_urls: List[Tuple[str, str]] = SC2EGSET_DATASET_REPLAYPACKS,
+        names_urls: list[DatasetProperties] = SC2EGSET_DATASET_REPLAYPACKS,
         download: bool = True,
         unpack_n_workers: int = 16,
         transform: Callable | None = None,
