@@ -43,7 +43,7 @@ class SC2EGSetDataset(SC2Dataset):
     download_dir : Path | str
         Specifies the path of a directory where the dataset files will be downloaded,\
         by default "./data/download/sc2egset_dataset".
-    names_urls : list[Tuple[str, str]]
+    names_urls : list[DatasetProperties]
         Specifies the URL of the dataset which will be used to download the files,\
         by default SC2EGSET_DATASET_REPLAYPACKS.
     unpack_n_workers : int, optional
