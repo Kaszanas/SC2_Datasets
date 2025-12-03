@@ -150,6 +150,10 @@ class SC2DatasetSingleJSON(Dataset):
         # Custom fields:
         self.dataset_name = dataset_name
 
+        self.maybe_downloaded_zip_path = Path(
+            self.download_dir, self.dataset_name + ".zip"
+        ).resolve()
+
         if download:
             self.download_dir = (
                 download_dir
@@ -158,10 +162,6 @@ class SC2DatasetSingleJSON(Dataset):
             )
             if not self.download_dir.exists():
                 self.download_dir.mkdir(parents=True, exist_ok=True)
-
-            self.maybe_downloaded_zip_path = Path(
-                self.download_dir, self.dataset_name + ".zip"
-            ).resolve()
 
             maybe_downloaded_zip_path = download_replaypack(
                 destination_dir=self.download_dir,
