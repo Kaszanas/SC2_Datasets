@@ -1,6 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Set, Tuple
+from typing import Any, Callable
 
 from torch.utils.data import Dataset
 from tqdm import tqdm
@@ -15,7 +15,7 @@ class SC2Dataset(Dataset):
 
     Parameters
     ----------
-    names_urls : List[Tuple[str, str]]
+    names_urls : list[tuple[str, str]]
         Specifies the URL of the dataset which will be used to download the files.
     unpack_dir : Path | str
         Specifies the path of a directory where the dataset files will be unpacked.
@@ -31,7 +31,7 @@ class SC2Dataset(Dataset):
 
     def __init__(
         self,
-        names_urls: List[Tuple[str, str]],
+        names_urls: list[tuple[str, str]],
         unpack_dir: Path | str = Path("./data/unpack").resolve(),
         download_dir: Path | str = Path("./data/download").resolve(),
         download: bool = True,
@@ -56,12 +56,11 @@ class SC2Dataset(Dataset):
         self.unpack_n_workers = unpack_n_workers
         self.validator = validator
 
-        self.skip_files: Dict[str, Set[str]] = {}
+        self.skip_files: dict[str, set[str]] = {}
 
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
         self.len = 0
-        self.replaypacks: List[SC2ReplaypackDataset] = []
         self.ensure_downloaded()
 
     def ensure_downloaded(self):
@@ -107,7 +106,7 @@ class SC2Dataset(Dataset):
         """
         return self.len
 
-    def __getitem__(self, index: Any) -> Tuple[Any, Any] | SC2ReplayData:
+    def __getitem__(self, index: Any) -> tuple[Any, Any] | SC2ReplayData:
         """
         Exposes logic of getting a single parsed item by using dataset[index].
 
@@ -126,7 +125,7 @@ class SC2Dataset(Dataset):
 
         Returns
         -------
-        Tuple[Any, Any] | SC2ReplayData
+        tuple[Any, Any] | SC2ReplayData
             Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,
             or a result of a transform that was passed to the dataset.
         """

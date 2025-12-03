@@ -34,6 +34,40 @@ class SC2ReplayData:
     messageEventsErr: bool = False
     trackerEventsErr: bool = False
 
+    # TODO: Add tests!!!!!
+    @staticmethod
+    def from_dict(loaded_data: dict, replay_filepath: str) -> "SC2ReplayData":
+        SC2ReplayData.sanitize_events(loaded_data=loaded_data)
+
+        return SC2ReplayData(
+            filepath=replay_filepath,
+            header=Header.from_dict(d=loaded_data["header"]),
+            initData=InitData.from_dict(d=loaded_data["initData"]),
+            details=Details.from_dict(d=loaded_data["details"]),
+            metadata=Metadata.from_dict(d=loaded_data["metadata"]),
+            messageEvents=[
+                MessageEventsParser.from_dict(d=event_dict)
+                for event_dict in loaded_data.get("messageEvents", [])
+            ],
+            gameEvents=[
+                GameEventsParser.from_dict(d=event_dict)
+                for event_dict in loaded_data.get("gameEvents", [])
+            ],
+            trackerEvents=[
+                TrackerEventsParser.from_dict(d=event_dict)
+                for event_dict in loaded_data.get("trackerEvents", [])
+            ],
+            toonPlayerDescMap=[
+                ToonPlayerDesc.from_dict(toon=toon, d=player_dict)
+                for toon, player_dict in loaded_data.get(
+                    "ToonPlayerDescMap", {}
+                ).items()
+            ],
+            gameEventsErr=loaded_data.get("gameEventsErr", False),
+            messageEventsErr=loaded_data.get("messageEventsErr", False),
+            trackerEventsErr=loaded_data.get("trackerEvtsErr", False),
+        )
+
     @staticmethod
     def from_file(replay_filepath: Path | str) -> "SC2ReplayData":
         """
@@ -69,36 +103,9 @@ class SC2ReplayData:
         logging.info(f"Attempting to parse: {str(replay_filepath)}")
         with replay_path.open(mode="r", encoding="utf-8") as replay_file:
             loaded_data = json.load(replay_file)
-
-            SC2ReplayData.sanitize_events(loaded_data=loaded_data)
-
-            return SC2ReplayData(
-                filepath=replay_filepath,
-                header=Header.from_dict(d=loaded_data["header"]),
-                initData=InitData.from_dict(d=loaded_data["initData"]),
-                details=Details.from_dict(d=loaded_data["details"]),
-                metadata=Metadata.from_dict(d=loaded_data["metadata"]),
-                messageEvents=[
-                    MessageEventsParser.from_dict(d=event_dict)
-                    for event_dict in loaded_data.get("messageEvents", [])
-                ],
-                gameEvents=[
-                    GameEventsParser.from_dict(d=event_dict)
-                    for event_dict in loaded_data.get("gameEvents", [])
-                ],
-                trackerEvents=[
-                    TrackerEventsParser.from_dict(d=event_dict)
-                    for event_dict in loaded_data.get("trackerEvents", [])
-                ],
-                toonPlayerDescMap=[
-                    ToonPlayerDesc.from_dict(toon=toon, d=player_dict)
-                    for toon, player_dict in loaded_data.get(
-                        "ToonPlayerDescMap", {}
-                    ).items()
-                ],
-                gameEventsErr=loaded_data.get("gameEventsErr", False),
-                messageEventsErr=loaded_data.get("messageEventsErr", False),
-                trackerEventsErr=loaded_data.get("trackerEvtsErr", False),
+            return SC2ReplayData.from_dict(
+                loaded_data=loaded_data,
+                replay_filepath=str(replay_filepath),
             )
 
     @staticmethod

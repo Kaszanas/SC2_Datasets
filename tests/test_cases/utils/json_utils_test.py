@@ -5,7 +5,11 @@ from pathlib import Path
 import pytest
 
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
-from sc2_datasets.utils.dataset_to_single_json import dataset_to_single_json
+from sc2_datasets.utils.json_utils import (
+    dataset_to_single_json,
+    get_json_offsets,
+    get_object_at_index,
+)
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 from tests.test_utils.test_utils import get_setup_paths, get_test_output_dir
 
@@ -57,6 +61,7 @@ class DatasetUtilsTest(unittest.TestCase):
         self.assertTrue(output_path.exists())
         self.assertEqual(output_path, self.output_json_path)
 
+        # Test the contents of the file when its entirety is loaded:
         with output_path.open("r", encoding="utf-8") as f:
             data = json.load(f)
 
@@ -74,3 +79,18 @@ class DatasetUtilsTest(unittest.TestCase):
                 first_item["additional_information"]["replaypack_name"],
                 self.test_replaypack_name,
             )
+
+        json_offsets = get_json_offsets(
+            json_filepath=output_path,
+            offsets_filepath=None,
+        )
+
+        with output_path.open("rb") as f:
+            for offset_index in range(len(json_offsets)):
+                read_json = get_object_at_index(
+                    file_handle=f,
+                    offsets=json_offsets,
+                    index=offset_index,
+                )
+
+                self.assertIsInstance(read_json, dict)
