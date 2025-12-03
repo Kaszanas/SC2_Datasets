@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
@@ -67,14 +66,14 @@ class UserOptions(GameEvent):
     versionFlags: int
 
     @staticmethod
-    def from_dict(d: Dict) -> "UserOptions":
+    def from_dict(d: dict) -> "UserOptions":
         """
         Static method returning an initialized UserOptions class from a dictionary.
         This assists in parsing the original JSON data.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             A dictionary available in the JSON file resulting from pre-processing
             an .SC2Replay file.
 

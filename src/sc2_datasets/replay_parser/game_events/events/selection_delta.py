@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.events.nested.delta import Delta
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
@@ -31,13 +30,13 @@ class SelectionDelta(GameEvent):
     userid: int
 
     @staticmethod
-    def from_dict(d: Dict) -> "SelectionDelta":
+    def from_dict(d: dict) -> "SelectionDelta":
         """
         Initializes a SelectionDelta class from a dictionary, aiding the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             A dictionary obtained from pre-processing an .SC2Replay file in JSON format.
 
         Returns

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any
 
 from sc2_datasets.replay_parser.init_data.game_options import GameOptions
 
@@ -39,14 +39,14 @@ class GameDescription:
     maxPlayers: int
 
     @staticmethod
-    def from_dict(d: Dict[str, Any]) -> "GameDescription":
+    def from_dict(d: dict[str, Any]) -> "GameDescription":
         """
         Static method that initializes a GameDescription class from a dictionary.
         This aids in parsing the original JSON content from an .SC2Replay file.
 
         Parameters
         ----------
-        d : Dict[str, Any]
+        d : dict[str, Any]
             Dictionary obtained from preprocessing an .SC2Replay file in JSON format.
 
         Returns

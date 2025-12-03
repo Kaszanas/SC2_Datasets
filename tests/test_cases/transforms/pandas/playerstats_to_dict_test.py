@@ -1,6 +1,5 @@
 import unittest
 from pathlib import Path
-from typing import List
 
 import pandas as pd
 import pytest
@@ -23,13 +22,13 @@ class PlayerStatsToDictTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         list_of_test_filenames = ["test_replay.json", "test_replay_victory_defeat.json"]
 
-        cls.test_replays: List[Path] = []
+        cls.test_replays: list[Path] = []
         for filename in list_of_test_filenames:
             cls.test_replays.append(
                 test_utils.get_specific_asset_path(filename=filename)
             )
 
-        cls.sc2_replays_data: List[SC2ReplayData] = []
+        cls.sc2_replays_data: list[SC2ReplayData] = []
         for replay in cls.test_replays:
             sc2_replay = SC2ReplayData.from_file(replay_filepath=replay)
             cls.sc2_replays_data.append(sc2_replay)

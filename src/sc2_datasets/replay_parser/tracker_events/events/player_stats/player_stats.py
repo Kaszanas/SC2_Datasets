@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.events.player_stats.stats import Stats
 
@@ -30,14 +29,14 @@ class PlayerStats(TrackerEvent):
     stats: Stats
 
     @staticmethod
-    def from_dict(d: Dict) -> "PlayerStats":
+    def from_dict(d: dict) -> "PlayerStats":
         """
         Static method returning initialized PlayerStats class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file that
             is a result of pre-processing some .SC2Replay file.
 

@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
@@ -30,14 +29,14 @@ class UnitTypeChange(TrackerEvent):
     unitTypeName: str
 
     @staticmethod
-    def from_dict(d: Dict) -> "UnitTypeChange":
+    def from_dict(d: dict) -> "UnitTypeChange":
         """
         Static method returning initialized UnitTypeChange class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file that
             is a result of pre-processing some .SC2Replay file.
 

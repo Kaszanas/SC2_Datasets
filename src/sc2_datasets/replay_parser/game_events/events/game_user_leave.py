@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
@@ -27,13 +26,13 @@ class GameUserLeave(GameEvent):
     userid: int
 
     @staticmethod
-    def from_dict(d: Dict) -> "GameUserLeave":
+    def from_dict(d: dict) -> "GameUserLeave":
         """
         Static method returning initialized GameUserLeave class from a dictionary.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file
             that is a result of pre-processing some .SC2Replay file.
 

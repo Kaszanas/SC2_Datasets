@@ -1,6 +1,3 @@
-from typing import Dict
-
-
 class Color:
     """
     Specifies RGBA model color representation.
@@ -18,7 +15,7 @@ class Color:
     """
 
     @staticmethod
-    def from_dict(d: Dict[str, int]) -> "Color":
+    def from_dict(d: dict[str, int]) -> "Color":
         """
         Specifies RGBA model color representation.
 

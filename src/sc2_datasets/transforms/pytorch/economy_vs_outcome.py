@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import torch
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
@@ -8,7 +6,7 @@ from sc2_datasets.transforms.utils import RESULT_DICT, average_player_stats
 
 def economy_average_vs_outcome(
     sc2_replay: SC2ReplayData,
-) -> Tuple[torch.Tensor, int]:
+) -> tuple[torch.Tensor, int]:
     """
     Transforms the SC2ReplayData representation into averaged economy statistics
     and maps the winner and loser of the match.
@@ -20,7 +18,7 @@ def economy_average_vs_outcome(
 
     Returns
     -------
-    Tuple[torch.Tensor, torch.Tensor]
+    tuple[torch.Tensor, torch.Tensor]
         Returns a tensor containing features and a target.
 
     Examples

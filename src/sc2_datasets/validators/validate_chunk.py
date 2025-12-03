@@ -1,25 +1,24 @@
 from pathlib import Path
-from typing import List, Tuple
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 
 
 # TODO: Verify if it is possible to return two sets:
 def validate_chunk(
-    list_of_replays: List[Path],
-) -> List[Tuple[Path, bool]]:
+    list_of_replays: list[Path],
+) -> list[tuple[Path, bool]]:
     """
     Attempts to parse a chunk of replays and validates the JSON
     structure using SC2ReplayData parser.
 
     Parameters
     ----------
-    list_of_replays : List[Path]
+    list_of_replays : list[Path]
         Specifies the list of replays that will be validated.
 
     Returns
     -------
-    List[Tuple[Path, bool]]
+    list[tuple[Path, bool]]
         Returns a tuple of a filepath and a boolean denoting\
         if the file should be skipped in final processing.
 

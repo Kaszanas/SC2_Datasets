@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any
 
 
 @dataclass
@@ -25,7 +25,7 @@ class Details:
     timeUTC: str
 
     @staticmethod
-    def from_dict(d: Dict[str, Any]) -> "Details":
+    def from_dict(d: dict[str, Any]) -> "Details":
         """
         Static method returning an initialized Details class from a dictionary.
         This aids in the original JSON parsing.

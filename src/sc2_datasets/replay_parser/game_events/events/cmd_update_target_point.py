@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.events.nested.target_3d import Target3D
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
@@ -28,14 +27,14 @@ class CmdUpdateTargetPoint(GameEvent):
     userid: int
 
     @staticmethod
-    def from_dict(d: Dict) -> "CmdUpdateTargetPoint":
+    def from_dict(d: dict) -> "CmdUpdateTargetPoint":
         """
         Static method returning an initialized CmdUpdateTargetPoint class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Dictionary available in the JSON file after pre-processing some .SC2Replay file.
 
         Returns

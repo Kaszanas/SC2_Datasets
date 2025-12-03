@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from types import NoneType
-from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
@@ -41,14 +40,14 @@ class Cmd(GameEvent):
     userid: int
 
     @staticmethod
-    def from_dict(d: Dict) -> "Cmd":
+    def from_dict(d: dict) -> "Cmd":
         """
         Static method returning an initialized Cmd class from a dictionary.
         This aids in parsing the original JSON.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Dictionary available in the JSON file, typically a result\
             of pre-processing an .SC2Replay file.
 

@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
@@ -32,14 +31,14 @@ class Upgrade(TrackerEvent):
     upgradeTypeName: str
 
     @staticmethod
-    def from_dict(d: Dict) -> "Upgrade":
+    def from_dict(d: dict) -> "Upgrade":
         """
         Static method returning initialized Upgrade class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file that
             is a result of pre-processing some .SC2Replay file.
 

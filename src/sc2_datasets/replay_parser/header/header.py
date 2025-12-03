@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any
 
 
 @dataclass
@@ -20,14 +20,14 @@ class Header:
     version: str
 
     @staticmethod
-    def from_dict(d: Dict[str, Any]) -> "Header":
+    def from_dict(d: dict[str, Any]) -> "Header":
         """
         Static method returning an initialized Header class from a provided dictionary.
         This method assists in parsing the original JSON representation of a .SC2Replay file.
 
         Parameters
         ----------
-        d : Dict[str, Any]
+        d : dict[str, Any]
             A dictionary representing the data available in the JSON file, obtained
             from preprocessing some .SC2Replay file.
 

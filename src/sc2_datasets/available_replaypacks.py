@@ -30,6 +30,11 @@ EXAMPLE_REAL_REPLAYPACKS = [
     ),
 ]
 
+SC2EGSET_SINGLE_JSON = DatasetProperties(
+    name="sc2egset_single_json",
+    url="https://zenodo.org/record/15073637/files/sc2egset_single_json.zip?download=1",
+)
+
 SC2EGSET_DATASET_REPLAYPACKS = [
     DatasetProperties(
         name="2016_IEM_10_Taipei",

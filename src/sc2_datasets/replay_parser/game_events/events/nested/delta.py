@@ -1,5 +1,4 @@
 from types import NoneType
-from typing import Dict, List
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
@@ -22,7 +21,7 @@ class AddSubgroups(GameEvent):
     """
 
     @staticmethod
-    def from_dict(d: Dict) -> "AddSubgroups":
+    def from_dict(d: dict) -> "AddSubgroups":
         return [
             AddSubgroups(
                 count=subgroup["count"],
@@ -56,7 +55,7 @@ class Delta(GameEvent):
     addSubgroups : AddSubgroups
         Most likely specifies a class with additional information
         on which subgroups were added.
-    addUnitTags : List[int]
+    addUnitTags : list[int]
         Most likely specifies which unit tags were added to a subgroup.
     removeMask : NoneType
         This is an unknown parameter. We were not able to interpret it.
@@ -65,7 +64,7 @@ class Delta(GameEvent):
     """
 
     @staticmethod
-    def from_dict(d: Dict) -> "Delta":
+    def from_dict(d: dict) -> "Delta":
         return Delta(
             addSubgroups=AddSubgroups.from_dict(d=d["addSubgroups"]),
             addUnitTags=d["addUnitTags"],
@@ -75,8 +74,8 @@ class Delta(GameEvent):
 
     def __init__(
         self,
-        addSubgroups: List[AddSubgroups],
-        addUnitTags: List[int],
+        addSubgroups: list[AddSubgroups],
+        addUnitTags: list[int],
         removeMask: NoneType,
         subgroupIndex: int,
     ) -> None:

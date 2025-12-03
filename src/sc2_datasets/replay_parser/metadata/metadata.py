@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any
 
 
 @dataclass
@@ -26,7 +26,7 @@ class Metadata:
     mapName: str
 
     @staticmethod
-    def from_dict(d: Dict[str, Any]) -> "Metadata":
+    def from_dict(d: dict[str, Any]) -> "Metadata":
         """
         Represents metadata extracted from a .SC2Replay file.
 

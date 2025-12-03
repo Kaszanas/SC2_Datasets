@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.events.nested.target_2d import Target2D
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
@@ -31,7 +30,7 @@ class CameraSave(GameEvent):
     which: int
 
     @staticmethod
-    def from_dict(d: Dict) -> "CameraSave":
+    def from_dict(d: dict) -> "CameraSave":
         """
         Static method returning an initialized CameraSave class from a dictionary.
         Helps with the original JSON parsing.
