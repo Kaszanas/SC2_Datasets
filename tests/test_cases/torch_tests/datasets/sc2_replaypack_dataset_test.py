@@ -66,12 +66,16 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
     @pytest.mark.minor
     def test_download_unpack_replaypack_synthetic(self):
+        replaypack = TEST_SYNTHETIC_REPLAYPACKS[0]
+        replaypack_name = replaypack.name
+        replaypack_url = replaypack.url
+
         sc2_replaypack_dataset = SC2ReplaypackDataset(
-            replaypack_name=TEST_SYNTHETIC_REPLAYPACKS[0][0],
+            replaypack_name=replaypack_name,
             unpack_dir=self.unpack_dir_path,
             download_dir=self.download_dir_path,
             download=True,
-            url=TEST_SYNTHETIC_REPLAYPACKS[0][1],
+            url=replaypack_url,
         )
 
         # Replaypack was initialized:
