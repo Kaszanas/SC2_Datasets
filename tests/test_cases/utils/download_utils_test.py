@@ -33,8 +33,12 @@ class DownloadUtilsTest(unittest.TestCase):
             shutil.rmtree(path=str(self.unpacked))
 
     def test_download_replaypack(self):
+        replaypack = TEST_SYNTHETIC_REPLAYPACKS[0]
+        replaypack_name = replaypack.name
+        replaypack_url = replaypack.url
+
         self.downloaded = download_replaypack(
             destination_dir=self.download_dir_path,
-            replaypack_name=TEST_SYNTHETIC_REPLAYPACKS[0][0],
-            replaypack_url=TEST_SYNTHETIC_REPLAYPACKS[0][1],
+            replaypack_name=replaypack_name,
+            replaypack_url=replaypack_url,
         )
