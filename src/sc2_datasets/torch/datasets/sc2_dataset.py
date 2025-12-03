@@ -5,6 +5,7 @@ from typing import Any, Callable
 from torch.utils.data import Dataset
 from tqdm import tqdm
 
+from sc2_datasets.available_replaypacks import DatasetProperties
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
 
@@ -15,7 +16,7 @@ class SC2Dataset(Dataset):
 
     Parameters
     ----------
-    names_urls : list[tuple[str, str]]
+    names_urls : list[DatasetProperties]
         Specifies the URL of the dataset which will be used to download the files.
     unpack_dir : Path | str
         Specifies the path of a directory where the dataset files will be unpacked.
@@ -31,7 +32,7 @@ class SC2Dataset(Dataset):
 
     def __init__(
         self,
-        names_urls: list[tuple[str, str]],
+        names_urls: list[DatasetProperties],
         unpack_dir: Path | str = Path("./data/unpack").resolve(),
         download_dir: Path | str = Path("./data/download").resolve(),
         download: bool = True,
@@ -69,13 +70,13 @@ class SC2Dataset(Dataset):
         """
 
         list_of_arguments = []
-        for replaypack_name, url in self.names_urls:
+        for dataset_properties in self.names_urls:
             list_of_arguments.append(
                 {
-                    "replaypack_name": replaypack_name,
+                    "replaypack_name": dataset_properties.name,
                     "unpack_dir": self.unpack_dir,
                     "download_dir": self.download_dir,
-                    "url": url,
+                    "url": dataset_properties.url,
                     "download": self.download,
                     "unpack_n_workers": self.unpack_n_workers,
                     "validator": self.validator,

@@ -5,6 +5,7 @@ import pytorch_lightning as pl
 from torch.utils.data import random_split
 from torch.utils.data.dataloader import DataLoader
 
+from sc2_datasets.available_replaypacks import DatasetProperties
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
 
 
@@ -14,8 +15,8 @@ class SC2DataModule(pl.LightningDataModule):
 
     Parameters
     ----------
-    replaypacks : List[Tuple[str, str]]
-        _description_
+    replaypacks : List[DatasetProperties]
+        Specifies a list of properties of replaypacks that will be used for downloading.
     download_dir : Path | str, optional
         Specifies the path where the dataset will be downloaded,\
         by default "./data/download"
@@ -23,23 +24,19 @@ class SC2DataModule(pl.LightningDataModule):
         Specifies the path where the dataset will be unpacked\
         into a custom directory structure, by default "./data/unpack"
     download : bool, optional
-        _description_, by default True
+        If the underlying dataset should be downloaded, by default True
     transform : Callable, optional
         Specifies the PyTorch transforms to be used\
         on the replaypack (dataset),
         Deprecated since version v1.5: Will be removed in v1.7.0, by default None
-    dims : _type_, optional
-        Specifies a tuple describing the shape of your data.\
-        Extra functionality exposed in size,
-        Deprecated since version v1.5: Will be removed in v1.7.0, by default None
     batch_size : int, optional
-        Specifies the size of collating individual\
+        The size of collating individual\
         fetched data samples, by default 256
     num_workers : int, optional
-        Specifies the data loader instance how many sub-processes\
+        How many sub-processes\
         to use for data loading, by default 0
     unpack_n_workers : int, optional
-        Specifies the number of workers\
+        The number of workers\
         that will be used for unpacking the archive, by default 16
     validator : Callable | None, optional
         Specifies the validation option for fetched data,\
@@ -49,12 +46,11 @@ class SC2DataModule(pl.LightningDataModule):
 
     def __init__(
         self,
-        replaypacks: List[Tuple[str, str]],
+        replaypacks: List[DatasetProperties],
         download_dir: Path | str = Path("./data/download").resolve(),
         unpack_dir: Path | str = Path("./data/unpack").resolve(),
         download: bool = True,
         transform: Callable = None,
-        dims=None,
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
@@ -64,7 +60,6 @@ class SC2DataModule(pl.LightningDataModule):
 
         # PyTorch fields:
         self.transform = transform
-        self.dims = dims
         self.batch_size = batch_size
         self.num_workers = num_workers
 
@@ -115,17 +110,23 @@ class SC2DataModule(pl.LightningDataModule):
 
     def train_dataloader(self) -> DataLoader:
         return DataLoader(
-            self.train_dataset, batch_size=self.batch_size, num_workers=self.num_workers
+            self.train_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
         )
 
     def val_dataloader(self) -> DataLoader:
         return DataLoader(
-            self.val_dataset, batch_size=self.batch_size, num_workers=self.num_workers
+            self.val_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
         )
 
     def test_dataloader(self) -> DataLoader:
         return DataLoader(
-            self.test_dataset, batch_size=self.batch_size, num_workers=self.num_workers
+            self.test_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
         )
 
     def teardown(self, stage: Optional[str] = None) -> None:

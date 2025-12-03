@@ -32,10 +32,6 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     transform : Callable | None, optional
         Specifies the PyTorch transforms to be used on the replaypack (dataset),\
         Deprecated since version v1.5: Will be removed in v1.7.0, by default None
-    dims : _type_, optional
-        Specifies a tuple describing the shape of your data.\
-        Extra functionality exposed in size,\
-        Deprecated since version v1.5: Will be removed in v1.7.0, by default None
     batch_size : int, optional
         Batch size which will be used for learning tasks, by default 256
     num_workers : int, optional
@@ -57,7 +53,6 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         url: str = "",
         download: bool = True,
         transform: Callable | None = None,
-        dims=None,
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
@@ -67,7 +62,6 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
 
         # PyTorch fields:
         self.transform = transform
-        self.dims = dims
         self.batch_size = batch_size
         self.num_workers = num_workers
 

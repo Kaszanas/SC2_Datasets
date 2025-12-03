@@ -88,7 +88,10 @@ class SC2ReplaypackDatasetTest(unittest.TestCase):
 
     @pytest.mark.major
     def test_download_unpack_replaypack_real(self):
-        for rp_name, rp_url in TEST_REAL_REPLAYPACKS:
+        for rp_property in TEST_REAL_REPLAYPACKS:
+            rp_name = rp_property.name
+            rp_url = rp_property.url
+
             with self.subTest(rp_name):
                 sc2_replaypack_dataset = SC2ReplaypackDataset(
                     replaypack_name=rp_name,
