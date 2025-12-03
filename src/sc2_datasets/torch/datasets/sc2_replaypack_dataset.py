@@ -1,6 +1,5 @@
-import os
 from pathlib import Path
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable
 
 from torch.utils.data import Dataset
 
@@ -38,7 +37,7 @@ class SC2ReplaypackDataset(Dataset):
     unpack_n_workers : int, optional
         Specifies the number of workers that will be used for unpacking the archive,\
         defaults to 16.
-    validator : Callable | None, optional
+    validator : Callable | dict, optional
         Specifies a validator for input data, defaults to None.
     """
 
@@ -165,7 +164,7 @@ class SC2ReplaypackDataset(Dataset):
 
         # Getting the paths to the files that consist of the dataset,
         # These will be used for validation at later step:
-        all_files: List[Path] = []
+        all_files: list[Path] = []
         for file in data_path.iterdir():
             all_files.append(Path(data_path, file))
 
@@ -211,13 +210,13 @@ class SC2ReplaypackDataset(Dataset):
         return replay_data
 
     @staticmethod
-    def from_args(args: Dict[str, Any]) -> "SC2ReplaypackDataset":
+    def from_args(args: dict[str, Any]) -> "SC2ReplaypackDataset":
         """
         Creates a SC2ReplaypackDataset object from a dictionary of arguments.
 
         Parameters
         ----------
-        args : Dict[str, Any]
+        args : dict[str, Any]
             Specifies the dictionary of arguments that will be used to initialize the dataset.
 
         Returns
@@ -228,13 +227,13 @@ class SC2ReplaypackDataset(Dataset):
         return SC2ReplaypackDataset(**args)
 
     @property
-    def replaypack_summary(self) -> Dict[str, Any]:
+    def replaypack_summary(self) -> dict[str, Any]:
         return self._replaypack_summary
 
     @property
-    def replaypack_dir_mapping(self) -> Dict[str, str]:
+    def replaypack_dir_mapping(self) -> dict[str, str]:
         return self._replaypack_dir_mapping
 
     @property
-    def replaypack_processed_failed(self) -> Dict[str, List[str]]:
+    def replaypack_processed_failed(self) -> dict[str, list[str]]:
         return self._replaypack_processed_failed

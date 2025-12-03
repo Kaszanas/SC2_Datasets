@@ -1,6 +1,6 @@
 import abc
 from types import NotImplementedType
-from typing import Dict, Literal
+from typing import Literal
 
 
 class TrackerEvent(metaclass=abc.ABCMeta):
@@ -13,14 +13,14 @@ class TrackerEvent(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def from_dict(d: Dict) -> "TrackerEvent":
+    def from_dict(d: dict) -> "TrackerEvent":
         """
         Abstract method returning some TrackerEvent.
         This method helps with implementation, with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file
             that is a result of pre-processing some .SC2Replay file.
 

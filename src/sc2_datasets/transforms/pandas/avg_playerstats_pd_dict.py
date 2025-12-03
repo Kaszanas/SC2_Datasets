@@ -1,5 +1,3 @@
-from typing import Dict
-
 import pandas as pd
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
@@ -12,7 +10,7 @@ from sc2_datasets.transforms.utils import select_apm_1v1, select_outcome_1v1
 # REVIEW: Verify this:
 def avg_playerstats_pd_dict_transform(
     sc2_replay: SC2ReplayData,
-) -> Dict[str, int | float]:
+) -> dict[str, int | float]:
     """
     Exposes logic for composing a row containing features for a classification task.
 
@@ -23,7 +21,7 @@ def avg_playerstats_pd_dict_transform(
 
     Returns
     -------
-    Dict[str, float]
+    dict[str, float]
         Returns a dictionary representation of the averaged values.
 
     Examples

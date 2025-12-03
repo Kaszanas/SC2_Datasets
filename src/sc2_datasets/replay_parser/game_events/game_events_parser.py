@@ -1,5 +1,3 @@
-from typing import Dict
-
 from sc2_datasets.replay_parser.game_events.events.camera_save import CameraSave
 from sc2_datasets.replay_parser.game_events.events.camera_update import CameraUpdate
 from sc2_datasets.replay_parser.game_events.events.cmd import Cmd
@@ -23,7 +21,7 @@ from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 class GameEventsParser:
     @staticmethod
-    def from_dict(d: Dict) -> GameEvent:
+    def from_dict(d: dict) -> GameEvent:
         """
         Static method returning an initialized GameEvent class obtained from a dictionary.
         This method assists in parsing the original JSON data derived from pre-processing an .SC2Replay file.

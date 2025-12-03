@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Callable, List, Optional, Tuple
+from typing import Callable
 
 import pytorch_lightning as pl
 from torch.utils.data import random_split
@@ -7,6 +7,81 @@ from torch.utils.data.dataloader import DataLoader
 
 from sc2_datasets.available_replaypacks import DatasetProperties
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
+from sc2_datasets.torch.datasets.sc2_dataset_single_json import SC2DatasetSingleJSON
+
+
+class SC2DataModuleSingleJSON(pl.LightningDataModule):
+    def __init__(
+        self,
+        dataset_name: str,
+        unpack_dir: Path,
+        download: bool = True,
+        download_dir: Path | str | None = None,
+        dataset_url: str = "",
+        transform: Callable | None = None,
+        validator: Callable | None = None,
+    ):
+        super().__init__()
+
+        self.dataset_name = dataset_name
+        self.unpack_dir = unpack_dir
+        self.download = download
+        self.download_dir = download_dir
+        self.dataset_url = dataset_url
+        self.transform = transform
+        self.validator = validator
+
+    def prepare_data(self) -> None:
+        self.dataset = SC2DatasetSingleJSON(
+            dataset_name=self.dataset_name,
+            unpack_dir=self.unpack_dir,
+            download=self.download,
+            download_dir=self.download_dir,
+            dataset_url=self.dataset_url,
+            transform=self.transform,
+            validator=self.validator,
+        )
+
+    def setup(self, stage: str | None = None) -> None:
+        # make assignments here (val/train/test split)
+        # called on every process in DDP
+        total_length = len(self.dataset)
+        # Add these to be a parameter in the initialization:
+        # 16.(6)% of total entries will be used for testing:
+        test_length = int(total_length / 6)
+        # 10% of total entries will be used for validation
+        val_length = int(total_length / 10)
+        # everything else will be used for training
+        train_length = total_length - test_length - val_length
+
+        self.train_dataset, self.test_dataset, self.val_dataset = random_split(
+            self.dataset,
+            [train_length, test_length, val_length],
+        )
+
+    def train_dataloader(self) -> DataLoader:
+        return DataLoader(
+            self.train_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+        )
+
+    def val_dataloader(self) -> DataLoader:
+        return DataLoader(
+            self.val_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+        )
+
+    def test_dataloader(self) -> DataLoader:
+        return DataLoader(
+            self.test_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+        )
+
+    def teardown(self, stage):
+        return super().teardown(stage)
 
 
 class SC2DataModule(pl.LightningDataModule):
@@ -15,7 +90,7 @@ class SC2DataModule(pl.LightningDataModule):
 
     Parameters
     ----------
-    replaypacks : List[DatasetProperties]
+    replaypacks : list[DatasetProperties]
         Specifies a list of properties of replaypacks that will be used for downloading.
     download_dir : Path | str, optional
         Specifies the path where the dataset will be downloaded,\
@@ -46,7 +121,7 @@ class SC2DataModule(pl.LightningDataModule):
 
     def __init__(
         self,
-        replaypacks: List[DatasetProperties],
+        replaypacks: list[DatasetProperties],
         download_dir: Path | str = Path("./data/download").resolve(),
         unpack_dir: Path | str = Path("./data/unpack").resolve(),
         download: bool = True,
@@ -90,10 +165,9 @@ class SC2DataModule(pl.LightningDataModule):
             unpack_n_workers=self.unpack_n_workers,
         )
 
-    def setup(self, stage: Optional[str] = None) -> None:
+    def setup(self, stage: str | None = None) -> None:
         # make assignments here (val/train/test split)
         # called on every process in DDP
-
         total_length = len(self.dataset)
         # Add these to be a parameter in the initialization:
         # 16.(6)% of total entries will be used for testing:
@@ -129,7 +203,7 @@ class SC2DataModule(pl.LightningDataModule):
             num_workers=self.num_workers,
         )
 
-    def teardown(self, stage: Optional[str] = None) -> None:
+    def teardown(self, stage: str | None = None) -> None:
         # clean up after fit or test
         # called on every process in DDP
         return super().teardown(stage)

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any
 
 from sc2_datasets.replay_parser.toon_player_desc_map.color import Color
 
@@ -77,14 +77,14 @@ class ToonPlayerInfo:
     color: Color
 
     @staticmethod
-    def from_dict(d: Dict[str, Any]) -> "ToonPlayerInfo":
+    def from_dict(d: dict[str, Any]) -> "ToonPlayerInfo":
         """
         Static method returning initialized ToonPlayerInfo class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict[str, Any]
+        d : dict[str, Any]
             Specifies a dictionary as available in the JSON file
             that is a result of pre-processing some .SC2Replay file.
 

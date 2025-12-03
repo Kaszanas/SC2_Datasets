@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Callable, Optional
+from typing import Callable
 
 import pytorch_lightning as pl
 from torch.utils.data import random_split
@@ -94,7 +94,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
             validator=self.validator,
         )
 
-    def setup(self, stage: Optional[str] = None) -> None:
+    def setup(self, stage: str | None = None) -> None:
         # make assignments here (val/train/test split)
         # called on every process in DDP
 
@@ -133,7 +133,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
             num_workers=self.num_workers,
         )
 
-    def teardown(self, stage: Optional[str] = None) -> None:
+    def teardown(self, stage: str | None = None) -> None:
         # clean up after fit or test
         # called on every process in DDP
         return super().teardown(stage)

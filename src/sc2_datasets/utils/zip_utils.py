@@ -4,7 +4,6 @@ import math
 import zipfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import List
 
 from tqdm import tqdm
 
@@ -17,7 +16,7 @@ class UnpackZipFileArguments:
     ----------
     zip_path : Path
         Specifies the path to the archive file that will be extracted.
-    filenames : List[str]
+    filenames : list[str]
         Specifies a list of the filenames which are within the archive\
         and will be extracted.
     path_to_extract : Path
@@ -28,7 +27,7 @@ class UnpackZipFileArguments:
         self,
         chunk_id: int,
         zip_path: Path,
-        filenames: List[str],
+        filenames: list[str],
         path_to_extract: Path,
     ):
         self.chunk_id = chunk_id
@@ -133,7 +132,7 @@ def unpack_zipfile(
     if n_workers <= 0:
         raise Exception("Number of workers cannot be equal or less than zero!")
 
-    file_list: List[str] = []
+    file_list: list[str] = []
     path_to_extract = Path(destination_dir, subdir).resolve()
     if not path_to_extract.exists():
         path_to_extract.mkdir(parents=True)

@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import List, Set, Tuple
 
 from sc2_datasets.validators.validate_chunk import validate_chunk
 from sc2_datasets.validators.validator_utils import (
@@ -11,16 +10,16 @@ from sc2_datasets.validators.validator_utils import (
 # REVIEW: This function:
 # TODO: Add temporary files to be used as a validator file:
 def validate_integrity_persist_sp(
-    list_of_replays: List[Path],
+    list_of_replays: list[Path],
     validation_file_path: Path,
-) -> Set[Path]:
+) -> set[Path]:
     """
     Exposes the logic for validating replays using a single process.
     This function uses a validation file that persists the files which were previously checked.
 
     Parameters
     ----------
-    list_of_replays : List[Path]
+    list_of_replays : list[Path]
         Specifies the list of replays that are supposed to be validated.
     validation_file_path : Path
         Specifies the path to the validation file\
@@ -28,7 +27,7 @@ def validate_integrity_persist_sp(
 
     Returns
     -------
-    Set[Path]
+    set[Path]
         Returns a set of files that should be skipped in further processing.
 
     Examples
@@ -75,20 +74,20 @@ def validate_integrity_persist_sp(
 
 
 def validate_integrity_sp(
-    list_of_replays: List[Path],
-) -> Tuple[Set[Path], Set[Path]]:
+    list_of_replays: list[Path],
+) -> tuple[set[Path], set[Path]]:
     """
     Exposes logic for single process integrity validation of a replay.
 
     Parameters
     ----------
-    list_of_replays : List[Path]
+    list_of_replays : list[Path]
         Specifies the SC2ReplayInfo information\
         of the files that will be validated.
 
     Returns
     -------
-    Tuple[Set[Path], Set[Path]]
+    tuple[set[Path], set[Path]]
         Returns a tuple that contains (validated replays, files to be skipped).
 
     Examples

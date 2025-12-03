@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
@@ -28,14 +27,14 @@ class UnitDone(TrackerEvent):
     unitTagRecycle: int
 
     @staticmethod
-    def from_dict(d: Dict) -> "UnitDone":
+    def from_dict(d: dict) -> "UnitDone":
         """
         Static method returning initialized UnitDone class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file
             that is a result of pre-processing some .SC2Replay file.
 

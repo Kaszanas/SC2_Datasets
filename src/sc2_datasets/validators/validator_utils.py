@@ -1,13 +1,12 @@
 import json
 import logging
 from pathlib import Path
-from typing import Set, Tuple
 
 
 # TODO: consider splitting file creation out from this method
 def read_validation_file(
     path: Path,
-) -> Tuple[Set[Path], Set[Path]]:
+) -> tuple[set[Path], set[Path]]:
     """
     Attempts to read the validation file from a specified path.
 
@@ -18,7 +17,7 @@ def read_validation_file(
 
     Returns
     -------
-    Tuple[Set[Path], Set[Path]]
+    tuple[set[Path], set[Path]]
         Returns a tuple of sets containing files that were validated.
 
     Examples
@@ -62,8 +61,8 @@ def read_validation_file(
 
 
 def save_validation_file(
-    validated_files: Set[Path],
-    skip_files: Set[Path],
+    validated_files: set[Path],
+    skip_files: set[Path],
     path: Path = Path("validator_file.json"),
 ) -> None:
     """
@@ -71,10 +70,10 @@ def save_validation_file(
 
     Parameters
     ----------
-    validated_files : Set[Path]
+    validated_files : set[Path]
         Specifies the list of paths to replays that were verified\
         as ones that can be used in further processing.
-    skip_files : Set[Path]
+    skip_files : set[Path]
         Specifies the list of paths to replays that were verified\
         as ones that should be skipped in further processing.
     path : Path, optional

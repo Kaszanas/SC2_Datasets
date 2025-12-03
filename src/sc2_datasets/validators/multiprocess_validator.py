@@ -1,7 +1,6 @@
 import math
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
-from typing import List, Set, Tuple
 
 from tqdm import tqdm
 
@@ -13,16 +12,16 @@ from sc2_datasets.validators.validator_utils import (
 
 
 def validate_integrity_mp(
-    list_of_replays: List[Path],
+    list_of_replays: list[Path],
     n_workers: int,
-) -> Tuple[Set[Path], Set[Path]]:
+) -> tuple[set[Path], set[Path]]:
     """
     Exposes logic for multiprocess validation of the replays.
     Validates if the replay can be parsed by using SC2ReplayData by spawning multiple processes.
 
     Parameters
     ----------
-    list_of_replays : List[Path]
+    list_of_replays : list[Path]
         Specifies a list of paths to replays that should be checked by the validator.
     n_workers : int
         Specifies the number of workers (processes) that will be used\
@@ -30,7 +29,7 @@ def validate_integrity_mp(
 
     Returns
     -------
-    Tuple[Set[Path], Set[Path]]
+    tuple[set[Path], set[Path]]
         Returns a tuple that contains (all validated replays, files to be skipped).
 
     Raises
@@ -114,17 +113,17 @@ def validate_integrity_mp(
 # REVIEW: This function:
 # TODO: Add temporary files to be used as a validator file:
 def validate_integrity_persist_mp(
-    list_of_replays: List[Path],
+    list_of_replays: list[Path],
     n_workers: int,
     validation_file_path: Path = Path("validator_file.json"),
-) -> Set[str]:
+) -> set[str]:
     """
     Exposes the logic for validating replays using multiple processes.
     This function uses a validation file that persists the files which were previously checked.
 
     Parameters
     ----------
-    list_of_replays : List[Path]
+    list_of_replays : list[Path]
         Specifies the list of filepaths to replays that are supposed to be validated.
     n_workers : int
         Specifies the number of workers that will be used to validate the files.
@@ -135,7 +134,7 @@ def validate_integrity_persist_mp(
 
     Returns
     -------
-    Set[str]
+    set[str]
         Returns a set of files that should be skipped in further processing.
 
     Examples

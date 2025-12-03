@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Dict
 
 from sc2_datasets.replay_parser.message_events.message_event import MessageEvent
 
@@ -30,14 +29,14 @@ class Chat(MessageEvent):
     userid: int
 
     @staticmethod
-    def from_dict(d: Dict) -> "Chat":
+    def from_dict(d: dict) -> "Chat":
         """
         Static method that returns an initialized Chat class based on a supplied dictionary.
         This method aids in parsing the original JSON data.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             A dictionary holding translations of a phrase or sentence.
 
         Returns

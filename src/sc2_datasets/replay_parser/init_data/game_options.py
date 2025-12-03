@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any
 
 
 class GameOptions:
@@ -40,13 +40,13 @@ class GameOptions:
     """
 
     @staticmethod
-    def from_dict(d: Dict[str, Any]) -> "GameOptions":
+    def from_dict(d: dict[str, Any]) -> "GameOptions":
         """
         Static method that initializes a GameOptions class from a provided dictionary.
 
         Parameters
         ----------
-        d : Dict[str, Any]
+        d : dict[str, Any]
             A dictionary containing information about the game, such as observer count, fog status,
             competitive mode, etc. It holds translations of phrases or sentences.
 

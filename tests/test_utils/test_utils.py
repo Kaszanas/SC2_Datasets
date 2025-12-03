@@ -1,7 +1,6 @@
 import logging
 import os
 from pathlib import Path
-from typing import Tuple
 
 
 def get_workspace_dir() -> Path:
@@ -106,7 +105,7 @@ def get_specific_asset_path(filename: str) -> Path:
     return Path(asset_dir, filename)
 
 
-def get_setup_paths(test_replaypack_name: str = "2022_TestReplaypack") -> Tuple:
+def get_setup_paths(test_replaypack_name: str = "2022_TestReplaypack") -> tuple:
     """
     Helper function providing basic setup utilities for tests.
 
@@ -118,7 +117,7 @@ def get_setup_paths(test_replaypack_name: str = "2022_TestReplaypack") -> Tuple:
 
     Returns
     -------
-    Tuple
+    tuple
         Returns a tuple containing all of the required variables.
     """
 

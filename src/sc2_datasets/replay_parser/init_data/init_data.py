@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any
 
 from sc2_datasets.replay_parser.init_data.game_description import GameDescription
 
@@ -18,13 +18,13 @@ class InitData:
     gameDescription: GameDescription
 
     @staticmethod
-    def from_dict(d: Dict[str, Any]) -> "InitData":
+    def from_dict(d: dict[str, Any]) -> "InitData":
         """
         Static method to create an initialized InitData class from a dictionary.
 
         Parameters
         ----------
-        d : Dict[str, Any]
+        d : dict[str, Any]
             Dictionary obtained from pre-processing an .SC2Replay file in JSON format.
 
         Returns

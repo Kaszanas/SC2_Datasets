@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any
 
 import pandas as pd
 
@@ -8,7 +8,7 @@ from sc2_datasets.transforms.utils import filter_player_stats
 
 # TODO: Consider renaming:
 # REVIEW: Verify this code!
-def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
+def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> dict[str, float]:
     """
     Exposes a logic of converting a single list of TrackerEvents
     to a dictionary representation of the data
@@ -21,7 +21,7 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
 
     Returns
     -------
-    Dict[str, float]
+    dict[str, float]
         Returns a dictionary representation of the averaged values.
 
     Examples
@@ -74,8 +74,8 @@ def playerstats_average_to_dict(sc2_replay: SC2ReplayData) -> Dict[str, float]:
 # TODO: Consider renaming:
 def playerstats_to_dict(
     sc2_replay: SC2ReplayData,
-    additional_data_dict: Dict[str, Dict[str, Any]] = {},
-) -> Dict[str, Dict[str, List[Any]]]:
+    additional_data_dict: dict[str, dict[str, Any]] = {},
+) -> dict[str, dict[str, list[Any]]]:
     """
     Exposes a logic of converting a single list of TrackerEvents to a dictionary representation
     of the data that can be used to initialize a pandas DataFrame.
@@ -88,7 +88,7 @@ def playerstats_to_dict(
 
     Returns
     -------
-    Dict[str, Dict[str, List[Any]]]
+    dict[str, dict[str, list[Any]]]
         Returns a dictionary of features with additional information
         repeated for all occurrences of events.
 
@@ -152,10 +152,10 @@ def playerstats_to_dict(
 
     >>> playerstats_to_dict_object = playerstats_to_dict(
     ...        sc2_replay= sc2_replay: SC2ReplayData,
-    ...        additional_data_dict = additional_data: Dict)
+    ...        additional_data_dict = additional_data: dict)
 
     >>> assert isinstance(sc2_replay, SC2ReplayData)
-    >>> assert isinstance(additional_data_dict, Dict)
+    >>> assert isinstance(additional_data_dict, dict)
 
     **Incorrect Usage Examples:**
 
@@ -202,7 +202,7 @@ def playerstats_to_dict(
 
 
 # TODO: Consider renaming:
-def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> Dict[str, float]:
+def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> dict[str, float]:
     """
     Averages a game dataframe.
 
@@ -213,7 +213,7 @@ def average_playerstats_dataframe(playerstats_df: pd.DataFrame) -> Dict[str, flo
 
     Returns
     -------
-    Dict[str, float]
+    dict[str, float]
         Returns a dictionary representation of the averaged values.
 
     Examples

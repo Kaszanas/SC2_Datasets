@@ -1,6 +1,6 @@
 import abc
 from types import NotImplementedType
-from typing import Dict, Literal
+from typing import Literal
 
 
 class GameEvent(metaclass=abc.ABCMeta):
@@ -13,7 +13,7 @@ class GameEvent(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def from_dict(d: Dict) -> "GameEvent":
+    def from_dict(d: dict) -> "GameEvent":
         """
         Abstract method that returns a GameEvent object.
         This method aids in implementation,

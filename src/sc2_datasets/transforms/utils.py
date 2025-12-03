@@ -1,5 +1,4 @@
 from collections import defaultdict
-from typing import Dict, List
 
 import numpy as np
 
@@ -23,7 +22,7 @@ RESULT_DICT = {
 
 def filter_player_stats(
     sc2_replay: SC2ReplayData,
-) -> Dict[str, List[PlayerStats]]:
+) -> dict[str, list[PlayerStats]]:
     """
     Filters PlayerStats events and places them in lists based on the playerId.
 
@@ -34,7 +33,7 @@ def filter_player_stats(
 
     Returns
     -------
-    Dict[str, List[PlayerStats]]
+    dict[str, list[PlayerStats]]
         Returns a dictionary containing a mapping from playerId\
         to the respective player stats.
 
@@ -85,7 +84,7 @@ def filter_player_stats(
 
 def average_player_stats(
     sc2_replay: SC2ReplayData,
-) -> Dict[str, List[float]]:
+) -> dict[str, list[float]]:
     """
     Exposes the logic of selecting and averaging PlayerStats events from within TrackerEvents list.
 
@@ -96,7 +95,7 @@ def average_player_stats(
 
     Returns
     -------
-    Dict[str, List[float]]
+    dict[str, list[float]]
         Returns a dictionary containing averaged features.
 
     Examples
@@ -153,7 +152,7 @@ def average_player_stats(
     return average_player_features
 
 
-def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
+def select_apm_1v1(sc2_replay: SC2ReplayData) -> dict[str, int]:
     """
     Exposes logic for selecting APM from replay data.
 
@@ -164,7 +163,7 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     Returns
     -------
-    Dict[str, int]
+    dict[str, int]
         Returns player id to APM mapping.
 
     Examples
@@ -204,7 +203,7 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     return player_apm
 
 
-def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
+def select_outcome_1v1(sc2_replay: SC2ReplayData) -> dict[str, int]:
     """
     Exposes logic for selecting game outcome of a 1v1 game.
     Maps loss to 0, and win to 1.
@@ -216,7 +215,7 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     Returns
     -------
-    Dict[str, int]
+    dict[str, int]
         Returns a dictionary mapping loss to 0, and win to 1 for playerIDs.
 
     Examples

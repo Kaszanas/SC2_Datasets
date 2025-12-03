@@ -4,20 +4,20 @@ from pathlib import Path
 
 import pytest
 
-from sc2_datasets.lightning.sc2_egset_datamodule import (
-    SC2EGSetDataModule,
-)
+from sc2_datasets.lightning.sc2_egset_datamodule import SC2EGSetDataModuleSingleJSON
 from sc2_datasets.utils.zip_utils import unpack_zipfile
-from tests.settings_test import (
-    TEST_REAL_REPLAYPACKS,
-    TEST_SYNTHETIC_REPLAYPACKS,
-)
+from tests.settings_test import TEST_SINGLE_JSON_REPLAYPACKS
 from tests.test_utils.test_utils import get_setup_paths
 
 
 class SC2EGSetDataModuleTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        properties = TEST_SINGLE_JSON_REPLAYPACKS[0]
+
+        cls.dataset_name = properties.name
+        cls.dataset_url = properties.url
+
         (
             cls.test_replaypack_name,
             cls.replaypack_zip_path,
@@ -25,7 +25,7 @@ class SC2EGSetDataModuleTest(unittest.TestCase):
             cls.download_dir_path,
             cls.unpacked,
             cls.download,
-        ) = get_setup_paths()
+        ) = get_setup_paths(test_replaypack_name="sc2egset_synthetic_merged")
 
         # If it doesn't exist, unpack the test .zip archive:
         if not cls.unpacked.exists():
@@ -47,34 +47,25 @@ class SC2EGSetDataModuleTest(unittest.TestCase):
             shutil.rmtree(path=str(self.unpacked))
 
     @pytest.mark.minor
-    def test_unpack_datamodule(self):
-        sc2_egset_datamodule = SC2EGSetDataModule(
+    def test_unpack_datamodule_single_json(self):
+        sc2_egset_datamodule = SC2EGSetDataModuleSingleJSON(
+            dataset_name=self.dataset_name,
             unpack_dir=self.unpack_dir_path,
-            download_dir=self.download_dir_path,
             download=False,
-            replaypacks=TEST_SYNTHETIC_REPLAYPACKS,
+            download_dir=self.download_dir_path,
+            dataset_url=self.dataset_url,
         )
 
-        self.assertIsInstance(sc2_egset_datamodule, SC2EGSetDataModule)
+        self.assertIsInstance(sc2_egset_datamodule, SC2EGSetDataModuleSingleJSON)
 
     @pytest.mark.minor
-    def test_download_unpack_datamodule(self):
-        sc2_egset_datamodule = SC2EGSetDataModule(
+    def test_download_unpack_datamodule_single_json(self):
+        sc2_egset_datamodule = SC2EGSetDataModuleSingleJSON(
+            dataset_name=self.dataset_name,
             unpack_dir=self.unpack_dir_path,
-            download_dir=self.download_dir_path,
             download=True,
-            replaypacks=TEST_SYNTHETIC_REPLAYPACKS,
+            download_dir=self.download_dir_path,
+            dataset_url=self.dataset_url,
         )
 
-        self.assertIsInstance(sc2_egset_datamodule, SC2EGSetDataModule)
-
-    @pytest.mark.major
-    def test_download_unpack_datamodule_real(self):
-        sc2_egset_datamodule = SC2EGSetDataModule(
-            unpack_dir=self.unpack_dir_path,
-            download_dir=self.download_dir_path,
-            download=True,
-            replaypacks=TEST_REAL_REPLAYPACKS,
-        )
-
-        self.assertIsInstance(sc2_egset_datamodule, SC2EGSetDataModule)
+        self.assertIsInstance(sc2_egset_datamodule, SC2EGSetDataModuleSingleJSON)

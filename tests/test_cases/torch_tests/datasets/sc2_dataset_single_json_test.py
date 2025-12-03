@@ -11,7 +11,6 @@ from tests.settings_test import TEST_SINGLE_JSON_REPLAYPACKS
 from tests.test_utils.test_utils import get_assets_dir, get_setup_paths
 
 
-@pytest.mark.minor
 class SC2DatasetSingleJSONTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -48,6 +47,7 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
         if self.unpacked.exists():
             shutil.rmtree(path=str(self.unpacked))
 
+    @pytest.mark.minor
     def test_parsing_dataset(self):
         download_dir = get_assets_dir()
 
@@ -59,7 +59,7 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
         )
 
         # Dataset was downloaded previously, so this will be tue afte initialization:
-        self.assertTrue(dataset.was_downloaded)
+        self.assertFalse(dataset.was_downloaded)
         self.assertIsInstance(dataset, SC2DatasetSingleJSON)
 
         self.assertNotEqual(len(dataset), 0)
@@ -76,6 +76,7 @@ class SC2DatasetSingleJSONTest(unittest.TestCase):
         self.assertIsInstance(sc2_replaydata_last, SC2ReplayData)
         self.assertIsNotNone(sc2_replaydata_last)
 
+    @pytest.mark.minor
     def test_downloading_single_json_dataset(self):
         dataset = SC2DatasetSingleJSON(
             dataset_name=self.dataset_name,

@@ -1,6 +1,6 @@
 import abc
 from types import NotImplementedType
-from typing import Dict, Literal
+from typing import Literal
 
 
 class MessageEvent(metaclass=abc.ABCMeta):
@@ -13,14 +13,14 @@ class MessageEvent(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def from_dict(d: Dict) -> "MessageEvent":
+    def from_dict(d: dict) -> "MessageEvent":
         """
         Abstract method returning a MessageEvent.
         This method assists in the implementation for original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary holding translations of a phrase or sentence.
 
         Raises
