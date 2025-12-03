@@ -1,11 +1,36 @@
 from pathlib import Path
-from typing import Callable, List, Tuple
 
 from sc2_datasets.available_replaypacks import (
     SC2EGSET_DATASET_REPLAYPACKS,
+    SC2EGSET_SINGLE_JSON,
     DatasetProperties,
 )
-from sc2_datasets.lightning.datamodules.sc2_datamodule import SC2DataModule
+from sc2_datasets.lightning.datamodules.sc2_datamodule import (
+    SC2DataModule,
+    SC2SingleJSONDataModule,
+)
+
+
+class SC2EGSetSingleJSONDataModule(SC2SingleJSONDataModule):
+    def __init__(
+        self,
+        dataset_name: str = SC2EGSET_SINGLE_JSON.name,
+        unpack_dir: Path | str = Path("./data/unpack/sc2egset_single_json"),
+        download=True,
+        download_dir: Path | str = Path("./data/download/sc2egset_single_json"),
+        dataset_url: str = SC2EGSET_SINGLE_JSON.url,
+        transform: callable | None = None,
+        validator: callable | None = None,
+    ):
+        super().__init__(
+            dataset_name,
+            unpack_dir,
+            download,
+            download_dir,
+            dataset_url,
+            transform,
+            validator,
+        )
 
 
 class SC2EGSetDataModule(SC2DataModule):
@@ -15,7 +40,7 @@ class SC2EGSetDataModule(SC2DataModule):
 
     Parameters
     ----------
-    replaypacks : List[DatasetProperties], optional
+    replaypacks : list[DatasetProperties], optional
         Specifies a list of tuples (replaypack_name, replaypack download url),\
         by default SC2EGSET_DATASET_REPLAYPACKS
     download_dir : Path | str, optional
@@ -45,15 +70,15 @@ class SC2EGSetDataModule(SC2DataModule):
 
     def __init__(
         self,
-        replaypacks: List[DatasetProperties] = SC2EGSET_DATASET_REPLAYPACKS,
+        replaypacks: list[DatasetProperties] = SC2EGSET_DATASET_REPLAYPACKS,
         download_dir: Path | str = Path("./data/download/sc2egset_dataset"),
         unpack_dir: Path | str = Path("./data/unpack/sc2egset_dataset"),
         download: bool = True,
-        transform: Callable = None,
+        transform: callable = None,
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
-        validator: Callable | None = None,
+        validator: callable | None = None,
     ):
         super().__init__(
             replaypacks=replaypacks,
