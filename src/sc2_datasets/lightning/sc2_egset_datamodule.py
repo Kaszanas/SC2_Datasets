@@ -11,7 +11,7 @@ from sc2_datasets.lightning.datamodules.sc2_datamodule import (
 )
 
 
-class SC2EGSetSingleJSONDataModule(SC2SingleJSONDataModule):
+class SC2EGSetDataModuleSingleJSON(SC2SingleJSONDataModule):
     def __init__(
         self,
         dataset_name: str = SC2EGSET_SINGLE_JSON.name,
