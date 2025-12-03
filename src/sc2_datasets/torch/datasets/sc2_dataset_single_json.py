@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from torch.utils.data import Dataset
 
@@ -21,8 +21,8 @@ class SC2DatasetSingleJSON(Dataset):
         download: bool = True,
         download_dir: Path | str | None = None,
         dataset_url: str = "",
-        transform: callable | None = None,
-        validator: callable | None = None,
+        transform: Callable | None = None,
+        validator: Callable | None = None,
     ):
         if not dataset_name:
             raise Exception("Dataset name cannot be empty!")

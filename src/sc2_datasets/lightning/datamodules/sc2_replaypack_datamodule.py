@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Callable
 
 import pytorch_lightning as pl
 from torch.utils.data import random_split
@@ -28,7 +29,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         Specifies if the dataset should be downloaded.\
         Otherwise the dataset is loaded from the unpack_dir\
         and a custom directory structure is assumed, by default True
-    transform : callable | None, optional
+    transform : Callable | None, optional
         Specifies the PyTorch transforms to be used on the replaypack (dataset),\
         Deprecated since version v1.5: Will be removed in v1.7.0, by default None
     batch_size : int, optional
@@ -38,7 +39,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     unpack_n_workers : int, optional
         Specifies the number of workers\
         that will be used for unpacking the archive, by default 16
-    validator : callable | None, optional
+    validator : Callable | None, optional
         Specifies the validation option for fetched data,\
         this can also act as a filtering function that will be\
         applied for the entirety of the dataset, by default None
@@ -51,11 +52,11 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         download_dir: Path | str = Path("./data/download").resolve(),
         url: str = "",
         download: bool = True,
-        transform: callable | None = None,
+        transform: Callable | None = None,
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
-        validator: callable | None = None,
+        validator: Callable | None = None,
     ):
         super().__init__()
 

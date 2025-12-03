@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Callable
 
 from sc2_datasets.available_replaypacks import (
     SC2EGSET_DATASET_REPLAYPACKS,
@@ -50,7 +51,7 @@ class SC2EGSetDataset(SC2Dataset):
         defaults to 16.
     transform : Func[SC2ReplayData, T]
         PyTorch transform function that takes SC2ReplayData and returns something.
-    validator : callable | None, optional
+    validator : Callable | None, optional
         Specifies the validation option for fetched data, defaults to None.
     """
 
@@ -61,8 +62,8 @@ class SC2EGSetDataset(SC2Dataset):
         names_urls: list[DatasetProperties] = SC2EGSET_DATASET_REPLAYPACKS,
         download: bool = True,
         unpack_n_workers: int = 16,
-        transform: callable | None = None,
-        validator: callable | None = None,
+        transform: Callable | None = None,
+        validator: Callable | None = None,
     ):
         super().__init__(
             unpack_dir=unpack_dir,

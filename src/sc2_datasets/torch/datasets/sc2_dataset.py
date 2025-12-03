@@ -1,6 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from torch.utils.data import Dataset
 from tqdm import tqdm
@@ -26,7 +26,7 @@ class SC2Dataset(Dataset):
         Specifies the number of workers that will be used for unpacking the archive, defaults to 16.
     transform : Func[SC2ReplayData, T]
         PyTorch transform function that takes SC2ReplayData and returns something.
-    validator : callable | None, optional
+    validator : Callable | None, optional
         Specifies the validation option for fetched data, defaults to None.
     """
 
@@ -37,8 +37,8 @@ class SC2Dataset(Dataset):
         download_dir: Path | str = Path("./data/download").resolve(),
         download: bool = True,
         unpack_n_workers: int = 16,
-        transform: callable | None = None,
-        validator: callable | None = None,
+        transform: Callable | None = None,
+        validator: Callable | None = None,
     ):
         # PyTorch fields:
         self.transform = transform

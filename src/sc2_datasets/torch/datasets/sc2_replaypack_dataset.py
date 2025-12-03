@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from torch.utils.data import Dataset
 
@@ -37,7 +37,7 @@ class SC2ReplaypackDataset(Dataset):
     unpack_n_workers : int, optional
         Specifies the number of workers that will be used for unpacking the archive,\
         defaults to 16.
-    validator : callable | dict, optional
+    validator : Callable | dict, optional
         Specifies a validator for input data, defaults to None.
     """
 
@@ -49,8 +49,8 @@ class SC2ReplaypackDataset(Dataset):
         url: str = "",
         download: bool = False,
         unpack_n_workers: int = 16,
-        transform: None | callable = dict,
-        validator: None | callable = dict,
+        transform: None | Callable = dict,
+        validator: None | Callable = dict,
     ):
         # PyTorch fields:
         self.transform = transform

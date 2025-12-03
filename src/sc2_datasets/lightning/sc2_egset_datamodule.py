@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Callable
 
 from sc2_datasets.available_replaypacks import (
     SC2EGSET_DATASET_REPLAYPACKS,
@@ -19,8 +20,8 @@ class SC2EGSetDataModuleSingleJSON(SC2SingleJSONDataModule):
         download=True,
         download_dir: Path | str = Path("./data/download/sc2egset_single_json"),
         dataset_url: str = SC2EGSET_SINGLE_JSON.url,
-        transform: callable | None = None,
-        validator: callable | None = None,
+        transform: Callable | None = None,
+        validator: Callable | None = None,
     ):
         super().__init__(
             dataset_name,
@@ -74,11 +75,11 @@ class SC2EGSetDataModule(SC2DataModule):
         download_dir: Path | str = Path("./data/download/sc2egset_dataset"),
         unpack_dir: Path | str = Path("./data/unpack/sc2egset_dataset"),
         download: bool = True,
-        transform: callable = None,
+        transform: Callable = None,
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
-        validator: callable | None = None,
+        validator: Callable | None = None,
     ):
         super().__init__(
             replaypacks=replaypacks,

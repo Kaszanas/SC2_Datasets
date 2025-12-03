@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Callable
 
 import pytorch_lightning as pl
 from torch.utils.data import random_split
@@ -17,8 +18,8 @@ class SC2DataModuleSingleJSON(pl.LightningDataModule):
         download: bool = True,
         download_dir: Path | str | None = None,
         dataset_url: str = "",
-        transform: callable | None = None,
-        validator: callable | None = None,
+        transform: Callable | None = None,
+        validator: Callable | None = None,
     ):
         super().__init__()
 
@@ -99,7 +100,7 @@ class SC2DataModule(pl.LightningDataModule):
         into a custom directory structure, by default "./data/unpack"
     download : bool, optional
         If the underlying dataset should be downloaded, by default True
-    transform : callable, optional
+    transform : Callable, optional
         Specifies the PyTorch transforms to be used\
         on the replaypack (dataset),
         Deprecated since version v1.5: Will be removed in v1.7.0, by default None
@@ -112,7 +113,7 @@ class SC2DataModule(pl.LightningDataModule):
     unpack_n_workers : int, optional
         The number of workers\
         that will be used for unpacking the archive, by default 16
-    validator : callable | None, optional
+    validator : Callable | None, optional
         Specifies the validation option for fetched data,\
         this can also act as a filtering function that will be\
         applied for the entirety of the dataset, by default None
@@ -124,11 +125,11 @@ class SC2DataModule(pl.LightningDataModule):
         download_dir: Path | str = Path("./data/download").resolve(),
         unpack_dir: Path | str = Path("./data/unpack").resolve(),
         download: bool = True,
-        transform: callable = None,
+        transform: Callable = None,
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
-        validator: callable | None = None,
+        validator: Callable | None = None,
     ):
         super().__init__()
 
