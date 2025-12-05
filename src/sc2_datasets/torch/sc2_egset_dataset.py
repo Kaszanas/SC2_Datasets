@@ -28,8 +28,6 @@ class SC2EGSetDatasetSingleJSON(SC2DatasetSingleJSON):
             validator=validator,
         )
 
-        pass
-
 
 class SC2EGSetDataset(SC2Dataset):
     """
