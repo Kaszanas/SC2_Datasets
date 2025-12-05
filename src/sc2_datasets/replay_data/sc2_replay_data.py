@@ -20,6 +20,23 @@ from sc2_datasets.replay_parser.tracker_events.tracker_events_parser import (
 
 
 @dataclass
+class AdditionalInformation:
+    replaypack_name: str | None
+    replaypack_url: str | None
+    filename: str | None
+    original_filepath: str | None
+
+    @staticmethod
+    def from_dict(d: dict) -> "AdditionalInformation":
+        return AdditionalInformation(
+            replaypack_name=d.get("replaypack_name", None),
+            replaypack_url=d.get("replaypack_url", None),
+            filename=d.get("filename", None),
+            original_filepath=d.get("original_filepath", None),
+        )
+
+
+@dataclass
 class SC2ReplayData:
     filepath: Path
     header: Header
@@ -33,11 +50,19 @@ class SC2ReplayData:
     gameEventsErr: bool = False
     messageEventsErr: bool = False
     trackerEventsErr: bool = False
+    additionalInformation: AdditionalInformation | None = None
 
     # TODO: Add tests!!!!!
     @staticmethod
     def from_dict(loaded_data: dict, replay_filepath: str) -> "SC2ReplayData":
         SC2ReplayData.sanitize_events(loaded_data=loaded_data)
+
+        additional_information_obj = loaded_data.get("additional_information", None)
+        additiona_information = (
+            AdditionalInformation.from_dict(d=additional_information_obj)
+            if additional_information_obj
+            else None
+        )
 
         return SC2ReplayData(
             filepath=replay_filepath,
@@ -66,6 +91,7 @@ class SC2ReplayData:
             gameEventsErr=loaded_data.get("gameEventsErr", False),
             messageEventsErr=loaded_data.get("messageEventsErr", False),
             trackerEventsErr=loaded_data.get("trackerEvtsErr", False),
+            additionalInformation=additiona_information,
         )
 
     @staticmethod
