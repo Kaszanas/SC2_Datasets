@@ -27,9 +27,6 @@ class SC2DatasetSingleJSON(Dataset):
         transform: Callable | None = None,
         validator: Callable | None = None,
     ):
-        if not dataset_name:
-            raise Exception("Dataset name cannot be empty!")
-
         # PyTorch fields:
         self.transform = transform
 
