@@ -4,9 +4,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from sc2_datasets.replay_parser.details.details import Details
+from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 from sc2_datasets.replay_parser.game_events.game_events_parser import GameEventsParser
 from sc2_datasets.replay_parser.header.header import Header
 from sc2_datasets.replay_parser.init_data.init_data import InitData
+from sc2_datasets.replay_parser.message_events.message_event import MessageEvent
 from sc2_datasets.replay_parser.message_events.message_events_parser import (
     MessageEventsParser,
 )
@@ -14,6 +16,7 @@ from sc2_datasets.replay_parser.metadata.metadata import Metadata
 from sc2_datasets.replay_parser.toon_player_desc_map.toon_player_desc import (
     ToonPlayerDesc,
 )
+from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 from sc2_datasets.replay_parser.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
@@ -43,9 +46,9 @@ class SC2ReplayData:
     initData: InitData
     details: Details
     metadata: Metadata
-    messageEvents: list = field(default_factory=list)
-    gameEvents: list = field(default_factory=list)
-    trackerEvents: list = field(default_factory=list)
+    messageEvents: list[MessageEvent] = field(default_factory=list)
+    gameEvents: list[GameEvent] = field(default_factory=list)
+    trackerEvents: list[TrackerEvent] = field(default_factory=list)
     toonPlayerDescMap: list = field(default_factory=list)
     gameEventsErr: bool = False
     messageEventsErr: bool = False
