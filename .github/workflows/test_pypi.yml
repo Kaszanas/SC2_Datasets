@@ -1,9 +1,7 @@
-name: Publish to PyPI
+name: Test PyPI Installation
 
 on:
     workflow_dispatch:
-    release:
-        types: [published]
 
 jobs:
     docs:
@@ -97,55 +95,3 @@ jobs:
                   --index-url https://test.pypi.org/simple/ \
                   --extra-index-url https://pypi.org/simple \
                   sc2-datasets
-
-    pypi:
-        runs-on: ubuntu-latest
-        needs:
-            - test-pypi
-            - docs
-
-        permissions:
-            id-token: write
-
-        steps:
-            - name: Set up Python 3.11.10
-              uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
-              with:
-                  python-version: "3.11.10"
-
-            - name: Check-out repository
-              uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-              with:
-                  fetch-depth: 0
-
-            - name: Install poetry
-              uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a
-
-            # Installing dependencies via poetry:
-            - name: Install packages
-              run: poetry install
-
-            # Building the package:
-            - name: Build dist with poetry
-              run: poetry build
-
-            # Upload to PyPI only if everything else is correct:
-            - name: Publish to PyPI
-              uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc
-              with:
-                  user: __token__
-
-    install-pypi-underscore-final:
-        runs-on: ubuntu-latest
-        needs:
-            - pypi
-            - docs
-
-        steps:
-            - name: Test install from PyPI underscore
-              run: |
-                  pip install sc2_datasets
-
-            - name: Test install from PyPI dash
-              run: |
-                  pip install sc2-datasets
