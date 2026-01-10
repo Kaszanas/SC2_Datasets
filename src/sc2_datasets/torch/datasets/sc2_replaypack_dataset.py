@@ -1,6 +1,5 @@
-import os
 from pathlib import Path
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable
 
 from torch.utils.data import Dataset
 
@@ -12,6 +11,10 @@ from sc2_datasets.utils.download_utils import (
 from sc2_datasets.utils.zip_utils import unpack_zipfile
 
 
+class SC2ReplaypackDatasetSingleJSON(Dataset):
+    pass
+
+
 class SC2ReplaypackDataset(Dataset):
     """
     Represents a Dataset for a single pre-processed replaypack.
@@ -21,10 +24,10 @@ class SC2ReplaypackDataset(Dataset):
     replaypack_name : str
         Specifies the name of a replaypack.\
         This can be a name of the tournament or any other arbitrary name.
-    download_dir : str
-        Specifies the directory where the initial archive will be downloaded.
-    unpack_dir : str
+    unpack_dir : Path
         Specifies the directory where the archive will be extracted.
+    download_dir : Path
+        Specifies the directory where the initial archive will be downloaded.
     url : str, optional
         Specifies the URL which will be used to download the .zip archive,\
         defaults to "".
@@ -34,15 +37,15 @@ class SC2ReplaypackDataset(Dataset):
     unpack_n_workers : int, optional
         Specifies the number of workers that will be used for unpacking the archive,\
         defaults to 16.
-    validator : Callable | None, optional
+    validator : Callable | dict, optional
         Specifies a validator for input data, defaults to None.
     """
 
     def __init__(
         self,
         replaypack_name: str,
-        unpack_dir: str,
-        download_dir: str = "",
+        unpack_dir: Path | str,
+        download_dir: Path | str = Path(""),
         url: str = "",
         download: bool = False,
         unpack_n_workers: int = 16,
@@ -54,7 +57,11 @@ class SC2ReplaypackDataset(Dataset):
 
         # Custom fields:
         self.unpack_n_workers = unpack_n_workers
-        self.download_dir = Path(download_dir).resolve()
+        self.download_dir = (
+            download_dir
+            if isinstance(download_dir, Path)
+            else Path(download_dir).resolve()
+        )
 
         # The path to the downloaded zip file, this will be either downloaded
         # and set to the path of the downloaded file, or detected if the file
@@ -70,24 +77,27 @@ class SC2ReplaypackDataset(Dataset):
         if not self.download_dir.exists():
             self.download_dir.mkdir(parents=True, exist_ok=True)
 
-        self.unpack_dir = Path(unpack_dir).resolve()
+        self.unpack_dir = (
+            unpack_dir if isinstance(unpack_dir, Path) else Path(unpack_dir).resolve()
+        )
         # Replaypack unpack directory must exist, we create it if it does not exist:
         # This is because otherwise we will not be able to load any data:
         if not self.unpack_dir.exists():
             self.unpack_dir.mkdir(parents=True, exist_ok=True)
 
-        if not os.path.isdir(self.unpack_dir):
-            raise Exception("Replaypack unpack directory does not exist!")
+        if not self.unpack_dir.is_dir():
+            raise Exception("Replaypack unpack directory is not a directory!")
 
         self.replaypack_name = replaypack_name
         self.url = url
         self.replaypack_unpack_path = Path(
-            self.unpack_dir, self.replaypack_name
+            self.unpack_dir,
+            self.replaypack_name,
         ).resolve()
         self.maybe_downloaded_zip_path = Path(
             self.download_dir,
             self.replaypack_name + ".zip",
-        )
+        ).resolve()
 
         # Downloading the replaypack dataset only if it was not downloaded yet:
         if download and not self.was_downloaded:
@@ -101,6 +111,8 @@ class SC2ReplaypackDataset(Dataset):
                 replaypack_name=self.replaypack_name,
                 replaypack_url=self.url,
             )
+            if not self.maybe_downloaded_zip_path:
+                raise Exception("Replaypack download failed!")
 
         # If the dataset is not unpacked, then look for it in the download folder.
         # If it is there then unpack it and resume:
@@ -124,7 +136,7 @@ class SC2ReplaypackDataset(Dataset):
                 )
             )
 
-        # Unpack the nested .zip file with the actual .json filesm, replaypack data:
+        # Unpack the nested .zip file with the actual .json files, replaypack data:
         data_zipfile = Path(
             self.replaypack_unpack_path,
             self.replaypack_name + "_data.zip",
@@ -152,11 +164,9 @@ class SC2ReplaypackDataset(Dataset):
 
         # Getting the paths to the files that consist of the dataset,
         # These will be used for validation at later step:
-
-        # TODO: This produces an ERROR!
-        all_files = []
-        for file in os.listdir(data_path):
-            all_files.append(str(Path(data_path, file)))
+        all_files: list[Path] = []
+        for file in data_path.iterdir():
+            all_files.append(Path(data_path, file))
 
         # Validating files:
         self.skip_files = set()
@@ -200,13 +210,13 @@ class SC2ReplaypackDataset(Dataset):
         return replay_data
 
     @staticmethod
-    def from_args(args: Dict[str, Any]) -> "SC2ReplaypackDataset":
+    def from_args(args: dict[str, Any]) -> "SC2ReplaypackDataset":
         """
         Creates a SC2ReplaypackDataset object from a dictionary of arguments.
 
         Parameters
         ----------
-        args : Dict[str, Any]
+        args : dict[str, Any]
             Specifies the dictionary of arguments that will be used to initialize the dataset.
 
         Returns
@@ -217,13 +227,13 @@ class SC2ReplaypackDataset(Dataset):
         return SC2ReplaypackDataset(**args)
 
     @property
-    def replaypack_summary(self) -> Dict[str, Any]:
+    def replaypack_summary(self) -> dict[str, Any]:
         return self._replaypack_summary
 
     @property
-    def replaypack_dir_mapping(self) -> Dict[str, str]:
+    def replaypack_dir_mapping(self) -> dict[str, str]:
         return self._replaypack_dir_mapping
 
     @property
-    def replaypack_processed_failed(self) -> Dict[str, List[str]]:
+    def replaypack_processed_failed(self) -> dict[str, list[str]]:
         return self._replaypack_processed_failed

@@ -1,8 +1,9 @@
-from typing import Dict
+from dataclasses import dataclass
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class PlayerSetup(TrackerEvent):
     """
     Data type that denotes a player setup event which is available in tracker events.
@@ -24,15 +25,22 @@ class PlayerSetup(TrackerEvent):
         Specifies the setup user id for the player.
     """
 
+    id: int
+    loop: int
+    playerId: int
+    slotId: int
+    type: int
+    userId: int
+
     @staticmethod
-    def from_dict(d: Dict) -> "PlayerSetup":
+    def from_dict(d: dict) -> "PlayerSetup":
         """
         Static method returning initialized PlayerSetup class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file
             that is a result of pre-processing some .SC2Replay file.
 
@@ -49,19 +57,3 @@ class PlayerSetup(TrackerEvent):
             type=d["type"],
             userId=d["userId"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        playerId: int,
-        slotId: int,
-        type: int,
-        userId: int,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.playerId = playerId
-        self.slotId = slotId
-        self.type = type
-        self.userId = userId

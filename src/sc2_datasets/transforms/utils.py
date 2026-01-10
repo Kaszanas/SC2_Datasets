@@ -1,4 +1,4 @@
-from typing import Dict, List
+from collections import defaultdict
 
 import numpy as np
 
@@ -9,10 +9,20 @@ from sc2_datasets.replay_parser.tracker_events.events.player_stats.player_stats 
     PlayerStats,
 )
 
+RESULT_DICT = {
+    "Loss": 0,
+    "Win": 1,
+    "Victory": 1,
+    "Defeat": 0,
+    "Undecided": -1,
+    "Draw": -1,
+    "Tie": -1,
+}
+
 
 def filter_player_stats(
     sc2_replay: SC2ReplayData,
-) -> Dict[str, List[PlayerStats]]:
+) -> dict[str, list[PlayerStats]]:
     """
     Filters PlayerStats events and places them in lists based on the playerId.
 
@@ -23,7 +33,7 @@ def filter_player_stats(
 
     Returns
     -------
-    Dict[str, List[PlayerStats]]
+    dict[str, list[PlayerStats]]
         Returns a dictionary containing a mapping from playerId\
         to the respective player stats.
 
@@ -74,7 +84,7 @@ def filter_player_stats(
 
 def average_player_stats(
     sc2_replay: SC2ReplayData,
-) -> Dict[str, List[float]]:
+) -> dict[str, list[float]]:
     """
     Exposes the logic of selecting and averaging PlayerStats events from within TrackerEvents list.
 
@@ -85,7 +95,7 @@ def average_player_stats(
 
     Returns
     -------
-    Dict[str, List[float]]
+    dict[str, list[float]]
         Returns a dictionary containing averaged features.
 
     Examples
@@ -142,7 +152,7 @@ def average_player_stats(
     return average_player_features
 
 
-def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
+def select_apm_1v1(sc2_replay: SC2ReplayData) -> dict[str, int]:
     """
     Exposes logic for selecting APM from replay data.
 
@@ -153,7 +163,7 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     Returns
     -------
-    Dict[str, int]
+    dict[str, int]
         Returns player id to APM mapping.
 
     Examples
@@ -193,7 +203,7 @@ def select_apm_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     return player_apm
 
 
-def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
+def select_outcome_1v1(sc2_replay: SC2ReplayData) -> dict[str, int]:
     """
     Exposes logic for selecting game outcome of a 1v1 game.
     Maps loss to 0, and win to 1.
@@ -205,7 +215,7 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
 
     Returns
     -------
-    Dict[str, int]
+    dict[str, int]
         Returns a dictionary mapping loss to 0, and win to 1 for playerIDs.
 
     Examples
@@ -233,11 +243,11 @@ def select_outcome_1v1(sc2_replay: SC2ReplayData) -> Dict[str, int]:
     If you don't set parameters or paste incorect parameters' type.
     """
 
-    player_outcome = {"1": 0, "2": 0}
+    player_outcome = defaultdict(int)
 
-    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0}
     for toon_desc_map in sc2_replay.toonPlayerDescMap:
-        result = result_dict[toon_desc_map.toon_player_info.result]
-        player_outcome[toon_desc_map.toon_player_info.playerID] = result
+        result = RESULT_DICT.get(toon_desc_map.toon_player_info.result, -1)
+        string_player_id = str(toon_desc_map.toon_player_info.playerID)
+        player_outcome[string_player_id] = result
 
     return player_outcome

@@ -1,9 +1,11 @@
 from concurrent.futures import ThreadPoolExecutor
-from typing import Any, Callable, Dict, List, Set, Tuple
+from pathlib import Path
+from typing import Any, Callable
 
 from torch.utils.data import Dataset
 from tqdm import tqdm
 
+from sc2_datasets.available_replaypacks import DatasetProperties
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
 from sc2_datasets.torch.datasets.sc2_replaypack_dataset import SC2ReplaypackDataset
 
@@ -14,12 +16,12 @@ class SC2Dataset(Dataset):
 
     Parameters
     ----------
-    unpack_dir : str
-        Specifies the path of a directory where the dataset files will be unpacked.
-    download_dir : str
-        Specifies the path of a directory where the dataset files will be downloaded.
-    names_urls : List[Tuple[str, str]]
+    names_urls : list[DatasetProperties]
         Specifies the URL of the dataset which will be used to download the files.
+    unpack_dir : Path | str
+        Specifies the path of a directory where the dataset files will be unpacked.
+    download_dir : Path | str
+        Specifies the path of a directory where the dataset files will be downloaded.
     unpack_n_workers : int, optional
         Specifies the number of workers that will be used for unpacking the archive, defaults to 16.
     transform : Func[SC2ReplayData, T]
@@ -30,9 +32,9 @@ class SC2Dataset(Dataset):
 
     def __init__(
         self,
-        names_urls: List[Tuple[str, str]],
-        unpack_dir: str = "./data/unpack",
-        download_dir: str = "./data/download",
+        names_urls: list[DatasetProperties],
+        unpack_dir: Path | str = Path("./data/unpack").resolve(),
+        download_dir: Path | str = Path("./data/download").resolve(),
         download: bool = True,
         unpack_n_workers: int = 16,
         transform: Callable | None = None,
@@ -42,14 +44,20 @@ class SC2Dataset(Dataset):
         self.transform = transform
 
         # Custom fields:
-        self.download_dir = download_dir
-        self.unpack_dir = unpack_dir
+        self.download_dir = (
+            download_dir
+            if isinstance(download_dir, Path)
+            else Path(download_dir).resolve()
+        )
+        self.unpack_dir = (
+            unpack_dir if isinstance(unpack_dir, Path) else Path(unpack_dir).resolve()
+        )
         self.names_urls = names_urls
         self.download = download
         self.unpack_n_workers = unpack_n_workers
         self.validator = validator
 
-        self.skip_files: Dict[str, Set[str]] = {}
+        self.skip_files: dict[str, set[str]] = {}
 
         # We have received an URL for the dataset
         # and it migth not have been downloaded:
@@ -61,16 +69,14 @@ class SC2Dataset(Dataset):
         Ensures that the dataset was downloaded before accessing the __len__ or __getitem__ methods.
         """
 
-        self.replaypacks: List[SC2ReplaypackDataset] = []
-
         list_of_arguments = []
-        for replaypack_name, url in self.names_urls:
+        for dataset_properties in self.names_urls:
             list_of_arguments.append(
                 {
-                    "replaypack_name": replaypack_name,
+                    "replaypack_name": dataset_properties.name,
                     "unpack_dir": self.unpack_dir,
                     "download_dir": self.download_dir,
-                    "url": url,
+                    "url": dataset_properties.url,
                     "download": self.download,
                     "unpack_n_workers": self.unpack_n_workers,
                     "validator": self.validator,
@@ -101,7 +107,7 @@ class SC2Dataset(Dataset):
         """
         return self.len
 
-    def __getitem__(self, index: Any) -> Tuple[Any, Any] | SC2ReplayData:
+    def __getitem__(self, index: Any) -> tuple[Any, Any] | SC2ReplayData:
         """
         Exposes logic of getting a single parsed item by using dataset[index].
 
@@ -120,7 +126,7 @@ class SC2Dataset(Dataset):
 
         Returns
         -------
-        Tuple[Any, Any] | SC2ReplayData
+        tuple[Any, Any] | SC2ReplayData
             Returns a parsed SC2ReplayData from an underlying SC2ReplaypackDataset,
             or a result of a transform that was passed to the dataset.
         """

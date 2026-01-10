@@ -4,7 +4,6 @@ import math
 import zipfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import List
 
 from tqdm import tqdm
 
@@ -17,7 +16,7 @@ class UnpackZipFileArguments:
     ----------
     zip_path : Path
         Specifies the path to the archive file that will be extracted.
-    filenames : List[str]
+    filenames : list[str]
         Specifies a list of the filenames which are within the archive\
         and will be extracted.
     path_to_extract : Path
@@ -28,7 +27,7 @@ class UnpackZipFileArguments:
         self,
         chunk_id: int,
         zip_path: Path,
-        filenames: List[str],
+        filenames: list[str],
         path_to_extract: Path,
     ):
         self.chunk_id = chunk_id
@@ -46,32 +45,8 @@ def unpack_chunk(
 
     Parameters
     ----------
-    zip_path : str
-        Specifies the path to the archive file that will be extracted.
-    filenames : List[str]
-        Specifies a list of the filenames which are within the archive\
-        and will be extracted.
-    path_to_extract : str
-        Specifies the path to which the files will be extracted to.
-
-    Examples
-    --------
-    The use of this method is intended to extract a zipfile from the .zip file.
-
-    You should set every parameter, zip_path, filenames and path_to_extract.
-
-    May help you to work with dataset.
-
-    The parameters should be set as in the example below.
-
-    >>> unpack_chunk_object = unpack_chunk(
-    ... zip_path="./directory/zip_path",
-    ... filenames="./directory/filenames",
-    ... path_to_extract="./directory/path_to_extract")
-
-    >>> assert isinstance(zip_path, str)
-    >>> assert all(isinstance(filename, str) for filename in filenames)
-    >>> assert isinstance(path_to_extract, str)
+    unpack_arguments : UnpackZipFileArguments
+        Specifies the arguments required for unpacking a chunk of files.
     """
 
     with zipfile.ZipFile(unpack_arguments.zip_path, "r") as zip_file:
@@ -88,7 +63,10 @@ def unpack_chunk(
                 continue
 
             try:
-                zip_file.extract(member=filename, path=unpack_arguments.path_to_extract)
+                zip_file.extract(
+                    member=filename,
+                    path=unpack_arguments.path_to_extract,
+                )
             except zipfile.error as e:
                 logging.error(
                     f"zipfile error was raised: {e}",
@@ -154,7 +132,7 @@ def unpack_zipfile(
     if n_workers <= 0:
         raise Exception("Number of workers cannot be equal or less than zero!")
 
-    file_list: List[str] = []
+    file_list: list[str] = []
     path_to_extract = Path(destination_dir, subdir).resolve()
     if not path_to_extract.exists():
         path_to_extract.mkdir(parents=True)

@@ -1,8 +1,9 @@
-from typing import Dict, List
+from dataclasses import dataclass
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class UnitPositions(TrackerEvent):
     """
     UnitPositions holds some detail information about how
@@ -14,21 +15,27 @@ class UnitPositions(TrackerEvent):
         Specifies a pointer for a specific unit which was doing some changes.
     id : int
         Specifies the ID of an event which corresponds to its name.
-    items : List[int]
+    items : list[int]
         Specifies a list of int values, there is no specific information what
         the numbers mean.
     loop : int
         Specifies the game loop number (game-engine tick) when at which the event occurred.
     """
 
-    def from_dict(d: Dict) -> "UnitPositions":
+    firstUnitIndex: int
+    id: int
+    items: list[int]
+    loop: int
+
+    @staticmethod
+    def from_dict(d: dict) -> "UnitPositions":
         """
         Static method returning initialized UnitPositions class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file that
             is a result of pre-processing some .SC2Replay file.
 
@@ -43,15 +50,3 @@ class UnitPositions(TrackerEvent):
             items=d["items"],
             loop=d["loop"],
         )
-
-    def __init__(
-        self,
-        firstUnitIndex: int,
-        id: int,
-        items: List[int],
-        loop: int,
-    ) -> None:
-        self.firstUnitIndex = firstUnitIndex
-        self.id = id
-        self.items = items
-        self.loop = loop

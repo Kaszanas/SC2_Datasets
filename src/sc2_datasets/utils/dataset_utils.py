@@ -1,28 +1,21 @@
 import json
-import os
 from pathlib import Path
-from typing import Dict, List, Tuple
-
-from sc2_datasets.utils.zip_utils import unpack_zipfile
 
 
 def load_replaypack_information(
     replaypack_path: Path,
-) -> Tuple[List[Dict], Dict, Dict, Dict]:
+) -> tuple[list[dict], dict, dict, dict]:
     """
     Helper function that loads replaypack information from a standard directory structure.
 
     Parameters
     ----------
-    replaypack_name : str
-        Specifies the replaypack name that will be used\
-        as a subdirectory where replaypack .json files will be extracted.
     replaypack_path : str
         Specifies the path to the extracted replaypack.
 
     Returns
     -------
-    Tuple[List[Dict], Dict, Dict, Dict]
+    tuple[list[dict], dict, dict, dict]
         Returns loaded summary information that\
         was generated when extracting the data from replays,\
         mapping information that specifies what was the directory\

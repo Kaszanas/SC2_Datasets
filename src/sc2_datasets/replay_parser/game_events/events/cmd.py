@@ -1,5 +1,5 @@
+from dataclasses import dataclass
 from types import NoneType
-from typing import Dict
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
@@ -7,6 +7,7 @@ from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 # Should this be encoded somehow if there is a NoneType detected?
 
 
+@dataclass
 class Cmd(GameEvent):
     """
     Cmd contains specific details about command interface events.
@@ -31,15 +32,22 @@ class Cmd(GameEvent):
 
     """
 
+    id: int
+    loop: int
+    otherUnit: NoneType
+    sequence: int
+    unitGroup: NoneType | int
+    userid: int
+
     @staticmethod
-    def from_dict(d: Dict) -> "Cmd":
+    def from_dict(d: dict) -> "Cmd":
         """
         Static method returning an initialized Cmd class from a dictionary.
         This aids in parsing the original JSON.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Dictionary available in the JSON file, typically a result\
             of pre-processing an .SC2Replay file.
 
@@ -57,19 +65,3 @@ class Cmd(GameEvent):
             unitGroup=d["unitGroup"],
             userid=d["userid"]["userId"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        otherUnit: NoneType,
-        sequence: int,
-        unitGroup: NoneType | int,
-        userid: int,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.otherUnit = otherUnit
-        self.sequence = sequence
-        self.unitGroup = unitGroup
-        self.userid = userid

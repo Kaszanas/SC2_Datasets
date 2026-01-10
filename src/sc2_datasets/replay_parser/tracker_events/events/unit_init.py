@@ -1,8 +1,9 @@
-from typing import Dict
+from dataclasses import dataclass
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class UnitInit(TrackerEvent):
     """
     UnitInit holds information about initializing object in the game.
@@ -29,14 +30,25 @@ class UnitInit(TrackerEvent):
         Specifies y coordinate of map in pixels where the object was initialized.
     """
 
-    def from_dict(d: Dict) -> "UnitInit":
+    controlPlayerId: int
+    id: int
+    loop: int
+    unitTagIndex: int
+    unitTagRecycle: int
+    unitTypeName: str
+    upkeepPlayerId: int
+    x: int
+    y: int
+
+    @staticmethod
+    def from_dict(d: dict) -> "UnitInit":
         """
         Static method returning initialized UnitInit class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file that
             is a result of pre-processing some .SC2Replay file.
 
@@ -56,25 +68,3 @@ class UnitInit(TrackerEvent):
             x=d["x"],
             y=d["y"],
         )
-
-    def __init__(
-        self,
-        controlPlayerId: int,
-        id: int,
-        loop: int,
-        unitTagIndex: int,
-        unitTagRecycle: int,
-        unitTypeName: str,
-        upkeepPlayerId: int,
-        x: int,
-        y: int,
-    ) -> None:
-        self.controlPlayerId = controlPlayerId
-        self.id = id
-        self.loop = loop
-        self.unitTagIndex = unitTagIndex
-        self.unitTagRecycle = unitTagRecycle
-        self.unitTypeName = unitTypeName
-        self.upkeepPlayerId = upkeepPlayerId
-        self.x = x
-        self.y = y

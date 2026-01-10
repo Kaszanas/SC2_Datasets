@@ -1,9 +1,10 @@
-from typing import Dict
+from dataclasses import dataclass
 
 from sc2_datasets.replay_parser.game_events.events.nested.target_2d import Target2D
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class CameraSave(GameEvent):
     """
     CameraSave represents replay information regarding a saved camera location within the game.
@@ -14,7 +15,7 @@ class CameraSave(GameEvent):
         Identifier for the CameraSave object. Multiple elements may share the same ID.
     loop : int
         Game loop number (game-engine tick) when the event occurred.
-    target : Target
+    target : Target2D
         Target class object containing x and y coordinates where the camera location was set in the game.
     userid : int
         ID of the player who saved the camera location.
@@ -22,9 +23,14 @@ class CameraSave(GameEvent):
         Hotkey [0-9] to which the camera location was set.
     """
 
-    # REVIEW: Doctests here:
+    id: int
+    loop: int
+    target: Target2D
+    userid: int
+    which: int
+
     @staticmethod
-    def from_dict(d: Dict) -> "CameraSave":
+    def from_dict(d: dict) -> "CameraSave":
         """
         Static method returning an initialized CameraSave class from a dictionary.
         Helps with the original JSON parsing.
@@ -79,17 +85,3 @@ class CameraSave(GameEvent):
             userid=d["userid"]["userId"],
             which=d["which"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        target: Target2D,
-        userid: int,
-        which: int,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.target = target
-        self.userid = userid
-        self.which = which

@@ -1,8 +1,9 @@
-from typing import Dict
+from dataclasses import dataclass
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class UserOptions(GameEvent):
     """
     Represents UserOptions containing detailed information about a player's settings,
@@ -46,15 +47,33 @@ class UserOptions(GameEvent):
         Availability of information about version flags, default value is 0.
     """
 
+    baseBuildNum: int
+    buildNum: int
+    cameraFollow: bool
+    debugPauseEnabled: bool
+    developmentCheatsEnabled: bool
+    gameFullyDownloaded: bool
+    hotkeyProfile: str
+    id: int
+    isMapToMapTransition: bool
+    loop: int
+    multiplayerCheatsEnabled: bool
+    platformMac: bool
+    syncChecksummingEnabled: bool
+    testCheatsEnabled: bool
+    useGalaxyAsserts: bool
+    userid: int
+    versionFlags: int
+
     @staticmethod
-    def from_dict(d: Dict) -> "UserOptions":
+    def from_dict(d: dict) -> "UserOptions":
         """
         Static method returning an initialized UserOptions class from a dictionary.
         This assists in parsing the original JSON data.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             A dictionary available in the JSON file resulting from pre-processing
             an .SC2Replay file.
 
@@ -83,41 +102,3 @@ class UserOptions(GameEvent):
             userid=d["userid"]["userId"],
             versionFlags=d["versionFlags"],
         )
-
-    def __init__(
-        self,
-        baseBuildNum: int,
-        buildNum: int,
-        cameraFollow: bool,
-        debugPauseEnabled: bool,
-        developmentCheatsEnabled: bool,
-        gameFullyDownloaded: bool,
-        hotkeyProfile: str,
-        id: int,
-        isMapToMapTransition: bool,
-        loop: int,
-        multiplayerCheatsEnabled: bool,
-        platformMac: bool,
-        syncChecksummingEnabled: bool,
-        testCheatsEnabled: bool,
-        useGalaxyAsserts: bool,
-        userid: int,
-        versionFlags: int,
-    ) -> None:
-        self.baseBuildNum = baseBuildNum
-        self.buildNum = buildNum
-        self.cameraFollow = cameraFollow
-        self.debugPauseEnabled = debugPauseEnabled
-        self.developmentCheatsEnabled = developmentCheatsEnabled
-        self.gameFullyDownloaded = gameFullyDownloaded
-        self.hotkeyProfile = hotkeyProfile
-        self.id = id
-        self.isMapToMapTransition = isMapToMapTransition
-        self.loop = loop
-        self.multiplayerCheatsEnabled = multiplayerCheatsEnabled
-        self.platformMac = platformMac
-        self.syncChecksummingEnabled = syncChecksummingEnabled
-        self.testCheatsEnabled = testCheatsEnabled
-        self.useGalaxyAsserts = useGalaxyAsserts
-        self.userid = userid
-        self.versionFlags = versionFlags

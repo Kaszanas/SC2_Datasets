@@ -1,11 +1,10 @@
-from typing import Tuple
-
 import torch
 
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.transforms.utils import RESULT_DICT
 
 
-def mmr_vs_result(sc2_replay: SC2ReplayData) -> Tuple[torch.Tensor, torch.Tensor]:
+def mmr_vs_result(sc2_replay: SC2ReplayData) -> tuple[torch.Tensor, torch.Tensor]:
     """
     Changes representation from the parsed SC2ReplayData representation into
     PyTorch tensors for learning mmr vs result.
@@ -17,7 +16,7 @@ def mmr_vs_result(sc2_replay: SC2ReplayData) -> Tuple[torch.Tensor, torch.Tensor
 
     Returns
     -------
-    Tuple[torch.Tensor, torch.Tensor]
+    tuple[torch.Tensor, torch.Tensor]
         Returns a tensor representation for the task of trying to
         learn how mmr maps to the end result of a match.
     """
@@ -29,9 +28,12 @@ def mmr_vs_result(sc2_replay: SC2ReplayData) -> Tuple[torch.Tensor, torch.Tensor
         dtype=torch.float,
     )
 
-    result_dict = {"Loss": 0, "Win": 1, "Victory": 1, "Defeat": 0}
+    player_result = sc2_replay.toonPlayerDescMap[0].toon_player_info.result
+    transformed_result = RESULT_DICT.get(player_result, -1)
+
+    # Map result to label tensor
     label_tensor = torch.tensor(
-        result_dict[sc2_replay.toonPlayerDescMap[0].toon_player_info.result],
+        transformed_result,
         dtype=torch.int8,
     )
 

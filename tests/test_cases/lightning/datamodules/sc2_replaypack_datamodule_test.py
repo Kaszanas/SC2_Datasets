@@ -59,7 +59,10 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
 
     @pytest.mark.minor
     def test_download_unpack_datamodule_synthetic(self):
-        for rp_name, rp_url in TEST_SYNTHETIC_REPLAYPACKS:
+        for rp_property in TEST_SYNTHETIC_REPLAYPACKS:
+            rp_name = rp_property.name
+            rp_url = rp_property.url
+
             with self.subTest(rp_name):
                 sc2_replaypack_datamodule = SC2ReplaypackDataModule(
                     replaypack_name=rp_name,
@@ -75,7 +78,10 @@ class SC2ReplaypackDataModuleTest(unittest.TestCase):
 
     @pytest.mark.major
     def test_download_unpack_datamodule_real(self):
-        for rp_name, rp_url in TEST_REAL_REPLAYPACKS:
+        for rp_properties in TEST_REAL_REPLAYPACKS:
+            rp_name = rp_properties.name
+            rp_url = rp_properties.url
+
             with self.subTest(rp_name):
                 sc2_replaypack_datamodule = SC2ReplaypackDataModule(
                     replaypack_name=rp_name,

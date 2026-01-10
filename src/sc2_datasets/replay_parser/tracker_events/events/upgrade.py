@@ -1,8 +1,9 @@
-from typing import Dict
+from dataclasses import dataclass
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class Upgrade(TrackerEvent):
     """
     Upgrade type containing some "details" information
@@ -23,15 +24,21 @@ class Upgrade(TrackerEvent):
         Specifies a name that upgrade has in the game.
     """
 
+    count: int
+    id: int
+    loop: int
+    playerId: int
+    upgradeTypeName: str
+
     @staticmethod
-    def from_dict(d: Dict) -> "Upgrade":
+    def from_dict(d: dict) -> "Upgrade":
         """
         Static method returning initialized Upgrade class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file that
             is a result of pre-processing some .SC2Replay file.
 
@@ -47,17 +54,3 @@ class Upgrade(TrackerEvent):
             playerId=d["playerId"],
             upgradeTypeName=d["upgradeTypeName"],
         )
-
-    def __init__(
-        self,
-        count: int,
-        id: int,
-        loop: int,
-        playerId: int,
-        upgradeTypeName: str,
-    ) -> None:
-        self.count = count
-        self.id = id
-        self.loop = loop
-        self.playerId = playerId
-        self.upgradeTypeName = upgradeTypeName

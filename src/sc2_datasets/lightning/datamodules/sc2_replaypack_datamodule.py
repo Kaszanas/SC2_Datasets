@@ -1,4 +1,5 @@
-from typing import Callable, Optional
+from pathlib import Path
+from typing import Callable
 
 import pytorch_lightning as pl
 from torch.utils.data import random_split
@@ -15,10 +16,10 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     ----------
     replaypack_name : str
         Specifies a replaypack name which will be used as a directory name.
-    unpack_dir : str, optional
+    unpack_dir : Path | str, optional
         Specifies the path where the replaypack (dataset)\
         will be unpacked into a custom directory structure, by default "./data/unpack"
-    download_dir : str, optional
+    download_dir : Path | str, optional
         Specifies the path where the replaypack (dataset)\
         will be downloaded, by default "./data/download"
     url : str, optional
@@ -30,10 +31,6 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
         and a custom directory structure is assumed, by default True
     transform : Callable | None, optional
         Specifies the PyTorch transforms to be used on the replaypack (dataset),\
-        Deprecated since version v1.5: Will be removed in v1.7.0, by default None
-    dims : _type_, optional
-        Specifies a tuple describing the shape of your data.\
-        Extra functionality exposed in size,\
         Deprecated since version v1.5: Will be removed in v1.7.0, by default None
     batch_size : int, optional
         Batch size which will be used for learning tasks, by default 256
@@ -51,12 +48,11 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
     def __init__(
         self,
         replaypack_name: str,
-        unpack_dir: str = "./data/unpack",
-        download_dir: str = "./data/download",
+        unpack_dir: Path | str = Path("./data/unpack").resolve(),
+        download_dir: Path | str = Path("./data/download").resolve(),
         url: str = "",
         download: bool = True,
         transform: Callable | None = None,
-        dims=None,
         batch_size: int = 256,
         num_workers: int = 0,
         unpack_n_workers: int = 16,
@@ -66,14 +62,19 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
 
         # PyTorch fields:
         self.transform = transform
-        self.dims = dims
         self.batch_size = batch_size
         self.num_workers = num_workers
 
         # Custom fields:
         self.replaypack_name = replaypack_name
-        self.unpack_dir = unpack_dir
-        self.download_dir = download_dir
+        self.unpack_dir = (
+            unpack_dir if isinstance(unpack_dir, Path) else Path(unpack_dir).resolve()
+        )
+        self.download_dir = (
+            download_dir
+            if isinstance(download_dir, Path)
+            else Path(download_dir).resolve()
+        )
         self.url = url
         self.download = download
         self.unpack_n_workers = unpack_n_workers
@@ -93,7 +94,7 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
             validator=self.validator,
         )
 
-    def setup(self, stage: Optional[str] = None) -> None:
+    def setup(self, stage: str | None = None) -> None:
         # make assignments here (val/train/test split)
         # called on every process in DDP
 
@@ -113,20 +114,26 @@ class SC2ReplaypackDataModule(pl.LightningDataModule):
 
     def train_dataloader(self) -> DataLoader:
         return DataLoader(
-            self.train_dataset, batch_size=self.batch_size, num_workers=self.num_workers
+            self.train_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
         )
 
     def val_dataloader(self) -> DataLoader:
         return DataLoader(
-            self.val_dataset, batch_size=self.batch_size, num_workers=self.num_workers
+            self.val_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
         )
 
     def test_dataloader(self) -> DataLoader:
         return DataLoader(
-            self.test_dataset, batch_size=self.batch_size, num_workers=self.num_workers
+            self.test_dataset,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
         )
 
-    def teardown(self, stage: Optional[str] = None) -> None:
+    def teardown(self, stage: str | None = None) -> None:
         # clean up after fit or test
         # called on every process in DDP
         return super().teardown(stage)

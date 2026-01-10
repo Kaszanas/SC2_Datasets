@@ -1,8 +1,9 @@
-from typing import Dict
+from dataclasses import dataclass
 
 from sc2_datasets.replay_parser.game_events.game_event import GameEvent
 
 
+@dataclass
 class ControlGroupUpdate(GameEvent):
     """
     ControlGroupUpdate is containing some "details" information about
@@ -24,15 +25,21 @@ class ControlGroupUpdate(GameEvent):
         Specifies id number of player who has updated the group control the game.
     """
 
+    controlGroupIndex: int
+    controlGroupUpdate: int
+    id: int
+    loop: int
+    userid: int
+
     @staticmethod
-    def from_dict(d: Dict) -> "ControlGroupUpdate":
+    def from_dict(d: dict) -> "ControlGroupUpdate":
         """
         Static method returning initialized ControlGroupUpdate class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file that is a result of
             pre-processing some .SC2Replay file.
 
@@ -48,17 +55,3 @@ class ControlGroupUpdate(GameEvent):
             loop=d["loop"],
             userid=d["userid"]["userId"],
         )
-
-    def __init__(
-        self,
-        controlGroupIndex: int,
-        controlGroupUpdate: int,
-        id: int,
-        loop: int,
-        userid: int,
-    ) -> None:
-        self.controlGroupIndex = controlGroupIndex
-        self.controlGroupUpdate = controlGroupUpdate
-        self.id = id
-        self.loop = loop
-        self.userid = userid

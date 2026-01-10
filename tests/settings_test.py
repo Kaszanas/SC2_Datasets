@@ -1,18 +1,26 @@
-# TODO: This will have to change after Pull Request to the main branch:
+from sc2_datasets.available_replaypacks import DatasetProperties
+
 TEST_SYNTHETIC_REPLAYPACKS = [
-    (
-        "2022_TestReplaypack",
-        "https://github.com/Kaszanas/SC2EGSet_Dataset/raw/main/tests/test_files/2022_TestReplaypack.zip",  # noqa
+    DatasetProperties(
+        name="2022_TestReplaypack",
+        url="https://github.com/Kaszanas/SC2EGSet_Dataset/raw/dev/tests/test_files/2022_TestReplaypack.zip",  # noqa
     )
 ]
 
-TEST_REAL_REPLAYPACKS = [
-    (
-        "2016_IEM_10_Taipei",
-        "https://zenodo.org/record/6903505/files/2016_IEM_10_Taipei.zip?download=1",
+TEST_SINGLE_JSON_REPLAYPACKS = [
+    DatasetProperties(
+        name="sc2egset_synthetic_merged",
+        url="https://github.com/Kaszanas/SC2EGSet_Dataset/raw/dev/tests/test_files/sc2egset_synthetic_merged.zip",
     ),
-    (
-        "2016_IEM_11_Shanghai",
-        "https://zenodo.org/record/6903505/files/2016_IEM_11_Shanghai.zip?download=1",
+]
+
+TEST_REAL_REPLAYPACKS = [
+    DatasetProperties(
+        name="2016_IEM_10_Taipei",
+        url="https://zenodo.org/record/6903505/files/2016_IEM_10_Taipei.zip?download=1",
+    ),
+    DatasetProperties(
+        name="2016_IEM_11_Shanghai",
+        url="https://zenodo.org/record/6903505/files/2016_IEM_11_Shanghai.zip?download=1",
     ),
 ]

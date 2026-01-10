@@ -1,8 +1,9 @@
-from typing import Dict
+from dataclasses import dataclass
 
 from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 
 
+@dataclass
 class UnitDone(TrackerEvent):
     """
     UnitDone is containing some "details" information about unit at the moment
@@ -20,15 +21,20 @@ class UnitDone(TrackerEvent):
         There is no specific information about this parameter.
     """
 
+    id: int
+    loop: int
+    unitTagIndex: int
+    unitTagRecycle: int
+
     @staticmethod
-    def from_dict(d: Dict) -> "UnitDone":
+    def from_dict(d: dict) -> "UnitDone":
         """
         Static method returning initialized UnitDone class from a dictionary.
         This helps with the original JSON parsing.
 
         Parameters
         ----------
-        d : Dict
+        d : dict
             Specifies a dictionary as available in the JSON file
             that is a result of pre-processing some .SC2Replay file.
 
@@ -43,15 +49,3 @@ class UnitDone(TrackerEvent):
             unitTagIndex=d["unitTagIndex"],
             unitTagRecycle=d["unitTagRecycle"],
         )
-
-    def __init__(
-        self,
-        id: int,
-        loop: int,
-        unitTagIndex: int,
-        unitTagRecycle: int,
-    ) -> None:
-        self.id = id
-        self.loop = loop
-        self.unitTagIndex = unitTagIndex
-        self.unitTagRecycle = unitTagRecycle

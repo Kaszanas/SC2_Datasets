@@ -1,6 +1,8 @@
-from typing import Any, Dict
+from dataclasses import dataclass
+from typing import Any
 
 
+@dataclass
 class Header:
     """
     Class representing the parameters of a replay header.
@@ -14,15 +16,18 @@ class Header:
         The game version used by players during the game.
     """
 
+    elapsedGameLoops: int
+    version: str
+
     @staticmethod
-    def from_dict(d: Dict[str, Any]) -> "Header":
+    def from_dict(d: dict[str, Any]) -> "Header":
         """
         Static method returning an initialized Header class from a provided dictionary.
         This method assists in parsing the original JSON representation of a .SC2Replay file.
 
         Parameters
         ----------
-        d : Dict[str, Any]
+        d : dict[str, Any]
             A dictionary representing the data available in the JSON file, obtained
             from preprocessing some .SC2Replay file.
 
@@ -69,16 +74,7 @@ class Header:
         TypeError: unsupported operand type(s) ...
 
         """
-
         return Header(
             elapsedGameLoops=d["elapsedGameLoops"],
             version=d["version"],
         )
-
-    def __init__(
-        self,
-        elapsedGameLoops: int,
-        version: str,
-    ) -> None:
-        self.elapsedGameLoops = elapsedGameLoops
-        self.version = version
