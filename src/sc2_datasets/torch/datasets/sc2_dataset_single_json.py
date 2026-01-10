@@ -354,9 +354,14 @@ class SC2DatasetSingleJSON(Dataset):
         additional_information = python_obj.get("additional_information", {})
 
         replaypack_name = additional_information.get("replaypack_name", "")
-        single_json_filename = additional_information.get(
-            "filename", f"index_{index}.json"
-        )
+        if not replaypack_name:
+            replaypack_name = self.dataset_name
+
+        json_index = f"index_{index}.json"
+        single_json_filename = additional_information.get("filename", json_index)
+        if not single_json_filename:
+            single_json_filename = json_index
+
         replaypack_filename = str(Path(replaypack_name, single_json_filename))
         replay_data = SC2ReplayData.from_dict(
             loaded_data=python_obj,
