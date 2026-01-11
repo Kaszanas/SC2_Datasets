@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "sc2_datasets"
-version = "2.0.1"
+version = "2.1.0"
 description = "Library providing PyTorch and PyTorch Lightning API for pre-processed StarCraft II dataset SC2EGSetDataset and other datasets."
 authors = ["Andrzej Białecki", "Andrzej Szczap"]
 license = "GNU General Public License v3.0"
 readme = "README.md"
 
 [tool.commitizen]
-version = "2.0.1"
+version = "2.1.0"
 version_files = ["pyproject.toml:version"]
 
 [tool.poetry.dependencies]

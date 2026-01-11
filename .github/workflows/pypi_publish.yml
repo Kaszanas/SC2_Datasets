@@ -103,6 +103,8 @@ jobs:
         needs:
             - test-pypi
             - docs
+            - install-pypi-underscore
+            - install-pypi-dash
 
         permissions:
             id-token: write
