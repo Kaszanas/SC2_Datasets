@@ -17,6 +17,7 @@ class SC2DataModuleSingleJSON(pl.LightningDataModule):
         unpack_dir: Path,
         download: bool = True,
         download_dir: Path | str | None = None,
+        json_path: Path | str | None = None,
         dataset_url: str = "",
         transform: Callable | None = None,
         validator: Callable | None = None,
@@ -35,10 +36,13 @@ class SC2DataModuleSingleJSON(pl.LightningDataModule):
         self.batch_size = batch_size
         self.num_workers = num_workers
 
+        self.json_path = json_path
+
     def prepare_data(self) -> None:
         self.dataset = SC2DatasetSingleJSON(
             dataset_name=self.dataset_name,
             unpack_dir=self.unpack_dir,
+            json_path=self.json_path,
             download=self.download,
             download_dir=self.download_dir,
             dataset_url=self.dataset_url,
