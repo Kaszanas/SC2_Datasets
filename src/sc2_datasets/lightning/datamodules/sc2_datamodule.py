@@ -20,6 +20,8 @@ class SC2DataModuleSingleJSON(pl.LightningDataModule):
         dataset_url: str = "",
         transform: Callable | None = None,
         validator: Callable | None = None,
+        batch_size: int = 256,
+        num_workers: int = 0,
     ):
         super().__init__()
 
@@ -30,6 +32,8 @@ class SC2DataModuleSingleJSON(pl.LightningDataModule):
         self.dataset_url = dataset_url
         self.transform = transform
         self.validator = validator
+        self.batch_size = batch_size
+        self.num_workers = num_workers
 
     def prepare_data(self) -> None:
         self.dataset = SC2DatasetSingleJSON(
