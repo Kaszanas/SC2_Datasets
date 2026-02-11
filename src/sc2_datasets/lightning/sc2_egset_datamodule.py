@@ -15,6 +15,7 @@ from sc2_datasets.lightning.datamodules.sc2_datamodule import (
 class SC2EGSetDataModuleSingleJSON(SC2DataModuleSingleJSON):
     def __init__(
         self,
+        json_path: Path | str,
         dataset_name: str = SC2EGSET_SINGLE_JSON.name,
         unpack_dir: Path | str = Path("./data/unpack/sc2egset_single_json"),
         download=True,
@@ -22,15 +23,20 @@ class SC2EGSetDataModuleSingleJSON(SC2DataModuleSingleJSON):
         dataset_url: str = SC2EGSET_SINGLE_JSON.url,
         transform: Callable | None = None,
         validator: Callable | None = None,
+        batch_size: int = 256,
+        num_workers: int = 0,
     ):
         super().__init__(
-            dataset_name,
-            unpack_dir,
-            download,
-            download_dir,
-            dataset_url,
-            transform,
-            validator,
+            json_path=json_path,
+            dataset_name=dataset_name,
+            unpack_dir=unpack_dir,
+            download=download,
+            download_dir=download_dir,
+            dataset_url=dataset_url,
+            transform=transform,
+            validator=validator,
+            batch_size=batch_size,
+            num_workers=num_workers,
         )
 
 
