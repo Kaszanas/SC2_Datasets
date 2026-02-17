@@ -3,6 +3,9 @@
 Below we post a direct ilustration of the data format.
 Every single StarCraft II replay has these json objects.
 We parse these data with our tools to get specific information.
+The parser used to obtain this data is available in as a separate repository [SC2InfoExtractorGo](https://github.com/Kaszanas/SC2InfoExtractorGo). As the backbone for this program we use: [s2prot](https://pkg.go.dev/github.com/icza/s2prot) and [s2prot/rep](https://pkg.go.dev/github.com/icza/s2prot/rep) libraries.
+
+For a more detailed description of the data format, please see the API reference documentation for the parser objects: [Parser Documentation](https://sc2-datasets.readthedocs.io/en/latest/autoapi/sc2_datasets/replay_parser/index.html).
 
 ---
 
