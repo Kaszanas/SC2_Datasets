@@ -54,12 +54,11 @@ class SC2DataModuleSingleJSON(pl.LightningDataModule):
         # make assignments here (val/train/test split)
         # called on every process in DDP
         total_length = len(self.dataset)
-        # Add these to be a parameter in the initialization:
-        # 16.(6)% of total entries will be used for testing:
-        test_length = int(total_length / 6)
+        # 10% of total entries will be used for testing
+        test_length = int(total_length * 0.1)
         # 10% of total entries will be used for validation
-        val_length = int(total_length / 10)
-        # everything else will be used for training
+        val_length = int(total_length * 0.1)
+        # 80% of total entries will be used for training
         train_length = total_length - test_length - val_length
 
         self.train_dataset, self.test_dataset, self.val_dataset = random_split(
@@ -177,12 +176,11 @@ class SC2DataModule(pl.LightningDataModule):
         # make assignments here (val/train/test split)
         # called on every process in DDP
         total_length = len(self.dataset)
-        # Add these to be a parameter in the initialization:
-        # 16.(6)% of total entries will be used for testing:
-        test_length = int(total_length / 6)
+        # 10% of total entries will be used for testing
+        test_length = int(total_length * 0.1)
         # 10% of total entries will be used for validation
-        val_length = int(total_length / 10)
-        # everything else will be used for training
+        val_length = int(total_length * 0.1)
+        # 80% of total entries will be used for training
         train_length = total_length - test_length - val_length
 
         self.train_dataset, self.test_dataset, self.val_dataset = random_split(
