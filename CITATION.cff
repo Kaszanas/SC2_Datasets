@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+message: If you use this software, please cite both the article from preferred-citation and the software itself.
+authors:
+  - family-names: Białecki
+    given-names: Andrzej
+  - family-names: Jakubowska
+    given-names: Natalia
+  - family-names: Dobrowolski
+    given-names: Paweł
+  - family-names: Białecki
+    given-names: Piotr
+  - family-names: Krupiński
+    given-names: Leszek
+  - family-names: Szczap
+    given-names: Andrzej
+  - family-names: Bia\lecki
+    given-names: Robert
+  - family-names: Gajewski
+    given-names: Jan
+title: "SC2EGSet: StarCraft II Esport Replay and Game-state Dataset"
+version: 1.0.0
+url: https://doi.org/10.1038/s41597-023-02510-7
+doi: 10.1038/s41597-023-02510-7
+date-released: "2023-03-15"
+preferred-citation:
+  authors:
+    - family-names: Białecki
+      given-names: Andrzej
+    - family-names: Jakubowska
+      given-names: Natalia
+    - family-names: Dobrowolski
+      given-names: Paweł
+    - family-names: Białecki
+      given-names: Piotr
+    - family-names: Krupiński
+      given-names: Leszek
+    - family-names: Szczap
+      given-names: Andrzej
+    - family-names: Białecki
+      given-names: Robert
+    - family-names: Gajewski
+      given-names: Jan
+  title: "SC2EGSet: StarCraft II Esport Replay and Game-state Dataset"
+  doi: 10.1038/s41597-023-02510-7
+  url: https://doi.org/10.1038/s41597-023-02510-7
+  type: article-journal
+  pages: "600"
+  year: "2023"
+  conference: {}
+  publisher: {}
