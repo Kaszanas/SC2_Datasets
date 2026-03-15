@@ -13,7 +13,7 @@ authors:
     given-names: Leszek
   - family-names: Szczap
     given-names: Andrzej
-  - family-names: Bia\lecki
+  - family-names: Białecki
     given-names: Robert
   - family-names: Gajewski
     given-names: Jan
@@ -21,7 +21,7 @@ title: "SC2EGSet: StarCraft II Esport Replay and Game-state Dataset"
 version: 1.0.0
 url: https://doi.org/10.1038/s41597-023-02510-7
 doi: 10.1038/s41597-023-02510-7
-date-released: "2023-03-15"
+date-released: "2023-09-08"
 preferred-citation:
   authors:
     - family-names: Białecki
@@ -44,7 +44,11 @@ preferred-citation:
   doi: 10.1038/s41597-023-02510-7
   url: https://doi.org/10.1038/s41597-023-02510-7
   type: article-journal
+  journal: "Scientific Data"
+  volume: 10
+  issue: 1
   pages: "600"
+  issn: "2052-4463"
   year: "2023"
-  conference: {}
-  publisher: {}
+  month: 9
+  abstract: "As a relatively new form of sport, esports offers unparalleled data availability. Our work aims to open esports to a broader scientific community by supplying raw and pre-processed files from StarCraft II esports tournaments. These files can be used in statistical and machine learning modeling tasks and compared to laboratory-based measurements. Additionally, we open-sourced and published all the custom tools that were developed in the process of creating our dataset. These tools include PyTorch and PyTorch Lightning API abstractions to load and model the data. Our dataset contains replays from major and premiere StarCraft II tournaments since 2016. We processed 55 replaypacks that contained 17930 files with game-state information. Our dataset is one of the few large publicly available sources of StarCraft II data upon its publication. Analysis of the extracted data holds promise for further Artificial Intelligence (AI), Machine Learning (ML), psychological, Human-Computer Interaction (HCI), and sports-related studies in a variety of supervised and self-supervised tasks."
