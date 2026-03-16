@@ -31,9 +31,9 @@ jobs:
 
             # Code quality checks:
             - name: Initialize pre-commit
-              run: uv run pre-commit install
+              run: uvx run pre-commit install
             - name: Run pre-commit on all files.
-              run: uv run pre-commit run --all-files
+              run: uvx run pre-commit run --all-files
 
             # Run tests:
             - name: Install all dependencies
