@@ -6,6 +6,7 @@ import pytest
 
 from sc2_datasets.available_replaypacks import DatasetProperties
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
+from sc2_datasets.utils.json_backends import AvailableBackends, load, set_json_backend
 from sc2_datasets.utils.json_utils import (
     dataset_to_single_json,
     get_json_offsets,
@@ -64,22 +65,26 @@ class DatasetUtilsTest(unittest.TestCase):
 
         # Test the contents of the file when its entirety is loaded:
         with output_path.open("r", encoding="utf-8") as f:
-            data = json.load(f)
+            for backend in AvailableBackends:
+                with self.subTest(backend=backend.value):
+                    set_json_backend(backend.value)
 
-        # Check if it is a list
-        self.assertIsInstance(data, list)
+                    data = load(f)
 
-        # Check if the number of items matches the dataset
-        self.assertEqual(len(data), len(test_dataset))
+                    # Check if it is a list
+                    self.assertIsInstance(data, list)
 
-        # Check if the first item has the additional info
-        if len(data) > 0:
-            first_item = data[0]
-            self.assertIn("additional_information", first_item)
-            self.assertEqual(
-                first_item["additional_information"]["replaypack_name"],
-                self.test_replaypack_name,
-            )
+                    # Check if the number of items matches the dataset
+                    self.assertEqual(len(data), len(test_dataset))
+
+                    # Check if the first item has the additional info
+                    if len(data) > 0:
+                        first_item = data[0]
+                        self.assertIn("additional_information", first_item)
+                        self.assertEqual(
+                            first_item["additional_information"]["replaypack_name"],
+                            self.test_replaypack_name,
+                        )
 
         json_offsets = get_json_offsets(
             json_filepath=output_path,

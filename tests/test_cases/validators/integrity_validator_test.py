@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 import tests.test_utils.test_utils as test_utils
+from sc2_datasets.utils.json_backends import AvailableBackends, load
 from sc2_datasets.validators.multiprocess_validator import (
     validate_integrity_mp,
     validate_integrity_persist_mp,
@@ -61,11 +62,14 @@ class IntegrityValidatorTest(unittest.TestCase):
             )
             # The file that persists validation needs to be opened and assertions are made:
             with open(temp_file_path, mode="r") as tf:
-                deserialized = json.load(tf)
-                validated = deserialized["validated_files"]
-                skipped = deserialized["skip_files"]
-                self.assertEqual(len(validated), 1)
-                self.assertEqual(len(skipped), 1)
+                for backend in AvailableBackends:
+                    with self.subTest(backend=backend.value):
+                        test_utils.set_json_backend(backend.value)
+                        deserialized = load(tf)
+                        validated = deserialized["validated_files"]
+                        skipped = deserialized["skip_files"]
+                        self.assertEqual(len(validated), 1)
+                        self.assertEqual(len(skipped), 1)
 
         self.assertIsInstance(next(iter(skip_files)), Path)
         self.assertEqual(len(skip_files), 1)
@@ -83,11 +87,15 @@ class IntegrityValidatorTest(unittest.TestCase):
 
             # The file that persists validation needs to be opened and assertions are made:
             with open(temp_file_path, mode="r") as tf:
-                deserialized = json.load(tf)
-                validated = deserialized["validated_files"]
-                skipped = deserialized["skip_files"]
-                self.assertEqual(len(validated), 2)
-                self.assertEqual(len(skipped), 1)
+                for backend in AvailableBackends:
+                    with self.subTest(backend=backend.value):
+                        test_utils.set_json_backend(backend.value)
+
+                        deserialized = load(tf)
+                        validated = deserialized["validated_files"]
+                        skipped = deserialized["skip_files"]
+                        self.assertEqual(len(validated), 2)
+                        self.assertEqual(len(skipped), 1)
 
         self.assertIsInstance(next(iter(skip_files)), Path)
         self.assertEqual(len(skip_files), 1)
