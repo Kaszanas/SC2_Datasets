@@ -131,7 +131,7 @@ class SC2ReplayData:
         )
 
         logging.info(f"Attempting to parse: {str(replay_filepath)}")
-        with replay_path.open(mode="r", encoding="utf-8") as replay_file:
+        with replay_path.open(mode="rb") as replay_file:
             loaded_data = load(replay_file)
             return SC2ReplayData.from_dict(
                 loaded_data=loaded_data,

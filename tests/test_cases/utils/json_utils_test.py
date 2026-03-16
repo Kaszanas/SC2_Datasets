@@ -64,11 +64,10 @@ class DatasetUtilsTest(unittest.TestCase):
         self.assertEqual(output_path, self.output_json_path)
 
         # Test the contents of the file when its entirety is loaded:
-        with output_path.open("r", encoding="utf-8") as f:
-            for backend in AvailableBackends:
-                with self.subTest(backend=backend.value):
-                    set_json_backend(backend.value)
-
+        for backend in AvailableBackends:
+            with self.subTest(backend=backend.value):
+                set_json_backend(backend.value)
+                with output_path.open("rb") as f:
                     data = load(f)
 
                     # Check if it is a list

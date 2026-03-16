@@ -20,10 +20,10 @@ class MessageEventsParserTest(unittest.TestCase):
         )
 
     def test_message_events_parser(self):
-        with open(self.test_replay) as f:
-            for backend in AvailableBackends:
-                with self.subTest(backend=backend.value):
-                    set_json_backend(backend.value)
+        for backend in AvailableBackends:
+            with self.subTest(backend=backend.value):
+                set_json_backend(backend.value)
+                with open(self.test_replay, "rb") as f:
                     loaded_file = load(f)
 
                     # Iterating over all of the message events and verifying
