@@ -25,6 +25,14 @@ dev = [
     "sphinx-autoapi>=3.8.0",
 ]
 
+[project.optional-dependencies]
+ijson = [
+    "ijson>=3.5.0",
+]
+msgspec = [
+    "msgspec>=0.20.0",
+]
+
 
 [tool.commitizen]
 version = "2.1.0"
