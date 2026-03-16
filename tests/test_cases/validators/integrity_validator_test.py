@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 import tests.test_utils.test_utils as test_utils
-from sc2_datasets.utils.json_backends import AvailableBackends, load
+from sc2_datasets.utils.json_backends import AvailableBackends, load, set_json_backend
 from sc2_datasets.validators.multiprocess_validator import (
     validate_integrity_mp,
     validate_integrity_persist_mp,
@@ -64,7 +64,7 @@ class IntegrityValidatorTest(unittest.TestCase):
             with open(temp_file_path, mode="r") as tf:
                 for backend in AvailableBackends:
                     with self.subTest(backend=backend.value):
-                        test_utils.set_json_backend(backend.value)
+                        set_json_backend(backend.value)
                         deserialized = load(tf)
                         validated = deserialized["validated_files"]
                         skipped = deserialized["skip_files"]
@@ -89,7 +89,7 @@ class IntegrityValidatorTest(unittest.TestCase):
             with open(temp_file_path, mode="r") as tf:
                 for backend in AvailableBackends:
                     with self.subTest(backend=backend.value):
-                        test_utils.set_json_backend(backend.value)
+                        set_json_backend(backend.value)
 
                         deserialized = load(tf)
                         validated = deserialized["validated_files"]
