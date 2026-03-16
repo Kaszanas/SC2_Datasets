@@ -1,5 +1,5 @@
 [project]
-name = "latent-trainer"
+name = "sc2_datasets"
 version = "2.1.0"
 description = "Library providing PyTorch and PyTorch Lightning API for pre-processed StarCraft II dataset SC2EGSetDataset and other datasets."
 readme = "README.md"
