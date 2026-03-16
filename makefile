@@ -12,7 +12,7 @@ DEVCONTAINER_GPU = sc2_datasets:devcontainer-gpu
 
 # Test commands:
 TEST_COMPOSE = $(DOCKER_DIR)/docker-test-compose.yml
-TEST_COMMAND_RAW = poetry run pytest --ignore-glob='test_*.py' ./tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov-report html --cov=xml 2>&1
+TEST_COMMAND_RAW = uv run pytest --ignore-glob='test_*.py' ./tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov-report html --cov=xml 2>&1
 TEST_COMMAND = "$(TEST_COMMAND_RAW)"
 TEST_COMMAND_LOG = "$(TEST_COMMAND_RAW) | tee /app/logs/test_output.log"
 
@@ -56,7 +56,7 @@ action_compose_test: ## Triggered from a GitHub Action to run the tests for CI.
 ##################################
 .PHONY: docs
 docs: ## Generates the documentation.
-	poetry run \
+	uv run \
 		make html \
 		--directory docs/
 
