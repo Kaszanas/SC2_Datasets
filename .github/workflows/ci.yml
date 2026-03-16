@@ -38,6 +38,8 @@ jobs:
             # Run tests:
             - name: Install all dependencies
               run: uv sync
+            - name: Install all dependencies
+              run: uv pip install -e .
             - name: Run tests
               run: uv run pytest --ignore-glob='test_*.py' ./tests/test_cases/ --cov=sc2_datasets --cov-report term-missing --cov-report html --cov-report xml 2>&1
 
