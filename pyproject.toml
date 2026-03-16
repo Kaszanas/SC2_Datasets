@@ -4,7 +4,7 @@ version = "2.1.0"
 description = "Library providing PyTorch and PyTorch Lightning API for pre-processed StarCraft II dataset SC2EGSetDataset and other datasets."
 readme = "README.md"
 authors = [{"name" = "Andrzej Białecki"}, {"name" = "Andrzej Szczap"}]
-license = "GNU General Public License v3.0"
+license = "GPL-3.0-only"
 requires-python = ">=3.11"
 dependencies = [
     "lightning>=2.6.1",
@@ -26,7 +26,6 @@ dev = [
 ]
 
 
-
 [tool.commitizen]
 version = "2.1.0"
 version_files = ["pyproject.toml:version"]
@@ -42,3 +41,7 @@ markers = [
     "minor: marks tests as minor (deselect with '-m \"not minor\"')",
     "major",
 ]
+
+[build-system]
+requires = ["uv_build>=0.9.5,<0.11.0"]
+build-backend = "uv_build"
