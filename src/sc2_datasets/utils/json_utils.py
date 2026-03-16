@@ -6,6 +6,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from sc2_datasets.torch.datasets.sc2_dataset import SC2Dataset
+from sc2_datasets.utils.json_backends import load, loads
 
 # NOTE: For now this implementation assumes that each JSON object is on its own line.
 
@@ -34,7 +35,7 @@ def get_json_offsets(json_filepath: Path, offsets_filepath: Path | None) -> list
                 f"Loading pre-computed JSON offsets from: {str(offsets_filepath)}"
             )
             with offsets_filepath.open("r", encoding="utf-8") as f:
-                offsets = json.load(f)
+                offsets = load(f)
             return offsets
 
     offsets = index_json_objects(json_filepath=json_filepath)
@@ -148,8 +149,8 @@ def get_object_at_index(
     # We strip whitespace, remove trailing comma if present, then strip again
     json_str = line_str.strip().rstrip(",").strip()
 
-    # Parse with standard library C-optimized parser
-    python_obj = json.loads(json_str)
+    # Parse with the active JSON backend:
+    python_obj = loads(json_str)
 
     return python_obj
 
@@ -226,7 +227,7 @@ def json_to_line(
 
     try:
         with json_replay_path.open("r", encoding="utf-8") as json_file:
-            json_data = json.load(json_file)
+            json_data = load(json_file)
             json_data["additional_information"] = {
                 "replaypack_name": replaypack_name,
                 "replaypack_url": replaypack_url,
@@ -323,77 +324,3 @@ def dataset_to_single_json(
         output_file.write("\n]")
 
     return output_filepath
-
-
-# from io import BufferedReader
-# import ijson
-# from ijson.common import ObjectBuilder
-# NOTE: Benchmarking showed that this method is 5x slower than the using json.loads():
-# def parse_exact_object_at_offset(f: BufferedReader, offset: int) -> dict | None:
-#     """
-#     Seeks to an offset and parses exactly one JSON object.
-#     Stops immediately after the closing brace '}' to avoid reading trailing commas.
-#     """
-#     # Seek to the precise start of the object (the '{'):
-#     f.seek(offset)
-
-#     # Create a raw event parser
-#     # This yields events like ('prefix', 'event_type', 'value')
-#     parser = ijson.parse(f)
-
-#     # Use ObjectBuilder to reconstruct the dict from events automatically
-#     builder = ObjectBuilder()
-
-#     # Iterate over the stream of events
-#     for prefix, event, value in parser:
-#         # Feed the event into the builder to construct the Python object:
-#         builder.event(event, value)
-
-#         # 5. The Magic Condition:
-#         # If we hit 'end_map' (closing brace '}') AND the prefix is empty (root level),
-#         # it means we have just finished the object we started at the offset.
-#         if event == "end_map" and (prefix == "" or prefix is None):
-#             # We have the full object. BREAK immediately.
-#             # Do NOT ask the parser for the next event (which would be the comma).
-#             return builder.value
-
-#     return None
-
-
-# def get_object_at_index(
-#     file_path: Path,
-#     offsets: list[int],
-#     index: int,
-# ) -> dict:
-#     """
-#     Retrieves the complete JSON object at the specified index by seeking
-#     to the pre-calculated line offset, reading one line, and stripping the trailing comma.
-
-
-#     Parameters
-#     ----------
-#     file_path : Path
-#         Specifies the path to the JSON file.
-#     offsets : list[int]
-#         Specifies the list of byte offsets for each JSON object.
-#     index : int
-#         Specifies the index of the JSON object to retrieve.
-#     """
-#     if index < 0 or index >= len(offsets):
-#         raise IndexError(
-#             "Index out of range. Cannot retrieve object from an indexed JSON file."
-#         )
-
-#     start_offset = offsets[index]
-#     with file_path.open("rb") as f:
-#         try:
-#             maybe_dict = parse_exact_object_at_offset(f=f, offset=start_offset)
-#             if maybe_dict:
-#                 return maybe_dict, True
-#         except Exception as e:
-#             logging.exception(
-#                 f"Error parsing object at index {index}, offset {start_offset}: {e}"
-#             )
-#             return dict(), False
-
-#     return dict(), False

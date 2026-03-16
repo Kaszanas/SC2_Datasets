@@ -20,6 +20,7 @@ from sc2_datasets.replay_parser.tracker_events.tracker_event import TrackerEvent
 from sc2_datasets.replay_parser.tracker_events.tracker_events_parser import (
     TrackerEventsParser,
 )
+from sc2_datasets.utils.json_backends import load
 
 
 @dataclass
@@ -131,7 +132,7 @@ class SC2ReplayData:
 
         logging.info(f"Attempting to parse: {str(replay_filepath)}")
         with replay_path.open(mode="r", encoding="utf-8") as replay_file:
-            loaded_data = json.load(replay_file)
+            loaded_data = load(replay_file)
             return SC2ReplayData.from_dict(
                 loaded_data=loaded_data,
                 replay_filepath=str(replay_filepath),
