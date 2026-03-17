@@ -61,9 +61,9 @@ class IntegrityValidatorTest(unittest.TestCase):
                 validation_file_path=temp_file_path,
             )
             # The file that persists validation needs to be opened and assertions are made:
-            with open(temp_file_path, mode="r") as tf:
-                for backend in AvailableBackends:
-                    with self.subTest(backend=backend.value):
+            for backend in AvailableBackends:
+                with self.subTest(backend=backend.value):
+                    with temp_file_path.open("rb") as tf:
                         set_json_backend(backend.value)
                         deserialized = load(tf)
                         validated = deserialized["validated_files"]
@@ -86,9 +86,9 @@ class IntegrityValidatorTest(unittest.TestCase):
             )
 
             # The file that persists validation needs to be opened and assertions are made:
-            with open(temp_file_path, mode="r") as tf:
-                for backend in AvailableBackends:
-                    with self.subTest(backend=backend.value):
+            for backend in AvailableBackends:
+                with self.subTest(backend=backend.value):
+                    with temp_file_path.open("rb") as tf:
                         set_json_backend(backend.value)
 
                         deserialized = load(tf)

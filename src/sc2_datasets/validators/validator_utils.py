@@ -45,7 +45,8 @@ def read_validation_file(
     validated_file_set = {}
     skip_file_set = {}
     # Reading the file:
-    with path.open(mode="r", encoding="utf-8") as input_file:
+    with path.open(mode="rb") as input_file:
+        # with path.open(mode="r", encoding="utf-8") as input_file:
         try:
             # Try reading the data from JSON:
             json_data = load(input_file)

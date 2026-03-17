@@ -34,7 +34,7 @@ def get_json_offsets(json_filepath: Path, offsets_filepath: Path | None) -> list
             logging.info(
                 f"Loading pre-computed JSON offsets from: {str(offsets_filepath)}"
             )
-            with offsets_filepath.open("r", encoding="utf-8") as f:
+            with offsets_filepath.open("rb") as f:
                 offsets = load(f)
             return offsets
 

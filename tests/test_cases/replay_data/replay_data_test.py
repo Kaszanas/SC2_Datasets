@@ -1,10 +1,17 @@
 import unittest
+
+# Exceptions that can be raised when trying to load an empty json file:
 from json import JSONDecodeError
 
 import pytest
 
+# Exceptions that can be raised when trying to load an empty json file:
+from ijson import IncompleteJSONError
+from msgspec import DecodeError
+
 import tests.test_utils.test_utils as test_utils
 from sc2_datasets.replay_data.sc2_replay_data import SC2ReplayData
+from sc2_datasets.utils.json_backends import AvailableBackends, set_json_backend
 
 """
     **Incorrect Usage Examples:**
@@ -32,13 +39,26 @@ class SC2ReplayDataTest(unittest.TestCase):
         )
 
     def test_loading_json(self):
-        sc2_replay_data = SC2ReplayData.from_file(replay_filepath=self.test_replay)
-        self.assertIsInstance(sc2_replay_data, SC2ReplayData)
+        for backend in AvailableBackends:
+            with self.subTest(backend=backend.value):
+                set_json_backend(backend.value)
+                sc2_replay_data = SC2ReplayData.from_file(
+                    replay_filepath=self.test_replay
+                )
+                self.assertIsInstance(sc2_replay_data, SC2ReplayData)
 
     def test_empty_json(self):
-        with self.assertRaises(JSONDecodeError):
-            _ = SC2ReplayData.from_file(replay_filepath=self.empty_json)
+        for backend in AvailableBackends:
+            with self.subTest(backend=backend.value):
+                set_json_backend(backend.value)
+                with self.assertRaises(
+                    (JSONDecodeError, DecodeError, IncompleteJSONError)
+                ):
+                    _ = SC2ReplayData.from_file(replay_filepath=self.empty_json)
 
     def test_empty_object(self):
-        with self.assertRaises(KeyError):
-            _ = SC2ReplayData.from_file(replay_filepath=self.empty_json_object)
+        for backend in AvailableBackends:
+            with self.subTest(backend=backend.value):
+                set_json_backend(backend.value)
+                with self.assertRaises(KeyError):
+                    _ = SC2ReplayData.from_file(replay_filepath=self.empty_json_object)
