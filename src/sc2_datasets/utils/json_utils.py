@@ -226,7 +226,7 @@ def json_to_line(
     """
 
     try:
-        with json_replay_path.open("r", encoding="utf-8") as json_file:
+        with json_replay_path.open("rb", encoding="utf-8") as json_file:
             json_data = load(json_file)
             json_data["additional_information"] = {
                 "replaypack_name": replaypack_name,
