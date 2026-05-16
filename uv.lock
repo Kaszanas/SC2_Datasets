@@ -2390,7 +2390,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "lightning", specifier = ">=2.6.1" },
-    { name = "pandas", specifier = ">=3.0.1" },
+    { name = "pandas", specifier = ">=2.3.3" },
     { name = "requests", specifier = ">=2.32.5" },
     { name = "tqdm", specifier = ">=4.67.3" },
 ]
