@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from sc2_datasets.utils.json_backends import load, loads
+
 
 def load_replaypack_information(
     replaypack_path: Path,
@@ -58,20 +60,20 @@ def load_replaypack_information(
             with main_log_filepath.open(encoding="utf-8") as main_log_file:
                 # Reading the lines of the log file and parsing them:
                 for line in main_log_file.readlines():
-                    log_object = json.loads(line)
+                    log_object = loads(line)
                     replaypack_main_log_obj_list.append(log_object)
         if filename.endswith("_processed_failed.log"):
             processed_files_filepath = Path(replaypack_path, file).resolve()
-            with processed_files_filepath.open(encoding="utf-8") as processed_files:
-                replaypack_processed_failed = json.load(processed_files)
+            with processed_files_filepath.open(mode="rb") as processed_files:
+                replaypack_processed_failed = load(processed_files)
         if filename.endswith("_processed_mapping.json"):
             mapping_file_filepath = Path(replaypack_path, file).resolve()
-            with mapping_file_filepath.open(encoding="utf-8") as mapping_file:
-                replaypack_dir_mapping = json.load(mapping_file)
+            with mapping_file_filepath.open(mode="rb") as mapping_file:
+                replaypack_dir_mapping = load(mapping_file)
         if filename.endswith("_summary.json"):
             summary_file_filepath = Path(replaypack_path, file).resolve()
-            with summary_file_filepath.open(encoding="utf-8") as summary_file:
-                replaypack_summary = json.load(summary_file)
+            with summary_file_filepath.open(mode="rb") as summary_file:
+                replaypack_summary = load(summary_file)
 
     return (
         replaypack_main_log_obj_list,

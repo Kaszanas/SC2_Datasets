@@ -2,6 +2,8 @@ import json
 import logging
 from pathlib import Path
 
+from sc2_datasets.utils.json_backends import load
+
 
 # TODO: consider splitting file creation out from this method
 def read_validation_file(
@@ -43,10 +45,11 @@ def read_validation_file(
     validated_file_set = {}
     skip_file_set = {}
     # Reading the file:
-    with path.open(mode="r", encoding="utf-8") as input_file:
+    with path.open(mode="rb") as input_file:
+        # with path.open(mode="r", encoding="utf-8") as input_file:
         try:
             # Try reading the data from JSON:
-            json_data = json.load(input_file)
+            json_data = load(input_file)
             # Immediately converting the lists of strings denoting paths to sets:
             validated_file_set = set(
                 Path(filepath).resolve() for filepath in json_data["validated_files"]
