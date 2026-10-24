@@ -23,7 +23,7 @@ jobs:
               uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
             - name: Install the latest version of uv
-              uses: astral-sh/setup-uv@e06108dd0aef18192324c70427afc47652e63a82
+              uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa
 
             # Installing only development dependencies (for pre-commit)
             - name: Install development dependencies
